@@ -1,0 +1,26 @@
+    1 Célula
+    La célula es la unidad básica de los seres vivos. Todos los organismos están formados por una o más células.
+
+    1.1 Tipos de células
+    Existen dos tipos principales de células según la presencia de núcleo definido y la organización interna.
+
+    1.1.1 Procariotas
+    No tienen núcleo definido y su material genético se encuentra disperso en el citoplasma. Son más simples y generalmente más pequeñas.
+
+    1.1.2 Eucariotas
+    Poseen núcleo y diversos organelos membranosos. Forman organismos unicelulares y multicelulares más complejos.
+
+    tienen → 1.1.2.1 Núcleo
+    El núcleo protege el material genético y coordina funciones importantes de la célula.
+
+    contiene → 1.1.2.1.1 ADN
+    El ADN almacena la información hereditaria necesaria para el funcionamiento y la reproducción celular.
+
+    1.2 Estructuras básicas
+    Además del núcleo, muchas células presentan membrana plasmática, citoplasma y distintos organelos especializados.
+
+    existe -> 1.2.1 Membrana plasmática
+    Delimita la célula y regula el intercambio de sustancias con el entorno.
+
+    contiene -> 1.2.2 Citoplasma
+    Es el medio interno donde ocurren múltiples reacciones químicas y donde se encuentran suspendidos los organelos.

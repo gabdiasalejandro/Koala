@@ -1,9 +1,34 @@
-from typing import Dict, List, Tuple
+"""Utilidades compartidas de layout.
+
+Retorna primitivas reutilizables para cualquier motor de layout:
+- Medición de nodos (`measure_nodes`) con tipografía y espaciados.
+- Helpers geométricos (`get_*_gap_for_depth`, `collect_bounds`, etc.).
+- Utilidades de texto para render (`wrap_text_lines`, `sort_node_key`).
+
+Cómo funciona:
+1. Recibe `root_nodes`, `LayoutConfig` y `TypographyConfig`.
+2. Calcula cajas base (`LayoutBox`) con tamaño y contenido tipográfico.
+3. Entrega helpers para que cada layout específico asigne posiciones y aristas.
+"""
+
+from typing import Dict, Iterable, List, Tuple
 
 from reportlab.pdfbase.pdfmetrics import stringWidth
 
 from core.models import ConceptNode
-from layout.models import LayoutBox, LayoutConfig, LayoutScene, TypographyConfig
+from layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
+
+
+def sort_node_key(number: str) -> List[int]:
+    return [int(part) for part in number.split(".")]
+
+
+def iter_nodes(root_nodes: List[ConceptNode]) -> Iterable[ConceptNode]:
+    stack: List[ConceptNode] = list(reversed(root_nodes))
+    while stack:
+        node = stack.pop()
+        yield node
+        stack.extend(reversed(node.children))
 
 
 def get_depth(number: str) -> int:
@@ -75,14 +100,14 @@ def choose_title_layout(
     return lines, typography.title_size_min, title_height
 
 
-def measure_tree(
+def measure_nodes(
     root_nodes: List[ConceptNode],
     config: LayoutConfig,
     typography: TypographyConfig,
 ) -> Dict[str, LayoutBox]:
     boxes: Dict[str, LayoutBox] = {}
 
-    def measure(node: ConceptNode) -> LayoutBox:
+    def visit(node: ConceptNode) -> None:
         depth = get_depth(node.number)
         width = get_node_width_for_depth(depth, config)
         content_width = width - (2 * config.inner_pad_x)
@@ -100,7 +125,7 @@ def measure_tree(
             + config.inner_pad_y
         )
 
-        box = LayoutBox(
+        boxes[node.number] = LayoutBox(
             node=node,
             depth=depth,
             width=width,
@@ -114,74 +139,33 @@ def measure_tree(
             body_lines=body_lines,
         )
 
-        if node.children:
-            child_boxes = [measure(child) for child in node.children]
-            h_gap = get_h_gap_for_depth(depth + 1, config)
-            total_children_width = sum(child_box.subtree_width for child_box in child_boxes)
-            total_children_width += h_gap * (len(child_boxes) - 1)
-            box.subtree_width = max(box.width, total_children_width)
-
-        boxes[node.number] = box
-        return box
+        for child in node.children:
+            visit(child)
 
     for root in root_nodes:
-        measure(root)
+        visit(root)
 
     return boxes
 
 
-def assign_positions(
-    root_nodes: List[ConceptNode],
-    boxes: Dict[str, LayoutBox],
-    config: LayoutConfig,
-) -> Tuple[float, float]:
-    current_x = config.margin_x
-    max_bottom = 0.0
-    max_right = 0.0
+def collect_bounds(boxes: Dict[str, LayoutBox]) -> Tuple[float, float, float, float]:
+    if not boxes:
+        return 0.0, 0.0, 0.0, 0.0
 
-    def place(node: ConceptNode, left: float, top: float) -> None:
-        nonlocal max_bottom, max_right
-
-        box = boxes[node.number]
-        box.x = left + (box.subtree_width - box.width) / 2
-        box.y = top
-
-        max_bottom = max(max_bottom, box.y + box.height)
-        max_right = max(max_right, box.x + box.width)
-
-        if not node.children:
-            return
-
-        h_gap = get_h_gap_for_depth(box.depth + 1, config)
-        v_gap = get_v_gap_for_depth(box.depth + 1, config)
-
-        total_children_width = sum(boxes[child.number].subtree_width for child in node.children)
-        total_children_width += h_gap * (len(node.children) - 1)
-
-        child_left = left + (box.subtree_width - total_children_width) / 2
-        next_top = box.y + box.height + v_gap
-
-        for child in node.children:
-            child_box = boxes[child.number]
-            place(child, child_left, next_top)
-            child_left += child_box.subtree_width + h_gap
-
-    for root in root_nodes:
-        place(root, current_x, config.margin_y)
-        current_x += boxes[root.number].subtree_width + config.h_gap_base
-
-    return max_bottom, max_right
+    left = min(box.x for box in boxes.values())
+    top = min(box.y for box in boxes.values())
+    right = max(box.x + box.width for box in boxes.values())
+    bottom = max(box.y + box.height for box in boxes.values())
+    return left, top, right, bottom
 
 
-def build_topdown_layout(
-    root_nodes: List[ConceptNode],
-    config: LayoutConfig,
-    typography: TypographyConfig,
-) -> LayoutScene:
-    boxes = measure_tree(root_nodes, config, typography)
-    content_bottom, content_right = assign_positions(root_nodes, boxes, config)
-    return LayoutScene(boxes=boxes, content_bottom=content_bottom, content_right=content_right)
-
-
-def sort_node_key(number: str) -> List[int]:
-    return [int(part) for part in number.split(".")]
+def build_scene(boxes: Dict[str, LayoutBox], edges: List[LayoutEdge]) -> LayoutScene:
+    left, top, right, bottom = collect_bounds(boxes)
+    return LayoutScene(
+        boxes=boxes,
+        edges=edges,
+        content_left=left,
+        content_top=top,
+        content_right=right,
+        content_bottom=bottom,
+    )

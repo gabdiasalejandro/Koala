@@ -1,67 +1,159 @@
-## Este proyecto es un DSL que tiene por objetivo generar diagramas a partir de texto 
+## Koala
 
-Utiliza una sintaxis simple y para poder ser utilizado tanto por humanos como por LLM's 
+DSL para generar diagramas a partir de texto estructurado.
 
-Para marcar los nódos del diagrama se utilizan prefijos numéricos, los enteros se toman como raíz (ej. 1, 2)
+El objetivo es tener una sintaxis suficientemente simple para que pueda ser escrita por personas o generada por LLMs, y a la vez una arquitectura que permita crecer hacia más layouts, más reglas de estilo y más dominios semánticos.
 
-Para determinar la profundidad de los nodos se usan puntos decimales, por ejemplo,
-para escribir un nodo que funcione como hijo de la raíz uno usamos 1.1, 1.2 si se busca un segundo hijo y así sucesivamente.
+## Sintaxis base
 
-Si es necesario que haya relaciones entre estas (palabras conectoras) se hace uso de el texto conector seguido de "->"
-antes del número identificador del nodo.
+Los nodos se definen con numeración jerárquica:
 
-El texto se agrega debajo del título y el número y se renderiza como cuerpo del nodo.
+- `1`, `2`, `3` representan raíces.
+- `1.1`, `1.2` representan hijos de `1`.
+- `1.1.1` representa un hijo de `1.1`.
 
-También existe un prefijo semántico opcional para el tipo de nodo: `kind::`.
-Esto permite aplicar estilos diferentes por layout/render. Ejemplo:
+También se puede declarar una relación explícita antes del nodo usando `->` o `→`.
+
+Ejemplo:
+
+```text
+1 Plataforma DSL
+Define el concepto principal.
+
+organiza -> 1.1 Core
+Contiene parser, modelos y validaciones.
+
+renderiza -> 1.2 Render
+Genera SVG y PDF.
+```
+
+El texto debajo de cada encabezado se interpreta como cuerpo del nodo.
+
+## Sintaxis `kind::`
+
+Existe un prefijo semántico opcional para marcar el tipo del nodo:
 
 ```text
 fr:: 1.2 Tabla Usuarios
 ```
 
-Con ese marcador, el nodo se parsea con `kind=fr` y puede colorearse con otra paleta.
+Eso produce un nodo con `kind=fr`, lo que permite aplicar colores o estilos distintos desde la capa de render.
 
-Ejemplo de sintaxis:
--------------------------------------------------------------------------------------------------------------------
-    1 Célula
-    La célula es la unidad básica de los seres vivos. Todos los organismos están formados por una o más células.
+También puede combinarse con relaciones:
 
-    1.1 Tipos de células
-    Existen dos tipos principales de células según la presencia de núcleo definido y la organización interna.
+```text
+contiene -> fr:: 1.2.1 Clave foránea
+```
 
-    1.1.1 Procariotas
-    No tienen núcleo definido y su material genético se encuentra disperso en el citoplasma. Son más simples y generalmente más pequeñas.
+## Ejemplo recomendado
 
-    1.1.2 Eucariotas
-    Poseen núcleo y diversos organelos membranosos. Forman organismos unicelulares y multicelulares más complejos.
+El ejemplo principal del proyecto está en [mocks/concepts.txt](/home/yaldapika/dev/koala/mocks/concepts.txt:1). Ese archivo está pensado para funcionar razonablemente bien en `tree`, `synoptic` y `radial`.
 
-    tienen → 1.1.2.1 Núcleo
-    El núcleo protege el material genético y coordina funciones importantes de la célula.
+## Uso
 
-    contiene → 1.1.2.1.1 ADN
-    El ADN almacena la información hereditaria necesaria para el funcionamiento y la reproducción celular.
+La entrada principal es [main.py](/home/yaldapika/dev/koala/main.py:1) y ahora expone una CLI simple.
 
-    1.2 Estructuras básicas
-    Además del núcleo, muchas células presentan membrana plasmática, citoplasma y distintos organelos especializados.
+Ejemplos:
 
-    1.2.1 Membrana plasmática
-    Delimita la célula y regula el intercambio de sustancias con el entorno.
+```bash
+./.venv/bin/python main.py --layout tree
+./.venv/bin/python main.py --layout synoptic
+./.venv/bin/python main.py --layout radial
+```
 
-    1.2.2 Citoplasma
-    Es el medio interno donde ocurren múltiples reacciones químicas y donde se encuentran suspendidos los organelos.
----------------------------------------------------------------------------------------------------------------------
+También soporta:
 
+```bash
+./.venv/bin/python main.py --layout radial --input mocks/concepts.txt --output-dir output
+```
+
+Parámetros disponibles:
+
+- `--layout`: `tree`, `synoptic`, `radial`
+- `--input`: archivo `.txt` o `.docx`
+- `--output-dir`: carpeta donde se generan los resultados
+
+La compilación genera ambos formatos:
+
+- `output/concept_map_<layout>.svg`
+- `output/concept_map_<layout>.pdf`
+
+## Layouts soportados
+
+Actualmente existen tres layouts:
+
+- `tree`: disposición vertical top-down, útil para jerarquías clásicas.
+- `synoptic`: disposición en columnas, útil para cuadros sinópticos.
+- `radial`: disposición tipo mapa mental, con la raíz al centro y las ramas distribuidas alrededor.
+
+En radial:
+
+- La raíz se coloca en el centro.
+- Los hijos de la raíz se reparten angularmente como una estrella.
+- Las ramas más profundas determinan el radio total del diagrama.
+- El motor intenta evitar solapes calculando separación radial y tangencial.
 
 ## Arquitectura
-Ahora está dividido en 3 capas principales:
 
-- `core/`: parser, modelos del DSL y carga de archivos (`io.py`).
-- `layout/`: motor de cálculo geométrico (`conceptual_topdown.py`) y modelos/configuración de layout/tema (`models.py`).
-- `layout/`: motor de cálculo geométrico (`conceptual_topdown.py`), modelos de layout/tema (`models.py`) y registro de motores (`registry.py`).
-- `render/`: salidas concretas (`svg_mvp.py`, `pdf_mvp.py`) con una configuración centralizada (`defaults.py`).
+El proyecto está dividido en tres capas:
 
-La idea de escalabilidad es:
+- `core/`: parsing, modelos del DSL y carga de archivos.
+- `layout/`: cálculo geométrico de nodos y aristas.
+- `render/`: traducción de la escena geométrica a SVG y PDF.
 
-- Agregar nuevos layouts (`synoptic`, `radial`) como motores en `layout/` sin duplicar lógica de render.
-- Agregar sintaxis nueva en `core/parser.py` sin tocar geometría.
-- Agregar reglas de color/estilo por `kind` en `render/defaults.py` (ej: `fr` para diagramas de DB).
+La separación de responsabilidades es:
+
+- `core` entiende el lenguaje.
+- `layout` decide posiciones según el tipo de layout.
+- `render` dibuja la escena y aplica tema, tipografía y salida final.
+
+## Carpeta `layout`
+
+La carpeta `layout/` está organizada para crecer sin duplicación:
+
+- [models.py](/home/yaldapika/dev/koala/layout/models.py:1): estructuras tipadas como `LayoutBox`, `LayoutEdge` y `LayoutScene`.
+- [shared.py](/home/yaldapika/dev/koala/layout/shared.py:1): utilidades compartidas de medición, texto y helpers geométricos.
+- [tree_layout.py](/home/yaldapika/dev/koala/layout/tree_layout.py:1): layout top-down.
+- [synoptic_layout.py](/home/yaldapika/dev/koala/layout/synoptic_layout.py:1): layout de cuadro sinóptico.
+- [radial_layout.py](/home/yaldapika/dev/koala/layout/radial_layout.py:1): layout tipo mapa mental.
+- [registry.py](/home/yaldapika/dev/koala/layout/registry.py:1): registro de motores por tipo de layout.
+
+Cada motor retorna una `LayoutScene` con:
+
+- `boxes`: nodos ya medidos y posicionados.
+- `edges`: aristas con geometría explícita.
+
+Eso permite que los renderizadores no dependan de la matemática específica de cada layout.
+
+## Capa de render
+
+Los renderizadores están en:
+
+- [svg_render.py](/home/yaldapika/dev/koala/render/svg_render.py:1)
+- [pdf_render.py](/home/yaldapika/dev/koala/render/pdf_render.py:1)
+
+Ambos consumen la misma `LayoutScene`, por lo que agregar un layout nuevo normalmente requiere tocar solo `layout/` y registrarlo en [registry.py](/home/yaldapika/dev/koala/layout/registry.py:1).
+
+La configuración visual está centralizada en [defaults.py](/home/yaldapika/dev/koala/render/defaults.py:1), incluyendo:
+
+- layout por defecto
+- tamaños base
+- paletas por `kind`
+- ajustes específicos para radial
+
+## Estado actual
+
+Ya es una herramienta útil para:
+
+- prototipar mapas conceptuales desde texto
+- generar variantes visuales del mismo contenido
+- probar estilos semánticos por tipo de nodo
+- experimentar con distintos layouts sin rehacer el parser
+
+Todavía hay espacio para refactorizar y pulir, sobre todo en:
+
+- compactación más fina del radial
+- reglas más ricas de sintaxis
+- estilos por dominio
+- validaciones más fuertes del DSL
+- pruebas visuales automatizadas

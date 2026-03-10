@@ -1,0 +1,56 @@
+1 Plataforma DSL de Diagramas
+Define una base común para describir conocimiento técnico con texto estructurado y renderizarlo en múltiples formatos.
+
+organiza -> core:: 1.1 Núcleo del lenguaje
+Gestiona sintaxis, parsing, normalización y validaciones mínimas para producir un modelo consistente.
+
+define -> syntax:: 1.1.1 Gramática base
+Establece reglas de numeración jerárquica, relaciones y bloques de contenido por nodo.
+
+extiende -> fr:: 1.1.2 Extensiones por dominio
+Permite agregar prefijos semánticos para representar áreas especializadas como bases de datos o arquitectura.
+
+coordina -> layout:: 1.2 Motor de layout
+Calcula posiciones y conexiones a partir del árbol lógico sin depender del formato final de salida.
+
+incluye -> layout:: 1.2.1 Árbol top-down
+Distribuye nodos de arriba hacia abajo con lectura secuencial clara para estructuras jerárquicas.
+
+incluye -> layout:: 1.2.2 Cuadro sinóptico
+Organiza nodos por columnas de izquierda a derecha para resumir categorías y subcategorías.
+
+incluye -> layout:: 1.2.3 Diagrama radial
+Coloca nodos por anillos según profundidad para resaltar relaciones alrededor de un concepto central.
+
+entrega -> render:: 1.3 Capa de render
+Transforma la escena geométrica en archivos visuales manteniendo estilos, tipografía y colores por tipo.
+
+produce -> ui:: 1.3.1 Salida SVG
+Genera un resultado editable e integrable en web, documentación y pipelines automáticos.
+
+produce -> print:: 1.3.2 Salida PDF
+Genera un formato portable para revisión, impresión y distribución formal.
+
+especializa -> fr:: 1.4 Dominio de base de datos
+Representa conceptos de modelado relacional para comunicar diseño lógico y dependencias entre tablas.
+
+modela -> fr:: 1.4.1 Entidades
+Describe tablas principales del sistema con sus responsabilidades funcionales.
+
+conecta -> fr:: 1.4.2 Relaciones
+Explica vínculos entre entidades, direccionalidad y dependencias de integridad.
+
+define -> fr:: 1.4.2.1 Cardinalidad
+Indica reglas uno a uno, uno a muchos y muchos a muchos para cada relación.
+
+restringe -> fr:: 1.4.2.2 Claves foráneas
+Declara referencias entre tablas para mantener consistencia y trazabilidad de datos.
+
+asegura -> qa:: 1.5 Calidad y evolución
+Permite escalar el DSL sin regresiones visuales ni pérdida de compatibilidad con sintaxis previa.
+
+valida -> rule:: 1.5.1 Reglas sintácticas
+Aplica advertencias para títulos largos, profundidad excesiva y errores de conectores.
+
+prueba -> qa:: 1.5.2 Pruebas visuales
+Compara salidas por layout para asegurar estabilidad de estilos, conexiones y legibilidad.

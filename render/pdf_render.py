@@ -1,34 +1,53 @@
 from pathlib import Path
-import sys
+from typing import Optional, Tuple
 
 from reportlab.lib import colors
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen import canvas
 
-if __package__ is None or __package__ == "":
-    sys.path.append(str(Path(__file__).resolve().parents[1]))
-
-from core.io import load_input_text
 from core.models import ParsedDocument
-from core.parser import parse_concept_text
-from layout.conceptual_topdown import (
-    get_v_gap_for_depth,
-    sort_node_key,
-    wrap_text_lines,
-)
+from layout.models import ThemeConfig, TypographyConfig
+from layout.models import LayoutKind
 from layout.registry import build_layout
+from layout.shared import sort_node_key, wrap_text_lines
 from render.defaults import (
     DEFAULT_LAYOUT_KIND,
-    DEFAULT_LAYOUT_CONFIG,
     DEFAULT_THEME,
-    DEFAULT_TYPOGRAPHY,
     SHOW_NODE_NUMBERS,
     SHOW_WARNINGS_FOOTER,
+    layout_config_for,
+    typography_for,
 )
 
 
 def to_pdf_y(y_top: float, page_height: float) -> float:
     return page_height - y_top
+
+
+def arrow_wing_points(start: Tuple[float, float], tip: Tuple[float, float]) -> Tuple[Tuple[float, float], Tuple[float, float]]:
+    dx = tip[0] - start[0]
+    dy = tip[1] - start[1]
+    length = (dx * dx + dy * dy) ** 0.5
+
+    if length < 1e-6:
+        return tip, tip
+
+    ux = dx / length
+    uy = dy / length
+
+    arrow_len = 6.0
+    arrow_w = 3.2
+
+    wing_a = (
+        tip[0] - (ux * arrow_len) - (uy * arrow_w),
+        tip[1] - (uy * arrow_len) + (ux * arrow_w),
+    )
+    wing_b = (
+        tip[0] - (ux * arrow_len) + (uy * arrow_w),
+        tip[1] - (uy * arrow_len) - (ux * arrow_w),
+    )
+
+    return wing_a, wing_b
 
 
 def draw_round_rect(
@@ -44,6 +63,13 @@ def draw_round_rect(
     pdf_canvas.roundRect(x, y, width, height, corner_radius, stroke=1, fill=1)
 
 
+def draw_polyline(pdf_canvas: canvas.Canvas, points: list[Tuple[float, float]], page_height: float) -> None:
+    for index in range(len(points) - 1):
+        x1, y1 = points[index]
+        x2, y2 = points[index + 1]
+        pdf_canvas.line(x1, to_pdf_y(y1, page_height), x2, to_pdf_y(y2, page_height))
+
+
 def draw_wrapped_label(
     pdf_canvas: canvas.Canvas,
     text: str,
@@ -51,10 +77,9 @@ def draw_wrapped_label(
     y_top: float,
     max_width: float,
     page_height: float,
+    typography: TypographyConfig,
+    theme: ThemeConfig,
 ) -> None:
-    typography = DEFAULT_TYPOGRAPHY
-    theme = DEFAULT_THEME
-
     lines = wrap_text_lines(text, typography.body_font, typography.relation_size, max(20.0, max_width))
     if not lines:
         return
@@ -75,67 +100,78 @@ def draw_wrapped_label(
         text_y -= typography.relation_size + 1
 
 
-def draw_arrow_head(pdf_canvas: canvas.Canvas, x: float, y_top: float, page_height: float) -> None:
-    y = to_pdf_y(y_top, page_height)
-    pdf_canvas.line(x, y, x - 2.2, y + 4.2)
-    pdf_canvas.line(x, y, x + 2.2, y + 4.2)
-
-
-def render_pdf(parsed: ParsedDocument, output_pdf: Path) -> None:
-    config = DEFAULT_LAYOUT_CONFIG
-    typography = DEFAULT_TYPOGRAPHY
+def render_pdf(parsed: ParsedDocument, output_pdf: Path, layout_kind: Optional[LayoutKind] = None) -> None:
+    selected_layout = layout_kind or DEFAULT_LAYOUT_KIND
+    config = layout_config_for(selected_layout)
+    typography = typography_for(selected_layout)
     theme = DEFAULT_THEME
 
-    scene = build_layout(DEFAULT_LAYOUT_KIND, parsed.root_nodes, config, typography)
+    scene = build_layout(selected_layout, parsed.root_nodes, config, typography)
     boxes = scene.boxes
 
     page_size = (config.page_width, config.page_height)
     pdf_canvas = canvas.Canvas(str(output_pdf), pagesize=page_size)
     pdf_canvas.setTitle("Prototype Concept Map")
 
+    content_w = max(1.0, scene.content_right - scene.content_left)
+    content_h = max(1.0, scene.content_bottom - scene.content_top)
     usable_w = config.page_width - (2 * config.margin_x)
     usable_h = config.page_height - (2 * config.margin_y)
-    content_w = max(1.0, scene.content_right - config.margin_x)
-    content_h = max(1.0, scene.content_bottom - config.margin_y)
 
     scale_x = usable_w / content_w if content_w > usable_w else 1.0
     scale_y = usable_h / content_h if content_h > usable_h else 1.0
     scale = min(1.0, scale_x, scale_y)
 
+    extra_x = 0.0
+    extra_y = 0.0
+    if selected_layout == "radial":
+        extra_x = max(0.0, (usable_w - (content_w * scale)) / 2)
+        extra_y = max(0.0, (usable_h - (content_h * scale)) / 2)
+
+    tx = config.margin_x + extra_x - (scale * scene.content_left)
+    ty = config.page_height - config.margin_y - extra_y + (scale * scene.content_top)
+
     pdf_canvas.saveState()
-    pdf_canvas.translate(config.margin_x * (1 - scale), config.page_height - config.margin_y * (1 - scale))
+    pdf_canvas.translate(tx, ty)
     pdf_canvas.scale(scale, scale)
     pdf_canvas.translate(0, -config.page_height)
 
     pdf_canvas.setStrokeColor(colors.HexColor(theme.edge_color))
     pdf_canvas.setLineWidth(0.9)
 
-    for node in parsed.node_index.values():
-        if node.parent is None:
+    for edge in scene.edges:
+        if len(edge.points) < 2:
             continue
 
-        parent = boxes[node.parent.number]
-        child = boxes[node.number]
+        draw_polyline(pdf_canvas, edge.points, config.page_height)
 
-        x1 = parent.x + (parent.width / 2)
-        y1_top = parent.y + parent.height
-        x2 = child.x + (child.width / 2)
-        y2_top = child.y
-        y_mid_top = y1_top + (get_v_gap_for_depth(child.depth, config) / 2)
+        prev_point = edge.points[-2]
+        tip_point = edge.points[-1]
+        wing_a, wing_b = arrow_wing_points(prev_point, tip_point)
 
-        pdf_canvas.line(x1, to_pdf_y(y1_top, config.page_height), x1, to_pdf_y(y_mid_top, config.page_height))
-        pdf_canvas.line(x1, to_pdf_y(y_mid_top, config.page_height), x2, to_pdf_y(y_mid_top, config.page_height))
-        pdf_canvas.line(x2, to_pdf_y(y_mid_top, config.page_height), x2, to_pdf_y(y2_top + 3, config.page_height))
-        draw_arrow_head(pdf_canvas, x2, y2_top + 3, config.page_height)
+        pdf_canvas.line(
+            tip_point[0],
+            to_pdf_y(tip_point[1], config.page_height),
+            wing_a[0],
+            to_pdf_y(wing_a[1], config.page_height),
+        )
+        pdf_canvas.line(
+            tip_point[0],
+            to_pdf_y(tip_point[1], config.page_height),
+            wing_b[0],
+            to_pdf_y(wing_b[1], config.page_height),
+        )
 
-        if node.relation_from_parent:
+        if edge.relation_label:
             draw_wrapped_label(
                 pdf_canvas,
-                node.relation_from_parent,
-                (x1 + x2) / 2,
-                y_mid_top,
-                max(18.0, abs(x2 - x1) + 18.0),
+                edge.relation_label,
+                edge.label_pos[0],
+                edge.label_pos[1],
+                edge.label_max_width,
                 config.page_height,
+                typography,
+                theme,
             )
 
     for number in sorted(boxes.keys(), key=sort_node_key):

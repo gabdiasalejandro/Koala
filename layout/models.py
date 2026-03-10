@@ -1,5 +1,17 @@
+"""Modelos de datos del subsistema de layout.
+
+Retorna estructuras tipadas para coordinar motores y renderizadores:
+- Configuración (`LayoutConfig`, `TypographyConfig`, `ThemeConfig`).
+- Primitivas de escena (`LayoutBox`, `LayoutEdge`, `LayoutScene`).
+
+Cómo funciona:
+1. Los motores de layout rellenan `LayoutBox` y `LayoutEdge`.
+2. Empaquetan todo en `LayoutScene`.
+3. Los renderizadores consumen `LayoutScene` sin conocer el layout interno.
+"""
+
 from dataclasses import dataclass, field
-from typing import Dict, List, Literal, Mapping
+from typing import Dict, List, Literal, Mapping, Tuple
 
 from core.models import ConceptNode
 
@@ -75,8 +87,21 @@ class LayoutBox:
     body_lines: List[str]
 
 
+@dataclass(frozen=True)
+class LayoutEdge:
+    parent_number: str
+    child_number: str
+    points: List[Tuple[float, float]]
+    relation_label: str
+    label_pos: Tuple[float, float]
+    label_max_width: float
+
+
 @dataclass
 class LayoutScene:
     boxes: Dict[str, LayoutBox]
+    edges: List[LayoutEdge]
+    content_left: float
+    content_top: float
     content_bottom: float
     content_right: float

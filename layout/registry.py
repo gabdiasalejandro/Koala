@@ -1,15 +1,29 @@
+"""Registro de motores de layout.
+
+Retorna una `LayoutScene` a través de `build_layout(layout_kind, ...)`.
+
+Cómo funciona:
+1. Mapea cada `LayoutKind` a una función constructora.
+2. Valida si el layout solicitado existe.
+3. Ejecuta el motor y devuelve la escena genérica para render.
+"""
+
 from typing import Callable, Dict, List
 
 from core.models import ConceptNode
-from layout.conceptual_topdown import build_topdown_layout
+from layout.radial_layout import build_radial_layout
 from layout.models import LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
+from layout.synoptic_layout import build_synoptic_layout
+from layout.tree_layout import build_tree_layout
 
 
 LayoutEngine = Callable[[List[ConceptNode], LayoutConfig, TypographyConfig], LayoutScene]
 
 
 LAYOUT_ENGINES: Dict[LayoutKind, LayoutEngine] = {
-    "tree": build_topdown_layout,
+    "tree": build_tree_layout,
+    "synoptic": build_synoptic_layout,
+    "radial": build_radial_layout,
 }
 
 
