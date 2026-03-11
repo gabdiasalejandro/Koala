@@ -1,8 +1,8 @@
-Project Name
+## Project Name
 
-🇺🇸 English | 🇪🇸 Español
+🇺🇸 English | 🇪🇸 [Español](README.es.md)
 
-Koala
+### Koala
 
 DSL for generating diagrams from structured text.
 
