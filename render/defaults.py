@@ -111,8 +111,10 @@ THEMES: Dict[str, ThemeConfig] = {
             ),
         },
         edge_color="#93A7B8",
-        relation_color="#5A6E7D",
+        implicit_edge_color="#5C7286",
+        relation_color="#A14F1A",
         number_pill_bg="#E6EDF3",
+        number_pill_text="#5A6E7D",
     ),
     "terracotta": ThemeConfig(
         default_node=NodeStyle(
@@ -130,8 +132,10 @@ THEMES: Dict[str, ThemeConfig] = {
             ),
         },
         edge_color="#B48B7A",
-        relation_color="#8B6557",
+        implicit_edge_color="#7A6258",
+        relation_color="#8C2F46",
         number_pill_bg="#F4E0D6",
+        number_pill_text="#8B6557",
     ),
     "jungle": ThemeConfig(
         default_node=NodeStyle(
@@ -149,8 +153,10 @@ THEMES: Dict[str, ThemeConfig] = {
             ),
         },
         edge_color="#86B8AD",
-        relation_color="#5A8E95",
+        implicit_edge_color="#4E7F86",
+        relation_color="#146B8C",
         number_pill_bg="#DDEFEA",
+        number_pill_text="#5A8E95",
     ),
 }
 

@@ -1,0 +1,38 @@
+0 Innovación
+Proceso mediante el cual se introducen ideas, productos, servicios o métodos nuevos o mejorados que generan valor en la sociedad, la economía o las organizaciones.
+
+define -> 1 Características de la Innovación
+Elementos que permiten identificar cuándo una idea se convierte realmente en innovación.
+
+hl:: 1.1 Novedad
+La innovación implica introducir algo nuevo o significativamente mejorado respecto a lo existente.
+
+1.2 Generación de valor
+Una innovación debe producir beneficios, ya sean económicos, sociales o tecnológicos.
+
+1.3 Aplicación práctica
+No basta con tener una idea; la innovación requiere implementarse en la realidad.
+
+clasifica -> 2 Tipología de la Innovación
+La innovación puede presentarse en diferentes formas según el ámbito donde se produzca el cambio.
+
+hl:: 2.1 Innovación de producto
+Consiste en crear o mejorar bienes o servicios que satisfacen nuevas necesidades.
+
+2.2 Innovación de proceso
+Introduce nuevas formas de producción, fabricación o distribución.
+
+2.3 Innovación organizacional
+Implica cambios en la estructura, gestión o funcionamiento de una organización.
+
+contrasta -> 3 Diferencias entre Innovación y otros conceptos
+La innovación se relaciona con otros términos, pero posee características que la distinguen claramente.
+
+hl:: 3.1 Innovación vs Invención
+La invención crea algo nuevo, mientras que la innovación aplica esa creación y genera valor.
+
+3.2 Innovación vs Creatividad
+La creatividad produce ideas originales; la innovación convierte esas ideas en soluciones útiles.
+
+3.3 Innovación vs Mejora
+La mejora optimiza algo existente, mientras que la innovación introduce cambios más significativos.

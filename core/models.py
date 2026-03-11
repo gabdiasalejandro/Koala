@@ -6,7 +6,7 @@ from typing import Dict, List, Optional
 class ConceptNode:
     number: str
     title: str
-    relation_from_parent: str = "contiene"
+    relation_from_parent: str = ""
     kind: str = "default"
     attributes: Dict[str, str] = field(default_factory=dict)
     paragraphs: List[str] = field(default_factory=list)

@@ -37,13 +37,17 @@ def _draw_edges(dwg: svgwrite.Drawing, root_group: svgwrite.container.Group, con
         if len(edge.points) < 2:
             continue
 
+        has_explicit_relation = bool(edge.relation_label)
+        stroke_color = theme.edge_color if has_explicit_relation else theme.implicit_edge_color
+        stroke_width = 1.2 if has_explicit_relation else 1.75
+
         if len(edge.points) == 2:
             root_group.add(
                 dwg.line(
                     edge.points[0],
                     edge.points[1],
-                    stroke=theme.edge_color,
-                    stroke_width=1.2,
+                    stroke=stroke_color,
+                    stroke_width=stroke_width,
                 )
             )
         else:
@@ -51,8 +55,8 @@ def _draw_edges(dwg: svgwrite.Drawing, root_group: svgwrite.container.Group, con
                 dwg.polyline(
                     points=edge.points,
                     fill="none",
-                    stroke=theme.edge_color,
-                    stroke_width=1.2,
+                    stroke=stroke_color,
+                    stroke_width=stroke_width,
                 )
             )
 
@@ -203,7 +207,7 @@ def _draw_node_number(
             insert=(num_x + (num_w / 2), num_y + 7),
             text_anchor="middle",
             font_size=6.5,
-            fill=theme.relation_color,
+            fill=theme.number_pill_text,
             font_family=typography.body_font,
         )
     )

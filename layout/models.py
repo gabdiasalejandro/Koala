@@ -64,8 +64,10 @@ class ThemeConfig:
     default_node: NodeStyle
     node_by_kind: Mapping[str, NodeStyle] = field(default_factory=dict)
     edge_color: str = "#8AA3B7"
+    implicit_edge_color: str = "#64798A"
     relation_color: str = "#4E6472"
     number_pill_bg: str = "#E3EDF5"
+    number_pill_text: str = "#4E6472"
 
     def style_for(self, kind: str) -> NodeStyle:
         normalized = kind.strip().lower() if kind else "default"

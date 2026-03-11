@@ -35,8 +35,13 @@ def iter_nodes(root_nodes: List[ConceptNode]) -> Iterable[ConceptNode]:
         stack.extend(reversed(node.children))
 
 
-def get_depth(number: str) -> int:
-    return len(number.split(".")) - 1
+def get_depth(node: ConceptNode) -> int:
+    depth = 0
+    current = node.parent
+    while current is not None:
+        depth += 1
+        current = current.parent
+    return depth
 
 
 def get_node_width_for_depth(depth: int, config: LayoutConfig) -> float:
@@ -139,7 +144,7 @@ def measure_nodes(
     boxes: Dict[str, LayoutBox] = {}
 
     def visit(node: ConceptNode) -> None:
-        depth = get_depth(node.number)
+        depth = get_depth(node)
         width = get_node_width_for_depth(depth, config)
         content_width = width - (2 * config.inner_pad_x)
 

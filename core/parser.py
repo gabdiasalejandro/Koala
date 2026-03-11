@@ -18,6 +18,17 @@ def get_parent_number(number: str) -> Optional[str]:
     return ".".join(parts[:-1])
 
 
+def resolve_parent_number(number: str, has_super_root: bool) -> Optional[str]:
+    parent_number = get_parent_number(number)
+    if parent_number is not None:
+        return parent_number
+
+    if has_super_root and number != "0":
+        return "0"
+
+    return None
+
+
 def detect_missing_levels(number: str, node_index: Dict[str, ConceptNode], warnings: List[ParseWarning]):
 
     parts = number.split(".")
@@ -63,7 +74,7 @@ def parse_concept_text(text: str) -> ParsedDocument:
 
         if match_node:
             kind = normalize_kind(match_node.group("kind"))
-            relation = (match_node.group("relation") or "contiene").strip()
+            relation = (match_node.group("relation") or "").strip()
             number = match_node.group("number").strip()
             title = match_node.group("title").strip()
 
@@ -98,10 +109,10 @@ def parse_concept_text(text: str) -> ParsedDocument:
     # ----------------------------------------------------
 
     root_nodes: List[ConceptNode] = []
+    has_super_root = "0" in node_index
 
     for number, node in node_index.items():
-
-        parent_number = get_parent_number(number)
+        parent_number = resolve_parent_number(number, has_super_root)
 
         if parent_number is None:
             root_nodes.append(node)
