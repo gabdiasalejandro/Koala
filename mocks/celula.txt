@@ -1,4 +1,4 @@
-    1 Célula
+    hl:: 1 Célula
     La célula es la unidad básica de los seres vivos. Todos los organismos están formados por una o más células.
 
     1.1 Tipos de células
@@ -10,7 +10,7 @@
     1.1.2 Eucariotas
     Poseen núcleo y diversos organelos membranosos. Forman organismos unicelulares y multicelulares más complejos.
 
-    tienen → 1.1.2.1 Núcleo
+    hl:: tienen → 1.1.2.1 Núcleo
     El núcleo protege el material genético y coordina funciones importantes de la célula.
 
     contiene → 1.1.2.1.1 ADN

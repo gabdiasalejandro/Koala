@@ -4,13 +4,10 @@ from .models import ConceptNode, ParseWarning, ParsedDocument
 
 
 KIND_PREFIX_RE = r'(?:(?P<kind>[A-Za-z_][\w-]*)\s*::\s*)?'
+RELATION_PREFIX_RE = r'(?:(?P<relation>.+?)\s*(?:→|->)\s*)?'
 
-NODE_WITH_REL_RE = re.compile(
-    rf'^\s*(?P<relation>.+?)\s*(?:→|->)\s*{KIND_PREFIX_RE}(?P<number>\d+(?:\.\d+)*)\s+(?P<title>.+?)\s*$'
-)
-
-NODE_SIMPLE_RE = re.compile(
-    rf'^\s*{KIND_PREFIX_RE}(?P<number>\d+(?:\.\d+)*)\s+(?P<title>.+?)\s*$'
+NODE_LINE_RE = re.compile(
+    rf'^\s*{KIND_PREFIX_RE}{RELATION_PREFIX_RE}(?P<number>\d+(?:\.\d+)*)\s+(?P<title>.+?)\s*$'
 )
 
 
@@ -62,43 +59,18 @@ def parse_concept_text(text: str) -> ParsedDocument:
         if not line:
             continue
 
-        match_rel = NODE_WITH_REL_RE.match(line)
-        match_simple = NODE_SIMPLE_RE.match(line) if not match_rel else None
+        match_node = NODE_LINE_RE.match(line)
 
-        if match_rel:
-
-            relation = match_rel.group("relation").strip()
-            kind = normalize_kind(match_rel.group("kind"))
-            number = match_rel.group("number").strip()
-            title = match_rel.group("title").strip()
+        if match_node:
+            kind = normalize_kind(match_node.group("kind"))
+            relation = (match_node.group("relation") or "contiene").strip()
+            number = match_node.group("number").strip()
+            title = match_node.group("title").strip()
 
             node = ConceptNode(
                 number=number,
                 title=title,
                 relation_from_parent=relation,
-                kind=kind,
-            )
-
-            if number in node_index:
-                warnings.append(ParseWarning(
-                    line_no,
-                    f"Nodo duplicado '{number}'. Se sobrescribirá."
-                ))
-
-            node_index[number] = node
-            current_node = node
-            continue
-
-        if match_simple:
-
-            kind = normalize_kind(match_simple.group("kind"))
-            number = match_simple.group("number").strip()
-            title = match_simple.group("title").strip()
-
-            node = ConceptNode(
-                number=number,
-                title=title,
-                relation_from_parent="contiene",
                 kind=kind,
             )
 

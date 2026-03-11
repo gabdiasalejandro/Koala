@@ -14,6 +14,7 @@ from core.models import ConceptNode
 from layout.radial_layout import build_radial_layout
 from layout.models import LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
 from layout.synoptic_layout import build_synoptic_layout
+from layout.synoptic_boxes_layout import build_synoptic_boxes_layout
 from layout.tree_layout import build_tree_layout
 
 
@@ -23,6 +24,7 @@ LayoutEngine = Callable[[List[ConceptNode], LayoutConfig, TypographyConfig], Lay
 LAYOUT_ENGINES: Dict[LayoutKind, LayoutEngine] = {
     "tree": build_tree_layout,
     "synoptic": build_synoptic_layout,
+    "synoptic_boxes": build_synoptic_boxes_layout,
     "radial": build_radial_layout,
 }
 

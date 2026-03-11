@@ -1,98 +1,211 @@
-from dataclasses import replace
+"""Presets visuales y de pagina del render.
 
-from reportlab.lib.pagesizes import A4, landscape
-from reportlab.lib.units import mm
+La idea es poder crecer por registro y no por `if` dispersos:
+- tipografias registradas por nombre
+- temas registrados por nombre
+- perfiles por layout que componen esos presets
+"""
+
+from dataclasses import dataclass, replace
+from typing import Dict, Optional
 
 from layout.models import LayoutConfig, LayoutKind, NodeStyle, ThemeConfig, TypographyConfig
+from render.models import RenderSettings
 
 
-PAGE_WIDTH, PAGE_HEIGHT = landscape(A4)
+MM = 72.0 / 25.4
+PAGE_WIDTH = 297 * MM
+PAGE_HEIGHT = 210 * MM
 
 SHOW_NODE_NUMBERS = True
 SHOW_WARNINGS_FOOTER = False
 DEFAULT_LAYOUT_KIND: LayoutKind = "tree"
+DEFAULT_THEME_NAME = "default"
 
-DEFAULT_LAYOUT_CONFIG = LayoutConfig(
-    page_width=PAGE_WIDTH,
-    page_height=PAGE_HEIGHT,
-    margin_x=12 * mm,
-    margin_y=12 * mm,
-    node_width_base=100 * mm,
-    min_node_width=34 * mm,
-    root_width_factor=1.5,
-    depth_width_reduction=0.10,
-    max_depth_reduction=0.35,
-    h_gap_base=9 * mm,
-    v_gap_base=10 * mm,
-    inner_pad_x=3.5 * mm,
-    inner_pad_y=2.8 * mm,
-    corner_radius=4.0,
-    title_body_gap=1.8 * mm,
-)
 
-RADIAL_LAYOUT_CONFIG = replace(
-    DEFAULT_LAYOUT_CONFIG,
-    node_width_base=58 * mm,
-    min_node_width=22 * mm,
+@dataclass(frozen=True)
+class RenderProfile:
+    layout_config_name: str
+    typography_name: str
+    theme_name: str = DEFAULT_THEME_NAME
+
+
+LAYOUT_CONFIGS: Dict[str, LayoutConfig] = {
+    "default": LayoutConfig(
+        page_width=PAGE_WIDTH,
+        page_height=PAGE_HEIGHT,
+        margin_x=12 * MM,
+        margin_y=12 * MM,
+        node_width_base=100 * MM,
+        min_node_width=34 * MM,
+        root_width_factor=1.5,
+        depth_width_reduction=0.10,
+        max_depth_reduction=0.35,
+        h_gap_base=9 * MM,
+        v_gap_base=10 * MM,
+        inner_pad_x=3.5 * MM,
+        inner_pad_y=2.8 * MM,
+        corner_radius=4.0,
+        title_body_gap=1.8 * MM,
+    ),
+}
+
+LAYOUT_CONFIGS["radial"] = replace(
+    LAYOUT_CONFIGS["default"],
+    node_width_base=58 * MM,
+    min_node_width=22 * MM,
     root_width_factor=1.15,
     depth_width_reduction=0,
     max_depth_reduction=0.55,
-    h_gap_base=6 * mm,
-    v_gap_base=6 * mm,
-    inner_pad_x=2.6 * mm,
-    inner_pad_y=2.2 * mm,
-    title_body_gap=1.0 * mm,
+    h_gap_base=6 * MM,
+    v_gap_base=6 * MM,
+    inner_pad_x=2.6 * MM,
+    inner_pad_y=2.2 * MM,
+    title_body_gap=1.0 * MM,
 )
 
-DEFAULT_TYPOGRAPHY = TypographyConfig(
-    title_font="Helvetica-Bold",
-    body_font="Helvetica",
-    title_size_base=20.0,
-    title_size_min=20.0,
-    body_size=12.0,
-    relation_size=11.0,
-    body_leading=15.0,
-    max_title_lines=3,
-    title_line_extra=1.8,
+LAYOUT_CONFIGS["synoptic"] = replace(
+    LAYOUT_CONFIGS["default"],
+    root_width_factor=1.0,
 )
 
-RADIAL_TYPOGRAPHY = replace(
-    DEFAULT_TYPOGRAPHY,
-    title_size_base=21.0,
-    title_size_min=19.0,
-    body_size=13.0,
-    relation_size=11.5,
-    body_leading=15.5,
-)
-
-DEFAULT_THEME = ThemeConfig(
-    default_node=NodeStyle(
-        fill="#F9FBFD",
-        stroke="#52728A",
-        title="#16324A",
-        body="#25313C",
+TYPOGRAPHIES: Dict[str, TypographyConfig] = {
+    "default": TypographyConfig(
+        title_font="Georgia",
+        body_font="Arial",
+        title_size_base=18.0,
+        title_size_min=16.5,
+        body_size=11.4,
+        relation_size=10.0,
+        body_leading=14.2,
+        max_title_lines=3,
+        title_line_extra=1.2,
     ),
-    node_by_kind={
-        "fr": NodeStyle(
-            fill="#EFF7FF",
-            stroke="#2F6FA3",
-            title="#123B5A",
-            body="#1A2E3D",
-        ),
-    },
-    edge_color="#8AA3B7",
-    relation_color="#4E6472",
-    number_pill_bg="#E3EDF5",
+}
+
+TYPOGRAPHIES["radial"] = replace(
+    TYPOGRAPHIES["default"],
+    title_font="Trebuchet MS",
+    body_font="Verdana",
+    title_size_base=16.8,
+    title_size_min=15.0,
+    body_size=10.8,
+    relation_size=9.8,
+    body_leading=13.4,
 )
 
+THEMES: Dict[str, ThemeConfig] = {
+    "default": ThemeConfig(
+        default_node=NodeStyle(
+            fill="#F8FAFC",
+            stroke="#4A647D",
+            title="#1A3044",
+            body="#314252",
+        ),
+        node_by_kind={
+            "hl": NodeStyle(
+                fill="#FFF4D8",
+                stroke="#D39A2C",
+                title="#6B4D00",
+                body="#624E21",
+            ),
+        },
+        edge_color="#93A7B8",
+        relation_color="#5A6E7D",
+        number_pill_bg="#E6EDF3",
+    ),
+    "terracotta": ThemeConfig(
+        default_node=NodeStyle(
+            fill="#FFF7F1",
+            stroke="#8F5D4A",
+            title="#48281E",
+            body="#66483F",
+        ),
+        node_by_kind={
+            "hl": NodeStyle(
+                fill="#FFE0D1",
+                stroke="#C35A34",
+                title="#6A2817",
+                body="#7A4332",
+            ),
+        },
+        edge_color="#B48B7A",
+        relation_color="#8B6557",
+        number_pill_bg="#F4E0D6",
+    ),
+    "jungle": ThemeConfig(
+        default_node=NodeStyle(
+            fill="#F2FBF8",
+            stroke="#4C8C78",
+            title="#184A44",
+            body="#2D5F68",
+        ),
+        node_by_kind={
+            "hl": NodeStyle(
+                fill="#DDF6F0",
+                stroke="#2F9B8F",
+                title="#0F5A63",
+                body="#2C6670",
+            ),
+        },
+        edge_color="#86B8AD",
+        relation_color="#5A8E95",
+        number_pill_bg="#DDEFEA",
+    ),
+}
 
-def layout_config_for(layout_kind: LayoutKind) -> LayoutConfig:
-    if layout_kind == "radial":
-        return RADIAL_LAYOUT_CONFIG
-    return DEFAULT_LAYOUT_CONFIG
+LAYOUT_RENDER_PROFILES: Dict[LayoutKind, RenderProfile] = {
+    "tree": RenderProfile(layout_config_name="default", typography_name="default"),
+    "synoptic": RenderProfile(layout_config_name="synoptic", typography_name="default"),
+    "synoptic_boxes": RenderProfile(layout_config_name="synoptic", typography_name="default"),
+    "radial": RenderProfile(layout_config_name="radial", typography_name="radial"),
+}
 
 
-def typography_for(layout_kind: LayoutKind) -> TypographyConfig:
-    if layout_kind == "radial":
-        return RADIAL_TYPOGRAPHY
-    return DEFAULT_TYPOGRAPHY
+def available_theme_names() -> tuple[str, ...]:
+    return tuple(sorted(THEMES.keys()))
+
+
+def available_typography_names() -> tuple[str, ...]:
+    return tuple(sorted(TYPOGRAPHIES.keys()))
+
+
+def resolve_render_settings(
+    layout_kind: LayoutKind,
+    theme_name: Optional[str] = None,
+    typography_name: Optional[str] = None,
+) -> RenderSettings:
+    profile = LAYOUT_RENDER_PROFILES[layout_kind]
+    resolved_theme_name = theme_name or profile.theme_name
+    resolved_typography_name = typography_name or profile.typography_name
+
+    layout_config = _require_named_preset(
+        LAYOUT_CONFIGS,
+        profile.layout_config_name,
+        preset_type="layout config",
+    )
+    typography = _require_named_preset(
+        TYPOGRAPHIES,
+        resolved_typography_name,
+        preset_type="typography",
+    )
+    theme = _require_named_preset(
+        THEMES,
+        resolved_theme_name,
+        preset_type="theme",
+    )
+
+    return RenderSettings(
+        layout_kind=layout_kind,
+        layout_config=layout_config,
+        typography=typography,
+        theme=theme,
+    )
+
+
+def _require_named_preset(presets: Dict[str, object], name: str, preset_type: str):
+    preset = presets.get(name)
+    if preset is None:
+        available = ", ".join(sorted(presets.keys()))
+        raise ValueError(f"{preset_type} '{name}' no existe. Disponibles: {available}.")
+    return preset

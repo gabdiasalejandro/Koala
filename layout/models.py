@@ -16,7 +16,7 @@ from typing import Dict, List, Literal, Mapping, Tuple
 from core.models import ConceptNode
 
 
-LayoutKind = Literal["tree", "synoptic", "radial"]
+LayoutKind = Literal["tree", "synoptic", "synoptic_boxes", "radial"]
 
 
 @dataclass(frozen=True)

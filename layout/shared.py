@@ -13,10 +13,14 @@ Cómo funciona:
 
 from typing import Dict, Iterable, List, Tuple
 
-from reportlab.pdfbase.pdfmetrics import stringWidth
-
 from core.models import ConceptNode
 from layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
+
+
+_NARROW_CHARS = set(" !'`,.:;|ijlIt")
+_MEDIUM_CHARS = set('()[]{}"*/\\-')
+_WIDE_CHARS = set("mwMW@%#&QGOD")
+_DIGITS = set("0123456789")
 
 
 def sort_node_key(number: str) -> List[int]:
@@ -51,6 +55,33 @@ def get_v_gap_for_depth(depth: int, config: LayoutConfig) -> float:
     return max(5.0, config.v_gap_base * (1.0 - min(0.30, depth * 0.06)))
 
 
+def measure_text_width(text: str, font_name: str, font_size: float) -> float:
+    """Aproxima el ancho de texto sin depender de motores externos.
+
+    El objetivo no es precision tipografica absoluta sino mantener una
+    medicion estable para layout y render usando fuentes Helvetica-like.
+    """
+
+    font_factor = 1.04 if "bold" in font_name.lower() else 1.0
+    total = 0.0
+
+    for char in text:
+        if char in _NARROW_CHARS:
+            total += 0.34
+        elif char in _MEDIUM_CHARS:
+            total += 0.42
+        elif char in _WIDE_CHARS:
+            total += 0.82
+        elif char in _DIGITS:
+            total += 0.56
+        elif char.isupper():
+            total += 0.68
+        else:
+            total += 0.54
+
+    return total * font_size * font_factor
+
+
 def wrap_text_lines(text: str, font_name: str, font_size: float, max_width: float) -> List[str]:
     words = text.split()
     if not words:
@@ -61,7 +92,7 @@ def wrap_text_lines(text: str, font_name: str, font_size: float, max_width: floa
 
     for word in words:
         trial = f"{current} {word}".strip()
-        if stringWidth(trial, font_name, font_size) <= max_width or not current:
+        if measure_text_width(trial, font_name, font_size) <= max_width or not current:
             current = trial
         else:
             lines.append(current)
@@ -92,7 +123,7 @@ def choose_title_layout(
 
     if lines:
         last = lines[-1]
-        while last and stringWidth(last + "...", typography.title_font, typography.title_size_min) > content_width:
+        while last and measure_text_width(last + "...", typography.title_font, typography.title_size_min) > content_width:
             last = last[:-1]
         lines[-1] = (last + "...") if last else "..."
 
