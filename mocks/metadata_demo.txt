@@ -1,0 +1,23 @@
+@layout synoptic
+@theme terracotta
+@typography default
+@size square
+@show-node-numbers false
+
+1 Plataforma DSL
+Coordina el parser, el layout y el render para transformar texto estructurado en diagramas.
+
+organiza -> 1.1 Core
+Contiene parsing, modelos y validaciones del documento.
+
+renderiza -> 1.2 Render
+Resuelve presets, viewport y salida SVG.
+
+usa -> 1.1.1 Parser
+Reconstruye jerarquía, warnings y metadata opcional con @.
+
+calcula -> 1.2.1 Layout
+Convierte el árbol semántico en cajas, aristas y geometría reutilizable.
+
+exporta -> 1.2.2 SVG
+Dibuja nodos, conectores, etiquetas y ajuste final a la hoja.

@@ -109,6 +109,101 @@ def wrap_text_lines(text: str, font_name: str, font_size: float, max_width: floa
     return lines
 
 
+def measure_longest_word_width(text: str, font_name: str, font_size: float) -> float:
+    words = text.split()
+    if not words:
+        return 0.0
+
+    return max(measure_text_width(word, font_name, font_size) for word in words)
+
+
+def get_content_min_width(
+    node: ConceptNode,
+    config: LayoutConfig,
+    typography: TypographyConfig,
+) -> float:
+    title_width = measure_longest_word_width(node.title, typography.title_font, typography.title_size_base)
+    body_width = measure_longest_word_width(node.body_text(), typography.body_font, typography.body_size)
+    content_width = max(title_width, body_width)
+
+    if content_width <= 0.0:
+        return 2 * config.inner_pad_x
+
+    return content_width + (2 * config.inner_pad_x)
+
+
+def get_preferred_title_width(
+    node: ConceptNode,
+    config: LayoutConfig,
+    typography: TypographyConfig,
+) -> float:
+    title_width = measure_text_width(node.title, typography.title_font, typography.title_size_base)
+    if title_width <= 0.0:
+        return 2 * config.inner_pad_x
+    return title_width + (2 * config.inner_pad_x) + 3.0
+
+
+def get_preferred_content_width(
+    node: ConceptNode,
+    config: LayoutConfig,
+    typography: TypographyConfig,
+) -> float:
+    title_width = measure_text_width(node.title, typography.title_font, typography.title_size_base)
+    body_width = measure_text_width(node.body_text(), typography.body_font, typography.body_size)
+    preferred_width = max(title_width, body_width)
+
+    if preferred_width <= 0.0:
+        return 2 * config.inner_pad_x
+
+    return preferred_width + (2 * config.inner_pad_x) + 3.0
+
+
+def get_required_node_width(
+    node: ConceptNode,
+    depth: int,
+    config: LayoutConfig,
+    typography: TypographyConfig,
+) -> float:
+    base_width = get_node_width_for_depth(depth, config)
+    padded_width = get_content_min_width(node, config, typography)
+    return max(base_width, padded_width)
+
+
+def measure_node_box(
+    node: ConceptNode,
+    depth: int,
+    width: float,
+    config: LayoutConfig,
+    typography: TypographyConfig,
+) -> LayoutBox:
+    content_width = width - (2 * config.inner_pad_x)
+    title_lines, title_font_size, title_height = choose_title_layout(node.title, content_width, typography)
+    body_lines = wrap_text_lines(node.body_text(), typography.body_font, typography.body_size, content_width)
+    body_height = len(body_lines) * typography.body_leading
+
+    height = (
+        config.inner_pad_y
+        + title_height
+        + (config.title_body_gap if body_lines else 0.0)
+        + body_height
+        + config.inner_pad_y
+    )
+
+    return LayoutBox(
+        node=node,
+        depth=depth,
+        width=width,
+        height=height,
+        subtree_width=width,
+        x=0.0,
+        y=0.0,
+        title_lines=title_lines,
+        title_font_size=title_font_size,
+        title_height=title_height,
+        body_lines=body_lines,
+    )
+
+
 def choose_title_layout(
     title: str,
     content_width: float,
@@ -145,35 +240,8 @@ def measure_nodes(
 
     def visit(node: ConceptNode) -> None:
         depth = get_depth(node)
-        width = get_node_width_for_depth(depth, config)
-        content_width = width - (2 * config.inner_pad_x)
-
-        title_lines, title_font_size, title_height = choose_title_layout(node.title, content_width, typography)
-
-        body_lines = wrap_text_lines(node.body_text(), typography.body_font, typography.body_size, content_width)
-        body_height = len(body_lines) * typography.body_leading
-
-        height = (
-            config.inner_pad_y
-            + title_height
-            + (config.title_body_gap if body_lines else 0.0)
-            + body_height
-            + config.inner_pad_y
-        )
-
-        boxes[node.number] = LayoutBox(
-            node=node,
-            depth=depth,
-            width=width,
-            height=height,
-            subtree_width=width,
-            x=0.0,
-            y=0.0,
-            title_lines=title_lines,
-            title_font_size=title_font_size,
-            title_height=title_height,
-            body_lines=body_lines,
-        )
+        width = get_required_node_width(node, depth, config, typography)
+        boxes[node.number] = measure_node_box(node, depth, width, config, typography)
 
         for child in node.children:
             visit(child)

@@ -17,6 +17,7 @@ class RenderSettings:
     layout_config: LayoutConfig
     typography: TypographyConfig
     theme: ThemeConfig
+    show_node_numbers: bool
 
 
 @dataclass(frozen=True)

@@ -13,6 +13,9 @@
     hl:: tienen → 1.1.2.1 Núcleo
     El núcleo protege el material genético y coordina funciones importantes de la célula.
 
+    1.1.2.2 Mitocondrias
+    Las mitocondrias se encargan de producir la energía de la célula.
+
     contiene → 1.1.2.1.1 ADN
     El ADN almacena la información hereditaria necesaria para el funcionamiento y la reproducción celular.
 

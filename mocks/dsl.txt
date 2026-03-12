@@ -3,7 +3,6 @@ Define una base común para describir conocimiento técnico con texto estructura
 
 core:: organiza -> 1.1 Núcleo del lenguaje
 Gestiona sintaxis, parsing, normalización y validaciones mínimas para producir un modelo consistente.
-
 syntax:: define -> 1.1.1 Gramática base
 Establece reglas de numeración jerárquica, relaciones y bloques de contenido por nodo.
 
@@ -30,21 +29,6 @@ Genera un resultado editable e integrable en web, documentación y pipelines aut
 
 theme:: configura -> 1.3.2 Themes y tipografías
 Permite variar color, contraste y jerarquía visual sin cambiar el contenido ni la geometría.
-
-hl:: especializa -> 1.4 Dominio de base de datos
-Representa conceptos de modelado relacional para comunicar diseño lógico y dependencias entre tablas.
-
-hl:: modela -> 1.4.1 Entidades
-Describe tablas principales del sistema con sus responsabilidades funcionales.
-
-hl:: conecta -> 1.4.2 Relaciones
-Explica vínculos entre entidades, direccionalidad y dependencias de integridad.
-
-hl:: define -> 1.4.2.1 Cardinalidad
-Indica reglas uno a uno, uno a muchos y muchos a muchos para cada relación.
-
-hl:: restringe -> 1.4.2.2 Claves foráneas
-Declara referencias entre tablas para mantener consistencia y trazabilidad de datos.
 
 qa:: asegura -> 1.5 Calidad y evolución
 Permite escalar el DSL sin regresiones visuales ni pérdida de compatibilidad con sintaxis previa.

@@ -13,6 +13,7 @@ import svgwrite
 
 from core.models import ParsedDocument
 from layout.models import LayoutKind
+from render.defaults import PageSizeName
 from render.scene import build_render_context
 from render.svg_canvas import draw_scene
 
@@ -23,12 +24,14 @@ def render_svg(
     layout_kind: Optional[LayoutKind] = None,
     theme_name: Optional[str] = None,
     typography_name: Optional[str] = None,
+    page_size_name: Optional[PageSizeName] = None,
 ) -> None:
     context = build_render_context(
         parsed,
         layout_kind=layout_kind,
         theme_name=theme_name,
         typography_name=typography_name,
+        page_size_name=page_size_name,
     )
     config = context.settings.layout_config
 

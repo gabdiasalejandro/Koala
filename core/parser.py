@@ -9,6 +9,7 @@ RELATION_PREFIX_RE = r'(?:(?P<relation>.+?)\s*(?:→|->)\s*)?'
 NODE_LINE_RE = re.compile(
     rf'^\s*{KIND_PREFIX_RE}{RELATION_PREFIX_RE}(?P<number>\d+(?:\.\d+)*)\s+(?P<title>.+?)\s*$'
 )
+METADATA_LINE_RE = re.compile(r'^\s*@(?P<key>[A-Za-z][\w-]*)\s*(?::|\s)\s*(?P<value>.+?)\s*$')
 
 
 def get_parent_number(number: str) -> Optional[str]:
@@ -55,6 +56,7 @@ def parse_concept_text(text: str) -> ParsedDocument:
     lines = text.splitlines()
 
     node_index: Dict[str, ConceptNode] = {}
+    metadata: Dict[str, str] = {}
     warnings: List[ParseWarning] = []
 
     current_node: Optional[ConceptNode] = None
@@ -68,6 +70,20 @@ def parse_concept_text(text: str) -> ParsedDocument:
         line = raw_line.strip()
 
         if not line:
+            continue
+
+        match_metadata = METADATA_LINE_RE.match(line)
+        if match_metadata:
+            metadata_key = match_metadata.group("key").strip().lower()
+            metadata_value = match_metadata.group("value").strip()
+
+            if metadata_key in metadata:
+                warnings.append(ParseWarning(
+                    line_no,
+                    f"Metadata duplicada '{metadata_key}'. Se sobrescribirá."
+                ))
+
+            metadata[metadata_key] = metadata_value
             continue
 
         match_node = NODE_LINE_RE.match(line)
@@ -165,5 +181,6 @@ def parse_concept_text(text: str) -> ParsedDocument:
     return ParsedDocument(
         root_nodes=root_nodes,
         node_index=node_index,
+        metadata=metadata,
         warnings=warnings
     )

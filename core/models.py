@@ -32,4 +32,5 @@ class ParseWarning:
 class ParsedDocument:
     root_nodes: List[ConceptNode]
     node_index: Dict[str, ConceptNode]
+    metadata: Dict[str, str]
     warnings: List[ParseWarning]

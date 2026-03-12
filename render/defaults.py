@@ -7,20 +7,22 @@ La idea es poder crecer por registro y no por `if` dispersos:
 """
 
 from dataclasses import dataclass, replace
-from typing import Dict, Optional
+from typing import Dict, Literal, Optional
 
 from layout.models import LayoutConfig, LayoutKind, NodeStyle, ThemeConfig, TypographyConfig
 from render.models import RenderSettings
 
 
 MM = 72.0 / 25.4
-PAGE_WIDTH = 297 * MM
-PAGE_HEIGHT = 210 * MM
+A4_WIDTH = 210 * MM
+A4_HEIGHT = 297 * MM
 
-SHOW_NODE_NUMBERS = True
+DEFAULT_SHOW_NODE_NUMBERS = True
 SHOW_WARNINGS_FOOTER = False
 DEFAULT_LAYOUT_KIND: LayoutKind = "tree"
 DEFAULT_THEME_NAME = "default"
+PageSizeName = Literal["a4", "a4_landscape", "square"]
+DEFAULT_PAGE_SIZE: PageSizeName = "a4_landscape"
 
 
 @dataclass(frozen=True)
@@ -32,8 +34,8 @@ class RenderProfile:
 
 LAYOUT_CONFIGS: Dict[str, LayoutConfig] = {
     "default": LayoutConfig(
-        page_width=PAGE_WIDTH,
-        page_height=PAGE_HEIGHT,
+        page_width=A4_HEIGHT,
+        page_height=A4_WIDTH,
         margin_x=12 * MM,
         margin_y=12 * MM,
         node_width_base=100 * MM,
@@ -167,6 +169,12 @@ LAYOUT_RENDER_PROFILES: Dict[LayoutKind, RenderProfile] = {
     "radial": RenderProfile(layout_config_name="radial", typography_name="radial"),
 }
 
+PAGE_SIZES: Dict[PageSizeName, tuple[float, float]] = {
+    "a4": (A4_WIDTH, A4_HEIGHT),
+    "a4_landscape": (A4_HEIGHT, A4_WIDTH),
+    "square": (A4_WIDTH, A4_WIDTH),
+}
+
 
 def available_theme_names() -> tuple[str, ...]:
     return tuple(sorted(THEMES.keys()))
@@ -176,14 +184,21 @@ def available_typography_names() -> tuple[str, ...]:
     return tuple(sorted(TYPOGRAPHIES.keys()))
 
 
+def available_page_size_names() -> tuple[str, ...]:
+    return tuple(PAGE_SIZES.keys())
+
+
 def resolve_render_settings(
     layout_kind: LayoutKind,
     theme_name: Optional[str] = None,
     typography_name: Optional[str] = None,
+    page_size_name: Optional[PageSizeName] = None,
+    show_node_numbers: Optional[bool] = None,
 ) -> RenderSettings:
     profile = LAYOUT_RENDER_PROFILES[layout_kind]
     resolved_theme_name = theme_name or profile.theme_name
     resolved_typography_name = typography_name or profile.typography_name
+    resolved_page_size_name = page_size_name or DEFAULT_PAGE_SIZE
 
     layout_config = _require_named_preset(
         LAYOUT_CONFIGS,
@@ -200,12 +215,23 @@ def resolve_render_settings(
         resolved_theme_name,
         preset_type="theme",
     )
+    page_width, page_height = _require_named_preset(
+        PAGE_SIZES,
+        resolved_page_size_name,
+        preset_type="page size",
+    )
+    layout_config = replace(
+        layout_config,
+        page_width=page_width,
+        page_height=page_height,
+    )
 
     return RenderSettings(
         layout_kind=layout_kind,
         layout_config=layout_config,
         typography=typography,
         theme=theme,
+        show_node_numbers=DEFAULT_SHOW_NODE_NUMBERS if show_node_numbers is None else show_node_numbers,
     )
 
 

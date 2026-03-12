@@ -1,25 +1,28 @@
-# Nombre del Proyecto
+# Koala
+
 🇪🇸 Español | 🇺🇸 [English](README.md)
 
-## Koala
+Koala es un DSL para generar diagramas a partir de texto estructurado.
 
-DSL para generar diagramas a partir de texto estructurado.
+La idea central del proyecto es simple: un mismo archivo fuente debe poder renderizarse en múltiples layouts y estilos sin reescribir el contenido.
 
-El objetivo es tener una sintaxis suficientemente simple para que pueda ser escrita por personas o generada por LLMs, y a la vez una arquitectura que permita crecer hacia más layouts, más reglas de estilo y más dominios semánticos.
+## Capacidades actuales
 
-## Sintaxis base
+- Parsear árboles conceptuales jerárquicos desde `.txt` y `.docx`
+- Renderizar el mismo documento como `tree`, `synoptic`, `synoptic_boxes` o `radial`
+- Aplicar presets de tema y tipografía
+- Elegir tamaño de página desde el CLI
+- Leer metadata opcional directamente desde el archivo fuente con `@...`
+- Ajustar la escena final al SVG de salida
 
-Los nodos se definen con numeración jerárquica:
+## Resumen de sintaxis
 
-- `1`, `2`, `3` representan raíces.
-- `1.1`, `1.2` representan hijos de `1`.
-- `1.1.1` representa un hijo de `1.1`.
-- `0` puede usarse como super-raíz opcional.
-- Si existe `0`, entonces `1`, `2`, `3` y demás nodos de primer nivel pasan a ser hijos automáticos de `0`.
-- Si no existe `0`, los nodos `1`, `2`, `3` siguen comportándose como raíces independientes.
+Los nodos usan numeración jerárquica:
 
-Tambien se puede declarar una relación explícita usando `->` o `→`.
-Si una línea no incluye `->`, la conexión jerárquica queda sin etiqueta.
+- `1`, `2`, `3` son raíces
+- `1.1`, `1.2` son hijos de `1`
+- `1.1.1` es hijo de `1.1`
+- `0` es una super-raíz opcional
 
 Ejemplo:
 
@@ -31,35 +34,40 @@ organiza -> 1.1 Core
 Contiene parser, modelos y validaciones.
 
 renderiza -> 1.2 Render
-Genera SVG.
+Genera la salida SVG.
 ```
 
-El texto debajo de cada encabezado se interpreta como cuerpo del nodo.
-
-## Sintaxis `kind::`
-
-Existe un prefijo semántico opcional para marcar el tipo del nodo.
-Ese prefijo va siempre al inicio de la línea, antes de la relación si existe:
+Tipo semántico opcional:
 
 ```text
 hl:: 1.2 Tabla Usuarios
-```
-
-Eso produce un nodo con `kind=hl`, pensado para resaltar conceptos clave desde la capa de render.
-
-También puede combinarse con relaciones:
-
-```text
 hl:: contiene -> 1.2.1 Clave foránea
 ```
 
-## Ejemplo recomendado
+Metadata opcional:
 
-El ejemplo principal del proyecto está en [mocks/concepts.txt](/home/yaldapika/dev/koala/mocks/concepts.txt:1). Ese archivo está pensado para funcionar razonablemente bien en `tree`, `synoptic`, `synoptic_boxes` y `radial`.
+```text
+@layout tree
+@theme terracotta
+@typography default
+@size square
+@show-node-numbers false
+@output-dir output/metadata_demo
+```
+
+La metadata es opcional y sigue esta precedencia:
+
+1. flag explícito del CLI
+2. metadata dentro del archivo fuente
+3. defaults internos
+
+Para la sintaxis completa, ver [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md).
 
 ## Uso
 
-La entrada principal es [main.py](/home/yaldapika/dev/koala/main.py:1) y ahora expone una CLI simple.
+Punto de entrada principal:
+
+- [main.py](/home/yaldapika/dev/koala/main.py)
 
 Ejemplos:
 
@@ -68,108 +76,146 @@ Ejemplos:
 ./.venv/bin/python main.py --layout synoptic
 ./.venv/bin/python main.py --layout synoptic_boxes
 ./.venv/bin/python main.py --layout radial
+./.venv/bin/python main.py --input mocks/metadata_demo.txt
+./.venv/bin/python main.py --layout tree --theme terracotta --size square
 ```
 
-Tambien soporta:
-
-```bash
-./.venv/bin/python main.py --layout radial --input mocks/concepts.txt --output-dir output
-./.venv/bin/python main.py --layout tree --theme terracotta
-```
-
-Parámetros disponibles:
+Opciones actuales del CLI:
 
 - `--layout`: `tree`, `synoptic`, `synoptic_boxes`, `radial`
 - `--input`: archivo `.txt` o `.docx`
-- `--output-dir`: carpeta donde se generan los resultados
-- `--theme`: preset de color registrado en `render/defaults.py`
-- `--typography`: preset tipografico registrado en `render/defaults.py`
+- `--output-dir`: carpeta de salida
+- `--theme`: preset de tema
+- `--typography`: preset tipográfico
+- `--size`: preset de página, actualmente `a4`, `a4_landscape`, `square`
 
-La compilacion genera un SVG:
+Presets actuales de página:
+
+- `a4`: `210 x 297 mm`
+- `a4_landscape`: `297 x 210 mm`
+- `square`: `210 x 210 mm`
+
+Salida:
 
 - `output/concept_map_<layout>.svg`
 
-## Layouts soportados
+## Layouts
 
-Actualmente existen cuatro layouts:
+Layouts soportados actualmente:
 
-- `tree`: disposición vertical top-down, útil para jerarquías clásicas.
-- `synoptic`: variante de cuadro sinóptico con corchetes, sin recuadros y sin labels de relación.
-- `synoptic_boxes`: disposición en columnas con recuadros y labels de relación.
-- `radial`: disposición tipo mapa mental, con la raíz al centro y las ramas distribuidas alrededor.
+- `tree`: jerarquía top-down con ancho adaptativo en padres y ajuste consciente de la página
+- `synoptic`: cuadro sinóptico con corchetes y sin labels de relación
+- `synoptic_boxes`: cuadro sinóptico con recuadros y labels de relación
+- `radial`: mapa mental con disposición desde el centro
 
-En radial:
-
-- La raíz se coloca en el centro.
-- Los hijos de la raíz se reparten angularmente como una estrella.
-- Las ramas más profundas determinan el radio total del diagrama.
-- El motor intenta evitar solapes calculando separación radial y tangencial.
+Para detalles de implementación, ver [docs/layouts.md](/home/yaldapika/dev/koala/docs/layouts.md).
 
 ## Arquitectura
 
 El proyecto está dividido en tres capas:
 
-- `core/`: parsing, modelos del DSL y carga de archivos.
-- `layout/`: cálculo geométrico de nodos y aristas.
-- `render/`: traducción de la escena geométrica a SVG.
+- `core/`: parsing, modelos del DSL y carga de entrada
+- `layout/`: cálculo geométrico de nodos y aristas
+- `render/`: ajuste a página, estilos y dibujo SVG
 
 La separación de responsabilidades es:
 
-- `core` entiende el lenguaje.
-- `layout` decide posiciones según el tipo de layout.
-- `render` dibuja la escena y aplica tema, tipografia y salida final.
+- `core` entiende el lenguaje
+- `layout` calcula la geometría
+- `render` dibuja la escena
 
-## Carpeta `layout`
+Para la arquitectura completa, ver [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md).
 
-La carpeta `layout/` está organizada para crecer sin duplicación:
+## Sugerencias para mejores resultados visuales
 
-- [models.py](/home/yaldapika/dev/koala/layout/models.py:1): estructuras tipadas como `LayoutBox`, `LayoutEdge` y `LayoutScene`.
-- [shared.py](/home/yaldapika/dev/koala/layout/shared.py:1): utilidades compartidas de medición, texto y helpers geométricos.
-- [tree_layout.py](/home/yaldapika/dev/koala/layout/tree_layout.py:1): layout top-down.
-- [synoptic_layout.py](/home/yaldapika/dev/koala/layout/synoptic_layout.py:1): layout de cuadro sinóptico con corchetes.
-- [synoptic_boxes_layout.py](/home/yaldapika/dev/koala/layout/synoptic_boxes_layout.py:1): layout de cuadro sinóptico con recuadros.
-- [radial_layout.py](/home/yaldapika/dev/koala/layout/radial_layout.py:1): layout tipo mapa mental.
-- [registry.py](/home/yaldapika/dev/koala/layout/registry.py:1): registro de motores por tipo de layout.
+Estas recomendaciones son heurísticas prácticas para obtener diagramas más limpios con los motores actuales.
 
-Cada motor retorna una `LayoutScene` con:
+### Generales
 
-- `boxes`: nodos ya medidos y posicionados.
-- `edges`: aristas con geometría explícita.
+- Mantén los títulos cortos y conceptuales; mueve la explicación al cuerpo
+- Usa relaciones solo cuando aporten algo; demasiadas labels generan ruido
+- Prefiere grupos de hermanos equilibrados cuando sea posible
+- Divide párrafos muy largos en prosa más compacta; la medición actual trabaja por líneas y la escritura más apretada suele envolver mejor
+- Usa metadata cuando un archivo esté pensado para renderizarse de una forma específica
 
-Eso permite que los renderizadores no dependan de la matemática específica de cada layout.
+### `tree`
 
-## Capa de render
+- Funciona mejor para jerarquías clásicas y mapas explicativos
+- Va muy bien cuando los niveles superiores son conceptuales y los inferiores concentran detalle
+- Encaja especialmente bien con `a4_landscape` y `square`
+- Si un padre tiene muchos hijos, conviene mantener los títulos hijos compactos para que el árbol conserve escala legible
+- Si el mapa es poco profundo y muy ancho, `square` suele ayudar a densificar la composición
 
-El motor de render ahora se divide asi:
+### `synoptic`
 
-- [scene.py](/home/yaldapika/dev/koala/render/scene.py:1): une presets, layout y viewport en un `RenderContext`.
-- [defaults.py](/home/yaldapika/dev/koala/render/defaults.py:1): registro de temas, tipografias y perfiles por layout.
-- [viewport.py](/home/yaldapika/dev/koala/render/viewport.py:1): ajuste de la escena al tamano de pagina.
-- [geometry.py](/home/yaldapika/dev/koala/render/geometry.py:1): helpers geometricos compartidos del dibujo.
-- [svg_canvas.py](/home/yaldapika/dev/koala/render/svg_canvas.py:1): dibujo concreto de nodos, aristas y etiquetas.
-- [svg_render.py](/home/yaldapika/dev/koala/render/svg_render.py:1): entrypoint publico del render SVG.
+- Funciona mejor para clasificaciones agrupadas y estructuras tipo esquema
+- Conviene usar títulos cortos y cuerpo muy ligero
+- Da mejores resultados cuando cada nivel refina categorías
+- `a4_landscape` sigue siendo el preset más seguro porque la geometría interna todavía está orientada a columnas
+- No dependas de labels de relación; este layout las suprime a propósito
 
-La configuracion visual sigue centralizada en [defaults.py](/home/yaldapika/dev/koala/render/defaults.py:1), pero ahora por registros:
+### `synoptic_boxes`
 
-- `THEMES`: paletas de color reutilizables
-- `TYPOGRAPHIES`: presets tipograficos reutilizables
-- `LAYOUT_RENDER_PROFILES`: combinacion default por layout
+- Funciona bien para diagramas didácticos de izquierda a derecha o descomposición de procesos
+- Conviene que cada grupo de hermanos sea conceptualmente paralelo
+- Usa cuerpo corto o medio, no párrafos enormes
+- `a4_landscape` sigue siendo el preset más seguro
+- `square` ya está soportado, pero todavía no existe una heurística específica de compactación para ese aspect ratio
+- Se sugiere una profundidad máxima menor a 4 
 
-Eso hace mas simple agregar nuevas configuraciones de tipografia y color sin tocar el pipeline de dibujo.
+### `radial`
+
+- Funciona mejor para un tema central con ramas relativamente equilibradas
+- Intenta que las ramas de primer nivel tengan importancia y tamaño similares
+- Evita una rama gigante y muchas ramas mínimas si quieres una composición circular limpia
+- `square` y `a4_landscape` suelen dar el mejor balance
+- Si la raíz es breve y los hijos tienen contenido rico, `radial` suele aprovechar muy bien la hoja
+
+### Consejos por tamaño de página
+
+#### `a4`
+
+- Mejor para árboles altos o jerarquías más profundas verticalmente
+- Útil cuando quieres más ritmo de lectura en pila
+- Menos ideal para estructuras sinópticas muy anchas, salvo que el contenido sea compacto
+
+#### `a4_landscape`
+
+- Default actual
+- Mejor preset generalista
+- La opción más segura para `synoptic` y `synoptic_boxes`
+- También funciona muy bien para documentos `tree` de anchura media
+
+#### `square`
+
+- Ideal cuando buscas una composición más densa y centrada
+- Muy buena opción para `radial`
+- Útil en `tree` cuando el contenido tendería a abrirse demasiado en horizontal
+- Exige escritura más compacta para `synoptic` y `synoptic_boxes` mientras esos motores no tengan optimización específica por aspect ratio
+
+## Ejemplos recomendados
+
+- [mocks/concepts.txt](/home/yaldapika/dev/koala/mocks/concepts.txt)
+- [mocks/metadata_demo.txt](/home/yaldapika/dev/koala/mocks/metadata_demo.txt)
 
 ## Estado actual
 
-Ya es una herramienta útil para:
+El proyecto ya es útil para:
 
-- prototipar mapas conceptuales desde texto
-- generar variantes visuales del mismo contenido
-- probar estilos semánticos por tipo de nodo
-- experimentar con distintos layouts sin rehacer el parser
+- prototipado rápido de mapas conceptuales
+- probar múltiples layouts desde el mismo contenido
+- testear semántica visual con `kind::`
+- distribuir mocks auto-descriptivos mediante metadata
 
-Todavía hay espacio para refactorizar y pulir, sobre todo en:
+Todavía hay espacio de mejora en:
 
-- compactación más fina del radial
-- reglas más ricas de sintaxis
-- estilos por dominio
-- validaciones más fuertes del DSL
+- adaptación específica de `synoptic` y `synoptic_boxes` a páginas portrait y square
+- aceptar markdown adentro para destacar conceptos en negritas
+- evaluar crosed relationships entre nodos en la misma jerarquía o diferente (solo la flecha)
+- aceptar saltos de línea en el texto del nodo
+- mejorar la distribución de radial
+- validaciones más fuertes
 - pruebas visuales automatizadas
+- facilitar su uso como DSL haciéndolo ejecutable de otras maneras sin depender de main.py
+- añadir más temas, tipografías y tipos de conectores o hacerlo fácilmente configurable
+- mejorar los corchetes de synoptic

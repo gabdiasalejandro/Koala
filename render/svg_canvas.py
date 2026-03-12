@@ -9,7 +9,7 @@ Recibe un `RenderContext` ya resuelto y se concentra solo en:
 import svgwrite
 
 from layout.shared import measure_text_width, sort_node_key, wrap_text_lines
-from render.defaults import SHOW_NODE_NUMBERS, SHOW_WARNINGS_FOOTER
+from render.defaults import SHOW_WARNINGS_FOOTER
 from render.geometry import arrow_wing_points
 from render.models import RenderContext
 
@@ -26,6 +26,102 @@ def draw_scene(dwg: svgwrite.Drawing, context: RenderContext) -> None:
 
     if SHOW_WARNINGS_FOOTER and context.parsed.warnings:
         _draw_warnings_footer(dwg, context)
+
+
+def _should_justify_line(text_align: str, line: str, is_last_line: bool) -> bool:
+    return text_align == "justify" and not is_last_line and len(line.split()) > 1
+
+
+def _draw_line(
+    dwg: svgwrite.Drawing,
+    root_group: svgwrite.container.Group,
+    *,
+    line: str,
+    x: float,
+    y: float,
+    font_size: float,
+    font_family: str,
+    fill: str,
+    max_width: float,
+    text_align: str,
+    is_last_line: bool,
+    font_weight: str | None = None,
+) -> None:
+    text_kwargs = {
+        "insert": (x, y),
+        "font_size": font_size,
+        "fill": fill,
+        "font_family": font_family,
+    }
+    if font_weight is not None:
+        text_kwargs["font_weight"] = font_weight
+
+    if _should_justify_line(text_align, line, is_last_line):
+        words = line.split()
+        if len(words) > 1:
+            word_widths = [measure_text_width(word, font_family, font_size) for word in words]
+            words_total_width = sum(word_widths)
+            available_gap_width = max_width - words_total_width
+
+            if available_gap_width > 0:
+                gap_width = available_gap_width / (len(words) - 1)
+                current_x = x
+
+                for word, word_width in zip(words, word_widths):
+                    word_kwargs = {
+                        "insert": (current_x, y),
+                        "font_size": font_size,
+                        "fill": fill,
+                        "font_family": font_family,
+                    }
+                    if font_weight is not None:
+                        word_kwargs["font_weight"] = font_weight
+
+                    root_group.add(dwg.text(word, **word_kwargs))
+                    current_x += word_width + gap_width
+                return
+
+        root_group.add(
+            dwg.text(
+                line,
+                **text_kwargs,
+            )
+        )
+        return
+
+    root_group.add(dwg.text(line, **text_kwargs))
+
+
+def _draw_block_lines(
+    dwg: svgwrite.Drawing,
+    root_group: svgwrite.container.Group,
+    *,
+    lines: list[str],
+    x: float,
+    start_y: float,
+    line_step: float,
+    font_size: float,
+    font_family: str,
+    fill: str,
+    max_width: float,
+    text_align: str,
+    font_weight: str | None = None,
+) -> None:
+    for index, line in enumerate(lines):
+        _draw_line(
+            dwg,
+            root_group,
+            line=line,
+            x=x,
+            y=start_y + (index * line_step),
+            font_size=font_size,
+            font_family=font_family,
+            fill=fill,
+            max_width=max_width,
+            text_align=text_align,
+            is_last_line=index == len(lines) - 1,
+            font_weight=font_weight,
+        )
 
 
 def _draw_edges(dwg: svgwrite.Drawing, root_group: svgwrite.container.Group, context: RenderContext) -> None:
@@ -110,34 +206,40 @@ def _draw_nodes(dwg: svgwrite.Drawing, root_group: svgwrite.container.Group, con
             )
         )
 
+        text_x = box.x + config.inner_pad_x
+        text_width = box.width - (2 * config.inner_pad_x)
         title_y = box.y + config.inner_pad_y + box.title_font_size
-        for line in box.title_lines or [box.node.title]:
-            root_group.add(
-                dwg.text(
-                    line,
-                    insert=(box.x + config.inner_pad_x, title_y),
-                    font_size=box.title_font_size,
-                    fill=style.title,
-                    font_family=typography.title_font,
-                )
-            )
-            title_y += box.title_font_size + typography.title_line_extra
+        _draw_block_lines(
+            dwg,
+            root_group,
+            lines=box.title_lines or [box.node.title],
+            x=text_x,
+            start_y=title_y,
+            line_step=box.title_font_size + typography.title_line_extra,
+            font_size=box.title_font_size,
+            font_family=typography.title_font,
+            fill=style.title,
+            max_width=text_width,
+            text_align=typography.text_align,
+        )
 
         if box.body_lines:
             body_y = box.y + config.inner_pad_y + box.title_height + config.title_body_gap + typography.body_size
-            for line in box.body_lines:
-                root_group.add(
-                    dwg.text(
-                        line,
-                        insert=(box.x + config.inner_pad_x, body_y),
-                        font_size=typography.body_size,
-                        fill=style.body,
-                        font_family=typography.body_font,
-                    )
-                )
-                body_y += typography.body_leading
+            _draw_block_lines(
+                dwg,
+                root_group,
+                lines=box.body_lines,
+                x=text_x,
+                start_y=body_y,
+                line_step=typography.body_leading,
+                font_size=typography.body_size,
+                font_family=typography.body_font,
+                fill=style.body,
+                max_width=text_width,
+                text_align=typography.text_align,
+            )
 
-        if SHOW_NODE_NUMBERS:
+        if context.settings.show_node_numbers:
             _draw_node_number(dwg, root_group, box, typography, theme)
 
 
@@ -150,33 +252,39 @@ def _draw_text_only_nodes(dwg: svgwrite.Drawing, root_group: svgwrite.container.
         box = context.scene.boxes[number]
         style = theme.style_for(box.node.kind)
 
+        text_x = box.x + config.inner_pad_x
+        text_width = box.width - (2 * config.inner_pad_x)
         title_y = box.y + config.inner_pad_y + box.title_font_size
-        for line in box.title_lines or [box.node.title]:
-            root_group.add(
-                dwg.text(
-                    line,
-                    insert=(box.x + config.inner_pad_x, title_y),
-                    font_size=box.title_font_size,
-                    fill=style.title,
-                    font_family=typography.title_font,
-                    font_weight="600",
-                )
-            )
-            title_y += box.title_font_size + typography.title_line_extra
+        _draw_block_lines(
+            dwg,
+            root_group,
+            lines=box.title_lines or [box.node.title],
+            x=text_x,
+            start_y=title_y,
+            line_step=box.title_font_size + typography.title_line_extra,
+            font_size=box.title_font_size,
+            font_family=typography.title_font,
+            fill=style.title,
+            max_width=text_width,
+            text_align=typography.text_align,
+            font_weight="600",
+        )
 
         if box.body_lines:
             body_y = box.y + config.inner_pad_y + box.title_height + config.title_body_gap + typography.body_size
-            for line in box.body_lines:
-                root_group.add(
-                    dwg.text(
-                        line,
-                        insert=(box.x + config.inner_pad_x, body_y),
-                        font_size=typography.body_size,
-                        fill=style.body,
-                        font_family=typography.body_font,
-                    )
-                )
-                body_y += typography.body_leading
+            _draw_block_lines(
+                dwg,
+                root_group,
+                lines=box.body_lines,
+                x=text_x,
+                start_y=body_y,
+                line_step=typography.body_leading,
+                font_size=typography.body_size,
+                font_family=typography.body_font,
+                fill=style.body,
+                max_width=text_width,
+                text_align=typography.text_align,
+            )
 
 
 def _draw_node_number(
