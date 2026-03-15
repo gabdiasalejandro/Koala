@@ -226,18 +226,20 @@ Place the concept map around a center, with angular distribution driven by subtr
 ### Current calculation flow
 
 1. Measure all nodes.
-2. Count leaves per subtree.
-3. Assign angular spans using leaf counts.
-4. Compute a radius for each depth.
+2. Compute a subtree weight that mixes structure and visual footprint.
+3. Assign angular spans from those subtree weights.
+4. Compute a base radius for each depth.
 5. Refine radii to avoid tangential overlap.
-6. Place nodes around the center.
-7. Build straight connectors between parent and child anchors.
+6. Try several global rotations and keep the one that best fits the target page.
+7. Pull nodes inward along their own ray while they still do not collide.
+8. Build straight connectors between parent and child anchors.
 
 ### Angular distribution
 
-Leaf count drives angular weight:
+Angular weight is now heuristic rather than purely structural:
 
-- a subtree with more leaves gets a larger angle span
+- each subtree gets weight from both descendant structure and box footprint
+- bulky but shallow branches can therefore receive more angular room
 - each node angle is the midpoint of its assigned angular interval
 
 If there is a single root:
@@ -251,23 +253,23 @@ If there are multiple roots:
 
 ### Radial distance calculation
 
-The radius for each depth is built in stages:
+The radial engine now works in two passes:
 
-1. Compute a minimum radial step from the previous depth:
-   - based on box extents projected in the radial direction
-2. Increase radius when needed for tangential separation:
-   - compare adjacent nodes around the ring
-   - require enough chord distance between their projected tangential extents
-3. Recheck that radius still remains larger than the previous depth radius plus the minimum radial step
+1. Build conservative per-depth radii:
+   - based on radial projected extents between adjacent depths
+   - then increased when needed for tangential separation around the ring
+2. Run a local compaction pass:
+   - each node is tested closer to the center along its own ray
+   - the move is accepted only if the box still avoids collisions
 
-This produces concentric rings that avoid obvious box overlap.
+This keeps the layout stable while recovering slack left by the conservative ring estimate.
 
 ### Position assignment
 
 For each node:
 
 - take the angle assigned to the node
-- take the radius for the node depth
+- take the base radius for the node depth, then compact it if local slack exists
 - place the box center at:
   - `center_x + radius * cos(angle)`
   - `center_y + radius * sin(angle)`
@@ -290,7 +292,8 @@ After scene construction:
 
 - `radial` can scale down or up
 - radial content is centered in the page
-- different page sizes change the usable centered area and therefore the final visual scale
+- several candidate rotations are evaluated against the selected page ratio
+- different page sizes therefore affect both final scale and the chosen orientation
 
 ## Summary table
 
@@ -299,7 +302,7 @@ After scene construction:
 | `tree` | Top-down | Subtree width | Orthogonal vertical-horizontal-vertical | Yes |
 | `synoptic_boxes` | Left-to-right | Subtree height | Orthogonal horizontal-vertical-horizontal | Yes |
 | `synoptic` | Left-to-right | Subtree height | Bracket polyline per child group | No |
-| `radial` | Center-out | Leaf count + per-depth radius | Straight line from border anchor to border anchor | Yes |
+| `radial` | Center-out | Subtree weight + compacted per-node radius | Straight line from border anchor to border anchor | Yes |
 
 ## Notes about current heuristics
 
@@ -307,7 +310,7 @@ Some layout behavior is intentionally heuristic rather than purely formulaic:
 
 - `tree` tries multiple compactness profiles before choosing a final scene
 - `tree` remeasures parents after final width selection
-- `radial` uses projected extents instead of exact collision solving
+- `radial` uses projected extents plus a post-placement collision-aware compaction pass
 - shared text measurement is deterministic but approximate
 
 This is enough for stable diagram generation while keeping the system simple to modify.

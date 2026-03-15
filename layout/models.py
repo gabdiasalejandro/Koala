@@ -23,7 +23,7 @@ LayoutKind = Literal["tree", "synoptic", "synoptic_boxes", "radial"]
 class TypographyConfig:
     title_font: str = "Helvetica-Bold"
     body_font: str = "Helvetica"
-    text_align: Literal["justify", "left"] = "justify"
+    text_align: Literal["justify", "left"] = "left"
     title_size_base: float = 20.0
     title_size_min: float = 18.0
     body_size: float = 12.0

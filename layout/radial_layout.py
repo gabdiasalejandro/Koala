@@ -1,15 +1,16 @@
 """Motor de layout radial.
 
 Retorna un `LayoutScene` con:
-- `boxes`: raíz centrada y nodos distribuidos en anillos sin solaparse.
+- `boxes`: raíz centrada y nodos distribuidos radialmente con compactación local.
 - `edges`: aristas lineales entre nodos con flecha hacia el hijo y label.
 
 Cómo funciona:
 1. Mide nodos con utilidades compartidas.
-2. Reparte ángulos por subárbol (tipo estrella/copo) usando hojas.
-3. Calcula radios por profundidad para evitar solapes radial y tangencial.
-4. La rama más profunda fija el radio externo final del diagrama.
-5. Construye aristas y devuelve escena final.
+2. Reparte ángulos usando una mezcla de peso estructural y huella visual.
+3. Calcula radios base por profundidad para evitar solapes radial y tangencial.
+4. Prueba varias rotaciones y elige la que mejor aprovecha la hoja.
+5. Acerca nodos individualmente hacia el centro mientras sigan sin colisionar.
+6. Construye aristas y devuelve escena final.
 """
 
 import math
@@ -46,9 +47,12 @@ def angle_diff_positive(a_from: float, a_to: float) -> float:
     return (a_to - a_from) % (2 * math.pi)
 
 
+def box_center(box: LayoutBox) -> Tuple[float, float]:
+    return box.x + (box.width / 2), box.y + (box.height / 2)
+
+
 def rect_anchor_towards(box: LayoutBox, target_x: float, target_y: float) -> Tuple[float, float]:
-    cx = box.x + (box.width / 2)
-    cy = box.y + (box.height / 2)
+    cx, cy = box_center(box)
 
     dx = target_x - cx
     dy = target_y - cy
@@ -79,8 +83,8 @@ def build_radial_edges(
         parent = boxes[node.parent.number]
         child = boxes[node.number]
 
-        parent_center = (parent.x + (parent.width / 2), parent.y + (parent.height / 2))
-        child_center = (child.x + (child.width / 2), child.y + (child.height / 2))
+        parent_center = box_center(parent)
+        child_center = box_center(child)
 
         start = rect_anchor_towards(parent, child_center[0], child_center[1])
         end = rect_anchor_towards(child, parent_center[0], parent_center[1])
@@ -103,22 +107,38 @@ def build_radial_edges(
     return edges
 
 
-def count_leaves(node: ConceptNode, leaf_counts: Dict[str, int]) -> int:
-    children = ordered_children(node)
-    if not children:
-        leaf_counts[node.number] = 1
-        return 1
+def compute_subtree_weights(
+    root_nodes: List[ConceptNode],
+    boxes: Dict[str, LayoutBox],
+    config: LayoutConfig,
+) -> Dict[str, float]:
+    weights: Dict[str, float] = {}
+    footprint_reference = max(config.min_node_width, config.node_width_base * 0.9)
 
-    total = sum(count_leaves(child, leaf_counts) for child in children)
-    leaf_counts[node.number] = total
-    return total
+    def visit(node: ConceptNode) -> float:
+        box = boxes[node.number]
+        self_weight = max(1.0, box_footprint(box) / footprint_reference)
+        children = ordered_children(node)
+
+        if not children:
+            weights[node.number] = self_weight
+            return self_weight
+
+        child_weight = sum(visit(child) for child in children)
+        weights[node.number] = max(child_weight, self_weight * 0.9)
+        return weights[node.number]
+
+    for root in root_nodes:
+        visit(root)
+
+    return weights
 
 
 def assign_angles(
     node: ConceptNode,
     start_angle: float,
     end_angle: float,
-    leaf_counts: Dict[str, int],
+    weights: Dict[str, float],
     angles: Dict[str, float],
 ) -> None:
     angles[node.number] = (start_angle + end_angle) / 2
@@ -127,17 +147,17 @@ def assign_angles(
     if not children:
         return
 
-    children_leaves = sum(leaf_counts[child.number] for child in children)
-    if children_leaves <= 0:
+    children_weight = sum(weights.get(child.number, 0.0) for child in children)
+    if children_weight <= 0:
         return
 
     cursor = start_angle
     angle_span = end_angle - start_angle
 
     for child in children:
-        portion = leaf_counts[child.number] / children_leaves
+        portion = weights.get(child.number, 0.0) / children_weight
         child_span = angle_span * portion
-        assign_angles(child, cursor, cursor + child_span, leaf_counts, angles)
+        assign_angles(child, cursor, cursor + child_span, weights, angles)
         cursor += child_span
 
 
@@ -209,48 +229,47 @@ def required_radius_for_tangential_separation(
     return required_radius
 
 
-def assign_radial_positions(
+def assign_node_angles(
     root_nodes: List[ConceptNode],
     boxes: Dict[str, LayoutBox],
     config: LayoutConfig,
-) -> None:
-    if not boxes:
-        return
-
+    rotation_offset: float,
+) -> Dict[str, float]:
     roots = sorted(root_nodes, key=lambda node: sort_node_key(node.number))
-
-    leaf_counts: Dict[str, int] = {}
-    for root in roots:
-        count_leaves(root, leaf_counts)
-
+    weights = compute_subtree_weights(roots, boxes, config)
     angles: Dict[str, float] = {}
+    start_angle = -math.pi / 2 + rotation_offset
 
     if len(roots) == 1:
         root = roots[0]
         children = ordered_children(root)
 
         if children:
-            total = sum(leaf_counts[child.number] for child in children)
-            cursor = -math.pi / 2
+            total = sum(weights.get(child.number, 0.0) for child in children)
+            cursor = start_angle
             for child in children:
-                child_span = (2 * math.pi) * (leaf_counts[child.number] / total)
-                assign_angles(child, cursor, cursor + child_span, leaf_counts, angles)
+                child_span = (2 * math.pi) * (weights.get(child.number, 0.0) / total)
+                assign_angles(child, cursor, cursor + child_span, weights, angles)
                 cursor += child_span
     else:
-        total = sum(leaf_counts[root.number] for root in roots)
-        cursor = -math.pi / 2
+        total = sum(weights.get(root.number, 0.0) for root in roots)
+        cursor = start_angle
         for root in roots:
-            root_span = (2 * math.pi) * (leaf_counts[root.number] / total)
-            assign_angles(root, cursor, cursor + root_span, leaf_counts, angles)
+            root_span = (2 * math.pi) * (weights.get(root.number, 0.0) / total)
+            assign_angles(root, cursor, cursor + root_span, weights, angles)
             cursor += root_span
 
-    depth_groups: Dict[int, List[LayoutBox]] = {}
-    for box in boxes.values():
-        depth_groups.setdefault(box.depth, []).append(box)
+    return angles
 
-    max_depth = max(depth_groups.keys())
 
+def compute_depth_radii(
+    depth_groups: Dict[int, List[LayoutBox]],
+    angles: Dict[str, float],
+    config: LayoutConfig,
+) -> Dict[int, float]:
+    max_depth = max(depth_groups.keys(), default=0)
     radii: Dict[int, float] = {0: 0.0}
+
     for depth in range(1, max_depth + 1):
         prev_level = depth_groups.get(depth - 1, [])
         current_level = depth_groups.get(depth, [])
@@ -265,10 +284,75 @@ def assign_radial_positions(
         current_level = depth_groups.get(depth, [])
         radii[depth] = max(radii[depth], radii[depth - 1] + min_radial_step(prev_level, current_level, angles, config))
 
+    return radii
+
+
+def resolve_node_angle(node: ConceptNode, angles: Dict[str, float]) -> float:
+    angle = angles.get(node.number)
+    if angle is not None:
+        return angle
+
+    if node.parent is not None:
+        return angles.get(node.parent.number, -math.pi / 2)
+
+    return -math.pi / 2
+
+
+def root_ring_radius(depth_groups: Dict[int, List[LayoutBox]], config: LayoutConfig) -> float:
+    return max(max_box_dim(depth_groups.get(0, [])), config.h_gap_base * 1.5)
+
+
+def build_node_radii(
+    root_nodes: List[ConceptNode],
+    boxes: Dict[str, LayoutBox],
+    depth_groups: Dict[int, List[LayoutBox]],
+    depth_radii: Dict[int, float],
+    config: LayoutConfig,
+) -> Dict[str, float]:
+    roots = sorted(root_nodes, key=lambda node: sort_node_key(node.number))
+    node_radii: Dict[str, float] = {}
+    root_radius = root_ring_radius(depth_groups, config)
+
+    for node in iter_nodes(roots):
+        box = boxes[node.number]
+        if len(roots) == 1 and box.depth == 0:
+            node_radii[node.number] = 0.0
+            continue
+
+        if box.depth == 0:
+            node_radii[node.number] = root_radius
+            continue
+
+        node_radii[node.number] = depth_radii.get(box.depth, 0.0)
+
+    return node_radii
+
+
+def place_box_on_ray(
+    box: LayoutBox,
+    center_x: float,
+    center_y: float,
+    angle: float,
+    radius: float,
+) -> None:
+    x = center_x + (radius * math.cos(angle))
+    y = center_y + (radius * math.sin(angle))
+    box.x = x - (box.width / 2)
+    box.y = y - (box.height / 2)
+
+
+def place_radial_boxes(
+    root_nodes: List[ConceptNode],
+    boxes: Dict[str, LayoutBox],
+    node_radii: Dict[str, float],
+    angles: Dict[str, float],
+    config: LayoutConfig,
+) -> None:
+    roots = sorted(root_nodes, key=lambda node: sort_node_key(node.number))
     center_x = config.page_width / 2
     center_y = config.page_height / 2
 
-    if len(roots) == 1:
+    if len(roots) == 1 and roots:
         root = roots[0]
         root_box = boxes[root.number]
         root_box.x = center_x - (root_box.width / 2)
@@ -280,24 +364,141 @@ def assign_radial_positions(
         if len(roots) == 1 and box.depth == 0:
             continue
 
-        angle = angles.get(node.number)
-        if angle is None:
-            if node.parent is not None:
-                angle = angles.get(node.parent.number, -math.pi / 2)
+        angle = resolve_node_angle(node, angles)
+        radius = node_radii.get(node.number, 0.0)
+        place_box_on_ray(box, center_x, center_y, angle, radius)
+
+
+def boxes_overlap(a: LayoutBox, b: LayoutBox, clearance: float) -> bool:
+    return not (
+        (a.x + a.width + clearance) <= b.x
+        or (b.x + b.width + clearance) <= a.x
+        or (a.y + a.height + clearance) <= b.y
+        or (b.y + b.height + clearance) <= a.y
+    )
+
+
+def collides_with_any(
+    candidate: LayoutBox,
+    boxes: Dict[str, LayoutBox],
+    clearance: float,
+) -> bool:
+    for other in boxes.values():
+        if other.node.number == candidate.node.number:
+            continue
+        if boxes_overlap(candidate, other, clearance):
+            return True
+    return False
+
+
+def minimum_node_radius(
+    node: ConceptNode,
+    boxes: Dict[str, LayoutBox],
+    node_radii: Dict[str, float],
+    angle: float,
+    config: LayoutConfig,
+) -> float:
+    if node.parent is None:
+        return node_radii.get(node.number, 0.0)
+
+    parent_box = boxes[node.parent.number]
+    child_box = boxes[node.number]
+    parent_radius = node_radii.get(node.parent.number, 0.0)
+    parent_extent = max(parent_box.width, parent_box.height) / 2 if parent_radius <= 1e-6 else radial_half_extent(parent_box, angle)
+    child_extent = radial_half_extent(child_box, angle)
+    gap = max(4.0, max(config.h_gap_base, config.v_gap_base) * 0.28)
+    return parent_radius + parent_extent + child_extent + gap
+
+
+def compact_node_radii(
+    root_nodes: List[ConceptNode],
+    boxes: Dict[str, LayoutBox],
+    node_radii: Dict[str, float],
+    angles: Dict[str, float],
+    config: LayoutConfig,
+) -> None:
+    center_x = config.page_width / 2
+    center_y = config.page_height / 2
+    clearance = max(2.0, min(config.h_gap_base, config.v_gap_base) * 0.16)
+
+    movable_nodes = [
+        node
+        for node in iter_nodes(root_nodes)
+        if node.parent is not None
+    ]
+    movable_nodes.sort(key=lambda node: (boxes[node.number].depth, angles.get(node.number, -math.pi / 2)))
+
+    for node in movable_nodes:
+        box = boxes[node.number]
+        angle = resolve_node_angle(node, angles)
+        current_radius = node_radii.get(node.number, 0.0)
+        minimum_radius = minimum_node_radius(node, boxes, node_radii, angle, config)
+
+        if current_radius - minimum_radius <= 1.0:
+            continue
+
+        best_radius = current_radius
+        low = minimum_radius
+        high = current_radius
+
+        for _ in range(18):
+            trial_radius = (low + high) / 2
+            place_box_on_ray(box, center_x, center_y, angle, trial_radius)
+            if collides_with_any(box, boxes, clearance):
+                low = trial_radius
             else:
-                angle = -math.pi / 2
+                best_radius = trial_radius
+                high = trial_radius
 
-        if box.depth == 0:
-            root_radius = max_box_dim(depth_groups.get(0, []))
-            radius = max(root_radius, config.h_gap_base * 1.5)
-        else:
-            radius = radii.get(box.depth, radii.get(max_depth, 0.0))
+        node_radii[node.number] = best_radius
+        place_box_on_ray(box, center_x, center_y, angle, best_radius)
 
-        x = center_x + (radius * math.cos(angle))
-        y = center_y + (radius * math.sin(angle))
 
-        box.x = x - (box.width / 2)
-        box.y = y - (box.height / 2)
+def layout_score(scene: LayoutScene, config: LayoutConfig) -> Tuple[float, float, float]:
+    usable_w = config.page_width - (2 * config.margin_x)
+    usable_h = config.page_height - (2 * config.margin_y)
+    content_w = max(1.0, scene.content_right - scene.content_left)
+    content_h = max(1.0, scene.content_bottom - scene.content_top)
+    scale = min(usable_w / content_w, usable_h / content_h)
+    scaled_fill = ((content_w * scale) * (content_h * scale)) / max(1.0, usable_w * usable_h)
+    aspect_delta = abs((content_w / content_h) - (usable_w / usable_h))
+    return scale, scaled_fill, -aspect_delta
+
+
+def assign_radial_positions(
+    root_nodes: List[ConceptNode],
+    boxes: Dict[str, LayoutBox],
+    config: LayoutConfig,
+) -> None:
+    if not boxes:
+        return
+
+    depth_groups: Dict[int, List[LayoutBox]] = {}
+    for box in boxes.values():
+        depth_groups.setdefault(box.depth, []).append(box)
+
+    rotation_steps = 12
+    best_rotation = 0.0
+    best_score: Tuple[float, float, float] | None = None
+
+    for step in range(rotation_steps):
+        rotation_offset = (2 * math.pi * step) / rotation_steps
+        angles = assign_node_angles(root_nodes, boxes, config, rotation_offset)
+        depth_radii = compute_depth_radii(depth_groups, angles, config)
+        node_radii = build_node_radii(root_nodes, boxes, depth_groups, depth_radii, config)
+        place_radial_boxes(root_nodes, boxes, node_radii, angles, config)
+        compact_node_radii(root_nodes, boxes, node_radii, angles, config)
+        score = layout_score(build_scene(boxes, []), config)
+
+        if best_score is None or score > best_score:
+            best_score = score
+            best_rotation = rotation_offset
+
+    angles = assign_node_angles(root_nodes, boxes, config, best_rotation)
+    depth_radii = compute_depth_radii(depth_groups, angles, config)
+    node_radii = build_node_radii(root_nodes, boxes, depth_groups, depth_radii, config)
+    place_radial_boxes(root_nodes, boxes, node_radii, angles, config)
+    compact_node_radii(root_nodes, boxes, node_radii, angles, config)
 
 
 def build_radial_layout(

@@ -50,6 +50,7 @@ Optional metadata:
 @layout tree
 @theme terracotta
 @typography default
+@text-align justify
 @size square
 @show-node-numbers false
 @output-dir output/metadata_demo
@@ -60,6 +61,8 @@ Metadata is optional and follows this precedence:
 1. explicit CLI flag
 2. metadata in the source file
 3. built-in defaults
+
+Node text alignment is now `left` by default. If you want justified text, use `@text-align justify`.
 
 For the full syntax, see [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md).
 

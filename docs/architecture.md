@@ -158,12 +158,12 @@ Typography is currently defined in `TypographyConfig` and resolved from `render/
 
 Current text alignment behavior:
 
-- default node text alignment is `justify`
-- the alignment option already supports `left`
+- default node text alignment is `left`
+- `justify` remains available through document metadata such as `@text-align justify`
 - justified lines in SVG are implemented by distributing space between words, not by stretching characters
 - the last line of a text block remains left-aligned
 
-The public interface for choosing alignment is not exposed yet; for now it lives inside typography configuration.
+Alignment can be overridden from document metadata and is applied before layout measurement, so wrapping stays consistent with the final render.
 
 ## Why the architecture is structured this way
 

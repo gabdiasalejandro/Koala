@@ -134,6 +134,7 @@ Current accepted forms are:
 @layout tree
 @theme terracotta
 @typography default
+@text-align justify
 @size square
 @show-node-numbers false
 @output-dir output/metadata_demo
@@ -163,9 +164,15 @@ The parser currently accepts metadata for the CLI-related render options:
 - `@size`
 - `@page-size`
 - `@output-dir`
+- `@text-align`
 - `@show-node-numbers`
 
-`@output_dir`, `@show_node_numbers`, `@node-numbers`, and `@node_numbers` are also accepted as aliases.
+`@output_dir`, `@text_align`, `@show_node_numbers`, `@node-numbers`, and `@node_numbers` are also accepted as aliases.
+
+For text alignment, accepted values are:
+
+- `left` (default)
+- `justify`
 
 ### Precedence
 

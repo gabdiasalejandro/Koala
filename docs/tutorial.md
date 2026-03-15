@@ -128,6 +128,7 @@ Example:
 @layout tree
 @theme terracotta
 @typography default
+@text-align justify
 @size square
 @show-node-numbers false
 @output-dir output/tutorial_demo
@@ -147,14 +148,18 @@ Current supported metadata keys:
 - `@layout`
 - `@theme`
 - `@typography`
+- `@text-align`
 - `@size`
 - `@page-size`
 - `@output-dir`
 - `@output_dir`
+- `@text_align`
 - `@show-node-numbers`
 - `@show_node_numbers`
 - `@node-numbers`
 - `@node_numbers`
+
+For text alignment, supported values are `left` and `justify`. The default is `left`.
 
 ### Metadata precedence
 
@@ -372,6 +377,7 @@ Best when:
 ## 11. Suggestions for better visual results
 
 These are practical writing heuristics for the current engines.
+## Main suggestion is to avoid having more than 8 children in the deeepest ring of the nodes
 
 ### General suggestions
 

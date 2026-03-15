@@ -6,6 +6,7 @@ Este modulo une layout y render:
 3. Calcula el viewport final para SVG.
 """
 
+from dataclasses import replace
 from typing import Optional
 
 from core.models import ParsedDocument
@@ -18,6 +19,7 @@ from render.viewport import fit_scene_to_page
 
 _BOOLEAN_TRUE_VALUES = {"1", "true", "yes", "on", "show", "shown"}
 _BOOLEAN_FALSE_VALUES = {"0", "false", "no", "off", "hide", "hidden"}
+_TEXT_ALIGN_VALUES = {"left", "justify"}
 
 
 def _resolve_bool_metadata(metadata: dict[str, str], *keys: str) -> bool | None:
@@ -31,6 +33,19 @@ def _resolve_bool_metadata(metadata: dict[str, str], *keys: str) -> bool | None:
             return True
         if normalized in _BOOLEAN_FALSE_VALUES:
             return False
+
+    return None
+
+
+def _resolve_text_align_metadata(metadata: dict[str, str], *keys: str) -> str | None:
+    for key in keys:
+        raw_value = metadata.get(key)
+        if raw_value is None:
+            continue
+
+        normalized = raw_value.strip().lower()
+        if normalized in _TEXT_ALIGN_VALUES:
+            return normalized
 
     return None
 
@@ -56,6 +71,16 @@ def build_render_context(
             "node_numbers",
         ),
     )
+    text_align = _resolve_text_align_metadata(
+        parsed.metadata,
+        "text-align",
+        "text_align",
+    )
+    if text_align is not None:
+        settings = replace(
+            settings,
+            typography=replace(settings.typography, text_align=text_align),
+        )
     scene = build_layout(
         selected_layout,
         parsed.root_nodes,
