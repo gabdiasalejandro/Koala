@@ -5,8 +5,10 @@ from typing import Sequence
 from core.io import load_input_text
 from core.parser import parse_concept_text
 from layout.models import LayoutKind
-from render.defaults import available_page_size_names, available_theme_names, available_typography_names
+from render.models import SvgRenderRequest
+from render.settings import available_page_size_names, available_typography_names
 from render.svg_render import render_svg
+from render.themes import available_theme_names
 
 INPUT_FILE = "mocks/concepts.txt"     # puede ser .txt o .docx
 OUTPUT_DIR = "output"
@@ -60,14 +62,6 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def _resolve_metadata_value(metadata: dict[str, str], *keys: str) -> str | None:
-    for key in keys:
-        value = metadata.get(key)
-        if value:
-            return value
-    return None
-
-
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
 
@@ -76,31 +70,23 @@ def main(argv: Sequence[str] | None = None) -> None:
     text = load_input_text(args.input)
     parsed = parse_concept_text(text)
 
-    resolved_layout = args.layout or _resolve_metadata_value(parsed.metadata, "layout") or "tree"
-    resolved_theme = args.theme or _resolve_metadata_value(parsed.metadata, "theme") or "default"
-    resolved_typography = args.typography or _resolve_metadata_value(parsed.metadata, "typography")
-    resolved_size = args.size or _resolve_metadata_value(parsed.metadata, "size", "page-size")
-    resolved_output_dir = args.output_dir or _resolve_metadata_value(parsed.metadata, "output-dir", "output_dir") or OUTPUT_DIR
-
-    output_dir = base_dir / resolved_output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    output_svg = output_dir / f"concept_map_{resolved_layout}.svg"
-
-    render_svg(
-        parsed,
-        output_svg,
-        layout_kind=resolved_layout,
-        theme_name=resolved_theme,
-        typography_name=resolved_typography,
-        page_size_name=resolved_size,
+    request = SvgRenderRequest(
+        parsed=parsed,
+        base_dir=base_dir,
+        output_dir_name=args.output_dir,
+        default_output_dir_name=OUTPUT_DIR,
+        layout_kind=args.layout,
+        theme_name=args.theme,
+        typography_name=args.typography,
+        page_size_name=args.size,
     )
+    result = render_svg(request)
 
-    print(f"SVG generado: {output_svg}")
-    print(f"Layout usado: {resolved_layout}")
-    print(f"Tema usado: {resolved_theme}")
-    print(f"Tipografia usada: {resolved_typography or 'default del layout'}")
-    print(f"Tamano de pagina usado: {resolved_size or 'default configurado'}")
+    print(f"SVG generado: {result.output_svg}")
+    print(f"Layout usado: {result.context.settings.layout_kind}")
+    print(f"Tema usado: {result.context.settings.theme_name}")
+    print(f"Tipografia usada: {result.context.settings.typography_name}")
+    print(f"Tamano de pagina usado: {result.context.settings.page_size_name}")
 
 
 if __name__ == "__main__":

@@ -2,6 +2,21 @@
 
 This document explains how each layout currently computes node positions and connector geometry.
 
+## Layout architecture
+
+The `layout/` package is organized around a small geometry pipeline:
+
+1. `layout/registry.py` selects the engine for the requested layout kind.
+2. `layout/shared.py` handles common measurement, wrapping, depth-aware sizing, and scene-bound helpers.
+3. A concrete engine (`tree_layout.py`, `synoptic_layout.py`, `synoptic_boxes_layout.py`, or `radial_layout.py`) computes positions and edge geometry.
+4. The engine returns a generic `LayoutScene` made of `LayoutBox` and `LayoutEdge`.
+
+This keeps a strict split:
+
+- `shared.py` owns common measurement rules
+- each engine owns only its own placement strategy
+- render code receives a layout-agnostic scene and does not know which engine produced it
+
 ## Shared concepts used by all layouts
 
 All layout engines start from `measure_nodes(...)` in `layout/shared.py`.

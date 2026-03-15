@@ -42,7 +42,14 @@ Tipo semántico opcional:
 ```text
 hl:: 1.2 Tabla Usuarios
 hl:: contiene -> 1.2.1 Clave foránea
+note:: 1.3 Nota
+focus:: 1.4 Idea principal
 ```
+
+Kinds integrados disponibles actualmente:
+
+- universales: `note`, `warn`, `soft`
+- propios del theme: `hl`, `focus`
 
 Metadata opcional:
 
@@ -118,14 +125,14 @@ Para detalles de implementación, ver [docs/layouts.md](/home/yaldapika/dev/koal
 El proyecto está dividido en tres capas:
 
 - `core/`: parsing, modelos del DSL y carga de entrada
-- `layout/`: cálculo geométrico de nodos y aristas
-- `render/`: ajuste a página, estilos y dibujo SVG
+- `layout/`: medición compartida y un motor geométrico por layout
+- `render/`: resolución de themes, contexto de render, ajuste a página y backend SVG
 
 La separación de responsabilidades es:
 
 - `core` entiende el lenguaje
-- `layout` calcula la geometría
-- `render` dibuja la escena
+- `layout` calcula geometría y conectores
+- `render` resuelve presentación y dibuja la escena
 
 Para la arquitectura completa, ver [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md).
 

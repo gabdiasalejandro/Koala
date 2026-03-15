@@ -3,6 +3,7 @@
 
 output/
 concepts.txt
+legacy_mocks/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

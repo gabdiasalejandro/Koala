@@ -1,0 +1,33 @@
+@layout radial
+@theme jungle
+@typography radial
+@size square
+@show-node-numbers true
+@output-dir output/theme_jungle_radial
+
+focus:: 1 Sustainable Strategy
+Places one central theme in the middle and distributes balanced supporting branches around it.
+
+hl:: grows through -> 1.1 Long-Term Planning
+Defines the main decisions that give continuity to the strategy.
+
+note:: supports -> 1.1.1 Metrics
+Measures progress without overwhelming the central branch.
+
+uses -> 1.1.2 SMART
+An objective that is specific, meassurable, atteinable, realistic and with a timeline
+
+warn:: protects -> 1.2 Risk Control
+Highlights the constraints that keep the strategy realistic.
+
+soft:: stabilizes -> 1.2.1 Documentation
+Captures secondary operational knowledge for later reference.
+
+hl:: connects -> 1.3 Team Alignment
+Keeps the human side of execution synchronized with the plan.
+
+note:: spreads -> 1.3.1 Shared Language
+Helps each participant interpret goals in the same way.
+
+1.4 Administration
+Follows administration filosophies to increase productivity and continuous improving. 

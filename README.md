@@ -42,7 +42,20 @@ Optional semantic kind:
 ```text
 hl:: 1.2 Users Table
 hl:: contains -> 1.2.1 Foreign Key
+note:: 1.3 Note
+focus:: 1.4 Main Insight
 ```
+
+Built-in kinds currently available:
+
+- universal: `note`, `warn`, `soft`
+- theme-owned: `hl`, `focus`
+
+Built-in themes currently available:
+
+- `default`
+- `terracotta`
+- `jungle`
 
 Optional metadata:
 
@@ -118,14 +131,14 @@ For implementation details, see [docs/layouts.md](/home/yaldapika/dev/koala/docs
 The project is split into three layers:
 
 - `core/`: parsing, DSL models, input loading
-- `layout/`: geometric calculations for nodes and edges
-- `render/`: viewport fitting, styles, and SVG drawing
+- `layout/`: shared measurement plus one geometry engine per layout
+- `render/`: theme resolution, render context, viewport fitting, and SVG backend
 
 The separation of concerns is:
 
 - `core` understands the language
-- `layout` computes geometry
-- `render` draws the scene
+- `layout` computes geometry and connector paths
+- `render` resolves presentation and draws the scene
 
 For the full architecture, see [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md).
 
@@ -198,7 +211,9 @@ These suggestions are practical heuristics for getting cleaner diagrams with the
 ## Recommended examples
 
 - [mocks/concepts.txt](/home/yaldapika/dev/koala/mocks/concepts.txt)
-- [mocks/metadata_demo.txt](/home/yaldapika/dev/koala/mocks/metadata_demo.txt)
+- [mocks/theme_default_tree.txt](/home/yaldapika/dev/koala/mocks/theme_default_tree.txt)
+- [mocks/theme_terracotta_synoptic_boxes.txt](/home/yaldapika/dev/koala/mocks/theme_terracotta_synoptic_boxes.txt)
+- [mocks/theme_jungle_radial.txt](/home/yaldapika/dev/koala/mocks/theme_jungle_radial.txt)
 
 ## Current status
 

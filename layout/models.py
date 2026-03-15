@@ -1,7 +1,7 @@
 """Modelos de datos del subsistema de layout.
 
 Retorna estructuras tipadas para coordinar motores y renderizadores:
-- Configuración (`LayoutConfig`, `TypographyConfig`, `ThemeConfig`).
+- Configuración geometrica y tipografica (`LayoutConfig`, `TypographyConfig`).
 - Primitivas de escena (`LayoutBox`, `LayoutEdge`, `LayoutScene`).
 
 Cómo funciona:
@@ -10,8 +10,8 @@ Cómo funciona:
 3. Los renderizadores consumen `LayoutScene` sin conocer el layout interno.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Literal, Mapping, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Literal, Tuple
 
 from core.models import ConceptNode
 
@@ -50,31 +50,6 @@ class LayoutConfig:
     inner_pad_y: float
     corner_radius: float
     title_body_gap: float
-
-
-@dataclass(frozen=True)
-class NodeStyle:
-    fill: str
-    stroke: str
-    title: str
-    body: str
-
-
-@dataclass(frozen=True)
-class ThemeConfig:
-    default_node: NodeStyle
-    node_by_kind: Mapping[str, NodeStyle] = field(default_factory=dict)
-    edge_color: str = "#8AA3B7"
-    implicit_edge_color: str = "#64798A"
-    relation_color: str = "#4E6472"
-    number_pill_bg: str = "#E3EDF5"
-    number_pill_text: str = "#4E6472"
-
-    def style_for(self, kind: str) -> NodeStyle:
-        normalized = kind.strip().lower() if kind else "default"
-        return self.node_by_kind.get(normalized, self.default_node)
-
-
 @dataclass
 class LayoutBox:
     node: ConceptNode

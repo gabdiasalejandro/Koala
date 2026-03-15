@@ -10,8 +10,8 @@ Koala transforms structured text into an SVG in five steps:
 1. `core/io.py` loads source text from `.txt` or `.docx`.
 2. `core/parser.py` converts raw text into a `ParsedDocument`.
 3. `layout/` turns the parsed node tree into a geometric `LayoutScene`.
-4. `render/scene.py` combines layout, visual presets, and viewport fitting into a `RenderContext`.
-5. `render/svg_render.py` and `render/svg_canvas.py` draw the final SVG.
+4. `render/context.py` combines metadata, presets, layout, and viewport fitting into a `RenderContext`.
+5. `render/svg_render.py` runs the SVG pipeline and delegates drawing to `render/svg/`.
 
 The strict separation is:
 
@@ -71,6 +71,14 @@ These complete the pipeline:
 - `ViewportTransform` scales/translates the scene into the final page
 - `RenderContext` packages parsed content, scene, settings, and viewport
 
+The same module also holds render-side style dataclasses such as:
+
+- `NodeStyle` and `NodeStyleOverride`
+- `ThemeDefinition` and `ThemeConfig`
+- `RenderResult`
+- `SvgRenderRequest`
+- SVG drawing specs used by `render/svg/`
+
 ## Folder responsibilities
 
 ### `core/`
@@ -87,7 +95,7 @@ Important property: no layout geometry is computed here.
 
 `layout` is the geometry layer:
 
-- `models.py`: layout-side structures and shared configuration
+- `models.py`: layout-side structures and shared configuration for geometry/text measurement
 - `shared.py`: text measurement, wrapping, common gap rules, scene bounds
 - `tree_layout.py`: vertical hierarchy layout
 - `synoptic_boxes_layout.py`: column layout with boxed nodes
@@ -97,16 +105,26 @@ Important property: no layout geometry is computed here.
 
 Important property: layout code measures text and computes node/edge coordinates, but does not draw SVG.
 
+Internal flow inside `layout/` is:
+
+1. `registry.py` picks the engine by layout kind.
+2. `shared.py` measures nodes and provides reusable spacing/bounds helpers.
+3. the concrete engine computes box positions and connector geometry.
+4. the engine returns a generic `LayoutScene`.
+
 ### `render/`
 
 `render` translates the scene into the final document:
 
-- `defaults.py`: themes, typographies, page presets, default layout profiles
-- `scene.py`: orchestration from parsed document to render context
+- `themes.py`: universal kinds and theme definitions
+- `settings.py`: typographies, page presets, layout profiles, and resolved `RenderSettings`
+- `models.py`: render-side style models, resolved settings, viewport, and SVG draw specs
+- `context.py`: orchestration from parsed document metadata to `RenderContext`
+- `output.py`: output-path resolution from explicit args, metadata, and external defaults
 - `viewport.py`: fit scene to page size
 - `geometry.py`: small geometry helpers for rendering
-- `svg_canvas.py`: concrete SVG drawing
-- `svg_render.py`: public render entrypoint
+- `svg_render.py`: public render entrypoint and pipeline execution
+- `svg/`: SVG backend split by document, canvas, text, nodes, and edges
 
 Important property: render code consumes `LayoutScene` as a generic scene, independent of layout internals.
 
@@ -114,11 +132,13 @@ Important property: render code consumes `LayoutScene` as a generic scene, indep
 
 The current render orchestration is:
 
-1. `render/scene.build_render_context(...)`
-2. `render/defaults.resolve_render_settings(...)`
-3. `layout.registry.build_layout(...)`
-4. `render/viewport.fit_scene_to_page(...)`
-5. `render/svg_canvas.draw_scene(...)`
+1. `render.svg_render.render_svg(SvgRenderRequest(...))`
+2. `render.context.RenderContextBuilder.build(...)`
+3. `render.settings.RenderSettingsCatalog.resolve(...)`
+4. `layout.registry.build_layout(...)`
+5. `render.viewport.ViewportFitter.fit(...)`
+6. `render.output.RenderOutputResolver.resolve_svg_path(...)`
+7. `render.svg.canvas.SvgCanvasRenderer.render(...)`
 
 This means the order is:
 
@@ -143,7 +163,7 @@ For `tree`, parent nodes can be remeasured after child widths are known, so the 
 
 ## Viewport fitting
 
-`render/viewport.py` fits scene bounds into the usable page area.
+`render/viewport.py` fits scene bounds into the usable page area through `ViewportFitter`.
 
 Current behavior:
 
@@ -154,7 +174,17 @@ Current behavior:
 
 ## Typography and alignment
 
-Typography is currently defined in `TypographyConfig` and resolved from `render/defaults.py`.
+Typography is currently defined in `TypographyConfig` and resolved from `render/settings.py`.
+
+Theme composition now happens in `render/themes.py`:
+
+- universal kind styles are defined once
+- current universal kinds are `note`, `warn`, and `soft`
+- each theme contributes a base `default_node`
+- each built-in theme defines two theme-owned kinds: `hl` and `focus`
+- theme-specific kind overrides are merged on top of the universal ones
+
+The result is a resolved `ThemeConfig` consumed by the SVG renderer.
 
 Current text alignment behavior:
 

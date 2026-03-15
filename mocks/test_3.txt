@@ -1,0 +1,30 @@
+@layout synoptic_boxes
+@theme terracotta
+@typography default
+@size a4_landscape
+@show-node-numbers false
+@output-dir output/theme_terracotta_synoptic_boxes
+
+focus:: 1 Teaching Sequence
+Organizes the visual explanation of a topic from concept to reinforcement.
+
+hl:: starts with -> 1.1 Core Idea
+Introduces the main idea with the strongest emphasis.
+
+note:: expands into -> 1.1.1 Supporting Context
+Adds clarifying information that helps the reader follow the sequence.
+
+warn:: prevents -> 1.1.2 Common Confusion
+Marks the misconception or caution that should not be ignored.
+
+soft:: closes with -> 1.1.3 Secondary Detail
+Adds a lower-priority reminder that still helps complete the explanation.
+
+1.2 Practice Layer
+Turns the explanation into something easier to recall and teach.
+
+hl:: reinforces -> 1.2.1 Key Example
+Connects the explanation to a concrete didactic case.
+
+note:: summarizes -> 1.2.2 Short Recap
+Ends the branch with a compact synthesis.

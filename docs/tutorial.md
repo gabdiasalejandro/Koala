@@ -108,13 +108,55 @@ Example:
 ```text
 hl:: 1 Important Concept
 hl:: contains -> 1.1 Highlighted Child
+note:: 1.2 Supporting Note
+warn:: 1.2.1 Caution
+soft:: 1.2.2 Secondary Detail
+focus:: 1.3 Central Idea
 ```
 
 Current behavior:
 
 - kinds are normalized to lowercase
 - if omitted, the kind becomes `default`
-- current built-in themes include styling for `hl`
+- built-in universal kinds are `note`, `warn`, and `soft`
+- built-in theme-owned kinds are `hl` and `focus`
+
+### What each built-in kind is for
+
+- `note`: supporting context that should read as useful but not dominant
+- `warn`: caution, constraint, tradeoff, or risk
+- `soft`: lower-priority supporting detail
+- `hl`: a highlighted concept the active theme wants to emphasize strongly
+- `focus`: the key thesis, core idea, or primary anchor of a branch
+
+### Universal vs theme-owned kinds
+
+Koala currently ships with two semantic groups:
+
+- universal kinds: `note`, `warn`, `soft`
+- theme-owned kinds: `hl`, `focus`
+
+Universal kinds are defined once and then recolored by the active theme.
+Theme-owned kinds also exist in every built-in theme, but each theme defines their specific treatment directly.
+
+### Full example using all built-in kinds
+
+```text
+focus:: 1 Render Pipeline
+Coordinates the full SVG export process.
+
+hl:: orchestrates -> 1.1 Render Context
+Combines layout selection, theme resolution, and viewport fitting.
+
+note:: includes -> 1.1.1 Metadata
+Allows the source file to carry render preferences.
+
+warn:: constrains -> 1.1.2 Viewport
+Very dense scenes may still require scale reduction.
+
+soft:: documents -> 1.1.3 Defaults
+Presets keep the CLI small and predictable.
+```
 
 Use `kind::` when a concept should visually stand out, not on every node.
 
@@ -272,6 +314,11 @@ Current built-in themes:
 - `terracotta`
 - `jungle`
 
+All built-in themes currently support:
+
+- universal kinds: `note`, `warn`, `soft`
+- theme-owned kinds: `hl`, `focus`
+
 ### `default`
 
 Best when:
@@ -280,6 +327,11 @@ Best when:
 - readability is the priority
 - you want the least opinionated color palette
 
+Kind tone:
+
+- `hl` reads as a warm highlight against a neutral base
+- `focus` reads as a cooler, primary emphasis
+
 ### `terracotta`
 
 Best when:
@@ -287,12 +339,30 @@ Best when:
 - you want a warmer editorial tone
 - the document should feel more didactic or presentation-oriented
 
+Kind tone:
+
+- `hl` reads as a strong terracotta-accent highlight
+- `focus` reads as a softer clay emphasis
+
 ### `jungle`
 
 Best when:
 
 - you want a fresher, greener palette
 - the content benefits from a lighter organic tone
+
+Kind tone:
+
+- `hl` reads as an aqua-highlighted concept
+- `focus` reads as a greener structural emphasis
+
+### Theme demo files
+
+The repository includes one example mock per built-in theme:
+
+- [mocks/theme_default_tree.txt](/home/yaldapika/dev/koala/mocks/theme_default_tree.txt)
+- [mocks/theme_terracotta_synoptic_boxes.txt](/home/yaldapika/dev/koala/mocks/theme_terracotta_synoptic_boxes.txt)
+- [mocks/theme_jungle_radial.txt](/home/yaldapika/dev/koala/mocks/theme_jungle_radial.txt)
 
 ## 9. Available typographies
 

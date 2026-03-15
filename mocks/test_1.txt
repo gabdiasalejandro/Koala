@@ -1,0 +1,30 @@
+@layout tree
+@theme default
+@typography default
+@size a4_landscape
+@show-node-numbers true
+@output-dir output/theme_default_tree
+
+focus:: 1 Render Pipeline
+Coordinates the full SVG generation flow from parsed DSL to final document.
+
+hl:: resolves -> 1.1 Render Context
+Combines layout, theme, typography, viewport, and scene data in one place.
+
+note:: reads -> 1.1.1 Metadata
+Allows a source file to carry layout, theme, size, and output preferences.
+
+warn:: constrains -> 1.1.2 Viewport Fit
+Large scenes can still require scale reduction to stay inside the printable page.
+
+soft:: keeps -> 1.1.3 Defaults
+Preset registries reduce CLI noise and make common renders repeatable.
+
+1.2 SVG Backend
+Consumes the resolved context and emits the final drawing primitives.
+
+note:: draws -> 1.2.1 Text
+Handles wrapping, alignment, and justified rendering.
+
+soft:: assembles -> 1.2.2 Nodes
+Builds visual boxes, numbers, and content blocks from the generic scene.

@@ -95,6 +95,8 @@ Kinds are declared with the `kind::` prefix:
 
 ```text
 hl:: 1 Important Concept
+note:: 1 Supporting Note
+focus:: 1.1 Main Takeaway
 ```
 
 Current behavior:
@@ -103,7 +105,13 @@ Current behavior:
 - if no kind is present, the parser stores `default`
 - themes can style nodes by kind at render time
 
-The repository currently includes `hl` as the main semantic example used by the default themes.
+Current built-in kinds are:
+
+- universal kinds: `note`, `warn`, `soft`
+- theme-owned kinds: `hl`, `focus`
+
+Universal kinds are declared once and then recolored by the active theme.
+Theme-owned kinds are also supported across built-in themes, but each theme defines their visual treatment explicitly.
 
 ## Relations
 
