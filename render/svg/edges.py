@@ -9,7 +9,7 @@ Este modulo dibuja conectores sobre una escena ya resuelta:
 import svgwrite
 
 from layout.shared import wrap_text_lines
-from render.geometry import arrow_wing_points
+from render.geometry import arrow_wing_points, synoptic_brace_path_data
 from render.models import RenderContext, SvgTextBlockSpec, SvgTextStyle
 from render.svg.text import SvgTextRenderer
 
@@ -41,6 +41,9 @@ class SvgEdgeRenderer:
             has_explicit_relation = bool(edge.relation_label)
             stroke_color = theme.edge_color if has_explicit_relation else theme.implicit_edge_color
             stroke_width = 1.2 if has_explicit_relation else 1.75
+
+            if use_brackets_only and self._draw_synoptic_brace(edge.points, stroke_color):
+                continue
 
             if len(edge.points) == 2:
                 self._root_group.add(
@@ -84,6 +87,24 @@ class SvgEdgeRenderer:
                     ),
                 )
                 self._text_renderer.draw_centered_block(label_spec)
+
+    def _draw_synoptic_brace(self, points, stroke_color: str) -> bool:
+        path_data = synoptic_brace_path_data(points)
+        if path_data is None:
+            return False
+
+        self._root_group.add(
+            self._dwg.path(
+                d=path_data,
+                fill="none",
+                stroke=stroke_color,
+                stroke_width=2.1,
+                stroke_linecap="round",
+                stroke_linejoin="round",
+                opacity=0.96,
+            )
+        )
+        return True
 
     def _draw_arrow(self, start, tip, stroke_color: str) -> None:
         wing_a, wing_b = arrow_wing_points(start, tip)

@@ -221,6 +221,8 @@ For each node with children:
 
 Unlike `tree` and `synoptic_boxes`, this layout intentionally omits relation labels because the visual priority is grouping, not edge annotation.
 
+At render time, the SVG backend can stylize that bracket geometry as a smoother brace-shaped path so the final `{` connectors read more clearly than a raw orthogonal polyline.
+
 ### Page fitting behavior
 
 Current behavior:
