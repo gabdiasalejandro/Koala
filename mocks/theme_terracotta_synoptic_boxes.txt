@@ -5,7 +5,7 @@
 @show-node-numbers false
 @output-dir output/theme_terracotta_synoptic_boxes
 
-focus:: 1 Teaching Sequence
+main:: 1 Teaching Sequence
 Organizes the visual explanation of a topic from concept to reinforcement.
 
 hl:: starts with -> 1.1 Core Idea

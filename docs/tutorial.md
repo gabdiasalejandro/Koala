@@ -106,7 +106,7 @@ If you do not include a relation, the parent-child connector still exists, but i
 Example:
 
 ```text
-hl:: 1 Important Concept
+main:: 1 Main Topic
 hl:: contains -> 1.1 Highlighted Child
 note:: 1.2 Supporting Note
 warn:: 1.2.1 Caution
@@ -119,13 +119,14 @@ Current behavior:
 - kinds are normalized to lowercase
 - if omitted, the kind becomes `default`
 - built-in universal kinds are `note`, `warn`, and `soft`
-- built-in theme-owned kinds are `hl` and `focus`
+- built-in theme-owned kinds are `main`, `hl`, and `focus`
 
 ### What each built-in kind is for
 
 - `note`: supporting context that should read as useful but not dominant
 - `warn`: caution, constraint, tradeoff, or risk
 - `soft`: lower-priority supporting detail
+- `main`: the primary root concept; built-in themes reserve it for the top-level anchor
 - `hl`: a highlighted concept the active theme wants to emphasize strongly
 - `focus`: the key thesis, core idea, or primary anchor of a branch
 
@@ -134,7 +135,7 @@ Current behavior:
 Koala currently ships with two semantic groups:
 
 - universal kinds: `note`, `warn`, `soft`
-- theme-owned kinds: `hl`, `focus`
+- theme-owned kinds: `main`, `hl`, `focus`
 
 Universal kinds are defined once and then recolored by the active theme.
 Theme-owned kinds also exist in every built-in theme, but each theme defines their specific treatment directly.
@@ -142,7 +143,7 @@ Theme-owned kinds also exist in every built-in theme, but each theme defines the
 ### Full example using all built-in kinds
 
 ```text
-focus:: 1 Render Pipeline
+main:: 1 Render Pipeline
 Coordinates the full SVG export process.
 
 hl:: orchestrates -> 1.1 Render Context
@@ -157,6 +158,8 @@ Very dense scenes may still require scale reduction.
 soft:: documents -> 1.1.3 Defaults
 Presets keep the CLI small and predictable.
 ```
+
+If the root node uses `main::` in a boxed layout such as `tree`, `synoptic_boxes`, or `radial`, Koala also draws it with a thicker border to make the visual hierarchy more explicit.
 
 Use `kind::` when a concept should visually stand out, not on every node.
 
@@ -317,7 +320,7 @@ Current built-in themes:
 All built-in themes currently support:
 
 - universal kinds: `note`, `warn`, `soft`
-- theme-owned kinds: `hl`, `focus`
+- theme-owned kinds: `main`, `hl`, `focus`
 
 ### `default`
 
@@ -329,6 +332,7 @@ Best when:
 
 Kind tone:
 
+- `main` reads as the strongest root-level accent
 - `hl` reads as a warm highlight against a neutral base
 - `focus` reads as a cooler, primary emphasis
 
@@ -341,6 +345,7 @@ Best when:
 
 Kind tone:
 
+- `main` reads as the strongest terracotta root accent
 - `hl` reads as a strong terracotta-accent highlight
 - `focus` reads as a softer clay emphasis
 
@@ -353,6 +358,7 @@ Best when:
 
 Kind tone:
 
+- `main` reads as the strongest green root accent
 - `hl` reads as an aqua-highlighted concept
 - `focus` reads as a greener structural emphasis
 

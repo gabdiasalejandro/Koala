@@ -5,7 +5,7 @@
 @show-node-numbers true
 @output-dir output/theme_jungle_radial
 
-focus:: 1 Sustainable Strategy
+main:: 1 Sustainable Strategy
 Places one central theme in the middle and distributes balanced supporting branches around it.
 
 hl:: grows through -> 1.1 Long-Term Planning

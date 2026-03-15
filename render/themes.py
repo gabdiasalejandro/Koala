@@ -7,7 +7,7 @@ Este archivo agrupa en un solo lugar:
 
 La regla es simple:
 - los kinds universales se aplican sobre el `default_node` del theme
-- cada theme aporta sus kinds propios, hoy `hl` y `focus`
+- cada theme aporta sus kinds propios, hoy `main`, `hl` y `focus`
 """
 
 from typing import Dict
@@ -51,6 +51,12 @@ class ThemeCatalog:
                 body="#314252",
             ),
             kind_overrides={
+                "main": NodeStyleOverride(
+                    fill="#FFE7CC",
+                    stroke="#FF8A00",
+                    title="#7A3E00",
+                    body="#8A5620",
+                ),
                 "hl": NodeStyleOverride(
                     fill="#FFF4D8",
                     stroke="#D39A2C",
@@ -78,6 +84,12 @@ class ThemeCatalog:
                 body="#66483F",
             ),
             kind_overrides={
+                "main": NodeStyleOverride(
+                    fill="#FFD8C8",
+                    stroke="#D74A1D",
+                    title="#7A2411",
+                    body="#8A4631",
+                ),
                 "hl": NodeStyleOverride(
                     fill="#FFE0D1",
                     stroke="#C35A34",
@@ -105,6 +117,12 @@ class ThemeCatalog:
                 body="#2D5F68",
             ),
             kind_overrides={
+                "main": NodeStyleOverride(
+                    fill="#D8F7BF",
+                    stroke="#4EA72E",
+                    title="#1F5E16",
+                    body="#3D6D2E",
+                ),
                 "hl": NodeStyleOverride(
                     fill="#DDF6F0",
                     stroke="#2F9B8F",

@@ -181,10 +181,12 @@ Theme composition now happens in `render/themes.py`:
 - universal kind styles are defined once
 - current universal kinds are `note`, `warn`, and `soft`
 - each theme contributes a base `default_node`
-- each built-in theme defines two theme-owned kinds: `hl` and `focus`
+- each built-in theme defines three theme-owned kinds: `main`, `hl`, and `focus`
 - theme-specific kind overrides are merged on top of the universal ones
 
 The result is a resolved `ThemeConfig` consumed by the SVG renderer.
+
+`main` is intended mainly for the root node. In boxed layouts, when the root uses `main::`, the SVG node renderer applies a thicker border to reinforce the hierarchy visually.
 
 Current text alignment behavior:
 

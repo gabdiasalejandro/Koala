@@ -17,6 +17,9 @@ from render.svg.text import SvgTextRenderer
 class SvgNodeSpecFactory:
     """Convierte cajas del layout en specs aptos para el backend SVG."""
 
+    ROOT_MAIN_BORDER_WIDTH = 2.6
+    DEFAULT_BORDER_WIDTH = 1.2
+
     @classmethod
     def build(cls, context: RenderContext, number: str, *, text_only: bool) -> SvgNodeRenderSpec:
         config = context.settings.layout_config
@@ -65,9 +68,16 @@ class SvgNodeSpecFactory:
             box=box,
             node=box.node,
             node_style=node_style,
+            border_width=cls._resolve_border_width(box.node.kind, box.node.parent is None),
             title_block=title_block,
             body_block=body_block,
         )
+
+    @classmethod
+    def _resolve_border_width(cls, kind: str, is_root: bool) -> float:
+        if is_root and kind.strip().lower() == "main":
+            return cls.ROOT_MAIN_BORDER_WIDTH
+        return cls.DEFAULT_BORDER_WIDTH
 
 
 class SvgNodeRenderer:
@@ -95,13 +105,13 @@ class SvgNodeRenderer:
                 self._dwg.rect(
                     insert=(spec.box.x, spec.box.y),
                     size=(spec.box.width, spec.box.height),
-                    rx=config.corner_radius,
-                    ry=config.corner_radius,
-                    fill=spec.node_style.fill,
-                    stroke=spec.node_style.stroke,
-                    stroke_width=1.2,
-                )
+                rx=config.corner_radius,
+                ry=config.corner_radius,
+                fill=spec.node_style.fill,
+                stroke=spec.node_style.stroke,
+                stroke_width=spec.border_width,
             )
+        )
             self._text_renderer.draw_block(spec.title_block)
             if spec.body_block is not None:
                 self._text_renderer.draw_block(spec.body_block)

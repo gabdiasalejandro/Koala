@@ -5,7 +5,7 @@
 @show-node-numbers true
 @output-dir output/theme_default_tree
 
-focus:: 1 Render Pipeline
+main:: 1 Render Pipeline
 Coordinates the full SVG generation flow from parsed DSL to final document.
 
 hl:: resolves -> 1.1 Render Context

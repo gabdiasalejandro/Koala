@@ -203,5 +203,6 @@ class SvgNodeRenderSpec:
     box: LayoutBox
     node: ConceptNode
     node_style: NodeStyle
+    border_width: float
     title_block: SvgTextBlockSpec
     body_block: Optional[SvgTextBlockSpec]

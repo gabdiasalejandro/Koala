@@ -94,6 +94,7 @@ Internally, body lines are stored as paragraphs and later joined with spaces for
 Kinds are declared with the `kind::` prefix:
 
 ```text
+main:: 1 Root Topic
 hl:: 1 Important Concept
 note:: 1 Supporting Note
 focus:: 1.1 Main Takeaway
@@ -108,10 +109,12 @@ Current behavior:
 Current built-in kinds are:
 
 - universal kinds: `note`, `warn`, `soft`
-- theme-owned kinds: `hl`, `focus`
+- theme-owned kinds: `main`, `hl`, `focus`
 
 Universal kinds are declared once and then recolored by the active theme.
 Theme-owned kinds are also supported across built-in themes, but each theme defines their visual treatment explicitly.
+
+`main` is intended primarily for the diagram root. In boxed layouts, if the root node uses `main::`, the renderer also draws it with a thicker border.
 
 ## Relations
 

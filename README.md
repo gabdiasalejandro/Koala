@@ -40,6 +40,7 @@ Generates SVG output.
 Optional semantic kind:
 
 ```text
+main:: 1 DSL Platform
 hl:: 1.2 Users Table
 hl:: contains -> 1.2.1 Foreign Key
 note:: 1.3 Note
@@ -49,7 +50,9 @@ focus:: 1.4 Main Insight
 Built-in kinds currently available:
 
 - universal: `note`, `warn`, `soft`
-- theme-owned: `hl`, `focus`
+- theme-owned: `main`, `hl`, `focus`
+
+`main` is intended mainly for the diagram root. When the root node uses `main::`, built-in themes give it a more prominent color treatment and a thicker border.
 
 Built-in themes currently available:
 
