@@ -135,6 +135,8 @@ Available themes:
 default
 terracotta
 jungle
+frutal
+academic
 
 ---
 

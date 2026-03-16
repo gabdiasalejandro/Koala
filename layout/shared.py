@@ -21,6 +21,16 @@ _NARROW_CHARS = set(" !'`,.:;|ijlIt")
 _MEDIUM_CHARS = set('()[]{}"*/\\-')
 _WIDE_CHARS = set("mwMW@%#&QGOD")
 _DIGITS = set("0123456789")
+_FONT_WIDTH_FACTORS = {
+    "georgia": 1.01,
+    "trebuchet ms": 1.03,
+    "verdana": 1.04,
+}
+_FONT_WRAP_PADDING_EM = {
+    "georgia": 0.12,
+    "trebuchet ms": 0.18,
+    "verdana": 0.20,
+}
 
 
 def sort_node_key(number: str) -> List[int]:
@@ -60,14 +70,43 @@ def get_v_gap_for_depth(depth: int, config: LayoutConfig) -> float:
     return max(5.0, config.v_gap_base * (1.0 - min(0.30, depth * 0.06)))
 
 
+def _normalize_font_name(font_name: str) -> str:
+    return " ".join(font_name.strip().lower().split())
+
+
+def _font_width_factor(font_name: str) -> float:
+    normalized = _normalize_font_name(font_name)
+    return _FONT_WIDTH_FACTORS.get(normalized, 1.0)
+
+
+def _wrap_safety_padding(font_name: str, font_size: float) -> float:
+    """Retorna un margen defensivo para el wrap según la fuente.
+
+    La medicion es heuristica y funciona bien con fuentes Helvetica-like.
+    Algunas fuentes reales usadas por Koala, en especial `Verdana` y
+    `Trebuchet MS` del perfil radial, suelen renderizarse un poco mas anchas
+    que esa aproximacion. El padding reduce el ancho efectivo del wrap para
+    evitar que una o dos letras queden fuera del recuadro en casos limite.
+    """
+
+    normalized = _normalize_font_name(font_name)
+    padding_em = _FONT_WRAP_PADDING_EM.get(normalized, 0.10)
+    return max(1.2, font_size * padding_em)
+
+
 def measure_text_width(text: str, font_name: str, font_size: float) -> float:
     """Aproxima el ancho de texto sin depender de motores externos.
 
     El objetivo no es precision tipografica absoluta sino mantener una
     medicion estable para layout y render usando fuentes Helvetica-like.
+    Para fuentes conocidas mas anchas, se aplica un factor pequeno para que
+    layout y render SVG queden mas alineados en el borde derecho.
     """
 
-    font_factor = 1.04 if "bold" in font_name.lower() else 1.0
+    normalized_font = _normalize_font_name(font_name)
+    font_factor = _font_width_factor(normalized_font)
+    if "bold" in normalized_font:
+        font_factor *= 1.04
     total = 0.0
 
     for char in text:
@@ -92,12 +131,13 @@ def wrap_text_lines(text: str, font_name: str, font_size: float, max_width: floa
     if not words:
         return []
 
+    effective_max_width = max(1.0, max_width - _wrap_safety_padding(font_name, font_size))
     lines: List[str] = []
     current = ""
 
     for word in words:
         trial = f"{current} {word}".strip()
-        if measure_text_width(trial, font_name, font_size) <= max_width or not current:
+        if measure_text_width(trial, font_name, font_size) <= effective_max_width or not current:
             current = trial
         else:
             lines.append(current)

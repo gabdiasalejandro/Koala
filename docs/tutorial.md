@@ -316,6 +316,8 @@ Current built-in themes:
 - `default`
 - `terracotta`
 - `jungle`
+- `frutal`
+- `academic`
 
 All built-in themes currently support:
 

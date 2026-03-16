@@ -59,6 +59,8 @@ Built-in themes currently available:
 - `default`
 - `terracotta`
 - `jungle`
+- `frutal`
+- `academic`
 
 Optional metadata:
 

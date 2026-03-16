@@ -1,0 +1,25 @@
+@text-align justify
+
+main:: 1 Koala Validation Matrix
+Exercises the full SVG pipeline with stable content so end to end assertions can verify output files, metadata resolution, and theme serialization without relying on fragile pixel checks.
+
+hl:: supports -> 1.1 Theme coverage
+Touches theme-owned colors on highlighted content and keeps relation labels visible in layouts that render them.
+
+1.1.1 Default node sample
+Keeps a standard node in the tree so each render still includes the base palette alongside semantic overrides.
+
+focus:: surfaces -> 1.2 Layout coverage
+Provides enough branches and depth for tree, synoptic, synoptic_boxes, and radial to build a meaningful scene instead of a trivial shape.
+
+1.2.1 Geometry checks
+Leaves one edge implicit so the test can confirm both explicit and implicit connector colors land in the final SVG.
+
+note:: documents -> 1.3 Metadata path
+Reads text alignment from metadata because that is the same resolution path real users hit when authoring source files.
+
+warn:: flags -> 1.4 Output expectations
+Confirms generated files exist, contain SVG markup, and serialize visual tokens that belong to the selected theme and layout.
+
+soft:: 1.5 Stable assertions
+Keeps the document compact, but still varied enough to exercise body text, title text, semantic kinds, and connector drawing in one pass.

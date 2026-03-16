@@ -57,13 +57,20 @@ def synoptic_brace_path_data(points: Sequence[Tuple[float, float]]) -> str | Non
     curve_y = max(2.0, min(14.0, span_y * 0.18))
     if span_y < curve_y * 2.4:
         curve_y = max(1.5, span_y / 3)
+    peak_half_height = max(3.0, min(10.0, span_y * 0.10))
+    peak_depth = max(4.0, min(11.0, abs(hook_x - brace_x) * 0.95))
+    peak_x = brace_x - peak_depth
+    upper_peak_y = mid_y - peak_half_height
+    lower_peak_y = mid_y + peak_half_height
 
     return (
         f"M {parent_x:.2f} {parent_y:.2f} "
-        f"C {elbow_x:.2f} {parent_y:.2f} {elbow_x:.2f} {mid_y:.2f} {brace_x:.2f} {mid_y:.2f} "
+        f"C {elbow_x:.2f} {parent_y:.2f} {elbow_x:.2f} {mid_y:.2f} {peak_x:.2f} {mid_y:.2f} "
         f"M {hook_x:.2f} {top_y:.2f} "
         f"Q {brace_x:.2f} {top_y:.2f} {brace_x:.2f} {top_y + curve_y:.2f} "
-        f"L {brace_x:.2f} {mid_y:.2f} "
+        f"L {brace_x:.2f} {upper_peak_y:.2f} "
+        f"L {peak_x:.2f} {mid_y:.2f} "
+        f"L {brace_x:.2f} {lower_peak_y:.2f} "
         f"L {brace_x:.2f} {bottom_y - curve_y:.2f} "
         f"Q {brace_x:.2f} {bottom_y:.2f} {hook_x:.2f} {bottom_y:.2f}"
     )

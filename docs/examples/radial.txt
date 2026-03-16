@@ -1,0 +1,55 @@
+@layout radial
+@theme jungle
+@size a4
+@show-node-numbers false
+
+main:: 1 Innovación
+Proceso mediante el cual se crean o mejoran ideas, productos, servicios o procesos para generar valor y resolver problemas de forma diferente. Implica aplicar conocimiento y creatividad para producir cambios que mejoren la eficiencia, la competitividad o la calidad de vida.
+
+focus:: 1.1 Características de la innovación
+Rasgos que describen cómo funciona el proceso innovador y qué elementos permiten que una idea se convierta en una mejora o solución con impacto real.
+
+hl:: 1.1.1 Generación de valor
+La innovación transforma ideas en soluciones útiles que aportan beneficios económicos, sociales o tecnológicos a las organizaciones y a la sociedad.
+
+soft:: 1.1.2 Creatividad y cambio
+Se basa en la creatividad, la experimentación y la capacidad de cuestionar lo existente para generar nuevas soluciones y mejorar procesos o productos.
+
+soft:: 1.1.3 Proceso continuo
+La innovación no ocurre una sola vez; implica mejora constante, adaptación al entorno y aprendizaje continuo para responder a nuevas necesidades.
+
+focus:: 1.2 Tipología de la innovación
+Clasificación que describe los diferentes tipos de innovación según el grado de cambio que producen en productos, procesos o mercados.
+
+hl:: 1.2.1 Innovación incremental
+Consiste en mejoras graduales sobre productos, servicios o procesos ya existentes para aumentar su eficiencia, calidad o desempeño sin cambiar su esencia original.
+
+hl:: 1.2.2 Innovación radical
+Introduce cambios significativos basados en nuevos conocimientos o tecnologías que transforman de forma importante productos o procesos existentes.
+
+hl:: 1.2.3 Innovación disruptiva
+Genera soluciones completamente nuevas que cambian la forma en que funcionan los mercados o industrias, desplazando tecnologías o modelos tradicionales.
+
+focus:: 1.3 Diferencias entre innovación y otros conceptos
+Comparación conceptual que permite distinguir la innovación de ideas relacionadas como invención, mejora o cambio tecnológico.
+
+hl:: 1.3.1 Innovación vs invención
+La invención crea una idea o descubrimiento nuevo, mientras que la innovación implica aplicar esa idea para generar valor o resolver problemas en la práctica.
+
+soft:: 1.3.2 Innovación vs mejora
+Una mejora puede ser un ajuste pequeño, mientras que la innovación implica aplicar creatividad o conocimiento para producir un cambio significativo o estratégico.
+
+soft:: 1.3.3 Innovación vs cambio tecnológico
+El cambio tecnológico se refiere a la evolución de tecnologías, mientras que la innovación incluye su aplicación práctica para generar valor económico o social.
+
+focus:: 1.4 Importancia de la innovación
+Razones por las cuales la innovación es fundamental para el desarrollo económico, social y tecnológico en organizaciones y sociedades.
+
+hl:: 1.4.1 Competitividad
+Permite a las organizaciones adaptarse a los cambios del mercado y mantener ventajas frente a la competencia.
+
+soft:: 1.4.2 Desarrollo económico
+La innovación impulsa el crecimiento económico, la creación de nuevos mercados y el avance tecnológico.
+
+soft:: 1.4.3 Solución de problemas
+Facilita encontrar nuevas formas de resolver necesidades sociales, tecnológicas o empresariales mediante ideas creativas.

@@ -197,6 +197,15 @@ Current text alignment behavior:
 
 Alignment can be overridden from document metadata and is applied before layout measurement, so wrapping stays consistent with the final render.
 
+Current text measurement behavior:
+
+- `layout/shared.py` uses a heuristic width estimator instead of a native font engine
+- the estimator now applies small per-font width factors for known fonts such as `Georgia`, `Trebuchet MS`, and `Verdana`
+- wrapping also uses a small font-dependent safety padding, so the effective line width is slightly narrower than the box width
+- this is especially important for the radial typography profile, where `Trebuchet MS` and `Verdana` can render slightly wider than the generic Helvetica-like approximation
+
+The goal of those adjustments is not typographic exactness, but reducing right-edge overflow cases while keeping layout measurement deterministic and dependency-free.
+
 ## Why the architecture is structured this way
 
 The practical benefits of the current split are:

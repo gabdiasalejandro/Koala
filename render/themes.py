@@ -142,6 +142,72 @@ class ThemeCatalog:
             number_pill_bg="#DDEFEA",
             number_pill_text="#5A8E95",
         ),
+        "frutal": ThemeDefinition(
+            default_node=NodeStyle(
+                fill="#FFF8F2",
+                stroke="#C96C4A",
+                title="#5E2416",
+                body="#7A4A3A",
+            ),
+            kind_overrides={
+                "main": NodeStyleOverride(
+                    fill="#FFD66B",
+                    stroke="#E28A12",
+                    title="#6F3B00",
+                    body="#8B5A16",
+                ),
+                "hl": NodeStyleOverride(
+                    fill="#FFC2D1",
+                    stroke="#D94B76",
+                    title="#7D183A",
+                    body="#8C4160",
+                ),
+                "focus": NodeStyleOverride(
+                    fill="#DFF4C8",
+                    stroke="#76A83B",
+                    title="#355A12",
+                    body="#55713B",
+                ),
+            },
+            edge_color="#D39A7E",
+            implicit_edge_color="#8A5E52",
+            relation_color="#B53A3A",
+            number_pill_bg="#F9E3D6",
+            number_pill_text="#9B5B47",
+        ),
+        "academic": ThemeDefinition(
+            default_node=NodeStyle(
+                fill="#FCFCFA",
+                stroke="#6F6F6F",
+                title="#111111",
+                body="#111111",
+            ),
+            kind_overrides={
+                "main": NodeStyleOverride(
+                    fill="#F0F0EC",
+                    stroke="#3F3F3F",
+                    title="#000000",
+                    body="#111111",
+                ),
+                "hl": NodeStyleOverride(
+                    fill="#F6F6F3",
+                    stroke="#585858",
+                    title="#000000",
+                    body="#111111",
+                ),
+                "focus": NodeStyleOverride(
+                    fill="#F2F2EE",
+                    stroke="#4C4C4C",
+                    title="#000000",
+                    body="#111111",
+                ),
+            },
+            edge_color="#7A7A7A",
+            implicit_edge_color="#555555",
+            relation_color="#222222",
+            number_pill_bg="#F1F1ED",
+            number_pill_text="#111111",
+        ),
     }
 
     @classmethod

@@ -1,0 +1,29 @@
+@text-align left
+
+main:: 1 Matriz de Validación Koala
+Ejercita todo el flujo de SVG con contenido estable para que las verificaciones de extremo a extremo puedan validar archivos de salida, resolución de metadatos y serialización de temas sin depender de comprobaciones de píxeles frágiles.
+
+hl:: supports -> 1.1 Cobertura de temas
+Toca los colores pertenecientes al tema en contenido resaltado y mantiene visibles las etiquetas de relación en los diseños que las renderizan.
+
+1.1.1 Ejemplo de nodo predeterminado
+Mantiene un nodo estándar en el árbol para que cada renderizado siga incluyendo la paleta base junto con las sobreescrituras semánticas.
+
+focus:: surfaces -> 1.2 Cobertura de diseño
+Proporciona suficientes ramas y profundidad para que *tree*, *synoptic*, *synoptic_boxes* y *radial* construyan una escena significativa en lugar de una forma trivial.
+
+1.2.1 Verificaciones de geometría
+Deja una arista implícita para que la prueba pueda confirmar que tanto los colores de conectores explícitos como implícitos aparecen en el SVG final.
+
+note:: documents -> 1.3 Ruta de metadatos
+Lee la alineación de texto desde los metadatos porque esa es la misma ruta de resolución que usan los usuarios reales al crear archivos fuente.
+
+note:: documents -> 1.3.1 Prueba de metadatos
+Lee la alineación de texto desde los metadatos porque esa es la misma ruta de resolución que usan los usuarios reales al crear archivos fuente.
+
+warn:: flags -> 1.4 Expectativas de salida
+Confirma que los archivos generados existen, contienen marcado SVG y serializan tokens visuales que pertenecen al tema y al diseño seleccionados.
+
+soft:: 1.5 Aserciones estables
+Mantiene el documento compacto, pero lo suficientemente variado para ejercitar texto del cuerpo, texto del título, tipos semánticos y el dibujo de conectores en una sola pasada.
+

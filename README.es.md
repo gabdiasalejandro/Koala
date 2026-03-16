@@ -49,7 +49,17 @@ focus:: 1.4 Idea principal
 Kinds integrados disponibles actualmente:
 
 - universales: `note`, `warn`, `soft`
-- propios del theme: `hl`, `focus`
+- propios del theme: `main`, `hl`, `focus`
+
+`main` está pensado principalmente para la raíz del diagrama. Cuando la raíz usa `main::`, los themes integrados le dan un tratamiento más prominente y un borde más grueso.
+
+Themes integrados disponibles actualmente:
+
+- `default`
+- `terracotta`
+- `jungle`
+- `frutal`
+- `academic`
 
 Metadata opcional:
 
