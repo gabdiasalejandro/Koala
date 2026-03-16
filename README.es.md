@@ -6,6 +6,86 @@ Koala es un DSL para generar diagramas a partir de texto estructurado.
 
 La idea central del proyecto es simple: un mismo archivo fuente debe poder renderizarse en múltiples layouts y estilos sin reescribir el contenido.
 
+## Uso rápido
+
+Punto de entrada principal:
+
+- [cli.py](/home/yaldapika/dev/koala/cli.py)
+- comando instalado: `koala`
+
+Instalación local en entorno virtual:
+
+```bash
+python3 -m venv .venv
+./.venv/bin/pip install -r requirements.txt
+./.venv/bin/pip install -e . --no-build-isolation
+```
+
+Si prefieres una instalación orientada a usuario final:
+
+```bash
+pipx install .
+```
+
+Comandos básicos:
+
+```bash
+koala themes
+koala layouts
+koala typographies
+koala compile docs/examples/tree.txt --layout tree
+koala compile docs/examples/radial.txt --layout radial --theme jungle --size square
+koala inspect docs/examples/tree.txt
+koala validate docs/examples/radial.txt --strict
+koala config-path
+```
+
+Subcomandos disponibles:
+
+- `compile`: renderiza un archivo fuente a SVG
+- `inspect`: muestra metadata, warnings y settings resueltos
+- `validate`: valida parseo y settings; con `--strict` falla si hay warnings
+- `themes`: lista themes disponibles
+- `layouts`: lista layouts disponibles
+- `typographies`: lista presets tipográficos disponibles
+- `config-path`: muestra la ruta esperada de la config de usuario
+
+Config de usuario:
+
+- ruta por default: `~/.config/koala/config.toml`
+- ruta fallback: `~/.koala.toml`
+
+Ejemplo:
+
+```toml
+[tool.koala]
+default_layout = "tree"
+default_theme = "academic"
+default_typography = "default"
+default_size = "a4_landscape"
+default_text_align = "left"
+default_show_node_numbers = true
+default_output_mode = "next_to_input"
+```
+
+Claves soportadas:
+
+- `default_layout`
+- `default_theme`
+- `default_typography`
+- `default_size`
+- `default_text_align`
+- `default_show_node_numbers`
+- `default_output_mode`: `next_to_input`, `desktop`, `cwd`
+- `default_output_dir`
+
+Comportamiento de salida:
+
+- por default, la salida queda junto al archivo fuente con nombre `<input_stem>.<layout>.svg`
+- `--output` escribe a una ruta SVG explícita
+- `--output-dir` escribe en una carpeta concreta
+- `--desktop` escribe en `~/Desktop` si existe; si no, cae de vuelta a la carpeta del input
+
 ## Capacidades actuales
 
 - Parsear árboles conceptuales jerárquicos desde `.txt` y `.docx`
@@ -83,31 +163,7 @@ El alineado del texto de nodos ahora es `left` por default. Si quieres justifica
 
 Para la sintaxis completa, ver [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md).
 
-## Uso
-
-Punto de entrada principal:
-
-- [main.py](/home/yaldapika/dev/koala/main.py)
-
-Ejemplos:
-
-```bash
-./.venv/bin/python main.py --layout tree
-./.venv/bin/python main.py --layout synoptic
-./.venv/bin/python main.py --layout synoptic_boxes
-./.venv/bin/python main.py --layout radial
-./.venv/bin/python main.py --input mocks/metadata_demo.txt
-./.venv/bin/python main.py --layout tree --theme terracotta --size square
-```
-
-Opciones actuales del CLI:
-
-- `--layout`: `tree`, `synoptic`, `synoptic_boxes`, `radial`
-- `--input`: archivo `.txt` o `.docx`
-- `--output-dir`: carpeta de salida
-- `--theme`: preset de tema
-- `--typography`: preset tipográfico
-- `--size`: preset de página, actualmente `a4`, `a4_landscape`, `square`
+## Referencia CLI
 
 Presets actuales de página:
 
@@ -117,7 +173,8 @@ Presets actuales de página:
 
 Salida:
 
-- `output/concept_map_<layout>.svg`
+- por default, junto al archivo fuente, con nombre `<input_stem>.<layout>.svg`
+- también puede ir a `Desktop`, otra carpeta o una ruta explícita con `--output`
 
 ## Layouts
 
@@ -215,8 +272,8 @@ Estas recomendaciones son heurísticas prácticas para obtener diagramas más li
 
 ## Ejemplos recomendados
 
-- [mocks/concepts.txt](/home/yaldapika/dev/koala/mocks/concepts.txt)
-- [mocks/metadata_demo.txt](/home/yaldapika/dev/koala/mocks/metadata_demo.txt)
+- [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
+- [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
 
 ## Estado actual
 
@@ -236,6 +293,6 @@ Todavía hay espacio de mejora en:
 - mejorar la distribución de radial
 - validaciones más fuertes
 - pruebas visuales automatizadas
-- facilitar su uso como DSL haciéndolo ejecutable de otras maneras sin depender de main.py
+- facilitar su uso como DSL haciéndolo ejecutable e instalable desde un CLI dedicado
 - añadir más temas, tipografías y tipos de conectores o hacerlo fácilmente configurable
 - mejorar los corchetes de synoptic

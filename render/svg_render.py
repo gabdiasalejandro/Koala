@@ -46,6 +46,14 @@ class SvgRenderPipeline:
             theme_name=self._request.theme_name,
             typography_name=self._request.typography_name,
             page_size_name=self._request.page_size_name,
+            text_align=self._request.text_align,
+            show_node_numbers=self._request.show_node_numbers,
+            default_layout_kind=self._request.default_layout_kind,
+            default_theme_name=self._request.default_theme_name,
+            default_typography_name=self._request.default_typography_name,
+            default_page_size_name=self._request.default_page_size_name,
+            default_text_align=self._request.default_text_align,
+            default_show_node_numbers=self._request.default_show_node_numbers,
         )
 
     def _resolve_output_svg(self, context: RenderContext) -> Path:
@@ -55,7 +63,9 @@ class SvgRenderPipeline:
             base_dir=self._request.base_dir,
             parsed=self._request.parsed,
             layout_kind=context.settings.layout_kind,
+            output_svg_path=self._request.output_svg_path,
             output_dir_name=self._request.output_dir_name,
+            output_file_name=self._request.output_file_name,
             default_output_dir_name=self._request.default_output_dir_name,
         )
 

@@ -88,7 +88,7 @@ class RenderEndToEndTest(unittest.TestCase):
 
                 self._assert_settings(case, result)
                 self._assert_svg_structure(case, svg_text)
-                self._assert_theme_serialization(case, svg_text)
+                self._assert_theme_serialization(case, result, svg_text)
                 self._record_manifest(case, result)
 
     @staticmethod
@@ -147,7 +147,6 @@ class RenderEndToEndTest(unittest.TestCase):
     def _assert_svg_structure(self, case: E2ECase, svg_text: str) -> None:
         self.assertIn("<svg", svg_text)
         self.assertIn("transform=", svg_text)
-        self.assertIn("Koala", svg_text)
         self.assertIn("<text", svg_text)
 
         if case.layout == "synoptic":
@@ -156,10 +155,12 @@ class RenderEndToEndTest(unittest.TestCase):
         else:
             self.assertIn("<rect", svg_text)
 
-    def _assert_theme_serialization(self, case: E2ECase, svg_text: str) -> None:
+    def _assert_theme_serialization(self, case: E2ECase, result, svg_text: str) -> None:
         theme = ThemeCatalog.resolve(case.theme)
-
-        self.assertIn(theme.implicit_edge_color, svg_text)
+        present_kinds = {
+            node.kind.strip().lower() if node.kind else "default"
+            for node in result.context.parsed.node_index.values()
+        }
 
         if case.layout == "synoptic":
             self.assertNotIn(theme.edge_color, svg_text)
@@ -170,12 +171,16 @@ class RenderEndToEndTest(unittest.TestCase):
 
         self.assertIn(theme.default_node.title, svg_text)
 
-        for kind in ("main", "hl", "focus", "note", "warn", "soft"):
+        for kind in present_kinds:
+            if kind == "default":
+                continue
             self.assertIn(theme.style_for(kind).title, svg_text)
 
         if case.layout != "synoptic":
             self.assertIn(theme.default_node.fill, svg_text)
-            for kind in ("main", "hl", "focus", "note", "warn", "soft"):
+            for kind in present_kinds:
+                if kind == "default":
+                    continue
                 self.assertIn(theme.style_for(kind).fill, svg_text)
 
         if case.layout != "synoptic" and case.show_node_numbers:

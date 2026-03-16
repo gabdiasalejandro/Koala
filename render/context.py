@@ -56,9 +56,19 @@ class MetadataValueResolver:
             if raw_value is None:
                 continue
 
-            normalized = raw_value.strip().lower()
-            if normalized in cls.TEXT_ALIGN_VALUES:
+            normalized = cls.normalize_text_align(raw_value)
+            if normalized is not None:
                 return normalized
+        return None
+
+    @classmethod
+    def normalize_text_align(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+
+        normalized = value.strip().lower()
+        if normalized in cls.TEXT_ALIGN_VALUES:
+            return normalized
         return None
 
 
@@ -73,34 +83,59 @@ class RenderContextBuilder:
         theme_name: Optional[str] = None,
         typography_name: Optional[str] = None,
         page_size_name: Optional[PageSizeName] = None,
+        text_align: Optional[str] = None,
+        show_node_numbers: Optional[bool] = None,
+        default_layout_kind: Optional[LayoutKind] = None,
+        default_theme_name: Optional[str] = None,
+        default_typography_name: Optional[str] = None,
+        default_page_size_name: Optional[PageSizeName] = None,
+        default_text_align: Optional[str] = None,
+        default_show_node_numbers: Optional[bool] = None,
     ) -> RenderContext:
-        selected_layout = layout_kind or cls._resolve_layout(parsed)
-        resolved_theme_name = theme_name or cls._resolve_theme(parsed)
-        resolved_typography_name = typography_name or cls._resolve_typography(parsed)
-        resolved_page_size_name = page_size_name or cls._resolve_page_size(parsed)
+        selected_layout = layout_kind or cls._resolve_layout(parsed, default_layout_kind)
+        resolved_theme_name = theme_name or cls._resolve_theme(parsed, default_theme_name)
+        resolved_typography_name = typography_name or cls._resolve_typography(
+            parsed,
+            default_typography_name,
+        )
+        resolved_page_size_name = page_size_name or cls._resolve_page_size(
+            parsed,
+            default_page_size_name,
+        )
+        resolved_show_node_numbers = (
+            show_node_numbers
+            if show_node_numbers is not None
+            else MetadataValueResolver.resolve_bool(
+                parsed.metadata,
+                "show-node-numbers",
+                "show_node_numbers",
+                "node-numbers",
+                "node_numbers",
+            )
+        )
+        if resolved_show_node_numbers is None:
+            resolved_show_node_numbers = default_show_node_numbers
 
         settings = RenderSettingsCatalog.resolve(
             selected_layout,
             theme_name=resolved_theme_name,
             typography_name=resolved_typography_name,
             page_size_name=resolved_page_size_name,
-            show_node_numbers=MetadataValueResolver.resolve_bool(
+            show_node_numbers=resolved_show_node_numbers,
+        )
+        resolved_text_align = (
+            MetadataValueResolver.normalize_text_align(text_align)
+            or MetadataValueResolver.resolve_text_align(
                 parsed.metadata,
-                "show-node-numbers",
-                "show_node_numbers",
-                "node-numbers",
-                "node_numbers",
-            ),
+                "text-align",
+                "text_align",
+            )
+            or MetadataValueResolver.normalize_text_align(default_text_align)
         )
-        text_align = MetadataValueResolver.resolve_text_align(
-            parsed.metadata,
-            "text-align",
-            "text_align",
-        )
-        if text_align is not None:
+        if resolved_text_align is not None:
             settings = replace(
                 settings,
-                typography=replace(settings.typography, text_align=text_align),
+                typography=replace(settings.typography, text_align=resolved_text_align),
             )
 
         scene = build_layout(
@@ -119,20 +154,36 @@ class RenderContextBuilder:
         )
 
     @staticmethod
-    def _resolve_layout(parsed: ParsedDocument) -> LayoutKind:
+    def _resolve_layout(
+        parsed: ParsedDocument,
+        default_layout_kind: LayoutKind | None = None,
+    ) -> LayoutKind:
         return (
             MetadataValueResolver.resolve_value(parsed.metadata, "layout")
+            or default_layout_kind
             or DEFAULT_LAYOUT_KIND
         )
 
     @staticmethod
-    def _resolve_theme(parsed: ParsedDocument) -> str | None:
-        return MetadataValueResolver.resolve_value(parsed.metadata, "theme")
+    def _resolve_theme(parsed: ParsedDocument, default_theme_name: str | None = None) -> str | None:
+        return MetadataValueResolver.resolve_value(parsed.metadata, "theme") or default_theme_name
 
     @staticmethod
-    def _resolve_typography(parsed: ParsedDocument) -> str | None:
-        return MetadataValueResolver.resolve_value(parsed.metadata, "typography")
+    def _resolve_typography(
+        parsed: ParsedDocument,
+        default_typography_name: str | None = None,
+    ) -> str | None:
+        return (
+            MetadataValueResolver.resolve_value(parsed.metadata, "typography")
+            or default_typography_name
+        )
 
     @staticmethod
-    def _resolve_page_size(parsed: ParsedDocument) -> str | None:
-        return MetadataValueResolver.resolve_value(parsed.metadata, "size", "page-size")
+    def _resolve_page_size(
+        parsed: ParsedDocument,
+        default_page_size_name: str | None = None,
+    ) -> str | None:
+        return (
+            MetadataValueResolver.resolve_value(parsed.metadata, "size", "page-size")
+            or default_page_size_name
+        )

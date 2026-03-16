@@ -4,6 +4,10 @@
 output/
 concepts.txt
 legacy_mocks/
+*.tree.svg
+*.synoptic.svg
+*.synoptic_boxes.svg
+*.radial.svg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -221,5 +225,4 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-
 

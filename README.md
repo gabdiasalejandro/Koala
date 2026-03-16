@@ -6,6 +6,86 @@ Koala is a DSL for generating diagrams from structured text.
 
 The project is designed around a simple idea: the same source file should be able to drive multiple layouts and visual styles without rewriting the content itself.
 
+## Quick Start
+
+Main entry point:
+
+- [cli.py](/home/yaldapika/dev/koala/cli.py)
+- installed command: `koala`
+
+Install locally in a virtual environment:
+
+```bash
+python3 -m venv .venv
+./.venv/bin/pip install -r requirements.txt
+./.venv/bin/pip install -e . --no-build-isolation
+```
+
+If you prefer a user-facing install instead of a repo-local venv:
+
+```bash
+pipx install .
+```
+
+Basic commands:
+
+```bash
+koala themes
+koala layouts
+koala typographies
+koala compile docs/examples/tree.txt --layout tree
+koala compile docs/examples/radial.txt --layout radial --theme jungle --size square
+koala inspect docs/examples/tree.txt
+koala validate docs/examples/radial.txt --strict
+koala config-path
+```
+
+Available subcommands:
+
+- `compile`: render a source file to SVG
+- `inspect`: show metadata, warnings, and resolved settings
+- `validate`: validate parsing and resolved settings; with `--strict` it fails on warnings
+- `themes`: list available themes
+- `layouts`: list available layouts
+- `typographies`: list available typography presets
+- `config-path`: show the expected user config path
+
+User config:
+
+- default path: `~/.config/koala/config.toml`
+- fallback path: `~/.koala.toml`
+
+Example:
+
+```toml
+[tool.koala]
+default_layout = "tree"
+default_theme = "academic"
+default_typography = "default"
+default_size = "a4_landscape"
+default_text_align = "left"
+default_show_node_numbers = true
+default_output_mode = "next_to_input"
+```
+
+Supported config keys:
+
+- `default_layout`
+- `default_theme`
+- `default_typography`
+- `default_size`
+- `default_text_align`
+- `default_show_node_numbers`
+- `default_output_mode`: `next_to_input`, `desktop`, `cwd`
+- `default_output_dir`
+
+Output behavior:
+
+- by default, output goes next to the source file and is named `<input_stem>.<layout>.svg`
+- `--output` writes to an explicit SVG path
+- `--output-dir` writes to a specific folder
+- `--desktop` writes to `~/Desktop` when present, otherwise falls back to the input folder
+
 ## Current capabilities
 
 - Parse hierarchical concept trees from `.txt` and `.docx`
@@ -84,31 +164,7 @@ Node text alignment is now `left` by default. If you want justified text, use `@
 
 For the full syntax, see [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md).
 
-## Usage
-
-Main entry point:
-
-- [main.py](/home/yaldapika/dev/koala/main.py)
-
-Examples:
-
-```bash
-./.venv/bin/python main.py --layout tree
-./.venv/bin/python main.py --layout synoptic
-./.venv/bin/python main.py --layout synoptic_boxes
-./.venv/bin/python main.py --layout radial
-./.venv/bin/python main.py --input mocks/metadata_demo.txt
-./.venv/bin/python main.py --layout tree --theme terracotta --size square
-```
-
-Current CLI options:
-
-- `--layout`: `tree`, `synoptic`, `synoptic_boxes`, `radial`
-- `--input`: input `.txt` or `.docx`
-- `--output-dir`: output folder
-- `--theme`: theme preset
-- `--typography`: typography preset
-- `--size`: page preset, currently `a4`, `a4_landscape`, `square`
+## CLI Reference
 
 Current page presets:
 
@@ -118,7 +174,8 @@ Current page presets:
 
 Output:
 
-- `output/concept_map_<layout>.svg`
+- by default, next to the source file, named `<input_stem>.<layout>.svg`
+- it can also go to `Desktop`, another folder, or an explicit file path via `--output`
 
 ## Layouts
 
@@ -215,10 +272,8 @@ These suggestions are practical heuristics for getting cleaner diagrams with the
 
 ## Recommended examples
 
-- [mocks/concepts.txt](/home/yaldapika/dev/koala/mocks/concepts.txt)
-- [mocks/theme_default_tree.txt](/home/yaldapika/dev/koala/mocks/theme_default_tree.txt)
-- [mocks/theme_terracotta_synoptic_boxes.txt](/home/yaldapika/dev/koala/mocks/theme_terracotta_synoptic_boxes.txt)
-- [mocks/theme_jungle_radial.txt](/home/yaldapika/dev/koala/mocks/theme_jungle_radial.txt)
+- [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
+- [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
 
 ## Current status
 

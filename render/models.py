@@ -11,7 +11,7 @@ La meta es mantener el paso de datos explicito sin depender de parametros suelto
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Mapping, Optional
+from typing import Literal, Mapping, Optional
 
 from core.models import ConceptNode, ParsedDocument
 from layout.models import LayoutBox, LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
@@ -143,12 +143,22 @@ class SvgRenderRequest:
 
     parsed: ParsedDocument
     base_dir: Path
+    output_svg_path: Optional[Path] = None
     output_dir_name: Optional[str] = None
+    output_file_name: Optional[str] = None
     default_output_dir_name: Optional[str] = None
     layout_kind: Optional[LayoutKind] = None
     theme_name: Optional[str] = None
     typography_name: Optional[str] = None
     page_size_name: Optional[str] = None
+    text_align: Optional[Literal["justify", "left"]] = None
+    show_node_numbers: Optional[bool] = None
+    default_layout_kind: Optional[LayoutKind] = None
+    default_theme_name: Optional[str] = None
+    default_typography_name: Optional[str] = None
+    default_page_size_name: Optional[str] = None
+    default_text_align: Optional[Literal["justify", "left"]] = None
+    default_show_node_numbers: Optional[bool] = None
 
 
 @dataclass(frozen=True)

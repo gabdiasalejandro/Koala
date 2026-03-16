@@ -25,16 +25,23 @@ class RenderOutputResolver:
         base_dir: Path,
         parsed: ParsedDocument,
         layout_kind: LayoutKind,
+        output_svg_path: Path | None,
         output_dir_name: str | None,
+        output_file_name: str | None,
         default_output_dir_name: str | None,
     ) -> Path:
+        if output_svg_path is not None:
+            output_svg_path.parent.mkdir(parents=True, exist_ok=True)
+            return output_svg_path
+
         output_dir = cls.resolve_output_dir_path(
             base_dir=base_dir,
             parsed=parsed,
             output_dir_name=output_dir_name,
             default_output_dir_name=default_output_dir_name,
         )
-        return output_dir / f"concept_map_{layout_kind}.svg"
+        resolved_output_file_name = output_file_name or f"concept_map_{layout_kind}.svg"
+        return output_dir / resolved_output_file_name
 
     @classmethod
     def resolve_output_dir_path(

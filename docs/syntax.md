@@ -310,13 +310,13 @@ Coordinates parser, layout, and render.
 The DSL itself is independent from the CLI, but the parser/output flow is normally exercised through:
 
 ```bash
-./.venv/bin/python main.py --layout tree
-./.venv/bin/python main.py --layout synoptic
-./.venv/bin/python main.py --layout synoptic_boxes
-./.venv/bin/python main.py --layout radial
-./.venv/bin/python main.py --layout tree --size a4
-./.venv/bin/python main.py --layout tree --size a4_landscape
-./.venv/bin/python main.py --layout tree --size square
+./.venv/bin/koala compile docs/examples/tree.txt --layout tree
+./.venv/bin/koala compile docs/examples/tree.txt --layout synoptic
+./.venv/bin/koala compile docs/examples/tree.txt --layout synoptic_boxes
+./.venv/bin/koala compile docs/examples/radial.txt --layout radial
+./.venv/bin/koala compile docs/examples/tree.txt --layout tree --size a4
+./.venv/bin/koala compile docs/examples/tree.txt --layout tree --size a4_landscape
+./.venv/bin/koala compile docs/examples/tree.txt --layout tree --size square
 ```
 
 Useful parser-related flags:
