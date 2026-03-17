@@ -8,31 +8,43 @@ La idea central del proyecto es simple: un mismo archivo fuente debe poder rende
 
 ## Uso rápido
 
-Punto de entrada principal:
+Koala se puede usar de dos formas:
 
-- [src/koala/cli.py](/home/yaldapika/dev/koala/src/koala/cli.py)
-- comando instalado: `koala`
-- API de librería: `import koala`
+- como herramienta CLI mediante el comando instalado `koala`
+- como librería de Python mediante `import koala`
+- punto de implementación: [src/koala/cli.py](/home/yaldapika/dev/koala/src/koala/cli.py)
+- repositorio: `https://github.com/gabdiasalejandro/Koala`
 
-Instalación local en entorno virtual:
+Instalación desde PyPI:
+
+```bash
+pip install koala-diagrams==1.0.0
+```
+
+Si prefieres una instalación aislada para usar el CLI:
+
+```bash
+pipx install koala-diagrams==1.0.0
+```
+
+Instalación directa desde GitHub:
+
+```bash
+pip install "git+https://github.com/gabdiasalejandro/Koala.git"
+```
+
+Si quieres trabajar desde el repo durante desarrollo:
 
 ```bash
 python3 -m venv .venv
 ./.venv/bin/pip install -r requirements.txt
 ./.venv/bin/pip install -e . --no-build-isolation
-```
-
-Si prefieres una instalación orientada a usuario final:
-
-```bash
-pipx install .
-```
-
-Si quieres correrlo desde el repo sin instalar el paquete editable:
-
-```bash
 PYTHONPATH=src ./.venv/bin/python -m koala themes
 ```
+
+Uso desde CLI:
+
+Usa `koala` cuando quieras compilar archivos `.txt` o `.docx` desde terminal.
 
 Comandos básicos:
 
@@ -49,6 +61,8 @@ koala config-path
 
 Uso como librería:
 
+Usa `import koala` cuando quieras compilar diagramas desde otro programa Python y recibir un resultado estructurado.
+
 ```python
 import koala
 
@@ -63,6 +77,21 @@ result = koala.compile("docs/examples/radial.txt", **config)
 print(result.output_svg)
 print(len(result.context.parsed.node_index))
 ```
+
+Inputs aceptados por `koala.compile(path, **config)`:
+
+- `path`: archivo fuente `.txt` o `.docx` a compilar
+- `layout`: uno de `tree`, `synoptic`, `synoptic_boxes`, `radial`
+- `theme`: nombre de theme como `academic`, `frutal`, `terracotta`, `default`, `jungle`
+- `typography`: nombre del preset tipográfico
+- `size`: preset de tamaño como `a4`, `a4_landscape`, `square`
+- `text_align`: `left` o `justify`
+- `show_node_numbers`: fuerza mostrar u ocultar la numeración de nodos
+- `output`: ruta final explícita del SVG
+- `output_dir`: carpeta donde se escribirá el SVG
+- `desktop`: envía la salida a `~/Desktop` cuando exista
+- `use_user_config`: carga defaults desde la config de usuario
+- `user_config`: permite pasar un objeto `KoalaUserConfig` ya cargado
 
 Subcomandos disponibles:
 
@@ -109,20 +138,6 @@ Comportamiento de salida:
 - `--output` escribe a una ruta SVG explícita
 - `--output-dir` escribe en una carpeta concreta
 - `--desktop` escribe en `~/Desktop` si existe; si no, cae de vuelta a la carpeta del input
-
-Claves de config de la API para `koala.compile(path, **config)`:
-
-- `layout`
-- `theme`
-- `typography`
-- `size`
-- `text_align`
-- `show_node_numbers`
-- `output`
-- `output_dir`
-- `desktop`
-- `use_user_config`
-- `user_config`
 
 ## Capacidades actuales
 

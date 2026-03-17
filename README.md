@@ -8,31 +8,43 @@ The project is designed around a simple idea: the same source file should be abl
 
 ## Quick Start
 
-Main entry point:
+Koala can be used in two ways:
 
-- [src/koala/cli.py](/home/yaldapika/dev/koala/src/koala/cli.py)
-- installed command: `koala`
-- library API: `import koala`
+- as a CLI tool through the installed `koala` command
+- as a Python library through `import koala`
+- implementation entry point: [src/koala/cli.py](/home/yaldapika/dev/koala/src/koala/cli.py)
+- repository: `https://github.com/gabdiasalejandro/Koala`
 
-Install locally in a virtual environment:
+Install from PyPI:
+
+```bash
+pip install koala-diagrams==1.0.0
+```
+
+If you prefer an isolated user-level install for the CLI:
+
+```bash
+pipx install koala-diagrams==1.0.0
+```
+
+Install directly from GitHub:
+
+```bash
+pip install "git+https://github.com/gabdiasalejandro/Koala.git"
+```
+
+If you want to work from the repo during development:
 
 ```bash
 python3 -m venv .venv
 ./.venv/bin/pip install -r requirements.txt
 ./.venv/bin/pip install -e . --no-build-isolation
-```
-
-If you prefer a user-facing install instead of a repo-local venv:
-
-```bash
-pipx install .
-```
-
-If you want to run it from the repo without installing the editable package:
-
-```bash
 PYTHONPATH=src ./.venv/bin/python -m koala themes
 ```
+
+CLI usage:
+
+Use `koala` when you want a command-line compiler for `.txt` or `.docx` source files.
 
 Basic commands:
 
@@ -49,6 +61,8 @@ koala config-path
 
 Library usage:
 
+Use `import koala` when you want to compile diagrams from another Python program and receive a structured result object.
+
 ```python
 import koala
 
@@ -63,6 +77,21 @@ result = koala.compile("docs/examples/radial.txt", **config)
 print(result.output_svg)
 print(len(result.context.parsed.node_index))
 ```
+
+Inputs accepted by `koala.compile(path, **config)`:
+
+- `path`: source `.txt` or `.docx` file to compile
+- `layout`: one of `tree`, `synoptic`, `synoptic_boxes`, `radial`
+- `theme`: theme name such as `academic`, `frutal`, `terracotta`, `default`, `jungle`
+- `typography`: typography preset name
+- `size`: page size preset such as `a4`, `a4_landscape`, `square`
+- `text_align`: `left` or `justify`
+- `show_node_numbers`: force node numbering on or off
+- `output`: explicit final SVG path
+- `output_dir`: output directory for the generated SVG
+- `desktop`: send output to `~/Desktop` when available
+- `use_user_config`: load defaults from the user config file
+- `user_config`: pass an already loaded `KoalaUserConfig` object
 
 Available subcommands:
 
@@ -109,20 +138,6 @@ Output behavior:
 - `--output` writes to an explicit SVG path
 - `--output-dir` writes to a specific folder
 - `--desktop` writes to `~/Desktop` when present, otherwise falls back to the input folder
-
-Library API config keys for `koala.compile(path, **config)`:
-
-- `layout`
-- `theme`
-- `typography`
-- `size`
-- `text_align`
-- `show_node_numbers`
-- `output`
-- `output_dir`
-- `desktop`
-- `use_user_config`
-- `user_config`
 
 ## Current capabilities
 
