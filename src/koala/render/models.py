@@ -13,8 +13,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal, Mapping, Optional
 
-from core.models import ConceptNode, ParsedDocument
-from layout.models import LayoutBox, LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
+from koala.core.models import ConceptNode, ParsedDocument
+from koala.layout.models import LayoutBox, LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
 
 
 @dataclass(frozen=True)

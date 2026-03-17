@@ -10,8 +10,9 @@ The project is designed around a simple idea: the same source file should be abl
 
 Main entry point:
 
-- [cli.py](/home/yaldapika/dev/koala/cli.py)
+- [src/koala/cli.py](/home/yaldapika/dev/koala/src/koala/cli.py)
 - installed command: `koala`
+- library API: `import koala`
 
 Install locally in a virtual environment:
 
@@ -27,6 +28,12 @@ If you prefer a user-facing install instead of a repo-local venv:
 pipx install .
 ```
 
+If you want to run it from the repo without installing the editable package:
+
+```bash
+PYTHONPATH=src ./.venv/bin/python -m koala themes
+```
+
 Basic commands:
 
 ```bash
@@ -38,6 +45,23 @@ koala compile docs/examples/radial.txt --layout radial --theme jungle --size squ
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
 koala config-path
+```
+
+Library usage:
+
+```python
+import koala
+
+config = {
+    "layout": "radial",
+    "theme": "academic",
+    "size": "square",
+    "text_align": "left",
+}
+
+result = koala.compile("docs/examples/radial.txt", **config)
+print(result.output_svg)
+print(len(result.context.parsed.node_index))
 ```
 
 Available subcommands:
@@ -85,6 +109,20 @@ Output behavior:
 - `--output` writes to an explicit SVG path
 - `--output-dir` writes to a specific folder
 - `--desktop` writes to `~/Desktop` when present, otherwise falls back to the input folder
+
+Library API config keys for `koala.compile(path, **config)`:
+
+- `layout`
+- `theme`
+- `typography`
+- `size`
+- `text_align`
+- `show_node_numbers`
+- `output`
+- `output_dir`
+- `desktop`
+- `use_user_config`
+- `user_config`
 
 ## Current capabilities
 

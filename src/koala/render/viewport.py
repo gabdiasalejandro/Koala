@@ -7,8 +7,8 @@ Este archivo encapsula el ajuste final de la escena a pagina:
 - devuelve una sola transformacion reutilizable por el backend SVG
 """
 
-from layout.models import LayoutConfig, LayoutKind, LayoutScene
-from render.models import ViewportTransform
+from koala.layout.models import LayoutConfig, LayoutKind, LayoutScene
+from koala.render.models import ViewportTransform
 
 
 class ViewportFitter:

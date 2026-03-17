@@ -3,11 +3,13 @@
 
 output/
 concepts.txt
+dist/
 legacy_mocks/
 *.tree.svg
 *.synoptic.svg
 *.synoptic_boxes.svg
 *.radial.svg
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

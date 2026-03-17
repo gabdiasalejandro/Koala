@@ -14,11 +14,11 @@ cada paso interno tenga una responsabilidad facil de leer y probar.
 
 from pathlib import Path
 
-from render.context import RenderContextBuilder
-from render.models import RenderContext, RenderResult, SvgRenderRequest
-from render.output import RenderOutputResolver
-from render.svg.canvas import SvgCanvasRenderer
-from render.svg.document import SvgDocumentFactory
+from koala.render.context import RenderContextBuilder
+from koala.render.models import RenderContext, RenderResult, SvgRenderRequest
+from koala.render.output import RenderOutputResolver
+from koala.render.svg.canvas import SvgCanvasRenderer
+from koala.render.svg.document import SvgDocumentFactory
 
 
 class SvgRenderPipeline:

@@ -13,7 +13,7 @@ Cómo funciona:
 from dataclasses import dataclass
 from typing import Dict, List, Literal, Tuple
 
-from core.models import ConceptNode
+from koala.core.models import ConceptNode
 
 
 LayoutKind = Literal["tree", "synoptic", "synoptic_boxes", "radial"]

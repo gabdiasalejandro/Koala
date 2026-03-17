@@ -9,9 +9,9 @@ La composicion de colores ya llega resuelta desde el theme activo.
 
 import svgwrite
 
-from layout.shared import measure_text_width, sort_node_key
-from render.models import RenderContext, SvgNodeRenderSpec, SvgTextBlockSpec, SvgTextStyle
-from render.svg.text import SvgTextRenderer
+from koala.layout.shared import measure_text_width, sort_node_key
+from koala.render.models import RenderContext, SvgNodeRenderSpec, SvgTextBlockSpec, SvgTextStyle
+from koala.render.svg.text import SvgTextRenderer
 
 
 class SvgNodeSpecFactory:

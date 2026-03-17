@@ -13,8 +13,8 @@ Cómo funciona:
 
 from typing import Dict, Iterable, List, Tuple
 
-from core.models import ConceptNode
-from layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
+from koala.core.models import ConceptNode
+from koala.layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
 
 
 _NARROW_CHARS = set(" !'`,.:;|ijlIt")

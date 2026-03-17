@@ -10,12 +10,12 @@ Cómo funciona:
 
 from typing import Callable, Dict, List
 
-from core.models import ConceptNode
-from layout.radial_layout import build_radial_layout
-from layout.models import LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
-from layout.synoptic_layout import build_synoptic_layout
-from layout.synoptic_boxes_layout import build_synoptic_boxes_layout
-from layout.tree_layout import build_tree_layout
+from koala.core.models import ConceptNode
+from koala.layout.radial_layout import build_radial_layout
+from koala.layout.models import LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
+from koala.layout.synoptic_layout import build_synoptic_layout
+from koala.layout.synoptic_boxes_layout import build_synoptic_boxes_layout
+from koala.layout.tree_layout import build_tree_layout
 
 
 LayoutEngine = Callable[[List[ConceptNode], LayoutConfig, TypographyConfig], LayoutScene]

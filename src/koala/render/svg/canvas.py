@@ -8,10 +8,10 @@ Este archivo coordina el backend SVG:
 
 import svgwrite
 
-from render.models import RenderContext
-from render.svg.edges import SvgEdgeRenderer
-from render.svg.nodes import SvgNodeRenderer
-from render.svg.text import SvgTextRenderer
+from koala.render.models import RenderContext
+from koala.render.svg.edges import SvgEdgeRenderer
+from koala.render.svg.nodes import SvgNodeRenderer
+from koala.render.svg.text import SvgTextRenderer
 
 
 class SvgCanvasRenderer:

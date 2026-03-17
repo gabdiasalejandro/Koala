@@ -8,10 +8,10 @@ Este modulo dibuja conectores sobre una escena ya resuelta:
 
 import svgwrite
 
-from layout.shared import wrap_text_lines
-from render.geometry import arrow_wing_points, synoptic_brace_path_data
-from render.models import RenderContext, SvgTextBlockSpec, SvgTextStyle
-from render.svg.text import SvgTextRenderer
+from koala.layout.shared import wrap_text_lines
+from koala.render.geometry import arrow_wing_points, synoptic_brace_path_data
+from koala.render.models import RenderContext, SvgTextBlockSpec, SvgTextStyle
+from koala.render.svg.text import SvgTextRenderer
 
 
 class SvgEdgeRenderer:

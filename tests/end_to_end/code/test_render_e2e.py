@@ -9,14 +9,15 @@ from pathlib import Path
 
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
+SRC_DIR = ROOT_DIR / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
-from core.io import load_input_text
-from core.parser import parse_concept_text
-from render.models import SvgRenderRequest
-from render.svg_render import render_svg
-from render.themes import ThemeCatalog
+from koala.core.io import load_input_text
+from koala.core.parser import parse_concept_text
+from koala.render.models import SvgRenderRequest
+from koala.render.svg_render import render_svg
+from koala.render.themes import ThemeCatalog
 
 
 LAYOUTS = ("tree", "synoptic", "synoptic_boxes", "radial")

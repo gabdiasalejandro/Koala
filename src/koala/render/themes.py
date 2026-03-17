@@ -12,7 +12,7 @@ La regla es simple:
 
 from typing import Dict
 
-from render.models import NodeStyle, NodeStyleOverride, ThemeConfig, ThemeDefinition
+from koala.render.models import NodeStyle, NodeStyleOverride, ThemeConfig, ThemeDefinition
 
 
 DEFAULT_THEME_NAME = "default"

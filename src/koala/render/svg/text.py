@@ -10,8 +10,8 @@ El resto del backend solo arma specs y delega aqui el detalle tipografico.
 
 import svgwrite
 
-from layout.shared import measure_text_width
-from render.models import SvgTextBlockSpec, SvgTextLineSpec
+from koala.layout.shared import measure_text_width
+from koala.render.models import SvgTextBlockSpec, SvgTextLineSpec
 
 
 class SvgTextRenderer:

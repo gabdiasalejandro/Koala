@@ -8,9 +8,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
-from layout.models import LayoutKind
-from render.settings import available_page_size_names, available_typography_names
-from render.themes import available_theme_names
+from koala.layout.models import LayoutKind
+from koala.render.settings import available_page_size_names, available_typography_names
+from koala.render.themes import available_theme_names
 
 
 OutputMode = Literal["next_to_input", "desktop", "cwd"]

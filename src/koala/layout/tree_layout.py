@@ -14,9 +14,9 @@ Cómo funciona:
 from dataclasses import replace
 from typing import Dict, List, Tuple
 
-from core.models import ConceptNode
-from layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
-from layout.shared import (
+from koala.core.models import ConceptNode
+from koala.layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
+from koala.layout.shared import (
     build_scene,
     get_content_min_width,
     get_h_gap_for_depth,

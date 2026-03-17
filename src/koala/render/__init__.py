@@ -5,6 +5,6 @@ La superficie publica sigue siendo pequena:
 - el resto del paquete solo organiza contexto, presets y backend SVG
 """
 
-from render.svg_render import render_svg
+from koala.render.svg_render import render_svg
 
 __all__ = ["render_svg"]

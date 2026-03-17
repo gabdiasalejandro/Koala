@@ -10,7 +10,7 @@ from pathlib import Path
 
 import svgwrite
 
-from render.models import RenderContext
+from koala.render.models import RenderContext
 
 
 class SvgDocumentFactory:

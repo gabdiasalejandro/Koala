@@ -6,19 +6,17 @@ import argparse
 from pathlib import Path
 from typing import Sequence
 
-from cli_config import KoalaUserConfig, default_user_config_path, load_user_config
-from core.io import load_input_text
-from core.parser import parse_concept_text
-from layout.models import LayoutKind
-from render.context import MetadataValueResolver, RenderContextBuilder
-from render.models import SvgRenderRequest
-from render.settings import (
-    DEFAULT_LAYOUT_KIND,
+from koala.api import compile as compile_document
+from koala.config import default_user_config_path, load_user_config
+from koala.core.io import load_input_text
+from koala.core.parser import parse_concept_text
+from koala.layout.models import LayoutKind
+from koala.render.context import RenderContextBuilder
+from koala.render.settings import (
     available_page_size_names,
     available_typography_names,
 )
-from render.svg_render import render_svg
-from render.themes import available_theme_names
+from koala.render.themes import available_theme_names
 
 
 AVAILABLE_LAYOUTS: tuple[LayoutKind, ...] = ("tree", "synoptic", "synoptic_boxes", "radial")
@@ -155,38 +153,19 @@ def _add_render_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def _handle_compile(args: argparse.Namespace) -> int:
-    config = load_user_config()
-    input_path, parsed = _load_parsed_document(args.input)
-    resolved_layout = _resolve_effective_layout(parsed, args.layout, config)
-    explicit_output_svg_path = _resolve_explicit_output_path(args.output)
-    output_dir_name, default_output_dir_name = _resolve_output_directory_policy(
-        args,
-        input_path,
-        config,
-        has_explicit_output=explicit_output_svg_path is not None,
-    )
-
-    request = SvgRenderRequest(
-        parsed=parsed,
-        base_dir=input_path.parent,
-        output_svg_path=explicit_output_svg_path,
-        output_dir_name=output_dir_name,
-        output_file_name=None if explicit_output_svg_path is not None else f"{input_path.stem}.{resolved_layout}.svg",
-        default_output_dir_name=default_output_dir_name,
-        layout_kind=args.layout,
-        theme_name=args.theme,
-        typography_name=args.typography,
-        page_size_name=args.size,
+    result = compile_document(
+        args.input,
+        layout=args.layout,
+        theme=args.theme,
+        typography=args.typography,
+        size=args.size,
         text_align=args.text_align,
         show_node_numbers=args.show_node_numbers,
-        default_layout_kind=config.default_layout,
-        default_theme_name=config.default_theme,
-        default_typography_name=config.default_typography,
-        default_page_size_name=config.default_size,
-        default_text_align=config.default_text_align,
-        default_show_node_numbers=config.default_show_node_numbers,
+        output=args.output,
+        output_dir=args.output_dir,
+        desktop=args.desktop,
+        use_user_config=True,
     )
-    result = render_svg(request)
 
     print(f"SVG generado: {result.output_svg}")
     print(f"Layout usado: {result.context.settings.layout_kind}")
@@ -195,6 +174,7 @@ def _handle_compile(args: argparse.Namespace) -> int:
     print(f"Tamano de pagina usado: {result.context.settings.page_size_name}")
     print(f"Alineado usado: {result.context.settings.typography.text_align}")
     print(f"Numeracion visible: {result.context.settings.show_node_numbers}")
+    print(f"Nodos: {len(result.context.parsed.node_index)}")
     return 0
 
 
@@ -302,62 +282,6 @@ def _load_parsed_document(input_arg: str) -> tuple[Path, object]:
     input_path = Path(input_arg).expanduser().resolve()
     text = load_input_text(str(input_path))
     return input_path, parse_concept_text(text)
-
-
-def _resolve_effective_layout(
-    parsed,
-    explicit_layout: str | None,
-    config: KoalaUserConfig,
-) -> LayoutKind:
-    metadata_layout = MetadataValueResolver.resolve_value(parsed.metadata, "layout")
-    return explicit_layout or metadata_layout or config.default_layout or DEFAULT_LAYOUT_KIND
-
-
-def _resolve_explicit_output_path(raw_output: str | None) -> Path | None:
-    if raw_output is None:
-        return None
-    output_path = Path(raw_output).expanduser()
-    if output_path.suffix.lower() != ".svg":
-        output_path = output_path.with_suffix(".svg")
-    return output_path
-
-
-def _resolve_output_directory_policy(
-    args: argparse.Namespace,
-    input_path: Path,
-    config: KoalaUserConfig,
-    *,
-    has_explicit_output: bool,
-) -> tuple[str | None, str | None]:
-    if has_explicit_output:
-        return None, None
-
-    if args.output_dir is not None:
-        return str(Path(args.output_dir).expanduser()), None
-
-    if args.desktop:
-        return str(_desktop_path_or_input_parent(input_path)), None
-
-    return None, str(_config_default_output_dir(input_path, config))
-
-
-def _config_default_output_dir(input_path: Path, config: KoalaUserConfig) -> Path:
-    if config.default_output_dir:
-        configured = Path(config.default_output_dir).expanduser()
-        return configured if configured.is_absolute() else input_path.parent / configured
-
-    if config.default_output_mode == "desktop":
-        return _desktop_path_or_input_parent(input_path)
-    if config.default_output_mode == "cwd":
-        return Path.cwd()
-    return input_path.parent
-
-
-def _desktop_path_or_input_parent(input_path: Path) -> Path:
-    desktop_path = Path.home() / "Desktop"
-    if desktop_path.exists():
-        return desktop_path
-    return input_path.parent
 
 
 def main(argv: Sequence[str] | None = None) -> int:

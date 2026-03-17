@@ -16,9 +16,9 @@ Cómo funciona:
 import math
 from typing import Dict, List, Tuple
 
-from core.models import ConceptNode
-from layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
-from layout.shared import build_scene, iter_nodes, measure_nodes, sort_node_key
+from koala.core.models import ConceptNode
+from koala.layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
+from koala.layout.shared import build_scene, iter_nodes, measure_nodes, sort_node_key
 
 
 def ordered_children(node: ConceptNode) -> List[ConceptNode]:

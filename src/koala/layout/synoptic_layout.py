@@ -12,10 +12,10 @@ Como funciona:
 
 from typing import Dict, List
 
-from core.models import ConceptNode
-from layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
-from layout.shared import build_scene, get_h_gap_for_depth, measure_nodes, sort_node_key
-from layout.synoptic_boxes_layout import assign_synoptic_box_positions, compute_synoptic_box_subtree_heights
+from koala.core.models import ConceptNode
+from koala.layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
+from koala.layout.shared import build_scene, get_h_gap_for_depth, measure_nodes, sort_node_key
+from koala.layout.synoptic_boxes_layout import assign_synoptic_box_positions, compute_synoptic_box_subtree_heights
 
 
 def build_synoptic_edges(

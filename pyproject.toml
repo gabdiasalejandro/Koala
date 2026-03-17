@@ -19,10 +19,11 @@ dependencies = [
 ]
 
 [project.scripts]
-koala = "cli:main"
+koala = "koala.cli:main"
 
 [tool.setuptools]
-py-modules = ["cli", "cli_config"]
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
-include = ["core", "core.*", "layout", "layout.*", "render", "render.*"]
+where = ["src"]
+include = ["koala", "koala.*"]

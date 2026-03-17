@@ -12,12 +12,12 @@ La salida es un `RenderContext` listo para que el backend SVG lo dibuje.
 from dataclasses import replace
 from typing import Optional
 
-from core.models import ParsedDocument
-from layout.models import LayoutKind
-from layout.registry import build_layout
-from render.models import RenderContext
-from render.settings import DEFAULT_LAYOUT_KIND, PageSizeName, RenderSettingsCatalog
-from render.viewport import ViewportFitter
+from koala.core.models import ParsedDocument
+from koala.layout.models import LayoutKind
+from koala.layout.registry import build_layout
+from koala.render.models import RenderContext
+from koala.render.settings import DEFAULT_LAYOUT_KIND, PageSizeName, RenderSettingsCatalog
+from koala.render.viewport import ViewportFitter
 
 
 class MetadataValueResolver:

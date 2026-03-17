@@ -10,9 +10,9 @@ El default del output no vive aqui; lo recibe desde quien invoque el render.
 
 from pathlib import Path
 
-from core.models import ParsedDocument
-from layout.models import LayoutKind
-from render.context import MetadataValueResolver
+from koala.core.models import ParsedDocument
+from koala.layout.models import LayoutKind
+from koala.render.context import MetadataValueResolver
 
 
 class RenderOutputResolver:

@@ -13,9 +13,9 @@ con responsabilidades distintas.
 from dataclasses import dataclass, replace
 from typing import Dict, Literal, Optional
 
-from layout.models import LayoutConfig, LayoutKind, TypographyConfig
-from render.models import RenderSettings
-from render.themes import DEFAULT_THEME_NAME, ThemeCatalog
+from koala.layout.models import LayoutConfig, LayoutKind, TypographyConfig
+from koala.render.models import RenderSettings
+from koala.render.themes import DEFAULT_THEME_NAME, ThemeCatalog
 
 
 MM = 72.0 / 25.4
