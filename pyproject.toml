@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "koala-diagrams"
+version = "1.2.1"
+description = "Koala is a DSL and SVG compiler for structured concept diagrams."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+  "charset-normalizer==3.4.5",
+  "lxml==6.0.2",
+  "pillow==12.1.1",
+  "python-docx==1.2.0",
+  "svgwrite==1.4.3",
+  "typing_extensions==4.15.0",
+]
+
+[project.scripts]
+koala = "koala.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["koala", "koala.*"]
