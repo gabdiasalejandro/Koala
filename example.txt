@@ -1,0 +1,43 @@
+@layout radial
+@theme jungle
+@size square
+@show-node-numbers false
+
+main:: 1 Koala
+Tool that allows creating graphical organizers automatically from structured text.
+
+focus:: 1.1 Everyday problem
+Creating graphical organizers manually requires a lot of time and effort.
+
+hl:: 1.1.1 Manual diagrams
+Students must arrange boxes, arrows, and text in programs like Word or PowerPoint.
+
+soft:: 1.1.2 Time spent on formatting
+A large portion of the work is dedicated to adjusting the layout instead of organizing ideas.
+
+focus:: 1.2 Solution idea
+Describe diagrams using structured text that the system can interpret.
+
+hl:: 1.2.1 Writing the structure
+The user writes concepts and relationships in a simple textual format.
+
+soft:: 1.2.2 Single source of content
+The same information can be reused to generate different types of diagrams.
+
+focus:: 1.3 System process
+Koala interprets the written structure and automatically generates the diagram.
+
+hl:: 1.3.1 Interpreting information
+The system identifies the hierarchy between concepts.
+
+hl:: 1.3.2 Generating the diagram
+The program arranges nodes and produces the graphical organizer.
+
+focus:: 1.4 User outcome
+The user obtains clear diagrams without having to design them manually.
+
+hl:: 1.4.1 Different types of organizers
+It can generate mind maps, synoptic charts, or organizational diagrams.
+
+soft:: 1.4.2 Time savings
+The student can focus on understanding and organizing ideas.
