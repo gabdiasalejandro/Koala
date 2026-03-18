@@ -9,7 +9,8 @@ legacy_mocks/
 *.synoptic.svg
 *.synoptic_boxes.svg
 *.radial.svg
-
+tareas.md
+example.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -9,7 +9,7 @@ Koala currently accepts:
 - `.txt`
 - `.docx`
 
-The loader lives in `core/io.py`.
+The loader lives in `src/koala/core/io.py`.
 
 After loading, both formats become plain text and are parsed the same way.
 
@@ -148,7 +148,7 @@ Current accepted forms are:
 @text-align justify
 @size square
 @show-node-numbers false
-@output-dir output/metadata_demo
+@output-dir exports/metadata_demo
 ```
 
 or:
@@ -189,11 +189,12 @@ For text alignment, accepted values are:
 
 Current resolution order is:
 
-1. explicit CLI flag
+1. explicit CLI flag or explicit library kwarg
 2. document metadata
-3. built-in default
+3. user config default
+4. built-in default
 
-This means metadata is useful for shipping self-describing mocks or examples, while still allowing the CLI to override them when needed.
+This means metadata is useful for shipping self-describing examples, while still allowing the CLI or the library call to override them when needed.
 
 ### Controlling node numbers
 

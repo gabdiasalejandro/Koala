@@ -4,6 +4,11 @@ This tutorial is a practical guide to writing Koala documents and choosing good 
 
 It covers:
 
+- installation
+- CLI usage
+- library usage
+- in-memory APIs such as `compile_text(...)`, `inspect_text(...)`, and `validate_text(...)`
+- user config
 - core DSL syntax
 - optional metadata with `@...`
 - available themes
@@ -12,7 +17,169 @@ It covers:
 - available page sizes
 - practical suggestions for getting better visuals
 
-## 1. Smallest useful document
+## 1. Install and choose your interface
+
+Koala can be used in two ways:
+
+- from the CLI through the installed `koala` command
+- from Python through `import koala`
+
+Install from PyPI:
+
+```bash
+pip install koala-diagrams==1.0.0
+```
+
+If you mainly want the CLI as an isolated user tool:
+
+```bash
+pipx install koala-diagrams==1.0.0
+```
+
+If you are developing from the repository:
+
+```bash
+python3 -m venv .venv
+./.venv/bin/pip install -r requirements.txt
+./.venv/bin/pip install -e . --no-build-isolation
+PYTHONPATH=src ./.venv/bin/python -m koala themes
+```
+
+## 2. CLI quickstart
+
+The installed command is `koala`.
+
+Common commands:
+
+```bash
+koala themes
+koala layouts
+koala typographies
+koala compile docs/examples/tree.txt --layout tree --theme academic
+koala compile docs/examples/radial.txt --layout radial --theme frutal --size square
+koala inspect docs/examples/tree.txt
+koala validate docs/examples/radial.txt --strict
+koala config-path
+```
+
+Current CLI subcommands:
+
+- `compile`: render a source file to SVG
+- `inspect`: resolve metadata and settings without writing output
+- `validate`: validate parsing and settings; `--strict` fails on warnings
+- `themes`: list available themes
+- `layouts`: list available layouts
+- `typographies`: list typography presets
+- `config-path`: print the expected user config path
+
+Output behavior from the CLI:
+
+- by default, output goes next to the input file as `<input_stem>.<layout>.svg`
+- `--output` writes to an explicit SVG path
+- `--output-dir` writes to a specific folder
+- `--desktop` writes to `~/Desktop` when available and otherwise falls back to the input folder
+
+User config:
+
+- default path: `~/.config/koala/config.toml`
+- fallback path: `~/.koala.toml`
+
+Example:
+
+```toml
+[tool.koala]
+default_layout = "tree"
+default_theme = "academic"
+default_typography = "default"
+default_size = "a4_landscape"
+default_text_align = "left"
+default_show_node_numbers = true
+default_output_mode = "next_to_input"
+```
+
+## 3. Library quickstart
+
+Use the library API when you want to render from another Python program.
+
+### Render from a source file
+
+```python
+import koala
+
+result = koala.compile(
+    "docs/examples/radial.txt",
+    layout="radial",
+    theme="academic",
+    size="square",
+    text_align="left",
+)
+
+print(result.output_svg)
+print(result.context.settings.layout_kind)
+print(len(result.context.parsed.node_index))
+```
+
+### Render from raw text in memory
+
+```python
+import koala
+
+result = koala.compile_text(
+    """
+    1 Central Topic
+    Main explanation.
+
+    1.1 First Branch
+    Supporting detail.
+    """,
+    layout="tree",
+    theme="frutal",
+    base_dir="docs/examples",
+    output_name="inline_demo",
+)
+
+print(result.output_svg)
+```
+
+Current output behavior for `compile_text(...)`:
+
+- relative output paths are resolved against `base_dir` when provided
+- if `base_dir` is omitted, Koala uses `Path.cwd()`
+- if you do not pass `output` or `output_dir`, the default file is `concept_map.<layout>.svg`
+- if you pass `output_name="demo"`, the default file becomes `demo.<layout>.svg`
+
+### Inspect and validate text without writing files
+
+```python
+import koala
+
+context = koala.inspect_text(
+    "1 Root\nBody.\n",
+    layout="tree",
+    theme="academic",
+)
+
+validated = koala.validate_text(
+    "1 Root\nBody.\n",
+    layout="tree",
+    theme="academic",
+    strict=True,
+)
+
+print(len(context.parsed.node_index))
+print(len(validated.parsed.warnings))
+```
+
+If `strict=True` and the parser emits warnings, `validate_text(...)` raises `koala.ValidationError`.
+
+### Current in-memory API surface
+
+- `koala.compile(path, **config)`: render from `.txt` or `.docx`
+- `koala.compile_text(text, **config)`: render from raw Koala DSL text
+- `koala.inspect_text(text, **config)`: resolve `RenderContext` without writing SVG
+- `koala.validate_text(text, **config)`: resolve `RenderContext` and optionally fail on warnings
+
+## 4. Smallest useful document
 
 The smallest meaningful Koala file looks like this:
 
@@ -34,7 +201,7 @@ What this means:
 - `1.1` and `1.2` become children of `1`
 - `organizes` and `renders` are relation labels from the parent
 
-## 2. Hierarchy syntax
+## 5. Hierarchy syntax
 
 Koala uses numbered hierarchy:
 
@@ -72,7 +239,7 @@ Study of heredity.
 
 In that case, `1` and `2` become children of `0`.
 
-## 3. Body text
+## 6. Body text
 
 Any non-empty line after a valid node header becomes body text for that node until a new node header appears.
 
@@ -86,7 +253,7 @@ All living organisms are composed of one or more cells.
 
 That produces one node with two body lines.
 
-## 4. Relations
+## 7. Relations
 
 Relations are optional and appear before the node number:
 
@@ -99,7 +266,7 @@ Both `->` and `→` are accepted.
 
 If you do not include a relation, the parent-child connector still exists, but is treated as implicit.
 
-## 5. Semantic kinds with `kind::`
+## 8. Semantic kinds with `kind::`
 
 `kind::` lets you mark a node semantically so themes can style it differently.
 
@@ -163,7 +330,7 @@ If the root node uses `main::` in a boxed layout such as `tree`, `synoptic_boxes
 
 Use `kind::` when a concept should visually stand out, not on every node.
 
-## 6. Metadata with `@`
+## 9. Metadata with `@`
 
 Koala supports optional document-level metadata using lines that start with `@`.
 
@@ -176,7 +343,7 @@ Example:
 @text-align justify
 @size square
 @show-node-numbers false
-@output-dir output/tutorial_demo
+@output-dir exports/tutorial_demo
 ```
 
 Accepted styles:
@@ -210,11 +377,12 @@ For text alignment, supported values are `left` and `justify`. The default is `l
 
 Render options are resolved in this order:
 
-1. explicit CLI flag
+1. explicit CLI flag or explicit library kwarg
 2. metadata from the document
-3. built-in default
+3. user config default
+4. built-in default
 
-This means metadata is good for self-contained demo files, but the CLI can still override it.
+This means metadata is good for self-contained demo files, but the CLI and the library API can still override it.
 
 ### Disabling node numbers
 
@@ -244,7 +412,7 @@ Accepted true-like values:
 - `shown`
 - `1`
 
-## 7. Available layouts
+## 10. Available layouts
 
 Current layouts:
 
@@ -309,7 +477,7 @@ Characteristics:
 - branch distribution by angular span
 - overlap-aware radial separation
 
-## 8. Available themes
+## 11. Available themes
 
 Current built-in themes:
 
@@ -364,15 +532,42 @@ Kind tone:
 - `hl` reads as an aqua-highlighted concept
 - `focus` reads as a greener structural emphasis
 
+### `frutal`
+
+Best when:
+
+- you want a brighter and more playful palette
+- the diagram should feel more energetic or more didactic
+
+Kind tone:
+
+- `main` reads as the strongest fruit-like accent
+- `hl` reads as the most vivid emphasis
+- `focus` reads as a softer but still warm accent
+
+### `academic`
+
+Best when:
+
+- you want the most sober built-in presentation
+- black text and restrained contrast matter more than colorful accents
+
+Kind tone:
+
+- `main` reads as the strongest sober anchor
+- `hl` reads as a restrained emphasis instead of a loud accent
+- `focus` reads as a neutral structural highlight
+
 ### Theme demo files
 
-The repository includes one example mock per built-in theme:
+The repository currently includes usage examples and test fixtures instead of root-level theme mocks:
 
-- [mocks/theme_default_tree.txt](/home/yaldapika/dev/koala/mocks/theme_default_tree.txt)
-- [mocks/theme_terracotta_synoptic_boxes.txt](/home/yaldapika/dev/koala/mocks/theme_terracotta_synoptic_boxes.txt)
-- [mocks/theme_jungle_radial.txt](/home/yaldapika/dev/koala/mocks/theme_jungle_radial.txt)
+- [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
+- [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
+- [tests/end_to_end/mocks/alignment_left.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_left.txt)
+- [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
 
-## 9. Available typographies
+## 12. Available typographies
 
 Current built-in typography presets:
 
@@ -404,7 +599,7 @@ Characteristics:
 - slightly smaller type
 - tuned for denser circular compositions
 
-## 10. Available page sizes
+## 13. Available page sizes
 
 Current page presets:
 
@@ -452,10 +647,13 @@ Best when:
 - you are using `radial`
 - a `tree` would otherwise spread too wide
 
-## 11. Suggestions for better visual results
+## 14. Suggestions for better visual results
 
 These are practical writing heuristics for the current engines.
-## Main suggestion is to avoid having more than 8 children in the deeepest ring of the nodes
+
+Main suggestion:
+
+- avoid having more than 8 children in the deepest ring of a branch
 
 ### General suggestions
 
@@ -497,7 +695,7 @@ These are practical writing heuristics for the current engines.
 - Avoid one giant branch plus many tiny branches
 - `square` and `a4_landscape` usually give the cleanest balance
 
-## 12. Example tutorial document
+## 15. Example tutorial document
 
 ```text
 @layout tree
@@ -518,10 +716,12 @@ hl:: includes -> 1.2.1 Viewport
 Fits the scene into the selected page size.
 ```
 
-## 13. Recommended files to inspect
+## 16. Recommended files to inspect
 
-- [mocks/concepts.txt](/home/yaldapika/dev/koala/mocks/concepts.txt)
-- [mocks/metadata_demo.txt](/home/yaldapika/dev/koala/mocks/metadata_demo.txt)
+- [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
+- [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
+- [tests/end_to_end/mocks/alignment_left.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_left.txt)
+- [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
 - [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md)
 - [docs/layouts.md](/home/yaldapika/dev/koala/docs/layouts.md)
 - [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md)

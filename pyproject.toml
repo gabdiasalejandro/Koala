@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "koala-diagrams"
-version = "1.0.1"
+version = "1.2.1"
 description = "Koala is a DSL and SVG compiler for structured concept diagrams."
 readme = "README.md"
 requires-python = ">=3.11"
