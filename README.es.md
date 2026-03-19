@@ -1,6 +1,6 @@
 # Koala
 
-🇪🇸 Español | 🇺🇸 [English](README.md)
+🇪🇸 Español | 🇺🇸 [English](https://github.com/gabdiasalejandro/Koala/blob/main/README.md)
 
 Koala es un DSL para generar diagramas a partir de texto estructurado.
 
@@ -12,8 +12,8 @@ Koala se puede usar de dos formas:
 
 - como herramienta CLI mediante el comando instalado `koala`
 - como librería de Python mediante `import koala`
-- punto de implementación: [src/koala/cli.py](/home/yaldapika/dev/koala/src/koala/cli.py)
-- repositorio: `https://github.com/gabdiasalejandro/Koala`
+- punto de implementación: [src/koala/cli.py](https://github.com/gabdiasalejandro/Koala/blob/main/src/koala/cli.py)
+- repositorio: [github.com/gabdiasalejandro/Koala](https://github.com/gabdiasalejandro/Koala)
 
 Instalación desde PyPI:
 
@@ -178,9 +178,9 @@ Comportamiento de salida:
 
 ## Documentación
 
-- [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md): sintaxis del DSL, metadata y reglas de precedencia
-- [docs/tutorial.md](/home/yaldapika/dev/koala/docs/tutorial.md): guía práctica de autoría con ejemplos, themes y sugerencias de uso
-- [docs/layouts.md](/home/yaldapika/dev/koala/docs/layouts.md): comportamiento de layouts y reglas geométricas
-- [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md): estructura actual del paquete, flujo de API y pipeline de render
-- [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt): ejemplo mínimo tipo tree
-- [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt): ejemplo mínimo tipo radial
+- [docs/syntax.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/syntax.md): sintaxis del DSL, metadata y reglas de precedencia
+- [docs/tutorial.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/tutorial.md): guía práctica de autoría con ejemplos, themes y sugerencias de uso
+- [docs/layouts.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/layouts.md): comportamiento de layouts y reglas geométricas
+- [docs/architecture.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/architecture.md): estructura actual del paquete, flujo de API y pipeline de render
+- [docs/examples/tree.txt](https://github.com/gabdiasalejandro/Koala/blob/main/docs/examples/tree.txt): ejemplo mínimo tipo tree
+- [docs/examples/radial.txt](https://github.com/gabdiasalejandro/Koala/blob/main/docs/examples/radial.txt): ejemplo mínimo tipo radial
