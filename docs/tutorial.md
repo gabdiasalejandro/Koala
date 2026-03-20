@@ -57,6 +57,7 @@ koala layouts
 koala typographies
 koala compile docs/examples/tree.txt --layout tree --theme academic
 koala compile docs/examples/radial.txt --layout radial --theme frutal --size square
+koala compile docs/examples/tree.txt --background '#F7F4ED'
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
 koala config-path
@@ -342,6 +343,7 @@ Example:
 @typography default
 @text-align justify
 @size square
+@background #F7F4ED
 @show-node-numbers false
 @output-dir exports/tutorial_demo
 ```
@@ -363,6 +365,7 @@ Current supported metadata keys:
 - `@text-align`
 - `@size`
 - `@page-size`
+- `@background`
 - `@output-dir`
 - `@output_dir`
 - `@text_align`
@@ -372,6 +375,8 @@ Current supported metadata keys:
 - `@node_numbers`
 
 For text alignment, supported values are `left` and `justify`. The default is `left`.
+
+For background, pass a hex color such as `#F7F4ED`. If you omit it, Koala keeps the current default behavior and does not add an explicit page background.
 
 ### Metadata precedence
 

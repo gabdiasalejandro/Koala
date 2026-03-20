@@ -147,6 +147,7 @@ Current accepted forms are:
 @typography default
 @text-align justify
 @size square
+@background #F7F4ED
 @show-node-numbers false
 @output-dir exports/metadata_demo
 ```
@@ -174,16 +175,19 @@ The parser currently accepts metadata for the CLI-related render options:
 - `@typography`
 - `@size`
 - `@page-size`
+- `@background`
 - `@output-dir`
 - `@text-align`
 - `@show-node-numbers`
 
-`@output_dir`, `@text_align`, `@show_node_numbers`, `@node-numbers`, and `@node_numbers` are also accepted as aliases.
+`@output_dir`, `@text_align`, `@show_node_numbers`, `@node-numbers`, `@node_numbers`, `@background-color`, and `@background_color` are also accepted as aliases.
 
 For text alignment, accepted values are:
 
 - `left` (default)
 - `justify`
+
+For background, pass a hex color such as `#F7F4ED`. If omitted, Koala keeps the current default behavior and does not add an explicit page background.
 
 ### Precedence
 

@@ -27,6 +27,7 @@ class ContextConfig(TypedDict, total=False):
     size: str
     text_align: str
     show_node_numbers: bool
+    background: str
     use_user_config: bool
     user_config: KoalaUserConfig
 
@@ -40,6 +41,7 @@ class CompileConfig(TypedDict, total=False):
     size: str
     text_align: str
     show_node_numbers: bool
+    background: str
     output: str | Path
     output_dir: str | Path
     desktop: bool
@@ -93,6 +95,7 @@ def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
     size = config.get("size")
     text_align = config.get("text_align")
     show_node_numbers = config.get("show_node_numbers")
+    background = config.get("background")
     output = config.get("output")
     output_dir = config.get("output_dir")
     desktop = config.get("desktop", False)
@@ -112,6 +115,7 @@ def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
         size=size,
         text_align=text_align,
         show_node_numbers=show_node_numbers,
+        background=background,
         output=output,
         output_dir=output_dir,
         desktop=desktop,
@@ -135,6 +139,7 @@ def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult
     size = config.get("size")
     text_align = config.get("text_align")
     show_node_numbers = config.get("show_node_numbers")
+    background = config.get("background")
     output = config.get("output")
     output_dir = config.get("output_dir")
     desktop = config.get("desktop", False)
@@ -154,6 +159,7 @@ def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult
         size=size,
         text_align=text_align,
         show_node_numbers=show_node_numbers,
+        background=background,
         output=output,
         output_dir=output_dir,
         desktop=desktop,
@@ -174,6 +180,7 @@ def inspect_text(text: str, **config: Unpack[ContextConfig]) -> RenderContext:
         size=config.get("size"),
         text_align=config.get("text_align"),
         show_node_numbers=config.get("show_node_numbers"),
+        background=config.get("background"),
         use_user_config=config.get("use_user_config", False),
         user_config=config.get("user_config"),
     )
@@ -195,6 +202,7 @@ def validate_text(text: str, **config: Unpack[ValidateTextConfig]) -> RenderCont
         size=config.get("size"),
         text_align=config.get("text_align"),
         show_node_numbers=config.get("show_node_numbers"),
+        background=config.get("background"),
         use_user_config=config.get("use_user_config", False),
         user_config=config.get("user_config"),
     )
@@ -214,6 +222,7 @@ def _compile_source_text(
     size: str | None,
     text_align: str | None,
     show_node_numbers: bool | None,
+    background: str | None,
     output: str | Path | None,
     output_dir: str | Path | None,
     desktop: bool,
@@ -249,6 +258,7 @@ def _compile_source_text(
         page_size_name=size,
         text_align=text_align,
         show_node_numbers=show_node_numbers,
+        background_color=background,
         default_layout_kind=user_config.default_layout,
         default_theme_name=user_config.default_theme,
         default_typography_name=user_config.default_typography,
@@ -268,6 +278,7 @@ def _build_context_from_text(
     size: str | None,
     text_align: str | None,
     show_node_numbers: bool | None,
+    background: str | None,
     use_user_config: bool,
     user_config: KoalaUserConfig | None,
 ) -> RenderContext:
@@ -281,6 +292,7 @@ def _build_context_from_text(
         page_size_name=size,
         text_align=text_align,
         show_node_numbers=show_node_numbers,
+        background_color=background,
         default_layout_kind=resolved_user_config.default_layout,
         default_theme_name=resolved_user_config.default_theme,
         default_typography_name=resolved_user_config.default_typography,

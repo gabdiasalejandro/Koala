@@ -1,0 +1,3 @@
+- Create prompts.md for each layout to use in a future LLM web app
+-Hacer una rama para probar otras formas de renderizar los conectores 
+- Mejorar la Api de librería para trabajar con datos en memoria

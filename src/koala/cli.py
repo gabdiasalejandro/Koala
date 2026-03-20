@@ -136,6 +136,11 @@ def _add_render_arguments(parser: argparse.ArgumentParser) -> None:
         default=None,
         help="Alineado de texto. Precedencia: CLI > metadata > config de usuario > default interno.",
     )
+    parser.add_argument(
+        "--background",
+        default=None,
+        help="Color de fondo del SVG en hex, por ejemplo '#F7F4ED'. Precedencia: CLI > metadata > sin fondo explicito.",
+    )
     node_numbers_group = parser.add_mutually_exclusive_group()
     node_numbers_group.add_argument(
         "--show-node-numbers",
@@ -161,6 +166,7 @@ def _handle_compile(args: argparse.Namespace) -> int:
         size=args.size,
         text_align=args.text_align,
         show_node_numbers=args.show_node_numbers,
+        background=args.background,
         output=args.output,
         output_dir=args.output_dir,
         desktop=args.desktop,
@@ -174,6 +180,7 @@ def _handle_compile(args: argparse.Namespace) -> int:
     print(f"Tamano de pagina usado: {result.context.settings.page_size_name}")
     print(f"Alineado usado: {result.context.settings.typography.text_align}")
     print(f"Numeracion visible: {result.context.settings.show_node_numbers}")
+    print(f"Background usado: {result.context.settings.background_color or '(default)'}")
     print(f"Nodos: {len(result.context.parsed.node_index)}")
     return 0
 
@@ -189,6 +196,7 @@ def _handle_inspect(args: argparse.Namespace) -> int:
         page_size_name=args.size,
         text_align=args.text_align,
         show_node_numbers=args.show_node_numbers,
+        background_color=args.background,
         default_layout_kind=config.default_layout,
         default_theme_name=config.default_theme,
         default_typography_name=config.default_typography,
@@ -210,6 +218,7 @@ def _handle_inspect(args: argparse.Namespace) -> int:
     print(f"Tamano resuelto: {context.settings.page_size_name}")
     print(f"Alineado resuelto: {context.settings.typography.text_align}")
     print(f"Numeracion visible: {context.settings.show_node_numbers}")
+    print(f"Background resuelto: {context.settings.background_color or '(default)'}")
 
     if parsed.warnings:
         print("Warnings del parser:")
@@ -230,6 +239,7 @@ def _handle_validate(args: argparse.Namespace) -> int:
         page_size_name=args.size,
         text_align=args.text_align,
         show_node_numbers=args.show_node_numbers,
+        background_color=args.background,
         default_layout_kind=config.default_layout,
         default_theme_name=config.default_theme,
         default_typography_name=config.default_typography,
@@ -243,6 +253,7 @@ def _handle_validate(args: argparse.Namespace) -> int:
     print(f"Theme: {context.settings.theme_name}")
     print(f"Tipografia: {context.settings.typography_name}")
     print(f"Tamano: {context.settings.page_size_name}")
+    print(f"Background: {context.settings.background_color or '(default)'}")
 
     if parsed.warnings:
         print("Warnings:")

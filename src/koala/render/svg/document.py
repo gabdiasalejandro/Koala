@@ -19,8 +19,11 @@ class SvgDocumentFactory:
     @classmethod
     def create(cls, output_svg: Path, context: RenderContext) -> svgwrite.Drawing:
         config = context.settings.layout_config
-        return svgwrite.Drawing(
+        drawing = svgwrite.Drawing(
             str(output_svg),
             size=(config.page_width, config.page_height),
             viewBox=f"0 0 {config.page_width} {config.page_height}",
         )
+        if context.settings.background_color:
+            drawing.attribs["style"] = f"background-color:{context.settings.background_color}"
+        return drawing

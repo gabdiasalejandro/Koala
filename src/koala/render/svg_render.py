@@ -48,6 +48,7 @@ class SvgRenderPipeline:
             page_size_name=self._request.page_size_name,
             text_align=self._request.text_align,
             show_node_numbers=self._request.show_node_numbers,
+            background_color=self._request.background_color,
             default_layout_kind=self._request.default_layout_kind,
             default_theme_name=self._request.default_theme_name,
             default_typography_name=self._request.default_typography_name,

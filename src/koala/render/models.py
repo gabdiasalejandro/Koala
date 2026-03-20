@@ -99,6 +99,7 @@ class RenderSettings:
     typography: TypographyConfig
     theme: ThemeConfig
     show_node_numbers: bool
+    background_color: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -153,6 +154,7 @@ class SvgRenderRequest:
     page_size_name: Optional[str] = None
     text_align: Optional[Literal["justify", "left"]] = None
     show_node_numbers: Optional[bool] = None
+    background_color: Optional[str] = None
     default_layout_kind: Optional[LayoutKind] = None
     default_theme_name: Optional[str] = None
     default_typography_name: Optional[str] = None

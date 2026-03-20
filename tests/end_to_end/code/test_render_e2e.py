@@ -27,6 +27,7 @@ TEXT_ALIGN_MOCKS = {
 }
 PAGE_SIZES = ("a4", "a4_landscape", "square")
 SHOW_NODE_NUMBERS = (True, False)
+BACKGROUND_COLORS = ("#F7F4ED", "#F1F7FB", "#F8F3FF", "#F4F9F1")
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,7 @@ class E2ECase:
     text_align: str
     page_size: str
     show_node_numbers: bool
+    background: str | None
 
     @property
     def case_id(self) -> str:
@@ -108,6 +110,11 @@ class RenderEndToEndTest(unittest.TestCase):
                             text_align=text_align,
                             page_size=PAGE_SIZES[index % len(PAGE_SIZES)],
                             show_node_numbers=SHOW_NODE_NUMBERS[index % len(SHOW_NODE_NUMBERS)],
+                            background=(
+                                BACKGROUND_COLORS[(index // 2) % len(BACKGROUND_COLORS)]
+                                if index % 2 == 0
+                                else None
+                            ),
                         )
                     )
                     index += 1
@@ -118,6 +125,8 @@ class RenderEndToEndTest(unittest.TestCase):
         source_text = load_input_text(str(case.mock_path))
         parsed = parse_concept_text(source_text)
         parsed.metadata["show-node-numbers"] = "true" if case.show_node_numbers else "false"
+        if case.background is not None:
+            parsed.metadata["background"] = case.background
 
         request = SvgRenderRequest(
             parsed=parsed,
@@ -140,6 +149,7 @@ class RenderEndToEndTest(unittest.TestCase):
         self.assertEqual(result.context.settings.page_size_name, case.page_size)
         self.assertEqual(result.context.settings.typography.text_align, case.text_align)
         self.assertEqual(result.context.settings.show_node_numbers, case.show_node_numbers)
+        self.assertEqual(result.context.settings.background_color, case.background)
         self.assertEqual(
             result.output_svg,
             self.output_root / case.theme / case.text_align / case.output_svg_name,
@@ -155,6 +165,11 @@ class RenderEndToEndTest(unittest.TestCase):
             self.assertNotIn("marker-end", svg_text)
         else:
             self.assertIn("<rect", svg_text)
+
+        if case.background is not None:
+            self.assertIn(f'style="background-color:{case.background}"', svg_text)
+        else:
+            self.assertNotIn("background-color:", svg_text)
 
     def _assert_theme_serialization(self, case: E2ECase, result, svg_text: str) -> None:
         theme = ThemeCatalog.resolve(case.theme)
