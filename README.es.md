@@ -74,7 +74,7 @@ file_result = koala.compile(
     text_align="left",
 )
 
-text_result = koala.compile_text(
+svg_result = koala.render_text(
     """
     1 Tema central
     Explicación principal.
@@ -84,12 +84,16 @@ text_result = koala.compile_text(
     """,
     layout="tree",
     theme="academic",
-    base_dir="docs/examples",
-    output_name="inline_demo",
+)
+
+text_path = koala.save_text(
+    "1 Root\nBody.\n",
+    "docs/examples/inline_demo",
 )
 
 print(file_result.output_svg)
-print(text_result.output_svg)
+print(svg_result.svg)
+print(text_path)
 
 context = koala.inspect_text("1 Root\nBody.\n", layout="tree", theme="academic")
 validated = koala.validate_text("1 Root\nBody.\n", layout="tree", theme="academic", strict=True)
@@ -119,6 +123,7 @@ Inputs aceptados por `koala.compile_text(text, **config)`:
 - todas las claves de config aceptadas por `koala.compile(...)`
 - `base_dir`: directorio base para resolver rutas relativas de salida y metadata como `@output-dir`
 - `output_name`: nombre base del archivo de salida cuando `output` no es explícito
+- esta función se mantiene por compatibilidad y sigue escribiendo SVG a disco
 
 Inputs aceptados por `koala.inspect_text(text, **config)` y `koala.validate_text(text, **config)`:
 
@@ -126,6 +131,19 @@ Inputs aceptados por `koala.inspect_text(text, **config)` y `koala.validate_text
 - `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`
 - `use_user_config` y `user_config`
 - `strict`: solo para `validate_text(...)`; lanza `koala.ValidationError` si existen warnings del parser
+
+Inputs aceptados por `koala.render_text(text, **config)`:
+
+- `text`: contenido DSL de Koala en crudo
+- `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`, `background`
+- `use_user_config` y `user_config`
+- no escribe archivos; el SVG serializado queda en `result.svg`
+
+Inputs aceptados por `koala.save_text(text, output, **config)`:
+
+- `text`: contenido DSL de Koala en crudo
+- `output`: ruta final del `.txt`; si no termina en `.txt`, Koala agrega la extensión
+- `base_dir`: directorio base para resolver salidas relativas
 
 Subcomandos disponibles:
 
@@ -151,7 +169,7 @@ default_theme = "academic"
 default_typography = "default"
 default_size = "a4_landscape"
 default_text_align = "left"
-default_show_node_numbers = true
+default_show_node_numbers = false
 default_output_mode = "next_to_input"
 ```
 
@@ -172,8 +190,10 @@ Comportamiento de salida:
 - `--output` escribe a una ruta SVG explícita
 - `--output-dir` escribe en una carpeta concreta
 - `--desktop` escribe en `~/Desktop` si existe; si no, cae de vuelta a la carpeta del input
+- `koala.render_text(...)` no escribe archivos; retorna el SVG serializado en memoria
 - `koala.compile_text(...)` escribe por default en `<base_dir o cwd>/concept_map.<layout>.svg`
 - si pasas `output_name="demo"` a `koala.compile_text(...)`, el archivo por default será `<base_dir o cwd>/demo.<layout>.svg`
+- `koala.save_text(...)` escribe texto DSL a un `.txt`
 - `koala.inspect_text(...)` y `koala.validate_text(...)` no escriben archivos; solo resuelven y retornan contexto
 
 ## Documentación

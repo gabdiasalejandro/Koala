@@ -126,9 +126,14 @@ class RenderContext:
 
 @dataclass(frozen=True)
 class RenderResult:
-    """Resultado observable de una corrida de render."""
+    """Resultado observable de una corrida de render.
 
-    output_svg: Path
+    `svg` siempre contiene el SVG serializado final.
+    `output_svg` solo se completa cuando el caller persistio el archivo.
+    """
+
+    svg: str
+    output_svg: Optional[Path]
     context: RenderContext
 
 
@@ -140,10 +145,12 @@ class SvgRenderRequest:
     - el documento ya parseado
     - el directorio base donde se resolvera la salida
     - overrides opcionales del CLI para render y path
+    - si el SVG final debe persistirse o quedarse solo en memoria
     """
 
     parsed: ParsedDocument
     base_dir: Path
+    persist_output: bool = True
     output_svg_path: Optional[Path] = None
     output_dir_name: Optional[str] = None
     output_file_name: Optional[str] = None

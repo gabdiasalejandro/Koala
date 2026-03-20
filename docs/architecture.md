@@ -8,7 +8,7 @@ It is intentionally code-oriented: the goal is to describe what the system does 
 Koala now exposes two top-level usage surfaces:
 
 1. the installed CLI through `koala`
-2. the library API through `import koala`, `koala.compile(path, **config)`, `koala.compile_text(text, **config)`, `koala.inspect_text(text, **config)`, and `koala.validate_text(text, **config)`
+2. the library API through `import koala`, `koala.compile(path, **config)`, `koala.compile_file(path, **config)`, `koala.render_text(text, **config)`, `koala.save_text(text, output, **config)`, `koala.compile_text(text, **config)`, `koala.inspect_text(text, **config)`, and `koala.validate_text(text, **config)`
 
 The public package entry files live in:
 
@@ -20,14 +20,15 @@ The public package entry files live in:
 
 ## High-level pipeline
 
-Koala transforms structured text into an SVG in six steps:
+Koala transforms structured text into an SVG in seven steps:
 
 1. `src/koala/api.py` or `src/koala/cli.py` collects explicit user inputs.
 2. `src/koala/core/io.py` loads source text from `.txt` or `.docx`.
 3. `src/koala/core/parser.py` converts raw text into a `ParsedDocument`.
 4. `src/koala/layout/` turns the parsed node tree into a geometric `LayoutScene`.
 5. `src/koala/render/context.py` combines metadata, user defaults, presets, layout, and viewport fitting into a `RenderContext`.
-6. `src/koala/render/svg_render.py` runs the SVG pipeline and delegates drawing to `src/koala/render/svg/`.
+6. `src/koala/render/svg_render.py` builds an in-memory SVG document and delegates drawing to `src/koala/render/svg/`.
+7. `src/koala/render/output.py` optionally resolves a filesystem target and persists the serialized SVG.
 
 The strict separation is:
 
@@ -136,7 +137,7 @@ Internal flow inside `koala.layout` is:
 - `settings.py`: typographies, page presets, layout profiles, and resolved `RenderSettings`
 - `models.py`: render-side style models, resolved settings, viewport, and SVG draw specs
 - `context.py`: orchestration from parsed document metadata to `RenderContext`
-- `output.py`: output-path resolution from explicit args, metadata, and external defaults
+- `output.py`: output-path resolution and optional persistence for serialized SVG output
 - `viewport.py`: fit scene to page size
 - `geometry.py`: small geometry helpers for rendering
 - `svg_render.py`: public render entrypoint and pipeline execution
@@ -150,14 +151,18 @@ The high-level library surface lives in `src/koala/api.py`.
 
 Current behavior:
 
-- `koala.compile(path, **config)` is the public library entrypoint
-- `koala.compile_text(text, **config)` is the public in-memory authoring entrypoint
+- `koala.compile(path, **config)` and `koala.compile_file(path, **config)` are the file-to-SVG entrypoints
+- `koala.render_text(text, **config)` renders raw Koala DSL to SVG in memory
+- `koala.save_text(text, output, **config)` writes raw Koala DSL to a `.txt` file
+- `koala.compile_text(text, **config)` is kept as a legacy helper that still writes SVG to disk
 - `koala.inspect_text(text, **config)` resolves a `RenderContext` without writing output
 - `koala.validate_text(text, **config)` also resolves a `RenderContext` and can raise `ValidationError` in strict mode
 - it validates accepted config keys before rendering
 - it can load user defaults through `src/koala/config.py`
-- it returns a `RenderResult` with `output_svg` and the resolved `RenderContext`
+- all render entrypoints now produce the final SVG string in memory first
+- they return a `RenderResult` with `svg`, optional `output_svg`, and the resolved `RenderContext`
 - `compile_text(...)` resolves relative outputs against `base_dir` when provided, otherwise against `Path.cwd()`
+- explicit relative outputs for `compile_text(...)` are also resolved against `base_dir`
 
 `src/koala/config.py` is responsible for user-level defaults:
 
@@ -169,14 +174,16 @@ Current behavior:
 
 The current render orchestration is:
 
-1. `koala.compile(path, **config)` or `koala compile ...`
+1. `koala.compile(path, **config)`, `koala.render_text(text, **config)`, or `koala compile ...`
 2. `koala.render.svg_render.render_svg(SvgRenderRequest(...))`
 3. `koala.render.context.RenderContextBuilder.build(...)`
 4. `koala.render.settings.RenderSettingsCatalog.resolve(...)`
 5. `koala.layout.registry.build_layout(...)`
 6. `koala.render.viewport.ViewportFitter.fit(...)`
-7. `koala.render.output.RenderOutputResolver.resolve_svg_path(...)`
-8. `koala.render.svg.canvas.SvgCanvasRenderer.render(...)`
+7. `koala.render.svg.canvas.SvgCanvasRenderer.render(...)`
+8. `svgwrite.Drawing.tostring()` serializes the SVG document in memory
+9. when `persist_output=True`, `koala.render.output.RenderOutputResolver.resolve_svg_path(...)`
+10. when `persist_output=True`, `koala.render.output.RenderOutputWriter.write_svg(...)`
 
 This means the order is:
 
@@ -185,6 +192,8 @@ This means the order is:
 - build geometry
 - fit geometry to paper
 - draw SVG
+- serialize SVG in memory
+- optionally persist it to disk
 
 Current precedence for render settings is:
 

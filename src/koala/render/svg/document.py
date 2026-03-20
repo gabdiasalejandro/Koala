@@ -1,12 +1,12 @@
 """Creacion del documento SVG.
 
-Este archivo encapsula la configuracion fisica del archivo de salida:
+Este archivo encapsula la configuracion fisica del documento:
 - tamaño de pagina
 - viewBox
 - inicializacion del objeto `svgwrite.Drawing`
-"""
 
-from pathlib import Path
+El documento puede usarse solo en memoria o luego persistirse a disco.
+"""
 
 import svgwrite
 
@@ -17,10 +17,9 @@ class SvgDocumentFactory:
     """Fabrica del documento SVG final."""
 
     @classmethod
-    def create(cls, output_svg: Path, context: RenderContext) -> svgwrite.Drawing:
+    def create(cls, context: RenderContext) -> svgwrite.Drawing:
         config = context.settings.layout_config
         drawing = svgwrite.Drawing(
-            str(output_svg),
             size=(config.page_width, config.page_height),
             viewBox=f"0 0 {config.page_width} {config.page_height}",
         )

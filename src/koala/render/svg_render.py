@@ -3,20 +3,21 @@
 Este archivo define la secuencia completa del render:
 - recibir un `SvgRenderRequest` ya agrupado
 - construir el contexto visual y geometrico
-- resolver la ruta final del archivo de salida
-- crear el documento SVG
+- crear el documento SVG en memoria
 - delegar el dibujo al backend especializado
-- guardar el resultado
+- serializar el resultado
+- persistirlo solo si hace falta
 
 La intencion es que `render_svg(...)` sea la unica puerta de entrada y que
 cada paso interno tenga una responsabilidad facil de leer y probar.
 """
 
+import io
 from pathlib import Path
 
 from koala.render.context import RenderContextBuilder
 from koala.render.models import RenderContext, RenderResult, SvgRenderRequest
-from koala.render.output import RenderOutputResolver
+from koala.render.output import RenderOutputResolver, RenderOutputWriter
 from koala.render.svg.canvas import SvgCanvasRenderer
 from koala.render.svg.document import SvgDocumentFactory
 
@@ -28,14 +29,14 @@ class SvgRenderPipeline:
         self._request = request
 
     def run(self) -> RenderResult:
-        """Ejecuta el pipeline completo y retorna el resultado persistido."""
+        """Ejecuta el pipeline completo y retorna el resultado serializado."""
 
         context = self._build_context()
-        output_svg = self._resolve_output_svg(context)
-        drawing = self._build_document(output_svg, context)
+        drawing = self._build_document(context)
         self._draw_scene(drawing, context)
-        drawing.save()
-        return RenderResult(output_svg=output_svg, context=context)
+        svg = self._serialize_document(drawing)
+        output_svg = self._persist_svg_if_needed(context, svg)
+        return RenderResult(svg=svg, output_svg=output_svg, context=context)
 
     def _build_context(self) -> RenderContext:
         """Construye el contexto final de render desde el documento parseado."""
@@ -58,7 +59,7 @@ class SvgRenderPipeline:
         )
 
     def _resolve_output_svg(self, context: RenderContext) -> Path:
-        """Resuelve y crea la ruta final del SVG de salida."""
+        """Resuelve la ruta final del SVG de salida."""
 
         return RenderOutputResolver.resolve_svg_path(
             base_dir=self._request.base_dir,
@@ -71,16 +72,31 @@ class SvgRenderPipeline:
         )
 
     @staticmethod
-    def _build_document(output_svg: Path, context: RenderContext):
+    def _build_document(context: RenderContext):
         """Crea el objeto `svgwrite.Drawing` con el viewport correcto."""
 
-        return SvgDocumentFactory.create(output_svg, context)
+        return SvgDocumentFactory.create(context)
 
     @staticmethod
     def _draw_scene(drawing, context: RenderContext) -> None:
         """Delega el dibujo del contenido al backend SVG."""
 
         SvgCanvasRenderer(context).render(drawing)
+
+    @staticmethod
+    def _serialize_document(drawing) -> str:
+        """Serializa el documento SVG con el mismo formato del backend file-oriented."""
+
+        buffer = io.StringIO()
+        drawing.write(buffer)
+        return buffer.getvalue()
+
+    def _persist_svg_if_needed(self, context: RenderContext, svg: str) -> Path | None:
+        if not self._request.persist_output:
+            return None
+
+        output_svg = self._resolve_output_svg(context)
+        return RenderOutputWriter.write_svg(output_svg, svg)
 
 
 def render_svg(request: SvgRenderRequest) -> RenderResult:

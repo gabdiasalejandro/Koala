@@ -63,15 +63,43 @@ koala validate docs/examples/radial.txt --strict
 ```python
 import koala
 
-result = koala.compile(
+file_result = koala.compile(
     "docs/examples/radial.txt",
     layout="radial",
     theme="academic",
     size="square",
 )
 
-print(result.output_svg)
+svg_result = koala.render_text(
+    """
+    1 Central Topic
+    Main explanation.
+
+    1.1 First Branch
+    Supporting detail.
+    """,
+    layout="tree",
+    theme="frutal",
+)
+
+source_path = koala.save_text(
+    "1 Root\nBody.\n",
+    "docs/examples/inline_demo",
+)
+
+print(file_result.output_svg)
+print(svg_result.svg)
+print(source_path)
 ```
+
+Library API summary:
+
+- `koala.compile(path, **config)` or `koala.compile_file(path, **config)`: source file to `.svg`
+- `koala.render_text(text, **config)`: Koala DSL text to in-memory SVG via `result.svg`
+- `koala.save_text(text, output, **config)`: raw Koala DSL text to `.txt`
+- `koala.compile_text(text, **config)`: legacy helper that still writes `.svg` to disk
+
+`RenderResult` now always includes the serialized SVG in `result.svg`. `result.output_svg` is only populated when the operation writes a file.
 
 ## DSL Syntax
 
@@ -99,7 +127,7 @@ hl:: 1.2 Highlighted Node
 - Multiple layouts (`tree`, `radial`, `synoptic`)
 - Theme system
 - CLI and Python API
-- SVG output
+- SVG output to disk or in memory
 
 ## Multiple Layouts
 

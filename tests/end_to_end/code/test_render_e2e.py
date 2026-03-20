@@ -139,10 +139,12 @@ class RenderEndToEndTest(unittest.TestCase):
         )
         result = render_svg(request)
         final_svg = self.output_root / case.theme / case.text_align / case.output_svg_name
+        assert result.output_svg is not None
         result.output_svg.replace(final_svg)
-        return result.__class__(output_svg=final_svg, context=result.context)
+        return result.__class__(svg=result.svg, output_svg=final_svg, context=result.context)
 
     def _assert_settings(self, case: E2ECase, result) -> None:
+        self.assertIsNotNone(result.output_svg)
         self.assertTrue(result.output_svg.exists(), f"No se generó {case.case_id}.")
         self.assertEqual(result.context.settings.layout_kind, case.layout)
         self.assertEqual(result.context.settings.theme_name, case.theme)
@@ -172,6 +174,7 @@ class RenderEndToEndTest(unittest.TestCase):
             self.assertNotIn("background-color:", svg_text)
 
     def _assert_theme_serialization(self, case: E2ECase, result, svg_text: str) -> None:
+        self.assertEqual(result.svg, svg_text)
         theme = ThemeCatalog.resolve(case.theme)
         present_kinds = {
             node.kind.strip().lower() if node.kind else "default"
@@ -207,6 +210,7 @@ class RenderEndToEndTest(unittest.TestCase):
 
     @classmethod
     def _record_manifest(cls, case: E2ECase, result) -> None:
+        assert result.output_svg is not None
         cls.manifest.append(
             {
                 "case": asdict(case),

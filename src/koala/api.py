@@ -62,6 +62,12 @@ class ValidateTextConfig(ContextConfig, total=False):
     strict: bool
 
 
+class SaveTextConfig(TypedDict, total=False):
+    """Configuracion aceptada por `koala.save_text(text, output, **config)`."""
+
+    base_dir: str | Path
+
+
 @dataclass(frozen=True)
 class ValidationError(ValueError):
     """Error de validacion para la API de libreria."""
@@ -82,6 +88,7 @@ _ALLOWED_COMPILE_CONFIG_KEYS = frozenset(CompileConfig.__annotations__)
 _ALLOWED_COMPILE_TEXT_CONFIG_KEYS = frozenset(CompileTextConfig.__annotations__)
 _ALLOWED_CONTEXT_CONFIG_KEYS = frozenset(ContextConfig.__annotations__)
 _ALLOWED_VALIDATE_TEXT_CONFIG_KEYS = frozenset(ValidateTextConfig.__annotations__)
+_ALLOWED_SAVE_TEXT_CONFIG_KEYS = frozenset(SaveTextConfig.__annotations__)
 
 
 def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
@@ -105,10 +112,11 @@ def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
     input_path = Path(path).expanduser().resolve()
     resolved_user_config = _resolve_user_config(use_user_config, user_config)
     source_text = load_input_text(str(input_path))
-    return _compile_source_text(
+    return _render_source_text(
         source_text,
         base_dir=input_path.parent,
         default_output_file_name_stem=input_path.stem,
+        persist_output=True,
         layout=layout,
         theme=theme,
         typography=typography,
@@ -125,10 +133,13 @@ def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
 
 
 def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult:
-    """Compila texto Koala y retorna el resultado de render.
+    """Compila texto Koala y escribe un SVG en disco.
 
     Las rutas relativas de salida se resuelven contra `base_dir` si se provee.
     Si no se pasa, se usa `Path.cwd()`.
+
+    Esta funcion se mantiene por compatibilidad y utiliza el nuevo pipeline
+    basado en generacion de SVG en memoria.
     """
 
     _validate_config_keys(config, _ALLOWED_COMPILE_TEXT_CONFIG_KEYS, "koala.compile_text")
@@ -149,10 +160,11 @@ def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult
     output_name = config.get("output_name")
 
     resolved_user_config = _resolve_user_config(use_user_config, user_config)
-    return _compile_source_text(
+    return _render_source_text(
         text,
         base_dir=base_dir,
         default_output_file_name_stem=output_name or "concept_map",
+        persist_output=True,
         layout=layout,
         theme=theme,
         typography=typography,
@@ -166,6 +178,54 @@ def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult
         user_config=resolved_user_config,
         desktop_fallback_dir=base_dir,
     )
+
+
+def compile_file(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
+    """Alias explicito de `koala.compile(path, **config)`."""
+
+    return compile(path, **config)
+
+
+def render_text(text: str, **config: Unpack[ContextConfig]) -> RenderResult:
+    """Renderiza texto Koala y retorna el SVG en memoria.
+
+    No escribe archivos. El SVG final queda disponible en `result.svg`.
+    """
+
+    _validate_config_keys(config, _ALLOWED_CONTEXT_CONFIG_KEYS, "koala.render_text")
+    resolved_user_config = _resolve_user_config(
+        config.get("use_user_config", False),
+        config.get("user_config"),
+    )
+    return _render_source_text(
+        text,
+        base_dir=Path.cwd(),
+        default_output_file_name_stem="concept_map",
+        persist_output=False,
+        layout=config.get("layout"),
+        theme=config.get("theme"),
+        typography=config.get("typography"),
+        size=config.get("size"),
+        text_align=config.get("text_align"),
+        show_node_numbers=config.get("show_node_numbers"),
+        background=config.get("background"),
+        output=None,
+        output_dir=None,
+        desktop=False,
+        user_config=resolved_user_config,
+        desktop_fallback_dir=Path.cwd(),
+    )
+
+
+def save_text(text: str, output: str | Path, **config: Unpack[SaveTextConfig]) -> Path:
+    """Guarda texto plano en un archivo `.txt` y retorna la ruta final."""
+
+    _validate_config_keys(config, _ALLOWED_SAVE_TEXT_CONFIG_KEYS, "koala.save_text")
+    base_dir = _resolve_base_dir(config.get("base_dir"))
+    output_path = _resolve_text_output_path(output, base_dir)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(text, encoding="utf-8")
+    return output_path
 
 
 def inspect_text(text: str, **config: Unpack[ContextConfig]) -> RenderContext:
@@ -211,11 +271,12 @@ def validate_text(text: str, **config: Unpack[ValidateTextConfig]) -> RenderCont
     return context
 
 
-def _compile_source_text(
+def _render_source_text(
     source_text: str,
     *,
     base_dir: Path,
     default_output_file_name_stem: str,
+    persist_output: bool,
     layout: LayoutKind | None,
     theme: str | None,
     typography: str | None,
@@ -231,24 +292,27 @@ def _compile_source_text(
 ) -> RenderResult:
     parsed = parse_concept_text(source_text)
     resolved_layout = _resolve_effective_layout(parsed, layout, user_config)
-    explicit_output_svg_path = _resolve_explicit_output_path(output)
-    output_dir_name, default_output_dir_name = _resolve_output_directory_policy(
-        resolution_base_dir=base_dir,
-        output_dir=output_dir,
-        desktop=desktop,
-        config=user_config,
-        has_explicit_output=explicit_output_svg_path is not None,
-        desktop_fallback_dir=desktop_fallback_dir,
-    )
+    explicit_output_svg_path = _resolve_explicit_output_path(output, base_dir)
+    output_dir_name, default_output_dir_name = (None, None)
+    if persist_output:
+        output_dir_name, default_output_dir_name = _resolve_output_directory_policy(
+            resolution_base_dir=base_dir,
+            output_dir=output_dir,
+            desktop=desktop,
+            config=user_config,
+            has_explicit_output=explicit_output_svg_path is not None,
+            desktop_fallback_dir=desktop_fallback_dir,
+        )
 
     request = SvgRenderRequest(
         parsed=parsed,
         base_dir=base_dir,
+        persist_output=persist_output,
         output_svg_path=explicit_output_svg_path,
         output_dir_name=output_dir_name,
         output_file_name=(
             None
-            if explicit_output_svg_path is not None
+            if not persist_output or explicit_output_svg_path is not None
             else _resolve_output_file_name(default_output_file_name_stem, resolved_layout)
         ),
         default_output_dir_name=default_output_dir_name,
@@ -335,10 +399,13 @@ def _resolve_effective_layout(
     return explicit_layout or metadata_layout or config.default_layout or DEFAULT_LAYOUT_KIND
 
 
-def _resolve_explicit_output_path(raw_output: str | Path | None) -> Path | None:
+def _resolve_explicit_output_path(raw_output: str | Path | None, base_dir: Path) -> Path | None:
     if raw_output is None:
         return None
+
     output_path = Path(raw_output).expanduser()
+    if not output_path.is_absolute():
+        output_path = base_dir / output_path
     if output_path.suffix.lower() != ".svg":
         output_path = output_path.with_suffix(".svg")
     return output_path
@@ -399,6 +466,15 @@ def _resolve_base_dir(base_dir: str | Path | None) -> Path:
     if base_dir is None:
         return Path.cwd()
     return Path(base_dir).expanduser().resolve()
+
+
+def _resolve_text_output_path(output: str | Path, base_dir: Path) -> Path:
+    output_path = Path(output).expanduser()
+    if not output_path.is_absolute():
+        output_path = base_dir / output_path
+    if output_path.suffix.lower() != ".txt":
+        output_path = output_path.with_suffix(".txt")
+    return output_path.resolve()
 
 
 def _desktop_path_or_fallback(fallback_dir: Path) -> Path:

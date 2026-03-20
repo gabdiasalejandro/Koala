@@ -94,7 +94,7 @@ default_theme = "academic"
 default_typography = "default"
 default_size = "a4_landscape"
 default_text_align = "left"
-default_show_node_numbers = true
+default_show_node_numbers = false
 default_output_mode = "next_to_input"
 ```
 
@@ -391,9 +391,15 @@ This means metadata is good for self-contained demo files, but the CLI and the l
 
 ### Disabling node numbers
 
-By default Koala shows node numbers in the final map, such as `1`, `1.1`, and `1.2`.
+By default Koala hides node numbers in the final map.
 
-You can disable them in metadata:
+You can enable them in metadata:
+
+```text
+@show-node-numbers true
+```
+
+Or keep them disabled explicitly:
 
 ```text
 @show-node-numbers false

@@ -22,7 +22,7 @@ MM = 72.0 / 25.4
 A4_WIDTH = 210 * MM
 A4_HEIGHT = 297 * MM
 
-DEFAULT_SHOW_NODE_NUMBERS = True
+DEFAULT_SHOW_NODE_NUMBERS = False
 DEFAULT_LAYOUT_KIND: LayoutKind = "tree"
 PageSizeName = Literal["a4", "a4_landscape", "square"]
 DEFAULT_PAGE_SIZE: PageSizeName = "a4_landscape"

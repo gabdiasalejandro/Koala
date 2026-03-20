@@ -1,9 +1,9 @@
-"""Resolucion de rutas de salida del render.
+"""Resolucion y persistencia de outputs del render.
 
-Este archivo separa del backend SVG la politica de paths:
+Este archivo concentra la parte file-oriented del pipeline:
 - combina override explicito, metadata y default externo
-- crea el directorio destino si hace falta
 - construye el nombre final del archivo SVG
+- persiste el SVG serializado solo cuando el caller lo pide
 
 El default del output no vive aqui; lo recibe desde quien invoque el render.
 """
@@ -31,7 +31,6 @@ class RenderOutputResolver:
         default_output_dir_name: str | None,
     ) -> Path:
         if output_svg_path is not None:
-            output_svg_path.parent.mkdir(parents=True, exist_ok=True)
             return output_svg_path
 
         output_dir = cls.resolve_output_dir_path(
@@ -58,7 +57,6 @@ class RenderOutputResolver:
             default_output_dir_name=default_output_dir_name,
         )
         output_dir = base_dir / resolved_output_dir_name
-        output_dir.mkdir(parents=True, exist_ok=True)
         return output_dir
 
     @staticmethod
@@ -78,3 +76,13 @@ class RenderOutputResolver:
                 "No se resolvio output_dir. Pasa un output explicito, metadata `@output-dir`, o un default externo."
             )
         return resolved_output_dir_name
+
+
+class RenderOutputWriter:
+    """Persistencia opcional de SVGs serializados."""
+
+    @staticmethod
+    def write_svg(path: Path, svg: str) -> Path:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(svg, encoding="utf-8")
+        return path
