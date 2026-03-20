@@ -73,6 +73,7 @@ Useful values:
 - show-node-numbers: `true` or `false`
 
 For this prompt, set `@layout radial`.
+Avoid `@show-node-numbers` unless the user explicitly asks to embed numbering behavior in metadata.
 
 ## Connector Guidance
 
@@ -129,7 +130,6 @@ Start from a structure like this:
 @layout radial
 @theme jungle
 @size square
-@show-node-numbers false
 
 main:: 1 Central Concept
 Short overview of the whole topic.

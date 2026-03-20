@@ -4,6 +4,7 @@ Koala is a DSL for generating diagrams from structured text.
 
 Write once, render in multiple layouts.
 
+[GitHub Repository](https://github.com/gabdiasalejandro/Koala)
 [Español](https://github.com/gabdiasalejandro/Koala/blob/main/README.es.md)
 
 ## Quick Example
@@ -101,6 +102,8 @@ Library API summary:
 
 `RenderResult` now always includes the serialized SVG in `result.svg`. `result.output_svg` is only populated when the operation writes a file.
 
+In general, avoid embedding `@show-node-numbers` in document metadata. Prefer CLI flags, library arguments, or user config defaults unless a file really needs to be self-descriptive about numbering.
+
 ## DSL Syntax
 
 Koala uses a simple line-based DSL:
@@ -120,6 +123,7 @@ hl:: 1.2 Highlighted Node
 - [Full syntax guide](https://github.com/gabdiasalejandro/Koala/blob/main/docs/syntax.md)
 - [Authoring tutorial](https://github.com/gabdiasalejandro/Koala/blob/main/docs/tutorial.md)
 - [Examples](https://github.com/gabdiasalejandro/Koala/tree/main/docs/examples)
+- [LLM prompts](https://github.com/gabdiasalejandro/Koala/tree/main/docs/prompts)
 
 ## Features
 

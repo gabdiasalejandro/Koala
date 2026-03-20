@@ -85,6 +85,7 @@ Useful values:
 - show-node-numbers: `true` or `false`
 
 For this prompt, set `@layout tree`.
+Avoid `@show-node-numbers` unless the user explicitly asks to embed numbering behavior in metadata.
 
 ## Connector Guidance
 
@@ -146,7 +147,6 @@ Start from a structure like this:
 @layout tree
 @theme academic
 @size a4_landscape
-@show-node-numbers false
 
 main:: 1 Root Concept
 Short explanation of the whole topic.

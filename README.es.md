@@ -102,6 +102,8 @@ print(len(context.parsed.node_index))
 print(len(validated.parsed.warnings))
 ```
 
+En general conviene evitar `@show-node-numbers` dentro de la metadata del documento. Es mejor controlar esa preferencia desde flags de CLI, argumentos de librería o config de usuario, salvo que el archivo necesite dejar esa intención embebida explícitamente.
+
 Inputs aceptados por `koala.compile(path, **config)`:
 
 - `path`: archivo fuente `.txt` o `.docx` a compilar
@@ -204,3 +206,4 @@ Comportamiento de salida:
 - [docs/architecture.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/architecture.md): estructura actual del paquete, flujo de API y pipeline de render
 - [docs/examples/tree.txt](https://github.com/gabdiasalejandro/Koala/blob/main/docs/examples/tree.txt): ejemplo mínimo tipo tree
 - [docs/examples/radial.txt](https://github.com/gabdiasalejandro/Koala/blob/main/docs/examples/radial.txt): ejemplo mínimo tipo radial
+- [docs/prompts/](https://github.com/gabdiasalejandro/Koala/tree/main/docs/prompts): prompts listos para generar DSL por layout

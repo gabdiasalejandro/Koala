@@ -1,7 +1,6 @@
 @layout tree
 @theme jungle
 @size a4
-@show-node-numbers false
 
 1 Administración financiera
 Disciplina que estudia cómo se obtienen, administran y utilizan los recursos monetarios dentro de una organización con el objetivo de generar valor y mejorar la toma de decisiones económicas.

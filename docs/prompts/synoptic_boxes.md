@@ -73,6 +73,7 @@ Useful values:
 - show-node-numbers: `true` or `false`
 
 For this prompt, set `@layout synoptic_boxes`.
+Avoid `@show-node-numbers` unless the user explicitly asks to embed numbering behavior in metadata.
 
 ## Connector Guidance
 
@@ -126,7 +127,6 @@ Start from a structure like this:
 @layout synoptic_boxes
 @theme default
 @size a4_landscape
-@show-node-numbers false
 
 main:: 1 Root Topic
 Short overview of the full topic.

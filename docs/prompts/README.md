@@ -19,3 +19,5 @@ Each prompt includes:
 - node-count and depth guidance
 
 Use the prompt that matches the target layout. The generated answer should be Koala DSL only.
+
+As a general rule, prompts should avoid emitting `@show-node-numbers` unless the user explicitly asks for numbering behavior to be embedded in the document metadata.

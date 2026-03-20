@@ -1,7 +1,6 @@
 @layout radial
 @theme jungle
 @size a4
-@show-node-numbers false
 
 main:: 1 Innovación
 Proceso mediante el cual se crean o mejoran ideas, productos, servicios o procesos para generar valor y resolver problemas de forma diferente. Implica aplicar conocimiento y creatividad para producir cambios que mejoren la eficiencia, la competitividad o la calidad de vida.

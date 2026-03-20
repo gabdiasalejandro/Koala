@@ -73,6 +73,7 @@ Useful values:
 - show-node-numbers: `true` or `false`
 
 For this prompt, set `@layout synoptic`.
+Avoid `@show-node-numbers` unless the user explicitly asks to embed numbering behavior in metadata.
 
 ## Connector Rule
 
@@ -132,7 +133,6 @@ Start from a structure like this:
 @layout synoptic
 @theme academic
 @size a4_landscape
-@show-node-numbers false
 
 main:: 1 Root Category
 Short definition of the whole classification.
