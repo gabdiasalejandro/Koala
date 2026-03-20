@@ -212,16 +212,15 @@ This engine reuses the same measurement and positioning strategy as `synoptic_bo
 For each node with children:
 
 1. Collect the topmost and bottommost child bounds.
-2. Compute a midpoint across the whole child group.
-3. Draw a multi-segment polyline:
-   - short connector out of the parent
-   - elbow toward the group center
+2. Keep a fixed bracket body defined by:
    - bracket spine
    - top and bottom hooks
+   - a single peak on the inner side
+3. Slide that peak vertically toward the parent center, clamped inside the child-group span.
 
 Unlike `tree` and `synoptic_boxes`, this layout intentionally omits relation labels because the visual priority is grouping, not edge annotation.
 
-At render time, the SVG backend can stylize that bracket geometry as a smoother brace-shaped path so the final `{` connectors read more clearly than a raw orthogonal polyline.
+At render time, the SVG backend stylizes that geometry as a smooth brace-shaped path. The brace keeps a stable silhouette and only the peak position moves to follow the parent vertically.
 
 ### Page fitting behavior
 

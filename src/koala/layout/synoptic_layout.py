@@ -36,12 +36,10 @@ def build_synoptic_edges(
 
             group_top = min(child.y for child in child_boxes)
             group_bottom = max(child.y + child.height for child in child_boxes)
-            group_mid = (group_top + group_bottom) / 2
 
             parent_anchor_x = parent.x + parent.width
             parent_anchor_y = parent.y + (parent.height / 2)
             h_gap = get_h_gap_for_depth(parent.depth + 1, config)
-            connector_x = parent_anchor_x + max(8.0, h_gap * 0.28)
             bracket_x = parent_anchor_x + max(14.0, h_gap * 0.55)
             hook = max(8.0, h_gap * 0.22)
 
@@ -51,14 +49,8 @@ def build_synoptic_edges(
                     child_number=ordered_children[0].number,
                     points=[
                         (parent_anchor_x, parent_anchor_y),
-                        (connector_x, parent_anchor_y),
-                        (connector_x, group_mid),
-                        (bracket_x, group_mid),
-                        (bracket_x + hook, group_mid),
-                        (bracket_x, group_mid),
                         (bracket_x, group_top),
                         (bracket_x + hook, group_top),
-                        (bracket_x, group_top),
                         (bracket_x, group_bottom),
                         (bracket_x + hook, group_bottom),
                     ],

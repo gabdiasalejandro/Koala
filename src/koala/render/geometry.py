@@ -44,32 +44,30 @@ def synoptic_brace_path_data(points: Sequence[Tuple[float, float]]) -> str | Non
     renderer pueda usar el fallback polilineal.
     """
 
-    if len(points) < 10:
+    if len(points) < 5:
         return None
 
-    parent_x, parent_y = points[0]
-    elbow_x = points[1][0]
-    brace_x, mid_y = points[3]
-    hook_x = points[4][0]
-    top_y = points[6][1]
-    bottom_y = points[9][1]
+    _, parent_y = points[0]
+    brace_x, top_y = points[1]
+    hook_x = points[2][0]
+    bottom_y = points[3][1]
     span_y = max(1.0, bottom_y - top_y)
-    curve_y = max(2.0, min(14.0, span_y * 0.18))
-    if span_y < curve_y * 2.4:
-        curve_y = max(1.5, span_y / 3)
-    peak_half_height = max(3.0, min(10.0, span_y * 0.10))
-    peak_depth = max(4.0, min(11.0, abs(hook_x - brace_x) * 0.95))
+    feature_scale = min(1.0, span_y / 36.0)
+    curve_y = 8.0 * feature_scale
+    peak_half_height = 10.0 * feature_scale
+    peak_depth = max(6.0, min(11.0, abs(hook_x - brace_x)))
     peak_x = brace_x - peak_depth
-    upper_peak_y = mid_y - peak_half_height
-    lower_peak_y = mid_y + peak_half_height
+    peak_min_y = top_y + curve_y + peak_half_height
+    peak_max_y = bottom_y - curve_y - peak_half_height
+    peak_y = min(max(parent_y, peak_min_y), peak_max_y)
+    upper_peak_y = peak_y - peak_half_height
+    lower_peak_y = peak_y + peak_half_height
 
     return (
-        f"M {parent_x:.2f} {parent_y:.2f} "
-        f"C {elbow_x:.2f} {parent_y:.2f} {elbow_x:.2f} {mid_y:.2f} {peak_x:.2f} {mid_y:.2f} "
         f"M {hook_x:.2f} {top_y:.2f} "
         f"Q {brace_x:.2f} {top_y:.2f} {brace_x:.2f} {top_y + curve_y:.2f} "
         f"L {brace_x:.2f} {upper_peak_y:.2f} "
-        f"L {peak_x:.2f} {mid_y:.2f} "
+        f"L {peak_x:.2f} {peak_y:.2f} "
         f"L {brace_x:.2f} {lower_peak_y:.2f} "
         f"L {brace_x:.2f} {bottom_y - curve_y:.2f} "
         f"Q {brace_x:.2f} {bottom_y:.2f} {hook_x:.2f} {bottom_y:.2f}"
