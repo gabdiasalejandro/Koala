@@ -163,6 +163,7 @@ Current behavior:
 - they return a `RenderResult` with `svg`, optional `output_svg`, and the resolved `RenderContext`
 - `compile_text(...)` resolves relative outputs against `base_dir` when provided, otherwise against `Path.cwd()`
 - explicit relative outputs for `compile_text(...)` are also resolved against `base_dir`
+- output location is now controlled only by explicit args and external defaults, not by document metadata
 
 `src/koala/config.py` is responsible for user-level defaults:
 

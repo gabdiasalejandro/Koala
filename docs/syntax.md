@@ -149,7 +149,6 @@ Current accepted forms are:
 @size square
 @background #F7F4ED
 @show-node-numbers false
-@output-dir exports/metadata_demo
 ```
 
 or:
@@ -176,11 +175,10 @@ The parser currently accepts metadata for the CLI-related render options:
 - `@size`
 - `@page-size`
 - `@background`
-- `@output-dir`
 - `@text-align`
 - `@show-node-numbers`
 
-`@output_dir`, `@text_align`, `@show_node_numbers`, `@node-numbers`, `@node_numbers`, `@background-color`, and `@background_color` are also accepted as aliases.
+`@text_align`, `@show_node_numbers`, `@node-numbers`, `@node_numbers`, `@background-color`, and `@background_color` are also accepted as aliases.
 
 For text alignment, accepted values are:
 
@@ -198,16 +196,18 @@ Current resolution order is:
 3. user config default
 4. built-in default
 
-This means metadata is useful for shipping self-describing examples, while still allowing the CLI or the library call to override them when needed.
+This means metadata is useful for shipping self-describing visual examples, while still allowing the CLI or the library call to override them when needed.
+
+Output location is not resolved from metadata anymore. Use explicit CLI or library output options, or user config defaults.
 
 ### Controlling node numbers
 
-By default Koala shows node-number pills in the final map, such as `1`, `1.1`, and `1.2`.
+By default Koala hides node-number pills in the final map.
 
-You can disable them in metadata:
+You can enable or disable them in metadata when a document really needs that behavior embedded:
 
 ```text
-@show-node-numbers false
+@show-node-numbers true
 ```
 
 Accepted false-like values include:

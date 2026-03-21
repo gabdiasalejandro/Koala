@@ -123,7 +123,7 @@ Inputs aceptados por `koala.compile_text(text, **config)`:
 
 - `text`: contenido DSL de Koala en crudo
 - todas las claves de config aceptadas por `koala.compile(...)`
-- `base_dir`: directorio base para resolver rutas relativas de salida y metadata como `@output-dir`
+- `base_dir`: directorio base para resolver rutas relativas de salida
 - `output_name`: nombre base del archivo de salida cuando `output` no es explícito
 - esta función se mantiene por compatibilidad y sigue escribiendo SVG a disco
 

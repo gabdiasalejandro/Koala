@@ -72,7 +72,6 @@ Available metadata:
 - `@page-size`
 - `@background`
 - `@show-node-numbers`
-- `@output-dir`
 
 Useful values:
 

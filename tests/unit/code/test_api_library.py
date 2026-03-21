@@ -69,6 +69,22 @@ class LibraryApiTests(unittest.TestCase):
             self.assertIsNotNone(result.output_svg)
             self.assertTrue(result.output_svg.exists())
 
+    def test_compile_text_ignores_output_dir_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            base_dir = Path(tmp_dir)
+
+            result = koala.compile_text(
+                "@output-dir redirected\n1 Root\nBody.\n",
+                layout="tree",
+                theme="academic",
+                base_dir=base_dir,
+                output_name="diagram",
+            )
+
+            self.assertEqual(result.output_svg, base_dir / "diagram.tree.svg")
+            self.assertTrue((base_dir / "diagram.tree.svg").exists())
+            self.assertFalse((base_dir / "redirected").exists())
+
     def test_save_text_writes_txt_file(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             base_dir = Path(tmp_dir)

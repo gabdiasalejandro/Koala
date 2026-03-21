@@ -345,7 +345,6 @@ Example:
 @size square
 @background #F7F4ED
 @show-node-numbers false
-@output-dir exports/tutorial_demo
 ```
 
 Accepted styles:
@@ -366,8 +365,6 @@ Current supported metadata keys:
 - `@size`
 - `@page-size`
 - `@background`
-- `@output-dir`
-- `@output_dir`
 - `@text_align`
 - `@show-node-numbers`
 - `@show_node_numbers`
@@ -388,6 +385,8 @@ Render options are resolved in this order:
 4. built-in default
 
 This means metadata is good for self-contained demo files, but the CLI and the library API can still override it.
+
+Output location is not part of document metadata anymore. Use CLI output flags, library output kwargs, or user config defaults for that.
 
 ### Disabling node numbers
 

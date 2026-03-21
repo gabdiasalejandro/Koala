@@ -1,20 +1,17 @@
 """Resolucion y persistencia de outputs del render.
 
 Este archivo concentra la parte file-oriented del pipeline:
-- combina override explicito, metadata y default externo
+- combina override explicito y defaults externos
 - construye el nombre final del archivo SVG
 - persiste el SVG serializado solo cuando el caller lo pide
 
-El default del output no vive aqui; lo recibe desde quien invoque el render.
+La politica de output ya no se resuelve desde metadata del documento.
 """
 
 from pathlib import Path
 
 from koala.core.models import ParsedDocument
 from koala.layout.models import LayoutKind
-from koala.render.context import MetadataValueResolver
-
-
 class RenderOutputResolver:
     """Resuelve la ruta final del SVG a partir de inputs ya conocidos."""
 
@@ -66,14 +63,11 @@ class RenderOutputResolver:
         output_dir_name: str | None,
         default_output_dir_name: str | None,
     ) -> str:
-        resolved_output_dir_name = (
-            output_dir_name
-            or MetadataValueResolver.resolve_value(parsed.metadata, "output-dir", "output_dir")
-            or default_output_dir_name
-        )
+        del parsed
+        resolved_output_dir_name = output_dir_name or default_output_dir_name
         if resolved_output_dir_name is None:
             raise ValueError(
-                "No se resolvio output_dir. Pasa un output explicito, metadata `@output-dir`, o un default externo."
+                "No se resolvio output_dir. Pasa un output explicito, `output_dir`, o un default externo."
             )
         return resolved_output_dir_name
 
