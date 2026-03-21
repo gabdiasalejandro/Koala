@@ -80,6 +80,11 @@ Radial supports connectors, but keep them sparse and short.
 
 Use them only when the relation adds meaning beyond simple branch membership.
 
+Rendering note:
+
+- radial relation labels are best when they stay compact
+- the final SVG cuts the edge around the label rather than drawing the line through the text
+
 Good examples:
 
 - `drives`

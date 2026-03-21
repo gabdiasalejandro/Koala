@@ -384,12 +384,19 @@ These are writing suggestions for the current engines, not hard syntax rules.
 - Works best when first-level branches are relatively balanced
 - A short root title plus balanced branches usually gives the cleanest result
 - `square` and `a4_landscape` usually give the best radial balance
+- Relation labels now work best when they stay sparse and short; the renderer cuts the edge around the label instead of letting the line pass underneath
 
 ### Page-size-specific suggestions
 
 - `a4`: better for taller structures and deeper trees
 - `a4_landscape`: best general-purpose option and current default
 - `square`: best when you want a denser, more centered composition
+
+If page size is not specified explicitly:
+
+- Koala does not auto-pick a page size from layout shape or content density
+- precedence is CLI/library argument, then metadata, then user config, then the internal default
+- the internal fallback remains `a4_landscape`
 
 ## Summary
 

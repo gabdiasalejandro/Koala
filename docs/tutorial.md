@@ -645,6 +645,13 @@ Current default page size:
 
 - `a4_landscape`
 
+This is a fixed fallback, not an automatic layout-specific choice:
+
+- explicit CLI or library `size` wins first
+- then `@size` or `@page-size`
+- then user config `default_size`
+- if none of those exist, Koala falls back to `a4_landscape`
+
 ### `square`
 
 Size:

@@ -262,6 +262,13 @@ Current text measurement behavior:
 
 The goal of those adjustments is not typographic exactness, but reducing right-edge overflow cases while keeping layout measurement deterministic and dependency-free.
 
+Current edge-label behavior:
+
+- `tree` and `synoptic_boxes` keep their label geometry tied to the orthogonal connector midpoint
+- `radial` resolves relation labels in a post-layout pass after node positions are final
+- for `radial`, the final scene bounds include relation-label bounds so viewport fitting accounts for them
+- the SVG backend renders radial labels by cutting the straight edge around the label area instead of drawing the line behind the text
+
 ## Why the architecture is structured this way
 
 The practical benefits of the current split are:

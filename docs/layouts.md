@@ -302,6 +302,14 @@ The endpoints are not box centers:
 
 This avoids lines crossing through node rectangles.
 
+Relation labels in `radial` are now resolved after node placement:
+
+- the node layout itself is not recomputed for labels
+- each label gets a collision-aware position near its edge
+- horizontal text is preferred; mild rotation is used only when it improves fit
+- the edge line is split around the label bounds so the final SVG reads like `---- label ---->`
+- label bounds are included in final scene bounds so page fitting does not crop them
+
 ### Page fitting behavior
 
 After scene construction:
@@ -318,7 +326,7 @@ After scene construction:
 | `tree` | Top-down | Subtree width | Orthogonal vertical-horizontal-vertical | Yes |
 | `synoptic_boxes` | Left-to-right | Subtree height | Orthogonal horizontal-vertical-horizontal | Yes |
 | `synoptic` | Left-to-right | Subtree height | Bracket polyline per child group | No |
-| `radial` | Center-out | Subtree weight + compacted per-node radius | Straight line from border anchor to border anchor | Yes |
+| `radial` | Center-out | Subtree weight + compacted per-node radius | Straight line from border anchor to border anchor, split around relation labels | Yes |
 
 ## Notes about current heuristics
 
@@ -327,6 +335,7 @@ Some layout behavior is intentionally heuristic rather than purely formulaic:
 - `tree` tries multiple compactness profiles before choosing a final scene
 - `tree` remeasures parents after final width selection
 - `radial` uses projected extents plus a post-placement collision-aware compaction pass
+- `radial` also resolves relation labels in a separate post-layout pass instead of feeding them back into node placement
 - shared text measurement is deterministic but approximate
 
 This is enough for stable diagram generation while keeping the system simple to modify.

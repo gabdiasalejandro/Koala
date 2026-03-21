@@ -34,6 +34,33 @@ class SvgTextRenderer:
             )
             self._root_group.add(target_group)
 
+        background_rect = None
+        if spec.background_fill and spec.lines:
+            text_width = max(
+                measure_text_width(line, spec.style.font_family, spec.style.font_size)
+                for line in spec.lines
+            )
+            rect_x = spec.x - (text_width / 2) - spec.background_padding_x
+            rect_y = spec.start_y - spec.style.font_size - spec.background_padding_y + 1.5
+            rect_width = text_width + (2 * spec.background_padding_x)
+            rect_height = (
+                spec.style.font_size
+                + ((len(spec.lines) - 1) * spec.line_step)
+                + (2 * spec.background_padding_y)
+            )
+            background_rect = self._dwg.rect(
+                insert=(rect_x, rect_y),
+                size=(rect_width, rect_height),
+                rx=spec.background_corner_radius,
+                ry=spec.background_corner_radius,
+                fill=spec.background_fill,
+                opacity=spec.background_opacity,
+            )
+            target_group.add(background_rect)
+
+        if spec.style.fill == "none":
+            return background_rect
+
         for index, line in enumerate(spec.lines):
             text_kwargs: dict[str, object] = {
                 "insert": (spec.x, spec.start_y + (index * spec.line_step)),
@@ -46,6 +73,8 @@ class SvgTextRenderer:
                 text_kwargs["font_weight"] = spec.style.font_weight
 
             target_group.add(self._dwg.text(line, **text_kwargs))
+
+        return background_rect
 
     def draw_line(self, spec: SvgTextLineSpec) -> None:
         if self._should_justify_line(spec):

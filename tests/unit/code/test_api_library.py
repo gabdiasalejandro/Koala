@@ -37,8 +37,8 @@ class LibraryApiTests(unittest.TestCase):
 
         self.assertTrue(radial_edges)
         self.assertTrue(any(edge.label_bounds is not None for edge in radial_edges))
-        self.assertTrue(any(abs(edge.label_angle) > 1e-3 for edge in radial_edges))
-        self.assertIn("rotate(", radial_result.svg)
+        self.assertTrue(all(abs(edge.label_angle) <= 35.0 for edge in radial_edges))
+        self.assertNotIn('opacity="0.4"', radial_result.svg)
 
         for edge in radial_edges:
             self.assertIsNotNone(edge.label_bounds)

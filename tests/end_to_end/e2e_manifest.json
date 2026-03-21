@@ -95,7 +95,7 @@
     },
     "case_id": "06_radial_academic_left_a4_numbers_on",
     "output_svg": "tests/end_to_end/output/academic/left/06_radial_a4_numbers_on.svg",
-    "size_bytes": 27421
+    "size_bytes": 27361
   },
   {
     "case": {
@@ -109,7 +109,7 @@
     },
     "case_id": "07_radial_academic_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/academic/justify/07_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 29666
+    "size_bytes": 29662
   },
   {
     "case": {
@@ -207,7 +207,7 @@
     },
     "case_id": "14_radial_default_left_square_numbers_on",
     "output_svg": "tests/end_to_end/output/default/left/14_radial_square_numbers_on.svg",
-    "size_bytes": 27448
+    "size_bytes": 27386
   },
   {
     "case": {
@@ -319,7 +319,7 @@
     },
     "case_id": "22_radial_frutal_left_a4_landscape_numbers_on",
     "output_svg": "tests/end_to_end/output/frutal/left/22_radial_a4_landscape_numbers_on.svg",
-    "size_bytes": 27186
+    "size_bytes": 27784
   },
   {
     "case": {
@@ -333,7 +333,7 @@
     },
     "case_id": "23_radial_frutal_justify_square_numbers_off",
     "output_svg": "tests/end_to_end/output/frutal/justify/23_radial_square_numbers_off.svg",
-    "size_bytes": 29661
+    "size_bytes": 29659
   },
   {
     "case": {
@@ -431,7 +431,7 @@
     },
     "case_id": "30_radial_jungle_left_a4_numbers_on",
     "output_svg": "tests/end_to_end/output/jungle/left/30_radial_a4_numbers_on.svg",
-    "size_bytes": 27421
+    "size_bytes": 27361
   },
   {
     "case": {
@@ -445,7 +445,7 @@
     },
     "case_id": "31_radial_jungle_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/jungle/justify/31_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 29666
+    "size_bytes": 29662
   },
   {
     "case": {
@@ -543,7 +543,7 @@
     },
     "case_id": "38_radial_terracotta_left_square_numbers_on",
     "output_svg": "tests/end_to_end/output/terracotta/left/38_radial_square_numbers_on.svg",
-    "size_bytes": 27448
+    "size_bytes": 27386
   },
   {
     "case": {

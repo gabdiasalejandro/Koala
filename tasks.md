@@ -1,1 +1,2 @@
--Hacer una rama para probar otras formas de renderizar los conectores en radial y synoptic_boxes
+-Refactor para volver a separar responsabilidades :(
+-Mejorar la posición de los labels en tree

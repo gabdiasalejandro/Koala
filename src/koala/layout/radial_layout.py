@@ -191,11 +191,9 @@ def resolve_radial_label_geometry(
         return (mid_x, mid_y - 2), preferred_width, 0.0, zero_bounds
 
     angle_aligned = normalize_label_angle(math.atan2(dy, dx))
-    angle_candidates = [angle_aligned]
-    if abs(angle_aligned) > math.radians(12):
-        angle_candidates.append(0.0)
-    else:
-        angle_candidates.extend([0.0, math.radians(90.0)])
+    angle_candidates = [0.0]
+    if len(lines) == 1 and math.radians(8) <= abs(angle_aligned) <= math.radians(35):
+        angle_candidates.append(angle_aligned)
 
     offset_candidates = [12.0, 20.0, 30.0, 42.0, 56.0, 72.0]
     tangent_shift_candidates = [0.0, 12.0, -12.0, 24.0, -24.0]
@@ -243,7 +241,11 @@ def resolve_radial_label_geometry(
                     score = (
                         collision_count,
                         total_overlap_area,
-                        offset + abs(tangent_shift) + (abs(angle) * 10.0) + (0.5 if normal_side < 0 else 0.0),
+                        offset
+                        + abs(tangent_shift)
+                        + (abs(angle) * 12.0)
+                        + (0.5 if normal_side < 0 else 0.0)
+                        + (4.0 if abs(angle) > 1e-3 else 0.0),
                     )
                     if best_choice is None or score < best_choice[3]:
                         best_choice = (

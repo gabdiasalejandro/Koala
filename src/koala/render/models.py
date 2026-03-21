@@ -205,6 +205,11 @@ class SvgTextBlockSpec:
     style: SvgTextStyle
     rotation_degrees: float = 0.0
     rotation_center: tuple[float, float] | None = None
+    background_fill: str | None = None
+    background_opacity: float = 1.0
+    background_padding_x: float = 0.0
+    background_padding_y: float = 0.0
+    background_corner_radius: float = 0.0
 
     def line_spec(self, index: int, line: str) -> SvgTextLineSpec:
         return SvgTextLineSpec(
