@@ -30,7 +30,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--version",
         action="version",
-        version="koala 1.2.3",
+        version="koala 1.2.4",
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
