@@ -39,13 +39,13 @@ koala compile example.txt --layout tree
 Install from PyPI:
 
 ```bash
-pip install koala-diagrams==1.2.1
+pip install koala-diagrams
 ```
 
 Or with `pipx`:
 
 ```bash
-pipx install koala-diagrams==1.2.1
+pipx install koala-diagrams
 ```
 
 ## Usage
