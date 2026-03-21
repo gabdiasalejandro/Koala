@@ -1,25 +1,56 @@
+@layout radial
+@theme academic
+@size square
 @text-align justify
 
-main:: 1 Koala Validation Matrix
-Exercises the full SVG pipeline with stable content so end to end assertions can verify output files, metadata resolution, and theme serialization without relying on fragile pixel checks.
+main:: 1 Análisis DuPont
+Modelo financiero que descompone la rentabilidad en factores clave para entender el desempeño empresarial.
 
-hl:: supports -> 1.1 Theme coverage
-Touches theme-owned colors on highlighted content and keeps relation labels visible in layouts that render them.
+focus:: supports -> 1.1 Rentabilidad (ROE)
+Mide la capacidad de generar beneficios sobre el capital propio.
 
-1.1.1 Default node sample
-Keeps a standard node in the tree so each render still includes the base palette alongside semantic overrides.
+hl:: 1.1.1 Margen Neto
+Indica qué porcentaje de ventas se convierte en utilidad.
 
-focus:: surfaces -> 1.2 Layout coverage
-Provides enough branches and depth for tree, synoptic, synoptic_boxes, and radial to build a meaningful scene instead of a trivial shape.
+hl:: 1.1.2 Rotación de Activos
+Evalúa la eficiencia en el uso de los activos para generar ingresos.
 
-1.2.1 Geometry checks
-Leaves one edge implicit so the test can confirm both explicit and implicit connector colors land in the final SVG.
+hl:: 1.1.3 Apalancamiento Financiero
+Refleja el uso de deuda para aumentar la rentabilidad.
 
-note:: documents -> 1.3 Metadata path
-Reads text alignment from metadata because that is the same resolution path real users hit when authoring source files.
+focus:: supports -> 1.2 Margen de Utilidad
+Relaciona la utilidad neta con las ventas totales.
 
-warn:: flags -> 1.4 Output expectations
-Confirms generated files exist, contain SVG markup, and serialize visual tokens that belong to the selected theme and layout.
+1.2.1 Control de Costos
+Impacto de gastos operativos en la rentabilidad.
 
-soft:: 1.5 Stable assertions
-Keeps the document compact, but still varied enough to exercise body text, title text, semantic kinds, and connector drawing in one pass.
+1.2.2 Eficiencia Operativa
+Optimización de procesos para mejorar márgenes.
+
+focus:: supports -> 1.3 Eficiencia Operativa
+Uso adecuado de los recursos para generar ingresos.
+
+1.3.1 Gestión de Activos
+Administración efectiva de activos circulantes y fijos.
+
+1.3.2 Productividad
+Capacidad de generar más output con menos recursos.
+
+focus:: supports -> 1.4 Estructura Financiera
+Composición entre deuda y capital propio.
+
+1.4.1 Nivel de Endeudamiento
+Grado en que la empresa depende de financiamiento externo.
+
+1.4.2 Costo de Capital
+Impacto del financiamiento en la rentabilidad.
+
+focus:: supports -> 1.5 Toma de Decisiones
+Uso del modelo para análisis estratégico.
+
+1.5.1 Identificación de Problemas
+Permite detectar debilidades en áreas específicas.
+
+1.5.2 Mejora del Desempeño
+Guía acciones para optimizar resultados financieros.
+

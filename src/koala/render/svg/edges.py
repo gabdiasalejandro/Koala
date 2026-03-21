@@ -29,7 +29,7 @@ class SvgEdgeRenderer:
         self._context = context
         self._text_renderer = text_renderer
 
-    def render(self) -> None:
+    def render(self, *, include_lines: bool = True, include_labels: bool = True) -> None:
         typography = self._context.settings.typography
         theme = self._context.settings.theme
         use_brackets_only = self._context.settings.layout_kind == "synoptic"
@@ -42,32 +42,33 @@ class SvgEdgeRenderer:
             stroke_color = theme.edge_color if has_explicit_relation else theme.implicit_edge_color
             stroke_width = 1.2 if has_explicit_relation else 1.75
 
-            if use_brackets_only and self._draw_synoptic_brace(edge.points, stroke_color):
+            if include_lines and use_brackets_only and self._draw_synoptic_brace(edge.points, stroke_color):
                 continue
 
-            if len(edge.points) == 2:
-                self._root_group.add(
-                    self._dwg.line(
-                        edge.points[0],
-                        edge.points[1],
-                        stroke=stroke_color,
-                        stroke_width=stroke_width,
+            if include_lines:
+                if len(edge.points) == 2:
+                    self._root_group.add(
+                        self._dwg.line(
+                            edge.points[0],
+                            edge.points[1],
+                            stroke=stroke_color,
+                            stroke_width=stroke_width,
+                        )
                     )
-                )
-            else:
-                self._root_group.add(
-                    self._dwg.polyline(
-                        points=edge.points,
-                        fill="none",
-                        stroke=stroke_color,
-                        stroke_width=stroke_width,
+                else:
+                    self._root_group.add(
+                        self._dwg.polyline(
+                            points=edge.points,
+                            fill="none",
+                            stroke=stroke_color,
+                            stroke_width=stroke_width,
+                        )
                     )
-                )
 
-            if not use_brackets_only:
-                self._draw_arrow(edge.points[-2], edge.points[-1], theme.edge_color)
+                if not use_brackets_only:
+                    self._draw_arrow(edge.points[-2], edge.points[-1], theme.edge_color)
 
-            if edge.relation_label and not use_brackets_only:
+            if include_labels and edge.relation_label and not use_brackets_only:
                 label_spec = SvgTextBlockSpec(
                     lines=wrap_text_lines(
                         edge.relation_label,
@@ -84,6 +85,15 @@ class SvgEdgeRenderer:
                         font_family=typography.body_font,
                         fill=theme.relation_color,
                         text_align="left",
+                    ),
+                    rotation_degrees=edge.label_angle,
+                    rotation_center=(
+                        None
+                        if edge.label_bounds is None
+                        else (
+                            (edge.label_bounds[0] + edge.label_bounds[2]) / 2,
+                            (edge.label_bounds[1] + edge.label_bounds[3]) / 2,
+                        )
                     ),
                 )
                 self._text_renderer.draw_centered_block(label_spec)

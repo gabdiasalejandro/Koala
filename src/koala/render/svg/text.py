@@ -26,6 +26,14 @@ class SvgTextRenderer:
             self.draw_line(spec.line_spec(index, line))
 
     def draw_centered_block(self, spec: SvgTextBlockSpec) -> None:
+        target_group = self._root_group
+        if abs(spec.rotation_degrees) > 1e-3:
+            center_x, center_y = spec.rotation_center or (spec.x, spec.start_y)
+            target_group = self._dwg.g(
+                transform=f"rotate({spec.rotation_degrees},{center_x},{center_y})"
+            )
+            self._root_group.add(target_group)
+
         for index, line in enumerate(spec.lines):
             text_kwargs: dict[str, object] = {
                 "insert": (spec.x, spec.start_y + (index * spec.line_step)),
@@ -37,7 +45,7 @@ class SvgTextRenderer:
             if spec.style.font_weight is not None:
                 text_kwargs["font_weight"] = spec.style.font_weight
 
-            self._root_group.add(self._dwg.text(line, **text_kwargs))
+            target_group.add(self._dwg.text(line, **text_kwargs))
 
     def draw_line(self, spec: SvgTextLineSpec) -> None:
         if self._should_justify_line(spec):

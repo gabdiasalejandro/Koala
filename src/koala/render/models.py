@@ -203,6 +203,8 @@ class SvgTextBlockSpec:
     line_step: float
     max_width: float
     style: SvgTextStyle
+    rotation_degrees: float = 0.0
+    rotation_center: tuple[float, float] | None = None
 
     def line_spec(self, index: int, line: str) -> SvgTextLineSpec:
         return SvgTextLineSpec(

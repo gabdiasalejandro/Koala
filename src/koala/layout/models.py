@@ -73,6 +73,8 @@ class LayoutEdge:
     relation_label: str
     label_pos: Tuple[float, float]
     label_max_width: float
+    label_angle: float = 0.0
+    label_bounds: Tuple[float, float, float, float] | None = None
 
 
 @dataclass

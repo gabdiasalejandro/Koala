@@ -25,7 +25,7 @@
     },
     "case_id": "01_tree_academic_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/academic/justify/01_tree_a4_landscape_numbers_off.svg",
-    "size_bytes": 24572
+    "size_bytes": 29900
   },
   {
     "case": {
@@ -53,7 +53,7 @@
     },
     "case_id": "03_synoptic_academic_justify_a4_numbers_off",
     "output_svg": "tests/end_to_end/output/academic/justify/03_synoptic_a4_numbers_off.svg",
-    "size_bytes": 19693
+    "size_bytes": 17529
   },
   {
     "case": {
@@ -81,7 +81,7 @@
     },
     "case_id": "05_synoptic_boxes_academic_justify_square_numbers_off",
     "output_svg": "tests/end_to_end/output/academic/justify/05_synoptic_boxes_square_numbers_off.svg",
-    "size_bytes": 24128
+    "size_bytes": 27014
   },
   {
     "case": {
@@ -95,7 +95,7 @@
     },
     "case_id": "06_radial_academic_left_a4_numbers_on",
     "output_svg": "tests/end_to_end/output/academic/left/06_radial_a4_numbers_on.svg",
-    "size_bytes": 26267
+    "size_bytes": 27421
   },
   {
     "case": {
@@ -109,7 +109,7 @@
     },
     "case_id": "07_radial_academic_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/academic/justify/07_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 24259
+    "size_bytes": 29666
   },
   {
     "case": {
@@ -137,7 +137,7 @@
     },
     "case_id": "09_tree_default_justify_a4_numbers_off",
     "output_svg": "tests/end_to_end/output/default/justify/09_tree_a4_numbers_off.svg",
-    "size_bytes": 25880
+    "size_bytes": 29900
   },
   {
     "case": {
@@ -165,7 +165,7 @@
     },
     "case_id": "11_synoptic_default_justify_square_numbers_off",
     "output_svg": "tests/end_to_end/output/default/justify/11_synoptic_square_numbers_off.svg",
-    "size_bytes": 19693
+    "size_bytes": 17527
   },
   {
     "case": {
@@ -193,7 +193,7 @@
     },
     "case_id": "13_synoptic_boxes_default_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/default/justify/13_synoptic_boxes_a4_landscape_numbers_off.svg",
-    "size_bytes": 24128
+    "size_bytes": 27014
   },
   {
     "case": {
@@ -207,7 +207,7 @@
     },
     "case_id": "14_radial_default_left_square_numbers_on",
     "output_svg": "tests/end_to_end/output/default/left/14_radial_square_numbers_on.svg",
-    "size_bytes": 26302
+    "size_bytes": 27448
   },
   {
     "case": {
@@ -221,7 +221,7 @@
     },
     "case_id": "15_radial_default_justify_a4_numbers_off",
     "output_svg": "tests/end_to_end/output/default/justify/15_radial_a4_numbers_off.svg",
-    "size_bytes": 24216
+    "size_bytes": 29694
   },
   {
     "case": {
@@ -249,7 +249,7 @@
     },
     "case_id": "17_tree_frutal_justify_square_numbers_off",
     "output_svg": "tests/end_to_end/output/frutal/justify/17_tree_square_numbers_off.svg",
-    "size_bytes": 24651
+    "size_bytes": 29900
   },
   {
     "case": {
@@ -277,7 +277,7 @@
     },
     "case_id": "19_synoptic_frutal_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/frutal/justify/19_synoptic_a4_landscape_numbers_off.svg",
-    "size_bytes": 19693
+    "size_bytes": 17527
   },
   {
     "case": {
@@ -305,7 +305,7 @@
     },
     "case_id": "21_synoptic_boxes_frutal_justify_a4_numbers_off",
     "output_svg": "tests/end_to_end/output/frutal/justify/21_synoptic_boxes_a4_numbers_off.svg",
-    "size_bytes": 24128
+    "size_bytes": 27016
   },
   {
     "case": {
@@ -319,7 +319,7 @@
     },
     "case_id": "22_radial_frutal_left_a4_landscape_numbers_on",
     "output_svg": "tests/end_to_end/output/frutal/left/22_radial_a4_landscape_numbers_on.svg",
-    "size_bytes": 26278
+    "size_bytes": 27186
   },
   {
     "case": {
@@ -333,7 +333,7 @@
     },
     "case_id": "23_radial_frutal_justify_square_numbers_off",
     "output_svg": "tests/end_to_end/output/frutal/justify/23_radial_square_numbers_off.svg",
-    "size_bytes": 24276
+    "size_bytes": 29661
   },
   {
     "case": {
@@ -361,7 +361,7 @@
     },
     "case_id": "25_tree_jungle_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/jungle/justify/25_tree_a4_landscape_numbers_off.svg",
-    "size_bytes": 24572
+    "size_bytes": 29900
   },
   {
     "case": {
@@ -389,7 +389,7 @@
     },
     "case_id": "27_synoptic_jungle_justify_a4_numbers_off",
     "output_svg": "tests/end_to_end/output/jungle/justify/27_synoptic_a4_numbers_off.svg",
-    "size_bytes": 19693
+    "size_bytes": 17529
   },
   {
     "case": {
@@ -417,7 +417,7 @@
     },
     "case_id": "29_synoptic_boxes_jungle_justify_square_numbers_off",
     "output_svg": "tests/end_to_end/output/jungle/justify/29_synoptic_boxes_square_numbers_off.svg",
-    "size_bytes": 24128
+    "size_bytes": 27014
   },
   {
     "case": {
@@ -431,7 +431,7 @@
     },
     "case_id": "30_radial_jungle_left_a4_numbers_on",
     "output_svg": "tests/end_to_end/output/jungle/left/30_radial_a4_numbers_on.svg",
-    "size_bytes": 26267
+    "size_bytes": 27421
   },
   {
     "case": {
@@ -445,7 +445,7 @@
     },
     "case_id": "31_radial_jungle_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/jungle/justify/31_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 24259
+    "size_bytes": 29666
   },
   {
     "case": {
@@ -473,7 +473,7 @@
     },
     "case_id": "33_tree_terracotta_justify_a4_numbers_off",
     "output_svg": "tests/end_to_end/output/terracotta/justify/33_tree_a4_numbers_off.svg",
-    "size_bytes": 25880
+    "size_bytes": 29900
   },
   {
     "case": {
@@ -501,7 +501,7 @@
     },
     "case_id": "35_synoptic_terracotta_justify_square_numbers_off",
     "output_svg": "tests/end_to_end/output/terracotta/justify/35_synoptic_square_numbers_off.svg",
-    "size_bytes": 19693
+    "size_bytes": 17527
   },
   {
     "case": {
@@ -529,7 +529,7 @@
     },
     "case_id": "37_synoptic_boxes_terracotta_justify_a4_landscape_numbers_off",
     "output_svg": "tests/end_to_end/output/terracotta/justify/37_synoptic_boxes_a4_landscape_numbers_off.svg",
-    "size_bytes": 24128
+    "size_bytes": 27014
   },
   {
     "case": {
@@ -543,7 +543,7 @@
     },
     "case_id": "38_radial_terracotta_left_square_numbers_on",
     "output_svg": "tests/end_to_end/output/terracotta/left/38_radial_square_numbers_on.svg",
-    "size_bytes": 26302
+    "size_bytes": 27448
   },
   {
     "case": {
@@ -557,6 +557,6 @@
     },
     "case_id": "39_radial_terracotta_justify_a4_numbers_off",
     "output_svg": "tests/end_to_end/output/terracotta/justify/39_radial_a4_numbers_off.svg",
-    "size_bytes": 24216
+    "size_bytes": 29694
   }
 ]

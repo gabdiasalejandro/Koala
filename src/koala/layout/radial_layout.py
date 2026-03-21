@@ -18,7 +18,14 @@ from typing import Dict, List, Tuple
 
 from koala.core.models import ConceptNode
 from koala.layout.models import LayoutBox, LayoutConfig, LayoutEdge, LayoutScene, TypographyConfig
-from koala.layout.shared import build_scene, iter_nodes, measure_nodes, sort_node_key
+from koala.layout.shared import (
+    build_scene,
+    iter_nodes,
+    measure_nodes,
+    measure_text_width,
+    sort_node_key,
+    wrap_text_lines,
+)
 
 
 def ordered_children(node: ConceptNode) -> List[ConceptNode]:
@@ -70,11 +77,205 @@ def rect_anchor_towards(box: LayoutBox, target_x: float, target_y: float) -> Tup
     return cx + (dx * t), cy + (dy * t)
 
 
+def normalize_label_angle(angle: float) -> float:
+    while angle <= -math.pi:
+        angle += 2 * math.pi
+    while angle > math.pi:
+        angle -= 2 * math.pi
+
+    if angle > math.pi / 2:
+        angle -= math.pi
+    elif angle < -math.pi / 2:
+        angle += math.pi
+
+    return angle
+
+
+def rects_overlap(
+    rect_a: Tuple[float, float, float, float],
+    rect_b: Tuple[float, float, float, float],
+    clearance: float,
+) -> bool:
+    return not (
+        (rect_a[2] + clearance) <= rect_b[0]
+        or (rect_b[2] + clearance) <= rect_a[0]
+        or (rect_a[3] + clearance) <= rect_b[1]
+        or (rect_b[3] + clearance) <= rect_a[1]
+    )
+
+
+def box_bounds(box: LayoutBox) -> Tuple[float, float, float, float]:
+    return box.x, box.y, box.x + box.width, box.y + box.height
+
+
+def edge_label_metrics(
+    label: str,
+    max_width: float,
+    typography: TypographyConfig,
+) -> Tuple[List[str], float, float]:
+    lines = wrap_text_lines(
+        label,
+        typography.body_font,
+        typography.relation_size,
+        max_width,
+    )
+    measured_width = max(
+        (measure_text_width(line, typography.body_font, typography.relation_size) for line in lines),
+        default=0.0,
+    )
+    measured_height = typography.relation_size + max(0.0, (len(lines) - 1) * (typography.relation_size + 1))
+    return lines, measured_width, measured_height
+
+
+def rotated_text_bounds(
+    center_x: float,
+    center_y: float,
+    width: float,
+    height: float,
+    angle: float,
+) -> Tuple[float, float, float, float]:
+    projected_half_width = (abs(math.cos(angle)) * width + abs(math.sin(angle)) * height) / 2
+    projected_half_height = (abs(math.sin(angle)) * width + abs(math.cos(angle)) * height) / 2
+    return (
+        center_x - projected_half_width,
+        center_y - projected_half_height,
+        center_x + projected_half_width,
+        center_y + projected_half_height,
+    )
+
+
+def resolve_radial_label_geometry(
+    label: str,
+    start: Tuple[float, float],
+    end: Tuple[float, float],
+    boxes: Dict[str, LayoutBox],
+    typography: TypographyConfig,
+    config: LayoutConfig,
+    occupied_bounds: List[Tuple[float, float, float, float]],
+) -> Tuple[Tuple[float, float], float, float, Tuple[float, float, float, float]]:
+    def overlap_area(
+        rect_a: Tuple[float, float, float, float],
+        rect_b: Tuple[float, float, float, float],
+    ) -> float:
+        overlap_w = min(rect_a[2], rect_b[2]) - max(rect_a[0], rect_b[0])
+        overlap_h = min(rect_a[3], rect_b[3]) - max(rect_a[1], rect_b[1])
+        if overlap_w <= 0 or overlap_h <= 0:
+            return 0.0
+        return overlap_w * overlap_h
+
+    dx = end[0] - start[0]
+    dy = end[1] - start[1]
+    distance = max(1e-6, math.hypot(dx, dy))
+    tangent_x = dx / distance
+    tangent_y = dy / distance
+    normal_x = -tangent_y
+    normal_y = tangent_x
+    mid_x = (start[0] + end[0]) / 2
+    mid_y = (start[1] + end[1]) / 2
+    center_x = config.page_width / 2
+    center_y = config.page_height / 2
+    radial_x = mid_x - center_x
+    radial_y = mid_y - center_y
+
+    if (normal_x * radial_x) + (normal_y * radial_y) < 0:
+        normal_x *= -1
+        normal_y *= -1
+
+    preferred_width = min(
+        max(70.0, measure_text_width(label, typography.body_font, typography.relation_size) + 10.0),
+        max(70.0, distance * 1.25),
+    )
+    lines, label_width, label_height = edge_label_metrics(label, preferred_width, typography)
+    if not lines:
+        zero_bounds = (mid_x, mid_y, mid_x, mid_y)
+        return (mid_x, mid_y - 2), preferred_width, 0.0, zero_bounds
+
+    angle_aligned = normalize_label_angle(math.atan2(dy, dx))
+    angle_candidates = [angle_aligned]
+    if abs(angle_aligned) > math.radians(12):
+        angle_candidates.append(0.0)
+    else:
+        angle_candidates.extend([0.0, math.radians(90.0)])
+
+    offset_candidates = [12.0, 20.0, 30.0, 42.0, 56.0, 72.0]
+    tangent_shift_candidates = [0.0, 12.0, -12.0, 24.0, -24.0]
+    normal_sides = [1.0, -1.0]
+    box_bounds_list = [box_bounds(box) for box in boxes.values()]
+    best_choice: Tuple[Tuple[float, float], float, Tuple[float, float, float, float], Tuple[int, float, float]] | None = None
+
+    for angle in angle_candidates:
+        for normal_side in normal_sides:
+            for offset in offset_candidates:
+                for tangent_shift in tangent_shift_candidates:
+                    candidate_center_x = (
+                        mid_x
+                        + (normal_x * offset * normal_side)
+                        + (tangent_x * tangent_shift)
+                    )
+                    candidate_center_y = (
+                        mid_y
+                        + (normal_y * offset * normal_side)
+                        + (tangent_y * tangent_shift)
+                    )
+                    candidate_bounds = rotated_text_bounds(
+                        candidate_center_x,
+                        candidate_center_y,
+                        label_width,
+                        label_height,
+                        angle,
+                    )
+
+                    collision_count = 0
+                    total_overlap_area = 0.0
+
+                    for candidate_box_bounds in box_bounds_list:
+                        if not rects_overlap(candidate_bounds, candidate_box_bounds, 4.0):
+                            continue
+                        collision_count += 1
+                        total_overlap_area += overlap_area(candidate_bounds, candidate_box_bounds)
+
+                    for other_bounds in occupied_bounds:
+                        if not rects_overlap(candidate_bounds, other_bounds, 3.0):
+                            continue
+                        collision_count += 1
+                        total_overlap_area += overlap_area(candidate_bounds, other_bounds)
+
+                    score = (
+                        collision_count,
+                        total_overlap_area,
+                        offset + abs(tangent_shift) + (abs(angle) * 10.0) + (0.5 if normal_side < 0 else 0.0),
+                    )
+                    if best_choice is None or score < best_choice[3]:
+                        best_choice = (
+                            (candidate_center_x, candidate_center_y),
+                            angle,
+                            candidate_bounds,
+                            score,
+                        )
+
+                    if collision_count == 0:
+                        break
+                if best_choice is not None and best_choice[3][0] == 0:
+                    break
+            if best_choice is not None and best_choice[3][0] == 0:
+                break
+        if best_choice is not None and best_choice[3][0] == 0:
+            break
+
+    assert best_choice is not None
+    chosen_center, chosen_angle, chosen_bounds, _ = best_choice
+    start_y = chosen_center[1] - (label_height / 2) + typography.relation_size
+    return (chosen_center[0], start_y), preferred_width, math.degrees(chosen_angle), chosen_bounds
+
+
 def build_radial_edges(
     root_nodes: List[ConceptNode],
     boxes: Dict[str, LayoutBox],
+    config: LayoutConfig,
+    typography: TypographyConfig,
 ) -> List[LayoutEdge]:
     edges: List[LayoutEdge] = []
+    occupied_label_bounds: List[Tuple[float, float, float, float]] = []
 
     for node in iter_nodes(root_nodes):
         if node.parent is None:
@@ -92,6 +293,22 @@ def build_radial_edges(
         mid_x = (start[0] + end[0]) / 2
         mid_y = (start[1] + end[1]) / 2
         distance = math.hypot(end[0] - start[0], end[1] - start[1])
+        label_pos = (mid_x, mid_y - 2)
+        label_max_width = max(70.0, distance * 0.8)
+        label_angle = 0.0
+        label_bounds = None
+
+        if node.relation_from_parent:
+            label_pos, label_max_width, label_angle, label_bounds = resolve_radial_label_geometry(
+                node.relation_from_parent,
+                start,
+                end,
+                boxes,
+                typography,
+                config,
+                occupied_label_bounds,
+            )
+            occupied_label_bounds.append(label_bounds)
 
         edges.append(
             LayoutEdge(
@@ -99,8 +316,10 @@ def build_radial_edges(
                 child_number=node.number,
                 points=[start, end],
                 relation_label=node.relation_from_parent,
-                label_pos=(mid_x, mid_y - 2),
-                label_max_width=max(70.0, distance * 0.8),
+                label_pos=label_pos,
+                label_max_width=label_max_width,
+                label_angle=label_angle,
+                label_bounds=label_bounds,
             )
         )
 
@@ -509,6 +728,6 @@ def build_radial_layout(
     boxes = measure_nodes(root_nodes, config, typography)
 
     assign_radial_positions(root_nodes, boxes, config)
-    edges = build_radial_edges(root_nodes, boxes)
+    edges = build_radial_edges(root_nodes, boxes, config, typography)
 
     return build_scene(boxes, edges)

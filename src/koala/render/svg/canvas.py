@@ -27,13 +27,16 @@ class SvgCanvasRenderer:
         dwg.add(root_group)
 
         text_renderer = SvgTextRenderer(dwg, root_group)
-        SvgEdgeRenderer(dwg, root_group, self._context, text_renderer).render()
+        edge_renderer = SvgEdgeRenderer(dwg, root_group, self._context, text_renderer)
+        edge_renderer.render(include_labels=False)
         node_renderer = SvgNodeRenderer(dwg, root_group, self._context, text_renderer)
 
         if self._context.settings.layout_kind == "synoptic":
             node_renderer.render_text_only_nodes()
         else:
             node_renderer.render_boxed_nodes()
+
+        edge_renderer.render(include_lines=False)
 
         if self._should_draw_warnings_footer():
             self._draw_warnings_footer(dwg)

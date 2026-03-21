@@ -13,6 +13,57 @@ import koala
 
 
 class LibraryApiTests(unittest.TestCase):
+    def test_radial_relation_labels_get_resolved_geometry_without_affecting_tree_edges(self) -> None:
+        source_text = (
+            "1 Root\n"
+            "Body.\n\n"
+            "supports -> 1.1 First branch\n"
+            "Body.\n\n"
+            "documents -> 1.2 Second branch\n"
+            "Body.\n\n"
+            "1.1.1 Leaf A\n"
+            "Body.\n\n"
+            "1.2.1 Leaf B\n"
+            "Body.\n"
+        )
+
+        radial_result = koala.render_text(
+            source_text,
+            layout="radial",
+            theme="academic",
+            size="a4",
+        )
+        radial_edges = [edge for edge in radial_result.context.scene.edges if edge.relation_label]
+
+        self.assertTrue(radial_edges)
+        self.assertTrue(any(edge.label_bounds is not None for edge in radial_edges))
+        self.assertTrue(any(abs(edge.label_angle) > 1e-3 for edge in radial_edges))
+        self.assertIn("rotate(", radial_result.svg)
+
+        for edge in radial_edges:
+            self.assertIsNotNone(edge.label_bounds)
+            assert edge.label_bounds is not None
+            for box in radial_result.context.scene.boxes.values():
+                overlaps = not (
+                    edge.label_bounds[2] <= box.x
+                    or (box.x + box.width) <= edge.label_bounds[0]
+                    or edge.label_bounds[3] <= box.y
+                    or (box.y + box.height) <= edge.label_bounds[1]
+                )
+                self.assertFalse(overlaps, f"El label '{edge.relation_label}' invadio el nodo {box.node.number}.")
+
+        tree_context = koala.inspect_text(
+            source_text,
+            layout="tree",
+            theme="academic",
+            size="a4",
+        )
+        tree_edges = [edge for edge in tree_context.scene.edges if edge.relation_label]
+
+        self.assertTrue(tree_edges)
+        self.assertTrue(all(edge.label_angle == 0.0 for edge in tree_edges))
+        self.assertTrue(all(edge.label_bounds is None for edge in tree_edges))
+
     def test_render_text_returns_svg_in_memory(self) -> None:
         result = koala.render_text(
             "1 Root\nBody.\n",

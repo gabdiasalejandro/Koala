@@ -303,8 +303,33 @@ def collect_bounds(boxes: Dict[str, LayoutBox]) -> Tuple[float, float, float, fl
     return left, top, right, bottom
 
 
-def build_scene(boxes: Dict[str, LayoutBox], edges: List[LayoutEdge]) -> LayoutScene:
+def collect_scene_bounds(
+    boxes: Dict[str, LayoutBox],
+    edges: List[LayoutEdge],
+) -> Tuple[float, float, float, float]:
     left, top, right, bottom = collect_bounds(boxes)
+
+    for edge in edges:
+        for x, y in edge.points:
+            left = min(left, x)
+            top = min(top, y)
+            right = max(right, x)
+            bottom = max(bottom, y)
+
+        if edge.label_bounds is None:
+            continue
+
+        label_left, label_top, label_right, label_bottom = edge.label_bounds
+        left = min(left, label_left)
+        top = min(top, label_top)
+        right = max(right, label_right)
+        bottom = max(bottom, label_bottom)
+
+    return left, top, right, bottom
+
+
+def build_scene(boxes: Dict[str, LayoutBox], edges: List[LayoutEdge]) -> LayoutScene:
+    left, top, right, bottom = collect_scene_bounds(boxes, edges)
     return LayoutScene(
         boxes=boxes,
         edges=edges,
