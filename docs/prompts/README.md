@@ -11,13 +11,11 @@ Each file is a self-contained prompt for an LLM specialized in one Koala layout:
 
 Each prompt includes:
 
-- the current DSL syntax
-- supported metadata options
-- available semantic kinds
-- layout-specific structure advice
-- page-size suggestions
-- node-count and depth guidance
+- the core DSL syntax
+- the numbering model
+- optional semantic kinds
+- the minimum layout-specific rules
 
 Use the prompt that matches the target layout. The generated answer should be Koala DSL only.
 
-As a general rule, prompts should avoid emitting `@show-node-numbers` unless the user explicitly asks for numbering behavior to be embedded in the document metadata.
+As a general rule, prompts should keep metadata minimal and only set the target `@layout` unless the user explicitly asks for additional settings.

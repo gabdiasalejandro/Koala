@@ -6,17 +6,13 @@ Output only valid Koala DSL.
 Do not explain your choices.
 Do not use Markdown fences.
 
-## Goal
-
-Generate a top-down conceptual hierarchy with clear parent-child branching.
-
-Use `tree` when the content is explanatory, hierarchical, or decompositional.
-
-## Core DSL Syntax
+## DSL Syntax
 
 Every node header follows this structure:
 
 `[kind::] [relation ->] number title`
+
+Body text is written on the following non-empty lines until the next node header.
 
 Examples:
 
@@ -26,17 +22,14 @@ Examples:
 
 `hl:: explains -> 1.2 Important Child`
 
-Body text is written on the following non-empty lines until the next node header.
-
-## Numbering Rules
+## Numbering
 
 - `1`, `2`, `3` are top-level roots
 - `1.1` is a child of `1`
 - `1.1.1` is a child of `1.1`
 - `0` can be used as an optional super-root
-- prefer a single root unless the user explicitly asks for multiple roots
 
-## Semantic Kinds
+## Kinds
 
 Available kinds:
 
@@ -47,105 +40,28 @@ Available kinds:
 - `warn`
 - `soft`
 
-Use them sparsely:
+Use them only when they add meaning. Untyped nodes are valid.
 
-- `main` for the root concept
-- `focus` for major sections
-- `hl` for important concepts
-- `note` for side observations
-- `warn` for errors, risks, or caveats
-- `soft` for secondary detail
+## Metadata
 
-Most nodes should stay untyped.
+Put metadata at the top with `@key value` or `@key: value`.
 
-## Metadata Options
+Set:
 
-Metadata goes at the top using `@key value` or `@key: value`.
+`@layout tree`
 
-Available metadata:
+Add other metadata only if the user explicitly asks for it.
 
-- `@layout`
-- `@theme`
-- `@typography`
-- `@text-align`
-- `@size`
-- `@page-size`
-- `@background`
-- `@show-node-numbers`
+## Layout Rule
 
-Useful values:
-
-- layouts: `tree`, `synoptic`, `synoptic_boxes`, `radial`
-- themes: `default`, `academic`, `terracotta`, `jungle`, `frutal`
-- typographies: `default`, `radial`
-- text align: `left`, `justify`
-- sizes: `a4`, `a4_landscape`, `square`
-- background: hex color such as `#F7F4ED`
-- show-node-numbers: `true` or `false`
-
-For this prompt, set `@layout tree`.
-Avoid `@show-node-numbers` unless the user explicitly asks to embed numbering behavior in metadata.
-
-## Connector Guidance
-
-Tree supports relation labels well.
-
-Use connectors only when they add meaning.
-When you use them:
-
-- keep them short
-- prefer verbs or short verbal phrases
-- stay under 3 words when possible
-
-Good examples:
-
-- `contains`
-- `explains`
-- `produces`
-- `depends on`
-
-## Structural Targets
-
-Use these targets unless the user explicitly asks otherwise:
-
-- total levels: 4 to 5
-- soft maximum levels: 6
-- recommended total nodes: 14 to 24
-- soft maximum nodes: 28
-- ideal root children: 3 to 5
-- avoid more than 7 siblings in any crowded row
-
-## Page-Size Suggestions
-
-- use `@size a4_landscape` by default
-- use `@size a4` for deeper trees
-- use `@size square` for shallow but wide maps
-
-## Writing Rules
-
-- keep titles short and conceptual
-- move explanation into body text
-- avoid long paragraphs
-- keep bodies concise, usually 1 to 3 short sentences
-- avoid lists inside node bodies
-- avoid repeating the parent title inside the child title
-
-## Preferred Planning Pattern
-
-Build the diagram in this order:
-
-1. one clear root
-2. major sections
-3. supporting details
-4. optional examples, notes, or warnings
+`tree` allows relation labels such as `contains ->` or `explains ->`.
+Use relation labels only when they add meaning.
 
 ## Output Template
 
 Start from a structure like this:
 
 @layout tree
-@theme academic
-@size a4_landscape
 
 main:: 1 Root Concept
 Short explanation of the whole topic.
@@ -161,7 +77,4 @@ Specific idea that belongs under the section.
 Before answering, make sure:
 
 - numbering is valid
-- depth stays controlled
-- titles are compact
-- connectors are meaningful and sparse
 - the result is only Koala DSL
