@@ -175,6 +175,72 @@ class ThemeCatalog:
             number_pill_bg="#F9E3D6",
             number_pill_text="#9B5B47",
         ),
+        "ocean": ThemeDefinition(
+            default_node=NodeStyle(
+                fill="#F0F8FF",
+                stroke="#2E86AB",
+                title="#0A3D5C",
+                body="#1A5274",
+            ),
+            kind_overrides={
+                "main": NodeStyleOverride(
+                    fill="#C8EEFF",
+                    stroke="#1A6E9A",
+                    title="#083050",
+                    body="#0F4468",
+                ),
+                "hl": NodeStyleOverride(
+                    fill="#D4F4F0",
+                    stroke="#1A9E8F",
+                    title="#0C4C48",
+                    body="#136060",
+                ),
+                "focus": NodeStyleOverride(
+                    fill="#DCF0FF",
+                    stroke="#2878C0",
+                    title="#0A2A5C",
+                    body="#123E78",
+                ),
+            },
+            edge_color="#5BA8C8",
+            implicit_edge_color="#3A7A98",
+            relation_color="#0A5A8C",
+            number_pill_bg="#D8EEF8",
+            number_pill_text="#2A6888",
+        ),
+        "dusk": ThemeDefinition(
+            default_node=NodeStyle(
+                fill="#FDF6FF",
+                stroke="#8B6BAE",
+                title="#3A1F6E",
+                body="#5A3A8A",
+            ),
+            kind_overrides={
+                "main": NodeStyleOverride(
+                    fill="#F0D8FF",
+                    stroke="#7040B0",
+                    title="#2E1060",
+                    body="#4A2878",
+                ),
+                "hl": NodeStyleOverride(
+                    fill="#FFE8F4",
+                    stroke="#C05898",
+                    title="#7A1850",
+                    body="#903068",
+                ),
+                "focus": NodeStyleOverride(
+                    fill="#FFE8D8",
+                    stroke="#C07040",
+                    title="#7A3810",
+                    body="#985030",
+                ),
+            },
+            edge_color="#A888C8",
+            implicit_edge_color="#786098",
+            relation_color="#7840A8",
+            number_pill_bg="#EDD8F8",
+            number_pill_text="#7848A8",
+        ),
         "academic": ThemeDefinition(
             default_node=NodeStyle(
                 fill="#FCFCFA",
