@@ -58,6 +58,8 @@ koala typographies
 koala compile docs/examples/tree.txt --layout tree --theme academic
 koala compile docs/examples/radial.txt --layout radial --theme frutal --size square
 koala compile docs/examples/tree.txt --background '#F7F4ED'
+koala export docs/examples/tree.txt --format png --quality high
+koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
 koala config-path
@@ -66,6 +68,7 @@ koala config-path
 Current CLI subcommands:
 
 - `compile`: render a source file to SVG
+- `export`: export a source file to SVG, PNG, or PDF
 - `inspect`: resolve metadata and settings without writing output
 - `validate`: validate parsing and settings; `--strict` fails on warnings
 - `themes`: list available themes
@@ -177,8 +180,53 @@ If `strict=True` and the parser emits warnings, `validate_text(...)` raises `koa
 
 - `koala.compile(path, **config)`: render from `.txt` or `.docx`
 - `koala.compile_text(text, **config)`: render from raw Koala DSL text
+- `koala.export_text(text, format="svg"|"png"|"pdf", **config)`: export raw Koala DSL text to bytes
+- `koala.export_file(path, format="svg"|"png"|"pdf", **config)`: export `.txt` or `.docx` source to bytes
 - `koala.inspect_text(text, **config)`: resolve `RenderContext` without writing SVG
 - `koala.validate_text(text, **config)`: resolve `RenderContext` and optionally fail on warnings
+
+### Export SVG, PNG, and decorated PDF
+
+Use export APIs when a server needs to send final bytes to a client.
+The SVG renderer remains the canonical source; PNG and PDF are produced from that SVG in memory.
+
+```python
+import koala
+
+source = """
+main:: 1 Product Map
+Direction and scope.
+
+supports -> 1.1 API
+In-memory export results.
+"""
+
+png = koala.export_text(
+    source,
+    format="png",
+    quality="high",
+    layout="tree",
+    theme="jungle",
+)
+
+pdf = koala.export_text(
+    source,
+    format="pdf",
+    quality="high",
+    layout="tree",
+    theme="jungle",
+)
+
+print(png.media_type, len(png.content))
+print(pdf.media_type, len(pdf.content))
+```
+
+PNG export is direct and quality-based:
+
+- `medium`: 150 DPI
+- `high`: 300 DPI
+
+PDF export is vector-based and always high quality. It adds a professional frame with margins, an accent line, and a title. If `title` is omitted, Koala uses the first `main::` node title; if there is no `main::` node, it uses the first root title.
 
 ## 4. Smallest useful document
 

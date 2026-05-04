@@ -55,6 +55,8 @@ pipx install koala-diagrams
 ```bash
 koala compile docs/examples/tree.txt --layout tree
 koala compile docs/examples/radial.txt --layout radial --theme jungle --size square
+koala export docs/examples/tree.txt --format png --quality high
+koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
 ```
@@ -91,16 +93,39 @@ source_path = koala.save_text(
 print(file_result.output_svg)
 print(svg_result.svg)
 print(source_path)
+
+png_result = koala.export_text(
+    "main:: 1 Central Topic\nMain explanation.\n",
+    format="png",
+    quality="high",
+    layout="tree",
+    theme="frutal",
+)
+
+pdf_result = koala.export_text(
+    "main:: 1 Central Topic\nMain explanation.\n",
+    format="pdf",
+    quality="high",
+    layout="tree",
+    theme="frutal",
+)
+
+print(png_result.media_type, len(png_result.content))
+print(pdf_result.media_type, len(pdf_result.content))
 ```
 
 Library API summary:
 
 - `koala.compile(path, **config)` or `koala.compile_file(path, **config)`: source file to `.svg`
 - `koala.render_text(text, **config)`: Koala DSL text to in-memory SVG via `result.svg`
+- `koala.export_text(text, format="svg"|"png"|"pdf", **config)`: Koala DSL text to in-memory export bytes via `result.content`
+- `koala.export_file(path, format="svg"|"png"|"pdf", **config)`: source file to in-memory export bytes
 - `koala.save_text(text, output, **config)`: raw Koala DSL text to `.txt`
 - `koala.compile_text(text, **config)`: legacy helper that still writes `.svg` to disk
 
 `RenderResult` now always includes the serialized SVG in `result.svg`. `result.output_svg` is only populated when the operation writes a file.
+`ExportResult` includes final bytes in `result.content`, the HTTP media type in `result.media_type`, and `result.output_path` when an explicit output is written.
+PNG export uses direct SVG conversion at `medium` or `high` quality. PDF export is vector-based and adds a professional frame with margins, a title resolved from the first `main::` node, and theme-aware colors.
 
 In general, avoid embedding `@show-node-numbers` in document metadata. Prefer CLI flags, library arguments, or user config defaults unless a file really needs to be self-descriptive about numbering.
 
@@ -132,6 +157,7 @@ hl:: 1.2 Highlighted Node
 - Theme system
 - CLI and Python API
 - SVG output to disk or in memory
+- In-memory SVG, PNG, and decorated PDF export
 
 ## Multiple Layouts
 

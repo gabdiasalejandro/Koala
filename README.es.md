@@ -54,6 +54,8 @@ koala layouts
 koala typographies
 koala compile docs/examples/tree.txt --layout tree
 koala compile docs/examples/radial.txt --layout radial --theme jungle --size square
+koala export docs/examples/tree.txt --format png --quality high
+koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
 koala config-path
@@ -100,6 +102,25 @@ validated = koala.validate_text("1 Root\nBody.\n", layout="tree", theme="academi
 
 print(len(context.parsed.node_index))
 print(len(validated.parsed.warnings))
+
+png_result = koala.export_text(
+    "main:: 1 Tema central\nExplicación principal.\n",
+    format="png",
+    quality="high",
+    layout="tree",
+    theme="frutal",
+)
+
+pdf_result = koala.export_text(
+    "main:: 1 Tema central\nExplicación principal.\n",
+    format="pdf",
+    quality="high",
+    layout="tree",
+    theme="frutal",
+)
+
+print(png_result.media_type, len(png_result.content))
+print(pdf_result.media_type, len(pdf_result.content))
 ```
 
 En general conviene evitar `@show-node-numbers` dentro de la metadata del documento. Es mejor controlar esa preferencia desde flags de CLI, argumentos de librería o config de usuario, salvo que el archivo necesite dejar esa intención embebida explícitamente.
@@ -141,6 +162,16 @@ Inputs aceptados por `koala.render_text(text, **config)`:
 - `use_user_config` y `user_config`
 - no escribe archivos; el SVG serializado queda en `result.svg`
 
+Inputs aceptados por `koala.export_text(text, format=..., **config)` y `koala.export_file(path, format=..., **config)`:
+
+- `format`: `svg`, `png` o `pdf`
+- `quality`: `medium` o `high` para PNG; PDF usa `high`
+- `title`: título explícito para PDF; si se omite, Koala usa el primer nodo `main::` o la primera raíz
+- `output`: ruta opcional para escribir el archivo además de retornar bytes
+- `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`, `background`
+- retornan `ExportResult.content`, `ExportResult.media_type`, `ExportResult.extension` y `ExportResult.output_path` cuando se escribe archivo
+- PNG se exporta directo desde el SVG canónico según calidad; PDF agrega marco profesional, márgenes, título y colores acordes al theme
+
 Inputs aceptados por `koala.save_text(text, output, **config)`:
 
 - `text`: contenido DSL de Koala en crudo
@@ -150,6 +181,7 @@ Inputs aceptados por `koala.save_text(text, output, **config)`:
 Subcomandos disponibles:
 
 - `compile`: renderiza un archivo fuente a SVG
+- `export`: exporta un archivo fuente a SVG, PNG o PDF
 - `inspect`: muestra metadata, warnings y settings resueltos
 - `validate`: valida parseo y settings; con `--strict` falla si hay warnings
 - `themes`: lista themes disponibles
@@ -193,6 +225,7 @@ Comportamiento de salida:
 - `--output-dir` escribe en una carpeta concreta
 - `--desktop` escribe en `~/Desktop` si existe; si no, cae de vuelta a la carpeta del input
 - `koala.render_text(...)` no escribe archivos; retorna el SVG serializado en memoria
+- `koala.export_text(...)` y `koala.export_file(...)` retornan bytes en memoria; si pasas `output`, también escriben el archivo
 - `koala.compile_text(...)` escribe por default en `<base_dir o cwd>/concept_map.<layout>.svg`
 - si pasas `output_name="demo"` a `koala.compile_text(...)`, el archivo por default será `<base_dir o cwd>/demo.<layout>.svg`
 - `koala.save_text(...)` escribe texto DSL a un `.txt`

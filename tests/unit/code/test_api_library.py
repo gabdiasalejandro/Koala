@@ -13,6 +13,17 @@ import koala
 
 
 class LibraryApiTests(unittest.TestCase):
+    EXPORT_SAMPLE_TEXT = (
+        "@theme jungle\n"
+        "@size a4_landscape\n\n"
+        "main:: 1 Strategic Map\n"
+        "High level direction for the product.\n\n"
+        "supports -> 1.1 API\n"
+        "Server-friendly exports in memory.\n\n"
+        "documents -> 1.2 Output\n"
+        "SVG, PNG, and decorated PDF.\n"
+    )
+
     def test_radial_relation_labels_get_resolved_geometry_without_affecting_tree_edges(self) -> None:
         source_text = (
             "1 Root\n"
@@ -149,6 +160,49 @@ class LibraryApiTests(unittest.TestCase):
             self.assertEqual(output_path, (base_dir / "drafts" / "example.txt").resolve())
             self.assertTrue(output_path.exists())
             self.assertEqual(output_path.read_text(encoding="utf-8"), "1 Root\nBody.\n")
+
+    def test_export_text_generates_svg_png_and_decorated_pdf_samples(self) -> None:
+        output_dir = ROOT_DIR / "output" / "export_samples"
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        svg = koala.export_text(
+            self.EXPORT_SAMPLE_TEXT,
+            format="svg",
+            layout="tree",
+            theme="jungle",
+            output=output_dir / "sample.svg",
+        )
+        png = koala.export_text(
+            self.EXPORT_SAMPLE_TEXT,
+            format="png",
+            quality="medium",
+            layout="tree",
+            theme="jungle",
+            output=output_dir / "sample.medium.png",
+        )
+        pdf = koala.export_text(
+            self.EXPORT_SAMPLE_TEXT,
+            format="pdf",
+            quality="high",
+            layout="tree",
+            theme="jungle",
+            output=output_dir / "sample.high.pdf",
+        )
+
+        self.assertEqual(svg.media_type, "image/svg+xml")
+        self.assertEqual(png.media_type, "image/png")
+        self.assertEqual(pdf.media_type, "application/pdf")
+        self.assertTrue(svg.content.startswith(b"<?xml") or b"<svg" in svg.content[:200])
+        self.assertTrue(png.content.startswith(b"\x89PNG\r\n\x1a\n"))
+        self.assertTrue(pdf.content.startswith(b"%PDF"))
+        self.assertEqual(svg.output_path, output_dir / "sample.svg")
+        self.assertEqual(png.output_path, output_dir / "sample.medium.png")
+        self.assertEqual(pdf.output_path, output_dir / "sample.high.pdf")
+        self.assertTrue(svg.output_path.exists())
+        self.assertTrue(png.output_path.exists())
+        self.assertTrue(pdf.output_path.exists())
+        self.assertGreater(len(png.content), len(svg.content))
+        self.assertGreater(len(pdf.content), 500)
 
 
 if __name__ == "__main__":

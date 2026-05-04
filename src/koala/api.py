@@ -12,7 +12,15 @@ from koala.core.models import ParseWarning
 from koala.core.parser import parse_concept_text
 from koala.layout.models import LayoutKind
 from koala.render.context import MetadataValueResolver, RenderContextBuilder
-from koala.render.models import RenderContext, RenderResult, SvgRenderRequest
+from koala.render.export import ExportConverter
+from koala.render.models import (
+    ExportFormat,
+    ExportQuality,
+    ExportResult,
+    RenderContext,
+    RenderResult,
+    SvgRenderRequest,
+)
 from koala.render.settings import DEFAULT_LAYOUT_KIND
 from koala.render.svg_render import render_svg
 from typing_extensions import Unpack
@@ -215,6 +223,73 @@ def render_text(text: str, **config: Unpack[ContextConfig]) -> RenderResult:
         user_config=resolved_user_config,
         desktop_fallback_dir=Path.cwd(),
     )
+
+
+def export_text(
+    text: str,
+    *,
+    format: ExportFormat = "pdf",
+    quality: ExportQuality = "high",
+    title: str | None = None,
+    output: str | Path | None = None,
+    **config: Unpack[ContextConfig],
+) -> ExportResult:
+    """Exporta texto Koala a SVG, PNG o PDF y retorna bytes en memoria.
+
+    PNG se exporta directamente desde el SVG canonico usando la calidad
+    solicitada. PDF aplica un marco profesional con titulo y paleta del theme.
+    Si `output` se pasa, tambien escribe el archivo y retorna `output_path`.
+    """
+
+    _validate_config_keys(config, _ALLOWED_CONTEXT_CONFIG_KEYS, "koala.export_text")
+    render = render_text(text, **config)
+    export = ExportConverter.convert(render, format=format, quality=quality, title=title)
+    if output is None:
+        return export
+    return ExportConverter.write(export, _resolve_export_output_path(output, Path.cwd()))
+
+
+def export_file(
+    path: str | Path,
+    *,
+    format: ExportFormat = "pdf",
+    quality: ExportQuality = "high",
+    title: str | None = None,
+    output: str | Path | None = None,
+    **config: Unpack[ContextConfig],
+) -> ExportResult:
+    """Exporta un archivo fuente Koala a SVG, PNG o PDF y retorna bytes."""
+
+    _validate_config_keys(config, _ALLOWED_CONTEXT_CONFIG_KEYS, "koala.export_file")
+
+    input_path = Path(path).expanduser().resolve()
+    resolved_user_config = _resolve_user_config(
+        config.get("use_user_config", False),
+        config.get("user_config"),
+    )
+    source_text = load_input_text(str(input_path))
+    render = _render_source_text(
+        source_text,
+        base_dir=input_path.parent,
+        default_output_file_name_stem=input_path.stem,
+        persist_output=False,
+        layout=config.get("layout"),
+        theme=config.get("theme"),
+        typography=config.get("typography"),
+        size=config.get("size"),
+        text_align=config.get("text_align"),
+        show_node_numbers=config.get("show_node_numbers"),
+        background=config.get("background"),
+        output=None,
+        output_dir=None,
+        desktop=False,
+        user_config=resolved_user_config,
+        desktop_fallback_dir=input_path.parent,
+    )
+    export = ExportConverter.convert(render, format=format, quality=quality, title=title)
+    if output is None:
+        return export
+    return ExportConverter.write(export, _resolve_export_output_path(output, input_path.parent))
 
 
 def save_text(text: str, output: str | Path, **config: Unpack[SaveTextConfig]) -> Path:
@@ -474,6 +549,13 @@ def _resolve_text_output_path(output: str | Path, base_dir: Path) -> Path:
         output_path = base_dir / output_path
     if output_path.suffix.lower() != ".txt":
         output_path = output_path.with_suffix(".txt")
+    return output_path.resolve()
+
+
+def _resolve_export_output_path(output: str | Path, base_dir: Path) -> Path:
+    output_path = Path(output).expanduser()
+    if not output_path.is_absolute():
+        output_path = base_dir / output_path
     return output_path.resolve()
 
 

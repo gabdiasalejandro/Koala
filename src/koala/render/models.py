@@ -137,6 +137,27 @@ class RenderResult:
     context: RenderContext
 
 
+ExportFormat = Literal["svg", "png", "pdf"]
+ExportQuality = Literal["medium", "high"]
+
+
+@dataclass(frozen=True)
+class ExportResult:
+    """Resultado observable de una exportacion lista para servidor o archivo.
+
+    `content` contiene los bytes finales. Para `svg`, son bytes UTF-8 del SVG.
+    `render` conserva el resultado SVG canonico usado como fuente.
+    """
+
+    content: bytes
+    media_type: str
+    extension: str
+    format: ExportFormat
+    quality: ExportQuality
+    render: RenderResult
+    output_path: Optional[Path] = None
+
+
 @dataclass(frozen=True)
 class SvgRenderRequest:
     """Parametros de entrada del pipeline SVG.

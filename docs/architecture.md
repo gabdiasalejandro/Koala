@@ -8,7 +8,7 @@ It is intentionally code-oriented: the goal is to describe what the system does 
 Koala now exposes two top-level usage surfaces:
 
 1. the installed CLI through `koala`
-2. the library API through `import koala`, `koala.compile(path, **config)`, `koala.compile_file(path, **config)`, `koala.render_text(text, **config)`, `koala.save_text(text, output, **config)`, `koala.compile_text(text, **config)`, `koala.inspect_text(text, **config)`, and `koala.validate_text(text, **config)`
+2. the library API through `import koala`, `koala.compile(path, **config)`, `koala.compile_file(path, **config)`, `koala.render_text(text, **config)`, `koala.export_text(text, **config)`, `koala.export_file(path, **config)`, `koala.save_text(text, output, **config)`, `koala.compile_text(text, **config)`, `koala.inspect_text(text, **config)`, and `koala.validate_text(text, **config)`
 
 The public package entry files live in:
 
@@ -29,6 +29,12 @@ Koala transforms structured text into an SVG in seven steps:
 5. `src/koala/render/context.py` combines metadata, user defaults, presets, layout, and viewport fitting into a `RenderContext`.
 6. `src/koala/render/svg_render.py` builds an in-memory SVG document and delegates drawing to `src/koala/render/svg/`.
 7. `src/koala/render/output.py` optionally resolves a filesystem target and persists the serialized SVG.
+
+Export APIs add an optional post-processing step after the canonical SVG exists:
+
+- SVG export returns the serialized SVG as UTF-8 bytes.
+- PNG export converts that SVG directly according to the selected quality.
+- PDF export wraps that SVG in a theme-aware PDF frame with margins and title, then converts the decorated SVG to vector PDF bytes.
 
 The strict separation is:
 
@@ -93,6 +99,7 @@ The same module also holds render-side style dataclasses such as:
 - `NodeStyle` and `NodeStyleOverride`
 - `ThemeDefinition` and `ThemeConfig`
 - `RenderResult`
+- `ExportResult`
 - `SvgRenderRequest`
 - SVG drawing specs used by `src/koala/render/svg/`
 
@@ -138,6 +145,7 @@ Internal flow inside `koala.layout` is:
 - `models.py`: render-side style models, resolved settings, viewport, and SVG draw specs
 - `context.py`: orchestration from parsed document metadata to `RenderContext`
 - `output.py`: output-path resolution and optional persistence for serialized SVG output
+- `export.py`: post-render conversion from canonical SVG to SVG, PNG, or decorated PDF bytes
 - `viewport.py`: fit scene to page size
 - `geometry.py`: small geometry helpers for rendering
 - `svg_render.py`: public render entrypoint and pipeline execution
@@ -155,12 +163,15 @@ Current behavior:
 - `koala.render_text(text, **config)` renders raw Koala DSL to SVG in memory
 - `koala.save_text(text, output, **config)` writes raw Koala DSL to a `.txt` file
 - `koala.compile_text(text, **config)` is kept as a legacy helper that still writes SVG to disk
+- `koala.export_text(text, **config)` renders raw Koala DSL to final SVG, PNG, or PDF bytes in memory
+- `koala.export_file(path, **config)` renders a source file to final SVG, PNG, or PDF bytes in memory
 - `koala.inspect_text(text, **config)` resolves a `RenderContext` without writing output
 - `koala.validate_text(text, **config)` also resolves a `RenderContext` and can raise `ValidationError` in strict mode
 - it validates accepted config keys before rendering
 - it can load user defaults through `src/koala/config.py`
 - all render entrypoints now produce the final SVG string in memory first
 - they return a `RenderResult` with `svg`, optional `output_svg`, and the resolved `RenderContext`
+- export entrypoints return an `ExportResult` with `content`, `media_type`, `extension`, optional `output_path`, and the underlying `RenderResult`
 - `compile_text(...)` resolves relative outputs against `base_dir` when provided, otherwise against `Path.cwd()`
 - explicit relative outputs for `compile_text(...)` are also resolved against `base_dir`
 - output location is now controlled only by explicit args and external defaults, not by document metadata
@@ -186,6 +197,15 @@ The current render orchestration is:
 9. when `persist_output=True`, `koala.render.output.RenderOutputResolver.resolve_svg_path(...)`
 10. when `persist_output=True`, `koala.render.output.RenderOutputWriter.write_svg(...)`
 
+The export flow is:
+
+1. `koala.export_text(...)`, `koala.export_file(...)`, or `koala export ...`
+2. the same SVG render flow above with `persist_output=False`
+3. `koala.render.export.ExportConverter.convert(...)`
+4. for `svg`, return UTF-8 SVG bytes
+5. for `png`, call CairoSVG against the canonical SVG at the selected DPI
+6. for `pdf`, build a decorated outer SVG with a title and theme-aware frame, then call CairoSVG PDF conversion
+
 This means the order is:
 
 - resolve explicit inputs, metadata, and user defaults
@@ -195,6 +215,7 @@ This means the order is:
 - draw SVG
 - serialize SVG in memory
 - optionally persist it to disk
+- optionally convert the SVG to export bytes without changing layout or the SVG backend
 
 Current precedence for render settings is:
 

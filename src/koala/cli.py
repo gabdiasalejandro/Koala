@@ -7,11 +7,13 @@ from pathlib import Path
 from typing import Sequence
 
 from koala.api import compile as compile_document
+from koala.api import export_file as export_document
 from koala.config import default_user_config_path, load_user_config
 from koala.core.io import load_input_text
 from koala.core.parser import parse_concept_text
 from koala.layout.models import LayoutKind
 from koala.render.context import RenderContextBuilder
+from koala.render.export import ExportConverter
 from koala.render.settings import (
     available_page_size_names,
     available_typography_names,
@@ -54,6 +56,38 @@ def build_parser() -> argparse.ArgumentParser:
         help="Envía la salida al escritorio del usuario.",
     )
     compile_parser.set_defaults(handler=_handle_compile)
+
+    export_parser = subparsers.add_parser(
+        "export",
+        help="Exporta un archivo .txt/.docx a SVG, PNG o PDF.",
+    )
+    _add_input_argument(export_parser)
+    _add_render_arguments(export_parser)
+    export_parser.add_argument(
+        "-f",
+        "--format",
+        choices=("svg", "png", "pdf"),
+        default="pdf",
+        help="Formato final de exportacion.",
+    )
+    export_parser.add_argument(
+        "-q",
+        "--quality",
+        choices=("medium", "high"),
+        default="high",
+        help="Calidad final. PNG soporta medium/high; PDF usa high.",
+    )
+    export_parser.add_argument(
+        "--title",
+        default=None,
+        help="Titulo del PDF. Si se omite, se usa el titulo del nodo main o la primera raiz.",
+    )
+    export_parser.add_argument(
+        "-o",
+        "--output",
+        help="Ruta final del archivo exportado.",
+    )
+    export_parser.set_defaults(handler=_handle_export)
 
     inspect_parser = subparsers.add_parser(
         "inspect",
@@ -185,6 +219,34 @@ def _handle_compile(args: argparse.Namespace) -> int:
     return 0
 
 
+def _handle_export(args: argparse.Namespace) -> int:
+    result = export_document(
+        args.input,
+        format=args.format,
+        quality=args.quality,
+        title=args.title,
+        layout=args.layout,
+        theme=args.theme,
+        typography=args.typography,
+        size=args.size,
+        text_align=args.text_align,
+        show_node_numbers=args.show_node_numbers,
+        background=args.background,
+        use_user_config=True,
+    )
+    output_path = args.output or _default_export_output_path(args.input, result)
+    result = ExportConverter.write(result, output_path)
+
+    print(f"Archivo exportado: {result.output_path}")
+    print(f"Formato: {result.format}")
+    print(f"Calidad: {result.quality}")
+    print(f"Media type: {result.media_type}")
+    print(f"Layout usado: {result.render.context.settings.layout_kind}")
+    print(f"Tema usado: {result.render.context.settings.theme_name}")
+    print(f"Nodos: {len(result.render.context.parsed.node_index)}")
+    return 0
+
+
 def _handle_inspect(args: argparse.Namespace) -> int:
     config = load_user_config()
     input_path, parsed = _load_parsed_document(args.input)
@@ -293,6 +355,12 @@ def _load_parsed_document(input_arg: str) -> tuple[Path, object]:
     input_path = Path(input_arg).expanduser().resolve()
     text = load_input_text(str(input_path))
     return input_path, parse_concept_text(text)
+
+
+def _default_export_output_path(input_arg: str, result) -> Path:
+    input_path = Path(input_arg).expanduser().resolve()
+    layout = result.render.context.settings.layout_kind
+    return input_path.parent / f"{input_path.stem}.{layout}.{result.extension}"
 
 
 def main(argv: Sequence[str] | None = None) -> int:
