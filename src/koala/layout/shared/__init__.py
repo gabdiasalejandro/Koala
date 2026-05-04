@@ -4,7 +4,6 @@ from koala.layout.shared.models import (
     LayoutBox,
     LayoutConfig,
     LayoutEdge,
-    LayoutKind,
     LayoutScene,
     TypographyConfig,
 )
@@ -22,7 +21,6 @@ __all__ = [
     "LayoutBox",
     "LayoutConfig",
     "LayoutEdge",
-    "LayoutKind",
     "LayoutScene",
     "TypographyConfig",
     "build_scene",

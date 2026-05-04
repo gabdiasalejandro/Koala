@@ -8,7 +8,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
-from koala.layout.shared.models import LayoutKind
+from koala.layout.tree.models import TreeLayoutKind
+from koala.layout.tree.registry import TREE_LAYOUTS
 from koala.render.shared.settings import available_page_size_names, available_typography_names
 from koala.render.shared.themes import available_theme_names
 
@@ -16,14 +17,17 @@ from koala.render.shared.themes import available_theme_names
 OutputMode = Literal["next_to_input", "desktop", "cwd"]
 _SUPPORTED_OUTPUT_MODES: tuple[OutputMode, ...] = ("next_to_input", "desktop", "cwd")
 _SUPPORTED_TEXT_ALIGNS = {"left", "justify"}
-_AVAILABLE_LAYOUTS: tuple[LayoutKind, ...] = ("tree", "synoptic", "synoptic_boxes", "radial")
+# El config de usuario hoy solo soporta layouts de `tree`. Cuando lleguen
+# layouts de otros tipos, esta lista deberia construirse desde el registry
+# de cada tipo, p.ej. `TREE_LAYOUTS + MATRIX_LAYOUTS`.
+_AVAILABLE_LAYOUTS: tuple[TreeLayoutKind, ...] = TREE_LAYOUTS
 
 
 @dataclass(frozen=True)
 class KoalaUserConfig:
     path: Path
     exists: bool
-    default_layout: LayoutKind | None = None
+    default_layout: TreeLayoutKind | None = None
     default_theme: str | None = None
     default_typography: str | None = None
     default_size: str | None = None

@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Literal, Mapping, Optional
 
 from koala.core.tree.models import ConceptNode, ParsedDocument
-from koala.layout.shared.models import LayoutBox, LayoutConfig, LayoutKind, LayoutScene, TypographyConfig
+from koala.layout.shared.models import LayoutBox, LayoutConfig, LayoutScene, TypographyConfig
 
 
 @dataclass(frozen=True)
@@ -91,7 +91,7 @@ class ThemeConfig:
 class RenderSettings:
     """Configuracion visual resuelta para una corrida de render."""
 
-    layout_kind: LayoutKind
+    layout_kind: str
     theme_name: str
     typography_name: str
     page_size_name: str
@@ -180,14 +180,14 @@ class SvgRenderRequest:
     output_dir_name: Optional[str] = None
     output_file_name: Optional[str] = None
     default_output_dir_name: Optional[str] = None
-    layout_kind: Optional[LayoutKind] = None
+    layout_kind: Optional[str] = None
     theme_name: Optional[str] = None
     typography_name: Optional[str] = None
     page_size_name: Optional[str] = None
     text_align: Optional[Literal["justify", "left"]] = None
     show_node_numbers: Optional[bool] = None
     background_color: Optional[str] = None
-    default_layout_kind: Optional[LayoutKind] = None
+    default_layout_kind: Optional[str] = None
     default_theme_name: Optional[str] = None
     default_typography_name: Optional[str] = None
     default_page_size_name: Optional[str] = None

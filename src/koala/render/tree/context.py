@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from koala.layout.shared.models import LayoutKind
+from koala.layout.tree.models import TreeLayoutKind
 from koala.layout.tree.registry import build_tree_layout_scene
 from koala.core.tree.models import ParsedDocument
 from koala.render.shared.context import RenderContextBuilder, RenderSettingsResolver
@@ -19,14 +19,14 @@ class TreeRenderContextBuilder:
     def build(
         cls,
         parsed: ParsedDocument,
-        layout_kind: Optional[LayoutKind] = None,
+        layout_kind: Optional[TreeLayoutKind] = None,
         theme_name: Optional[str] = None,
         typography_name: Optional[str] = None,
         page_size_name: Optional[PageSizeName] = None,
         text_align: Optional[str] = None,
         show_node_numbers: Optional[bool] = None,
         background_color: Optional[str] = None,
-        default_layout_kind: Optional[LayoutKind] = None,
+        default_layout_kind: Optional[TreeLayoutKind] = None,
         default_theme_name: Optional[str] = None,
         default_typography_name: Optional[str] = None,
         default_page_size_name: Optional[PageSizeName] = None,
@@ -35,6 +35,7 @@ class TreeRenderContextBuilder:
     ) -> RenderContext:
         settings = RenderSettingsResolver.resolve(
             parsed,
+            document_type="tree",
             layout_kind=layout_kind,
             theme_name=theme_name,
             typography_name=typography_name,

@@ -11,7 +11,8 @@ La politica de output ya no se resuelve desde metadata del documento.
 from pathlib import Path
 
 from koala.core.tree.models import ParsedDocument
-from koala.layout.shared.models import LayoutKind
+
+
 class RenderOutputResolver:
     """Resuelve la ruta final del SVG a partir de inputs ya conocidos."""
 
@@ -21,7 +22,7 @@ class RenderOutputResolver:
         *,
         base_dir: Path,
         parsed: ParsedDocument,
-        layout_kind: LayoutKind,
+        layout_kind: str,
         output_svg_path: Path | None,
         output_dir_name: str | None,
         output_file_name: str | None,

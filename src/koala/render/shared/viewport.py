@@ -5,9 +5,16 @@ Este archivo encapsula el ajuste final de la escena a pagina:
 - calcula escala util
 - decide si un layout puede expandirse
 - devuelve una sola transformacion reutilizable por el backend SVG
+
+Notas de acoplamiento:
+- `EXPANDABLE_LAYOUTS` es un set por nombre de layout que conoce
+  comportamientos de tipos concretos. Hoy solo enumera layouts de `tree`. Si
+  llegan layouts de otros tipos que necesitan expansion, este set debe pasar
+  a aceptar registracion desde cada `render/<tipo>/profiles.py` para no
+  hardcodear valores tree-especificos en `shared`.
 """
 
-from koala.layout.shared.models import LayoutConfig, LayoutKind, LayoutScene
+from koala.layout.shared.models import LayoutConfig, LayoutScene
 from koala.render.shared.models import ViewportTransform
 
 
@@ -20,7 +27,7 @@ class ViewportFitter:
     def fit(
         cls,
         scene: LayoutScene,
-        layout_kind: LayoutKind,
+        layout_kind: str,
         config: LayoutConfig,
     ) -> ViewportTransform:
         content_w = max(1.0, scene.content_right - scene.content_left)
@@ -53,7 +60,7 @@ class ViewportFitter:
     @classmethod
     def _resolve_extra_offsets(
         cls,
-        layout_kind: LayoutKind,
+        layout_kind: str,
         usable_w: float,
         usable_h: float,
         content_w: float,

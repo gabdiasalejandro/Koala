@@ -1,19 +1,22 @@
-"""Resolucion de presets no semanticos del render.
+"""Resolucion de presets no semanticos del render compartidos por todos los tipos.
 
-Este archivo mantiene separados de los themes:
-- perfiles por layout
-- configuraciones de layout
-- tipografias
-- tamaños de pagina
+Este archivo solo aloja:
+- presets de pagina (`PAGE_SIZES`)
+- nombres por defecto reutilizables
+- el `RenderProfile` y la funcion de resolucion `resolve(...)`
 
-El objetivo es que cambiar color, tipografia o geometria no mezcle registros
-con responsabilidades distintas.
+Los catalogos especificos de cada tipo de documento (layout configs,
+tipografias, profiles por layout) viven en `render/<tipo>/profiles.py`. Cada
+tipo registra su catalogo via `RenderProfileCatalog.register(...)` durante el
+import del paquete `render.<tipo>`.
+
+Esto evita que `shared` tenga que enumerar layouts de tipos concretos.
 """
 
 from dataclasses import dataclass, replace
 from typing import Dict, Literal, Optional
 
-from koala.layout.shared.models import LayoutConfig, LayoutKind, TypographyConfig
+from koala.layout.shared.models import LayoutConfig, TypographyConfig
 from koala.render.shared.models import RenderSettings
 from koala.render.shared.themes import DEFAULT_THEME_NAME, ThemeCatalog
 
@@ -23,90 +26,94 @@ A4_WIDTH = 210 * MM
 A4_HEIGHT = 297 * MM
 
 DEFAULT_SHOW_NODE_NUMBERS = False
-DEFAULT_LAYOUT_KIND: LayoutKind = "tree"
 PageSizeName = Literal["a4", "a4_landscape", "square"]
 DEFAULT_PAGE_SIZE: PageSizeName = "a4_landscape"
+
+# Default conservador, util para fallback. El default real lo aporta cada
+# tipo de documento desde su pipeline.
+DEFAULT_LAYOUT_KIND: str = "tree"
 
 
 @dataclass(frozen=True)
 class RenderProfile:
-    """Preset por layout que compone geometria, tipografia y theme default."""
+    """Preset por layout que compone geometria, tipografia y theme default.
 
-    layout_config_name: str
+    `typography_name` es el nombre canonico de la tipografia asociada al
+    profile, util para reportar settings ya resueltos sin invertir el lookup.
+    """
+
+    layout_config: LayoutConfig
+    typography: TypographyConfig
     typography_name: str
     theme_name: str = DEFAULT_THEME_NAME
 
 
+class RenderProfileCatalog:
+    """Registro central de profiles y tipografias por tipo de documento.
+
+    Cada tipo de documento llama a `register_profile(...)` y
+    `register_typography(...)` desde su `render/<tipo>/profiles.py`. La capa
+    shared solo orquesta lookup; no conoce los nombres de tipografia ni de
+    layout especificos.
+    """
+
+    _PROFILES: Dict[tuple[str, str], RenderProfile] = {}
+    _TYPOGRAPHIES: Dict[tuple[str, str], TypographyConfig] = {}
+
+    @classmethod
+    def register_profile(
+        cls, document_type: str, layout_kind: str, profile: RenderProfile
+    ) -> None:
+        cls._PROFILES[(document_type, layout_kind)] = profile
+
+    @classmethod
+    def register_typography(
+        cls, document_type: str, name: str, typography: TypographyConfig
+    ) -> None:
+        cls._TYPOGRAPHIES[(document_type, name)] = typography
+
+    @classmethod
+    def get_profile(cls, document_type: str, layout_kind: str) -> RenderProfile:
+        key = (document_type, layout_kind)
+        profile = cls._PROFILES.get(key)
+        if profile is None:
+            available = ", ".join(
+                sorted(f"{dt}/{lk}" for dt, lk in cls._PROFILES.keys())
+            )
+            raise ValueError(
+                f"profile para document_type='{document_type}' layout='{layout_kind}' "
+                f"no esta registrado. Disponibles: {available or '(ninguno)'}."
+            )
+        return profile
+
+    @classmethod
+    def get_typography(
+        cls, document_type: str, name: str
+    ) -> TypographyConfig:
+        typography = cls._TYPOGRAPHIES.get((document_type, name))
+        if typography is None:
+            available = ", ".join(
+                sorted(n for dt, n in cls._TYPOGRAPHIES.keys() if dt == document_type)
+            )
+            raise ValueError(
+                f"typography '{name}' no existe para document_type='{document_type}'. "
+                f"Disponibles: {available or '(ninguno)'}."
+            )
+        return typography
+
+    @classmethod
+    def available_layouts_for(cls, document_type: str) -> tuple[str, ...]:
+        return tuple(
+            sorted(layout for dt, layout in cls._PROFILES.keys() if dt == document_type)
+        )
+
+    @classmethod
+    def available_typography_names(cls) -> tuple[str, ...]:
+        return tuple(sorted({name for _dt, name in cls._TYPOGRAPHIES.keys()}))
+
+
 class RenderSettingsCatalog:
-    """Registro y resolucion central de settings de render."""
-
-    LAYOUT_CONFIGS: Dict[str, LayoutConfig] = {
-        "default": LayoutConfig(
-            page_width=A4_HEIGHT,
-            page_height=A4_WIDTH,
-            margin_x=12 * MM,
-            margin_y=12 * MM,
-            node_width_base=100 * MM,
-            min_node_width=34 * MM,
-            root_width_factor=1.5,
-            depth_width_reduction=0.10,
-            max_depth_reduction=0.35,
-            h_gap_base=9 * MM,
-            v_gap_base=10 * MM,
-            inner_pad_x=3.5 * MM,
-            inner_pad_y=2.8 * MM,
-            corner_radius=4.0,
-            title_body_gap=1.8 * MM,
-        ),
-    }
-    LAYOUT_CONFIGS["radial"] = replace(
-        LAYOUT_CONFIGS["default"],
-        node_width_base=58 * MM,
-        min_node_width=22 * MM,
-        root_width_factor=1.15,
-        depth_width_reduction=0,
-        max_depth_reduction=0.55,
-        h_gap_base=6 * MM,
-        v_gap_base=6 * MM,
-        inner_pad_x=2.6 * MM,
-        inner_pad_y=2.2 * MM,
-        title_body_gap=1.0 * MM,
-    )
-    LAYOUT_CONFIGS["synoptic"] = replace(
-        LAYOUT_CONFIGS["default"],
-        root_width_factor=1.0,
-    )
-
-    TYPOGRAPHIES: Dict[str, TypographyConfig] = {
-        "default": TypographyConfig(
-            title_font="Georgia",
-            body_font="Arial",
-            title_size_base=18.0,
-            title_size_min=16.5,
-            body_size=11.4,
-            relation_size=10.0,
-            body_leading=14.2,
-            max_title_lines=3,
-            title_line_extra=1.2,
-        ),
-    }
-    TYPOGRAPHIES["radial"] = replace(
-        TYPOGRAPHIES["default"],
-        title_font="Trebuchet MS",
-        body_font="Verdana",
-        title_size_base=16.8,
-        title_size_min=15.0,
-        body_size=10.8,
-        relation_size=9.8,
-        body_leading=13.4,
-    )
-
-    PROFILES: Dict[LayoutKind, RenderProfile] = {
-        "tree": RenderProfile(layout_config_name="default", typography_name="default"),
-        "synoptic": RenderProfile(layout_config_name="synoptic", typography_name="default"),
-        "synoptic_boxes": RenderProfile(layout_config_name="synoptic", typography_name="default"),
-        "radial": RenderProfile(layout_config_name="radial", typography_name="radial"),
-    }
+    """Resolucion central de settings de render compartidos."""
 
     PAGE_SIZES: Dict[PageSizeName, tuple[float, float]] = {
         "a4": (A4_WIDTH, A4_HEIGHT),
@@ -119,33 +126,26 @@ class RenderSettingsCatalog:
         return tuple(cls.PAGE_SIZES.keys())
 
     @classmethod
-    def available_typography_names(cls) -> tuple[str, ...]:
-        return tuple(sorted(cls.TYPOGRAPHIES.keys()))
-
-    @classmethod
     def resolve(
         cls,
-        layout_kind: LayoutKind,
+        layout_kind: str,
+        document_type: str = "tree",
         theme_name: Optional[str] = None,
         typography_name: Optional[str] = None,
         page_size_name: Optional[PageSizeName] = None,
         show_node_numbers: Optional[bool] = None,
     ) -> RenderSettings:
-        profile = cls.PROFILES[layout_kind]
+        profile = RenderProfileCatalog.get_profile(document_type, layout_kind)
         resolved_theme_name = theme_name or profile.theme_name
-        resolved_typography_name = typography_name or profile.typography_name
         resolved_page_size_name = page_size_name or DEFAULT_PAGE_SIZE
 
-        layout_config = cls._require_named_preset(
-            cls.LAYOUT_CONFIGS,
-            profile.layout_config_name,
-            preset_type="layout config",
-        )
-        typography = cls._require_named_preset(
-            cls.TYPOGRAPHIES,
-            resolved_typography_name,
-            preset_type="typography",
-        )
+        if typography_name is not None:
+            typography = RenderProfileCatalog.get_typography(document_type, typography_name)
+            resolved_typography_name = typography_name
+        else:
+            typography = profile.typography
+            resolved_typography_name = profile.typography_name
+
         theme = ThemeCatalog.resolve(resolved_theme_name)
         page_width, page_height = cls._require_named_preset(
             cls.PAGE_SIZES,
@@ -153,7 +153,7 @@ class RenderSettingsCatalog:
             preset_type="page size",
         )
         layout_config = replace(
-            layout_config,
+            profile.layout_config,
             page_width=page_width,
             page_height=page_height,
         )
@@ -185,4 +185,4 @@ def available_page_size_names() -> tuple[str, ...]:
 
 
 def available_typography_names() -> tuple[str, ...]:
-    return RenderSettingsCatalog.available_typography_names()
+    return RenderProfileCatalog.available_typography_names()

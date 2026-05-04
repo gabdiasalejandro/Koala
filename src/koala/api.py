@@ -11,7 +11,9 @@ from koala.core.shared.io import load_input_text
 from koala.core.tree.models import ParseWarning
 from koala.core.shared.registry import DocumentPipelineRegistry
 from koala.core.shared.types import DocumentType
-from koala.layout.shared.models import LayoutKind
+# `layout` es un identificador opaco a nivel API. Cada pipeline de documento
+# valida que el layout exista entre los suyos (por ejemplo `TREE_LAYOUTS`).
+LayoutKind = str
 from koala.render.shared.export import ExportConverter
 from koala.render.shared.models import (
     ExportFormat,

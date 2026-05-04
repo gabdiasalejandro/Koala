@@ -14,7 +14,7 @@ from dataclasses import replace
 from typing import Optional
 
 from koala.core.tree.models import ParsedDocument
-from koala.layout.shared.models import LayoutKind, LayoutScene
+from koala.layout.shared.models import LayoutScene
 from koala.render.shared.models import RenderContext, RenderSettings
 from koala.render.shared.settings import DEFAULT_LAYOUT_KIND, PageSizeName, RenderSettingsCatalog
 from koala.render.shared.viewport import ViewportFitter
@@ -105,14 +105,15 @@ class RenderSettingsResolver:
     def resolve(
         cls,
         parsed: ParsedDocument,
-        layout_kind: Optional[LayoutKind] = None,
+        document_type: str = "tree",
+        layout_kind: Optional[str] = None,
         theme_name: Optional[str] = None,
         typography_name: Optional[str] = None,
         page_size_name: Optional[PageSizeName] = None,
         text_align: Optional[str] = None,
         show_node_numbers: Optional[bool] = None,
         background_color: Optional[str] = None,
-        default_layout_kind: Optional[LayoutKind] = None,
+        default_layout_kind: Optional[str] = None,
         default_theme_name: Optional[str] = None,
         default_typography_name: Optional[str] = None,
         default_page_size_name: Optional[PageSizeName] = None,
@@ -145,6 +146,7 @@ class RenderSettingsResolver:
 
         settings = RenderSettingsCatalog.resolve(
             selected_layout,
+            document_type=document_type,
             theme_name=resolved_theme_name,
             typography_name=resolved_typography_name,
             page_size_name=resolved_page_size_name,
@@ -173,8 +175,8 @@ class RenderSettingsResolver:
     @staticmethod
     def _resolve_layout(
         parsed: ParsedDocument,
-        default_layout_kind: LayoutKind | None = None,
-    ) -> LayoutKind:
+        default_layout_kind: str | None = None,
+    ) -> str:
         return (
             MetadataValueResolver.resolve_value(parsed.metadata, "layout")
             or default_layout_kind

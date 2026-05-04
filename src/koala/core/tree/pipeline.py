@@ -14,7 +14,7 @@ from koala.core.tree.models import ParsedDocument
 from koala.core.tree.parser import parse_concept_text
 from koala.core.shared.errors import DocumentTypeMismatchError
 from koala.layout.tree.registry import TREE_LAYOUTS
-from koala.layout.shared.models import LayoutKind
+from koala.layout.tree.models import TreeLayoutKind
 from koala.render.tree.context import TreeRenderContextBuilder
 from koala.render.shared.context import MetadataValueResolver
 from koala.render.shared.models import RenderContext, RenderResult, SvgRenderRequest
@@ -29,7 +29,7 @@ class TreeDocumentPipeline:
     """Implementacion del flujo para documentos jerarquicos."""
 
     type_name: TreeDocumentType = "tree"
-    supported_layouts: tuple[LayoutKind, ...] = TREE_LAYOUTS
+    supported_layouts: tuple[TreeLayoutKind, ...] = TREE_LAYOUTS
 
     def parse(self, source_text: str) -> ParsedDocument:
         self._raise_if_known_non_tree_syntax(source_text)
@@ -48,7 +48,7 @@ class TreeDocumentPipeline:
         parsed: ParsedDocument,
         *,
         stem: str,
-        layout: LayoutKind | None,
+        layout: TreeLayoutKind | None,
         user_config: KoalaUserConfig,
     ) -> str:
         sanitized_stem = stem.strip() or "concept_map"
@@ -73,7 +73,7 @@ class TreeDocumentPipeline:
         output_dir_name: str | None,
         output_file_name: str | None,
         default_output_dir_name: str | None,
-        layout: LayoutKind | None,
+        layout: TreeLayoutKind | None,
         theme_name: str | None,
         typography_name: str | None,
         page_size_name: str | None,
@@ -111,7 +111,7 @@ class TreeDocumentPipeline:
         output_dir_name: str | None,
         output_file_name: str | None,
         default_output_dir_name: str | None,
-        layout: LayoutKind | None,
+        layout: TreeLayoutKind | None,
         theme_name: str | None,
         typography_name: str | None,
         page_size_name: str | None,
@@ -149,7 +149,7 @@ class TreeDocumentPipeline:
         self,
         source_text: str,
         *,
-        layout: LayoutKind | None,
+        layout: TreeLayoutKind | None,
         theme_name: str | None,
         typography_name: str | None,
         page_size_name: str | None,

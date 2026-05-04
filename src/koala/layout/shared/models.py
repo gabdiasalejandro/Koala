@@ -16,9 +16,6 @@ from typing import Dict, List, Literal, Tuple
 from koala.core.tree.models import ConceptNode
 
 
-LayoutKind = Literal["tree", "synoptic", "synoptic_boxes", "radial"]
-
-
 @dataclass(frozen=True)
 class TypographyConfig:
     title_font: str = "Helvetica-Bold"
