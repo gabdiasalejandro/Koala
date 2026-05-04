@@ -4,22 +4,25 @@ This document explains how each layout currently computes node positions and con
 
 ## Layout architecture
 
-The `src/koala/layout/` package is organized around a small geometry pipeline:
+Tree layouts live under `src/koala/layout/tree/`.
 
-1. `src/koala/layout/registry.py` selects the engine for the requested layout kind.
-2. `src/koala/layout/shared.py` handles common measurement, wrapping, depth-aware sizing, and scene-bound helpers.
-3. A concrete engine (`tree_layout.py`, `synoptic_layout.py`, `synoptic_boxes_layout.py`, or `radial_layout.py`) computes positions and edge geometry.
+The tree layout package is organized around a small geometry pipeline:
+
+1. `src/koala/layout/tree/registry.py` selects the engine for the requested tree layout kind.
+2. `src/koala/layout/shared/measurement.py` handles common measurement, wrapping, depth-aware sizing, and scene-bound helpers.
+3. A concrete engine (`tree.py`, `synoptic.py`, `synoptic_boxes.py`, or `radial.py`) computes positions and edge geometry.
 4. The engine returns a generic `LayoutScene` made of `LayoutBox` and `LayoutEdge`.
 
 This keeps a strict split:
 
-- `shared.py` owns common measurement rules
+- `layout/shared/measurement.py` owns common measurement rules
 - each engine owns only its own placement strategy
 - render code receives a layout-agnostic scene and does not know which engine produced it
 
 ## Shared concepts used by all layouts
 
-All layout engines start from `measure_nodes(...)` in `src/koala/layout/shared.py`.
+All tree layout engines start from `measure_nodes(...)` in
+`src/koala/layout/shared/measurement.py`.
 
 That shared step does the following:
 
@@ -56,7 +59,7 @@ Current impact on layout engines:
 
 ## Tree layout
 
-File: `src/koala/layout/tree_layout.py`
+File: `src/koala/layout/tree/tree.py`
 
 ### Goal
 
@@ -131,7 +134,7 @@ That means the tree engine first optimizes scene proportions, then the viewport 
 
 ## Synoptic boxes layout
 
-File: `src/koala/layout/synoptic_boxes_layout.py`
+File: `src/koala/layout/tree/synoptic_boxes.py`
 
 ### Goal
 
@@ -192,7 +195,7 @@ So `synoptic_boxes` already adapts to the target paper size at render time, but 
 
 ## Synoptic layout
 
-File: `src/koala/layout/synoptic_layout.py`
+File: `src/koala/layout/tree/synoptic.py`
 
 ### Goal
 
@@ -233,7 +236,7 @@ That means `synoptic` can be rendered on portrait, landscape, or square pages, b
 
 ## Radial layout
 
-File: `src/koala/layout/radial_layout.py`
+File: `src/koala/layout/tree/radial.py`
 
 ### Goal
 

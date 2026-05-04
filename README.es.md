@@ -50,10 +50,11 @@ Comandos básicos:
 
 ```bash
 koala themes
+koala types
 koala layouts
 koala typographies
-koala compile docs/examples/tree.txt --layout tree
-koala compile docs/examples/radial.txt --layout radial --theme jungle --size square
+koala compile docs/examples/tree.txt --type tree --layout tree
+koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
 koala export docs/examples/tree.txt --format png --quality high
 koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
@@ -70,6 +71,7 @@ import koala
 
 file_result = koala.compile(
     "docs/examples/radial.txt",
+    type="tree",
     layout="radial",
     theme="academic",
     size="square",
@@ -84,6 +86,7 @@ svg_result = koala.render_text(
     1.1 Primera rama
     Detalle de apoyo.
     """,
+    type="tree",
     layout="tree",
     theme="academic",
 )
@@ -98,13 +101,14 @@ print(svg_result.svg)
 print(text_path)
 
 context = koala.inspect_text("1 Root\nBody.\n", layout="tree", theme="academic")
-validated = koala.validate_text("1 Root\nBody.\n", layout="tree", theme="academic", strict=True)
+validated = koala.validate_text("1 Root\nBody.\n", type="tree", layout="tree", theme="academic", strict=True)
 
 print(len(context.parsed.node_index))
 print(len(validated.parsed.warnings))
 
 png_result = koala.export_text(
     "main:: 1 Tema central\nExplicación principal.\n",
+    type="tree",
     format="png",
     quality="high",
     layout="tree",
@@ -113,6 +117,7 @@ png_result = koala.export_text(
 
 pdf_result = koala.export_text(
     "main:: 1 Tema central\nExplicación principal.\n",
+    type="tree",
     format="pdf",
     quality="high",
     layout="tree",
@@ -128,6 +133,7 @@ En general conviene evitar `@show-node-numbers` dentro de la metadata del docume
 Inputs aceptados por `koala.compile(path, **config)`:
 
 - `path`: archivo fuente `.txt` o `.docx` a compilar
+- `type`: tipo de documento a parsear; por ahora `tree` y default `tree`
 - `layout`: uno de `tree`, `synoptic`, `synoptic_boxes`, `radial`
 - `theme`: nombre de theme como `academic`, `frutal`, `terracotta`, `default`, `jungle`
 - `typography`: nombre del preset tipográfico
@@ -151,14 +157,14 @@ Inputs aceptados por `koala.compile_text(text, **config)`:
 Inputs aceptados por `koala.inspect_text(text, **config)` y `koala.validate_text(text, **config)`:
 
 - `text`: contenido DSL de Koala en crudo
-- `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`
+- `type`, `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`
 - `use_user_config` y `user_config`
 - `strict`: solo para `validate_text(...)`; lanza `koala.ValidationError` si existen warnings del parser
 
 Inputs aceptados por `koala.render_text(text, **config)`:
 
 - `text`: contenido DSL de Koala en crudo
-- `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`, `background`
+- `type`, `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`, `background`
 - `use_user_config` y `user_config`
 - no escribe archivos; el SVG serializado queda en `result.svg`
 
@@ -168,7 +174,7 @@ Inputs aceptados por `koala.export_text(text, format=..., **config)` y `koala.ex
 - `quality`: `medium` o `high` para PNG; PDF usa `high`
 - `title`: título explícito para PDF; si se omite, Koala usa el primer nodo `main::` o la primera raíz
 - `output`: ruta opcional para escribir el archivo además de retornar bytes
-- `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`, `background`
+- `type`, `layout`, `theme`, `typography`, `size`, `text_align`, `show_node_numbers`, `background`
 - retornan `ExportResult.content`, `ExportResult.media_type`, `ExportResult.extension` y `ExportResult.output_path` cuando se escribe archivo
 - PNG se exporta directo desde el SVG canónico según calidad; PDF agrega marco profesional, márgenes, título y colores acordes al theme
 
@@ -185,6 +191,7 @@ Subcomandos disponibles:
 - `inspect`: muestra metadata, warnings y settings resueltos
 - `validate`: valida parseo y settings; con `--strict` falla si hay warnings
 - `themes`: lista themes disponibles
+- `types`: lista tipos de documento disponibles
 - `layouts`: lista layouts disponibles
 - `typographies`: lista presets tipográficos disponibles
 - `config-path`: muestra la ruta esperada de la config de usuario
@@ -230,6 +237,14 @@ Comportamiento de salida:
 - si pasas `output_name="demo"` a `koala.compile_text(...)`, el archivo por default será `<base_dir o cwd>/demo.<layout>.svg`
 - `koala.save_text(...)` escribe texto DSL a un `.txt`
 - `koala.inspect_text(...)` y `koala.validate_text(...)` no escriben archivos; solo resuelven y retornan contexto
+
+Tipos de documento:
+
+- `type="tree"` es el default y usa el DSL jerárquico actual
+- los layouts disponibles hoy son exclusivos de `tree`
+- si el DSL no coincide con el `type` solicitado, Koala lanza `DocumentTypeMismatchError`
+- la arquitectura interna está organizada por capas: `core/<type>`, `layout/<type>` y `render/<type>`
+- `core/shared`, `layout/shared` y `render/shared` contienen config, themes, tipografía, tamaño de página, background y export compartidos para futuros tipos como `matrix` o `flowchart`
 
 ## Documentación
 

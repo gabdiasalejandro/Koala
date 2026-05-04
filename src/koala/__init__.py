@@ -20,17 +20,25 @@ from koala.api import (
     save_text,
     validate_text,
 )
+from koala.core.shared import (
+    DocumentType,
+    DocumentTypeMismatchError,
+    UnknownDocumentTypeError,
+)
 
 __all__ = [
     "CompileConfig",
     "CompileTextConfig",
     "ContextConfig",
+    "DocumentType",
+    "DocumentTypeMismatchError",
     "ExportFormat",
     "ExportQuality",
     "ExportResult",
     "SaveTextConfig",
     "ValidateTextConfig",
     "ValidationError",
+    "UnknownDocumentTypeError",
     "compile",
     "compile_file",
     "compile_text",

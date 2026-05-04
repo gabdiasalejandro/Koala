@@ -96,6 +96,35 @@ class LibraryApiTests(unittest.TestCase):
 
         self.assertFalse(result.context.settings.show_node_numbers)
 
+    def test_render_text_accepts_explicit_tree_type(self) -> None:
+        result = koala.render_text(
+            "1 Root\nBody.\n",
+            type="tree",
+            layout="tree",
+            theme="academic",
+        )
+
+        self.assertEqual(result.document_type, "tree")
+        self.assertEqual(result.context.settings.layout_kind, "tree")
+
+    def test_render_text_rejects_unknown_document_type(self) -> None:
+        with self.assertRaises(koala.UnknownDocumentTypeError):
+            koala.render_text(
+                "1 Root\nBody.\n",
+                type="matrix",
+                layout="tree",
+                theme="academic",
+            )
+
+    def test_tree_type_rejects_matrix_syntax(self) -> None:
+        with self.assertRaises(koala.DocumentTypeMismatchError):
+            koala.render_text(
+                "matrix:: Comparison\ncolumns:: A | B\nrow:: Cost | Low\n",
+                type="tree",
+                layout="tree",
+                theme="academic",
+            )
+
     def test_compile_text_legacy_persists_svg_and_returns_svg_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             base_dir = Path(tmp_dir)

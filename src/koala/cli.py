@@ -8,20 +8,21 @@ from typing import Sequence
 
 from koala.api import compile as compile_document
 from koala.api import export_file as export_document
+from koala.api import inspect_text as inspect_document_text
 from koala.config import default_user_config_path, load_user_config
-from koala.core.io import load_input_text
-from koala.core.parser import parse_concept_text
-from koala.layout.models import LayoutKind
-from koala.render.context import RenderContextBuilder
-from koala.render.export import ExportConverter
-from koala.render.settings import (
+from koala.core.shared.io import load_input_text
+from koala.core.shared.registry import DocumentPipelineRegistry
+from koala.layout.tree import TREE_LAYOUTS
+from koala.render.shared.export import ExportConverter
+from koala.render.shared.settings import (
     available_page_size_names,
     available_typography_names,
 )
-from koala.render.themes import available_theme_names
+from koala.render.shared.themes import available_theme_names
 
 
-AVAILABLE_LAYOUTS: tuple[LayoutKind, ...] = ("tree", "synoptic", "synoptic_boxes", "radial")
+AVAILABLE_DOCUMENT_TYPES = DocumentPipelineRegistry.available_types()
+AVAILABLE_TREE_LAYOUTS = TREE_LAYOUTS
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -113,7 +114,10 @@ def build_parser() -> argparse.ArgumentParser:
     themes_parser = subparsers.add_parser("themes", help="Lista los themes disponibles.")
     themes_parser.set_defaults(handler=_handle_themes)
 
-    layouts_parser = subparsers.add_parser("layouts", help="Lista los layouts disponibles.")
+    types_parser = subparsers.add_parser("types", help="Lista los tipos de documento disponibles.")
+    types_parser.set_defaults(handler=_handle_types)
+
+    layouts_parser = subparsers.add_parser("layouts", help="Lista los layouts disponibles para tree.")
     layouts_parser.set_defaults(handler=_handle_layouts)
 
     typographies_parser = subparsers.add_parser(
@@ -137,11 +141,18 @@ def _add_input_argument(parser: argparse.ArgumentParser) -> None:
 
 def _add_render_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
+        "--type",
+        choices=AVAILABLE_DOCUMENT_TYPES,
+        default="tree",
+        dest="document_type",
+        help="Tipo de documento a parsear. Por ahora disponible: tree.",
+    )
+    parser.add_argument(
         "-l",
         "--layout",
-        choices=AVAILABLE_LAYOUTS,
+        choices=AVAILABLE_TREE_LAYOUTS,
         default=None,
-        help="Layout a usar. Precedencia: CLI > metadata > config de usuario > default interno.",
+        help="Layout a usar para documentos tree. Precedencia: CLI > metadata > config de usuario > default interno.",
     )
     parser.add_argument(
         "-t",
@@ -194,6 +205,7 @@ def _add_render_arguments(parser: argparse.ArgumentParser) -> None:
 def _handle_compile(args: argparse.Namespace) -> int:
     result = compile_document(
         args.input,
+        type=args.document_type,
         layout=args.layout,
         theme=args.theme,
         typography=args.typography,
@@ -225,6 +237,7 @@ def _handle_export(args: argparse.Namespace) -> int:
         format=args.format,
         quality=args.quality,
         title=args.title,
+        type=args.document_type,
         layout=args.layout,
         theme=args.theme,
         typography=args.typography,
@@ -249,25 +262,23 @@ def _handle_export(args: argparse.Namespace) -> int:
 
 def _handle_inspect(args: argparse.Namespace) -> int:
     config = load_user_config()
-    input_path, parsed = _load_parsed_document(args.input)
-    context = RenderContextBuilder.build(
-        parsed,
-        layout_kind=args.layout,
-        theme_name=args.theme,
-        typography_name=args.typography,
-        page_size_name=args.size,
+    input_path, text = _load_input_text(args.input)
+    context = inspect_document_text(
+        text,
+        type=args.document_type,
+        layout=args.layout,
+        theme=args.theme,
+        typography=args.typography,
+        size=args.size,
         text_align=args.text_align,
         show_node_numbers=args.show_node_numbers,
-        background_color=args.background,
-        default_layout_kind=config.default_layout,
-        default_theme_name=config.default_theme,
-        default_typography_name=config.default_typography,
-        default_page_size_name=config.default_size,
-        default_text_align=config.default_text_align,
-        default_show_node_numbers=config.default_show_node_numbers,
+        background=args.background,
+        user_config=config,
     )
+    parsed = context.parsed
 
     print(f"Input: {input_path}")
+    print(f"Tipo de documento: {args.document_type}")
     print(f"Config path: {config.path}")
     print(f"Config cargada: {'si' if config.exists else 'no'}")
     print(f"Raices: {len(parsed.root_nodes)}")
@@ -292,25 +303,23 @@ def _handle_inspect(args: argparse.Namespace) -> int:
 
 def _handle_validate(args: argparse.Namespace) -> int:
     config = load_user_config()
-    input_path, parsed = _load_parsed_document(args.input)
-    context = RenderContextBuilder.build(
-        parsed,
-        layout_kind=args.layout,
-        theme_name=args.theme,
-        typography_name=args.typography,
-        page_size_name=args.size,
+    input_path, text = _load_input_text(args.input)
+    context = inspect_document_text(
+        text,
+        type=args.document_type,
+        layout=args.layout,
+        theme=args.theme,
+        typography=args.typography,
+        size=args.size,
         text_align=args.text_align,
         show_node_numbers=args.show_node_numbers,
-        background_color=args.background,
-        default_layout_kind=config.default_layout,
-        default_theme_name=config.default_theme,
-        default_typography_name=config.default_typography,
-        default_page_size_name=config.default_size,
-        default_text_align=config.default_text_align,
-        default_show_node_numbers=config.default_show_node_numbers,
+        background=args.background,
+        user_config=config,
     )
+    parsed = context.parsed
 
     print(f"Validacion OK: {input_path}")
+    print(f"Tipo: {args.document_type}")
     print(f"Layout: {context.settings.layout_kind}")
     print(f"Theme: {context.settings.theme_name}")
     print(f"Tipografia: {context.settings.typography_name}")
@@ -334,8 +343,14 @@ def _handle_themes(_: argparse.Namespace) -> int:
     return 0
 
 
+def _handle_types(_: argparse.Namespace) -> int:
+    for name in AVAILABLE_DOCUMENT_TYPES:
+        print(name)
+    return 0
+
+
 def _handle_layouts(_: argparse.Namespace) -> int:
-    for name in AVAILABLE_LAYOUTS:
+    for name in AVAILABLE_TREE_LAYOUTS:
         print(name)
     return 0
 
@@ -351,10 +366,10 @@ def _handle_config_path(_: argparse.Namespace) -> int:
     return 0
 
 
-def _load_parsed_document(input_arg: str) -> tuple[Path, object]:
+def _load_input_text(input_arg: str) -> tuple[Path, str]:
     input_path = Path(input_arg).expanduser().resolve()
     text = load_input_text(str(input_path))
-    return input_path, parse_concept_text(text)
+    return input_path, text
 
 
 def _default_export_output_path(input_arg: str, result) -> Path:

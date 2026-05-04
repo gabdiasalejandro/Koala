@@ -8,8 +8,8 @@ SRC_DIR = ROOT_DIR / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from koala.core.parser import parse_concept_text
-from koala.render.context import RenderContextBuilder
+from koala.core.tree.parser import parse_concept_text
+from koala.render.tree.context import TreeRenderContextBuilder
 
 
 class RenderBackgroundTests(unittest.TestCase):
@@ -22,7 +22,7 @@ class RenderBackgroundTests(unittest.TestCase):
             """
         )
 
-        context = RenderContextBuilder.build(parsed)
+        context = TreeRenderContextBuilder.build(parsed)
 
         self.assertEqual(context.settings.background_color, "#F7F4ED")
 
@@ -35,7 +35,7 @@ class RenderBackgroundTests(unittest.TestCase):
             """
         )
 
-        context = RenderContextBuilder.build(parsed, background_color="#f1f7fb")
+        context = TreeRenderContextBuilder.build(parsed, background_color="#f1f7fb")
 
         self.assertEqual(context.settings.background_color, "#F1F7FB")
 
@@ -49,7 +49,7 @@ class RenderBackgroundTests(unittest.TestCase):
         )
 
         with self.assertRaises(ValueError):
-            RenderContextBuilder.build(parsed)
+            TreeRenderContextBuilder.build(parsed)
 
 
 if __name__ == "__main__":

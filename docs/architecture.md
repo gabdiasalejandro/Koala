@@ -1,16 +1,19 @@
 # Architecture
 
-This document explains the current architecture of Koala as implemented in the codebase.
-It is intentionally code-oriented: the goal is to describe what the system does now, not an aspirational design.
+Koala is organized by layers first and document types second.
+
+The project has three main implementation layers:
+
+- `core/`: source loading, document type registry, parser models, parsers, and pipelines
+- `layout/`: layout contracts, measurement helpers, and geometry engines
+- `render/`: render settings, themes, viewport fitting, SVG drawing, output writing, and export conversion
+
+Inside each layer, type-specific code lives in a folder named after the document
+type. Shared code lives in `shared/`.
 
 ## Public entry points
 
-Koala now exposes two top-level usage surfaces:
-
-1. the installed CLI through `koala`
-2. the library API through `import koala`, `koala.compile(path, **config)`, `koala.compile_file(path, **config)`, `koala.render_text(text, **config)`, `koala.export_text(text, **config)`, `koala.export_file(path, **config)`, `koala.save_text(text, output, **config)`, `koala.compile_text(text, **config)`, `koala.inspect_text(text, **config)`, and `koala.validate_text(text, **config)`
-
-The public package entry files live in:
+The public package entry files are:
 
 - `src/koala/__init__.py`
 - `src/koala/__main__.py`
@@ -18,204 +21,165 @@ The public package entry files live in:
 - `src/koala/cli.py`
 - `src/koala/config.py`
 
-## High-level pipeline
+The main library entrypoints are:
 
-Koala transforms structured text into an SVG in seven steps:
+- `koala.compile(path, **config)` / `koala.compile_file(path, **config)`
+- `koala.render_text(text, **config)`
+- `koala.export_text(text, **config)` / `koala.export_file(path, **config)`
+- `koala.save_text(text, output, **config)`
+- `koala.compile_text(text, **config)`
+- `koala.inspect_text(text, **config)`
+- `koala.validate_text(text, **config)`
 
-1. `src/koala/api.py` or `src/koala/cli.py` collects explicit user inputs.
-2. `src/koala/core/io.py` loads source text from `.txt` or `.docx`.
-3. `src/koala/core/parser.py` converts raw text into a `ParsedDocument`.
-4. `src/koala/layout/` turns the parsed node tree into a geometric `LayoutScene`.
-5. `src/koala/render/context.py` combines metadata, user defaults, presets, layout, and viewport fitting into a `RenderContext`.
-6. `src/koala/render/svg_render.py` builds an in-memory SVG document and delegates drawing to `src/koala/render/svg/`.
-7. `src/koala/render/output.py` optionally resolves a filesystem target and persists the serialized SVG.
+## Document type policy
 
-Export APIs add an optional post-processing step after the canonical SVG exists:
+The caller chooses the document type explicitly through the API or CLI:
 
-- SVG export returns the serialized SVG as UTF-8 bytes.
-- PNG export converts that SVG directly according to the selected quality.
-- PDF export wraps that SVG in a theme-aware PDF frame with margins and title, then converts the decorated SVG to vector PDF bytes.
+- Python: `koala.render_text(text, type="tree")`
+- CLI: `koala compile input.txt --type tree`
 
-The strict separation is:
+Koala does not infer document type from metadata. If the caller requests
+`type="tree"` and sends matrix-like syntax, the selected pipeline raises
+`DocumentTypeMismatchError`.
 
-- `koala.core` understands the DSL and builds the semantic tree.
-- `koala.layout` computes geometry only.
-- `koala.render` applies presentation, page fitting, and SVG output.
+Current supported type:
 
-## Main data structures
+- `tree`
 
-### `ConceptNode`
+Prepared future types:
 
-Defined in `src/koala/core/models.py`.
+- `matrix`
+- `flowchart`
 
-Represents one DSL node and stores:
+## Target folder shape
 
-- hierarchical number such as `1.2.3`
-- title
-- relation from parent
-- semantic kind
-- body paragraphs
-- children
-- parent reference
+The intended scalable shape is:
 
-This is the semantic tree used by all layout engines.
+```text
+src/koala/
+├── core/
+│   ├── shared/
+│   ├── tree/
+│   ├── matrix/
+│   └── flowchart/
+├── layout/
+│   ├── shared/
+│   ├── tree/
+│   ├── matrix/
+│   └── flowchart/
+└── render/
+    ├── shared/
+    ├── tree/
+    ├── matrix/
+    └── flowchart/
+```
 
-### `ParsedDocument`
+## Core layer
 
-Also defined in `src/koala/core/models.py`.
-
-Contains:
-
-- `root_nodes`
-- `node_index`
-- `warnings`
-
-The parser normalizes syntax and reconstructs the tree before any layout code runs.
-
-### `LayoutBox`, `LayoutEdge`, `LayoutScene`
-
-Defined in `src/koala/layout/models.py`.
-
-These are the contract between layout and render:
-
-- `LayoutBox`: a measured and positioned node
-- `LayoutEdge`: an explicit connector polyline or line, with optional label geometry
-- `LayoutScene`: the full positioned scene plus bounds
-
-Render code never needs to know which layout engine produced the scene.
-
-### `RenderSettings`, `ViewportTransform`, `RenderContext`
-
-Defined in `src/koala/render/models.py`.
-
-These complete the pipeline:
-
-- `RenderSettings` resolves layout config, typography, and theme
-- `ViewportTransform` scales/translates the scene into the final page
-- `RenderContext` packages parsed content, scene, settings, and viewport
-
-The same module also holds render-side style dataclasses such as:
-
-- `NodeStyle` and `NodeStyleOverride`
-- `ThemeDefinition` and `ThemeConfig`
-- `RenderResult`
-- `ExportResult`
-- `SvgRenderRequest`
-- SVG drawing specs used by `src/koala/render/svg/`
-
-## Folder responsibilities
-
-### `src/koala/core/`
-
-`koala.core` is responsible for input normalization and parsing:
+`src/koala/core/shared/` owns cross-type core services:
 
 - `io.py`: load `.txt` and `.docx`
-- `models.py`: parser-side data structures
-- `parser.py`: line parsing, parent reconstruction, warnings
+- `types.py`: `DocumentType` and the default document type
+- `errors.py`: document-type errors
+- `registry.py`: `DocumentPipelineRegistry`
 
-Important property: no layout geometry is computed here.
+`src/koala/core/tree/` owns tree semantics:
 
-### `src/koala/layout/`
+- `models.py`: `ConceptNode`, `ParsedDocument`, parser warnings, metadata
+- `parser.py`: numbered tree DSL parser
+- `pipeline.py`: `TreeDocumentPipeline`
 
-`koala.layout` is the geometry layer:
+`src/koala/core/matrix/` and `src/koala/core/flowchart/` are intentionally
+present as placeholders. Their future parsers, models, and pipelines should be
+added there.
 
-- `models.py`: layout-side structures and shared configuration for geometry/text measurement
-- `shared.py`: text measurement, wrapping, common gap rules, scene bounds
-- `tree_layout.py`: vertical hierarchy layout
-- `synoptic_boxes_layout.py`: column layout with boxed nodes
-- `synoptic_layout.py`: bracket-based synoptic layout
-- `radial_layout.py`: center-out radial layout
-- `registry.py`: layout engine dispatch
+## Layout layer
 
-Important property: layout code measures text and computes node/edge coordinates, but does not draw SVG.
+`src/koala/layout/shared/` owns layout contracts and deterministic measurement:
 
-Internal flow inside `koala.layout` is:
+- `models.py`: `LayoutBox`, `LayoutEdge`, `LayoutScene`, `LayoutConfig`, `TypographyConfig`
+- `measurement.py`: text measurement, wrapping, spacing helpers, scene bounds
 
-1. `registry.py` picks the engine by layout kind.
-2. `shared.py` measures nodes and provides reusable spacing/bounds helpers.
-3. the concrete engine computes box positions and connector geometry.
-4. the engine returns a generic `LayoutScene`.
+`src/koala/layout/tree/` owns tree-only geometry engines:
 
-### `src/koala/render/`
+- `registry.py`: tree layout dispatch
+- `tree.py`: top-down hierarchy
+- `synoptic.py`: bracket-based synoptic layout
+- `synoptic_boxes.py`: boxed synoptic layout
+- `radial.py`: center-out radial layout
 
-`koala.render` translates the scene into the final document:
+`src/koala/layout/matrix/` and `src/koala/layout/flowchart/` are placeholders
+for future geometry engines.
 
-- `themes.py`: universal kinds and theme definitions
-- `settings.py`: typographies, page presets, layout profiles, and resolved `RenderSettings`
-- `models.py`: render-side style models, resolved settings, viewport, and SVG draw specs
-- `context.py`: orchestration from parsed document metadata to `RenderContext`
-- `output.py`: output-path resolution and optional persistence for serialized SVG output
-- `export.py`: post-render conversion from canonical SVG to SVG, PNG, or decorated PDF bytes
-- `viewport.py`: fit scene to page size
-- `geometry.py`: small geometry helpers for rendering
-- `svg_render.py`: public render entrypoint and pipeline execution
-- `svg/`: SVG backend split by document, canvas, text, nodes, and edges
+## Render layer
 
-Important property: render code consumes `LayoutScene` as a generic scene, independent of layout internals.
+`src/koala/render/shared/` owns cross-type render infrastructure:
 
-### `src/koala/api.py` and `src/koala/config.py`
+- `models.py`: `RenderResult`, `ExportResult`, `RenderContext`, styles, SVG specs
+- `settings.py`: page sizes, typography presets, layout profiles
+- `themes.py`: built-in themes and universal style kinds
+- `context.py`: shared metadata/settings resolution and generic `RenderContext` assembly
+- `viewport.py`: fit a layout scene into a page
+- `output.py`: SVG output-path resolution and persistence
+- `export.py`: SVG/PNG/PDF conversion from a canonical SVG
+- `geometry.py`: small geometry helpers used by SVG renderers
+- `svg/document.py`: shared SVG document factory
+- `svg/text.py`: shared SVG text renderer
 
-The high-level library surface lives in `src/koala/api.py`.
+`src/koala/render/tree/` owns tree-only SVG rendering:
 
-Current behavior:
+- `context.py`: tree render context construction
+- `svg_render.py`: tree SVG pipeline
+- `canvas.py`: tree canvas orchestration
+- `nodes.py`: tree node drawing
+- `edges.py`: tree edge drawing
 
-- `koala.compile(path, **config)` and `koala.compile_file(path, **config)` are the file-to-SVG entrypoints
-- `koala.render_text(text, **config)` renders raw Koala DSL to SVG in memory
-- `koala.save_text(text, output, **config)` writes raw Koala DSL to a `.txt` file
-- `koala.compile_text(text, **config)` is kept as a legacy helper that still writes SVG to disk
-- `koala.export_text(text, **config)` renders raw Koala DSL to final SVG, PNG, or PDF bytes in memory
-- `koala.export_file(path, **config)` renders a source file to final SVG, PNG, or PDF bytes in memory
-- `koala.inspect_text(text, **config)` resolves a `RenderContext` without writing output
-- `koala.validate_text(text, **config)` also resolves a `RenderContext` and can raise `ValidationError` in strict mode
-- it validates accepted config keys before rendering
-- it can load user defaults through `src/koala/config.py`
-- all render entrypoints now produce the final SVG string in memory first
-- they return a `RenderResult` with `svg`, optional `output_svg`, and the resolved `RenderContext`
-- export entrypoints return an `ExportResult` with `content`, `media_type`, `extension`, optional `output_path`, and the underlying `RenderResult`
-- `compile_text(...)` resolves relative outputs against `base_dir` when provided, otherwise against `Path.cwd()`
-- explicit relative outputs for `compile_text(...)` are also resolved against `base_dir`
-- output location is now controlled only by explicit args and external defaults, not by document metadata
+`src/koala/render/matrix/` and `src/koala/render/flowchart/` are placeholders
+for future renderers.
 
-`src/koala/config.py` is responsible for user-level defaults:
+## Tree render flow
 
-- default path: `~/.config/koala/config.toml`
-- fallback path: `~/.koala.toml`
-- supported defaults include layout, theme, typography, page size, text alignment, node numbers, and output policy
+For the current `tree` type, the concrete flow is:
 
-## Current render flow
+1. `koala.api` or `koala.cli` receives explicit inputs.
+2. `koala.core.shared.io.load_input_text(...)` loads source text.
+3. `koala.core.shared.registry.DocumentPipelineRegistry.require(...)` selects the pipeline.
+4. `koala.core.tree.pipeline.TreeDocumentPipeline.parse(...)` validates and parses tree DSL.
+5. `koala.render.tree.svg_render.render_tree_svg(...)` starts the tree SVG pipeline.
+6. `koala.render.tree.context.TreeRenderContextBuilder.build(...)` resolves settings and tree layout.
+7. `koala.render.shared.context.RenderSettingsResolver.resolve(...)` applies config precedence.
+8. `koala.layout.tree.registry.build_tree_layout_scene(...)` builds tree geometry.
+9. `koala.render.shared.context.RenderContextBuilder.build(...)` fits the viewport.
+10. `koala.render.tree.canvas.SvgCanvasRenderer.render(...)` draws the tree SVG.
+11. `svgwrite.Drawing.tostring()` serializes SVG in memory.
+12. `koala.render.shared.output.RenderOutputWriter.write_svg(...)` persists only when requested.
 
-The current render orchestration is:
+`RenderResult` contains:
 
-1. `koala.compile(path, **config)`, `koala.render_text(text, **config)`, or `koala compile ...`
-2. `koala.render.svg_render.render_svg(SvgRenderRequest(...))`
-3. `koala.render.context.RenderContextBuilder.build(...)`
-4. `koala.render.settings.RenderSettingsCatalog.resolve(...)`
-5. `koala.layout.registry.build_layout(...)`
-6. `koala.render.viewport.ViewportFitter.fit(...)`
-7. `koala.render.svg.canvas.SvgCanvasRenderer.render(...)`
-8. `svgwrite.Drawing.tostring()` serializes the SVG document in memory
-9. when `persist_output=True`, `koala.render.output.RenderOutputResolver.resolve_svg_path(...)`
-10. when `persist_output=True`, `koala.render.output.RenderOutputWriter.write_svg(...)`
+- `svg`: final canonical SVG string
+- `output_svg`: optional path when the SVG was persisted
+- `context`: resolved render context
+- `document_type`: currently `"tree"`
+- `title`: generic title used by shared surfaces such as PDF export
 
-The export flow is:
+## Export flow
+
+Export starts after the canonical SVG exists:
 
 1. `koala.export_text(...)`, `koala.export_file(...)`, or `koala export ...`
-2. the same SVG render flow above with `persist_output=False`
-3. `koala.render.export.ExportConverter.convert(...)`
+2. render with `persist_output=False`
+3. `koala.render.shared.export.ExportConverter.convert(...)`
 4. for `svg`, return UTF-8 SVG bytes
-5. for `png`, call CairoSVG against the canonical SVG at the selected DPI
-6. for `pdf`, build a decorated outer SVG with a title and theme-aware frame, then call CairoSVG PDF conversion
+5. for `png`, call CairoSVG against the canonical SVG at medium or high quality
+6. for `pdf`, build a decorated outer SVG using shared theme/settings metadata,
+   then call CairoSVG PDF conversion
 
-This means the order is:
+PNG export is intentionally plain: it reflects the canonical SVG exactly.
 
-- resolve explicit inputs, metadata, and user defaults
-- select presets
-- build geometry
-- fit geometry to paper
-- draw SVG
-- serialize SVG in memory
-- optionally persist it to disk
-- optionally convert the SVG to export bytes without changing layout or the SVG backend
+PDF export is intentionally decorated: it adds margins, a title, a subtle
+header, and a theme-aware page frame suitable for sending to a client.
+
+## Configuration precedence
 
 Current precedence for render settings is:
 
@@ -224,79 +188,28 @@ Current precedence for render settings is:
 3. user config default
 4. built-in default
 
-## Shared measurement model
+Document type is different: it is controlled by explicit API/CLI `type` and
+defaults to `tree`; metadata does not select document type.
 
-The common text and box measurement lives in `src/koala/layout/shared.py`.
+## Adding `matrix`
 
-Current behavior:
+To add `matrix`, fill the placeholders instead of modifying tree internals:
 
-- text width is approximated with a deterministic internal heuristic
-- node width depends on depth, but can grow to fit content
-- nodes never allow a single word to overflow horizontally
-- titles are wrapped with font-size fallback between `title_size_base` and `title_size_min`
-- body text uses the body font and body leading directly
+```text
+src/koala/core/matrix/
+src/koala/layout/matrix/
+src/koala/render/matrix/
+```
 
-For `tree`, parent nodes can be remeasured after child widths are known, so the final text layout for those boxes is based on the final visible width, not the initial width.
+Then:
 
-## Viewport fitting
+1. add matrix models/parser/pipeline in `core/matrix/`
+2. add matrix layout contracts/engines in `layout/matrix/`
+3. add matrix SVG rendering in `render/matrix/`
+4. register the pipeline in `core/shared/registry.py`
+5. add `"matrix"` to `core/shared/types.py`
+6. make the pipeline reject incompatible DSL through `DocumentTypeMismatchError`
+7. return `RenderResult(document_type="matrix", title=...)`
+8. reuse `render/shared/export.py` for SVG, PNG, and PDF
 
-`src/koala/render/viewport.py` fits scene bounds into the usable page area through `ViewportFitter`.
-
-Current behavior:
-
-- all layouts can scale down to fit
-- `tree` and `radial` can also scale up if the scene is smaller than the page
-- `tree` and `radial` are centered on leftover free space
-- `synoptic` and `synoptic_boxes` keep the more traditional fixed-to-page-origin behavior
-
-## Typography and alignment
-
-Typography is currently defined in `TypographyConfig` and resolved from `src/koala/render/settings.py`.
-
-Theme composition now happens in `src/koala/render/themes.py`:
-
-- universal kind styles are defined once
-- current universal kinds are `note`, `warn`, and `soft`
-- each theme contributes a base `default_node`
-- each built-in theme defines three theme-owned kinds: `main`, `hl`, and `focus`
-- theme-specific kind overrides are merged on top of the universal ones
-
-The result is a resolved `ThemeConfig` consumed by the SVG renderer.
-
-`main` is intended mainly for the root node. In boxed layouts, when the root uses `main::`, the SVG node renderer applies a thicker border to reinforce the hierarchy visually.
-
-Current text alignment behavior:
-
-- default node text alignment is `left`
-- `justify` remains available through document metadata such as `@text-align justify`
-- justified lines in SVG are implemented by distributing space between words, not by stretching characters
-- the last line of a text block remains left-aligned
-
-Alignment can be overridden from document metadata and is applied before layout measurement, so wrapping stays consistent with the final render.
-
-Current text measurement behavior:
-
-- `src/koala/layout/shared.py` uses a heuristic width estimator instead of a native font engine
-- the estimator now applies small per-font width factors for known fonts such as `Georgia`, `Trebuchet MS`, and `Verdana`
-- wrapping also uses a small font-dependent safety padding, so the effective line width is slightly narrower than the box width
-- this is especially important for the radial typography profile, where `Trebuchet MS` and `Verdana` can render slightly wider than the generic Helvetica-like approximation
-
-The goal of those adjustments is not typographic exactness, but reducing right-edge overflow cases while keeping layout measurement deterministic and dependency-free.
-
-Current edge-label behavior:
-
-- `tree` and `synoptic_boxes` keep their label geometry tied to the orthogonal connector midpoint
-- `radial` resolves relation labels in a post-layout pass after node positions are final
-- for `radial`, the final scene bounds include relation-label bounds so viewport fitting accounts for them
-- the SVG backend renders radial labels by cutting the straight edge around the label area instead of drawing the line behind the text
-
-## Why the architecture is structured this way
-
-The practical benefits of the current split are:
-
-- the parser can evolve without touching rendering math
-- new layouts can reuse shared measurement code
-- the SVG layer can change appearance without changing geometry engines
-- presets can be swapped without modifying the core pipeline
-
-This is the main architectural idea in Koala: semantic parsing, geometric layout, and visual rendering stay independent enough to evolve separately.
+`flowchart` should follow the same pattern.

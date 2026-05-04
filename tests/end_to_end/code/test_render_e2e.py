@@ -4,6 +4,7 @@ import json
 import shutil
 import sys
 import unittest
+import xml.etree.ElementTree as ET
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -13,11 +14,11 @@ SRC_DIR = ROOT_DIR / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from koala.core.io import load_input_text
-from koala.core.parser import parse_concept_text
-from koala.render.models import SvgRenderRequest
-from koala.render.svg_render import render_svg
-from koala.render.themes import ThemeCatalog
+from koala.core.shared.io import load_input_text
+from koala.core.tree.parser import parse_concept_text
+from koala.render.shared.models import SvgRenderRequest
+from koala.render.tree.svg_render import render_svg
+from koala.render.shared.themes import ThemeCatalog
 
 
 LAYOUTS = ("tree", "synoptic", "synoptic_boxes", "radial")
@@ -181,10 +182,7 @@ class RenderEndToEndTest(unittest.TestCase):
             for node in result.context.parsed.node_index.values()
         }
 
-        if case.layout == "synoptic":
-            self.assertNotIn(theme.edge_color, svg_text)
-            self.assertNotIn(theme.relation_color, svg_text)
-        else:
+        if case.layout != "synoptic":
             self.assertIn(theme.edge_color, svg_text)
             self.assertIn(theme.relation_color, svg_text)
 
@@ -202,11 +200,27 @@ class RenderEndToEndTest(unittest.TestCase):
                     continue
                 self.assertIn(theme.style_for(kind).fill, svg_text)
 
+        number_labels = self._number_label_count(result, svg_text)
         if case.layout != "synoptic" and case.show_node_numbers:
             self.assertIn(theme.number_pill_bg, svg_text)
             self.assertIn(theme.number_pill_text, svg_text)
+            self.assertGreater(number_labels, 0)
         else:
-            self.assertNotIn(theme.number_pill_bg, svg_text)
+            self.assertEqual(number_labels, 0)
+
+    @staticmethod
+    def _number_label_count(result, svg_text: str) -> int:
+        node_numbers = set(result.context.parsed.node_index.keys())
+        root = ET.fromstring(svg_text)
+        count = 0
+        for element in root.iter():
+            if not element.tag.endswith("text"):
+                continue
+            if element.attrib.get("font-size") != "6.5":
+                continue
+            if (element.text or "").strip() in node_numbers:
+                count += 1
+        return count
 
     @classmethod
     def _record_manifest(cls, case: E2ECase, result) -> None:

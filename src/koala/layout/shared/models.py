@@ -1,0 +1,87 @@
+"""Modelos de datos del subsistema de layout.
+
+Retorna estructuras tipadas para coordinar motores y renderizadores:
+- Configuración geometrica y tipografica (`LayoutConfig`, `TypographyConfig`).
+- Primitivas de escena (`LayoutBox`, `LayoutEdge`, `LayoutScene`).
+
+Cómo funciona:
+1. Los motores de layout rellenan `LayoutBox` y `LayoutEdge`.
+2. Empaquetan todo en `LayoutScene`.
+3. Los renderizadores consumen `LayoutScene` sin conocer el layout interno.
+"""
+
+from dataclasses import dataclass
+from typing import Dict, List, Literal, Tuple
+
+from koala.core.tree.models import ConceptNode
+
+
+LayoutKind = Literal["tree", "synoptic", "synoptic_boxes", "radial"]
+
+
+@dataclass(frozen=True)
+class TypographyConfig:
+    title_font: str = "Helvetica-Bold"
+    body_font: str = "Helvetica"
+    text_align: Literal["justify", "left"] = "left"
+    title_size_base: float = 20.0
+    title_size_min: float = 18.0
+    body_size: float = 12.0
+    relation_size: float = 11.0
+    body_leading: float = 15.0
+    max_title_lines: int = 3
+    title_line_extra: float = 1.8
+
+
+@dataclass(frozen=True)
+class LayoutConfig:
+    page_width: float
+    page_height: float
+    margin_x: float
+    margin_y: float
+    node_width_base: float
+    min_node_width: float
+    root_width_factor: float
+    depth_width_reduction: float
+    max_depth_reduction: float
+    h_gap_base: float
+    v_gap_base: float
+    inner_pad_x: float
+    inner_pad_y: float
+    corner_radius: float
+    title_body_gap: float
+@dataclass
+class LayoutBox:
+    node: ConceptNode
+    depth: int
+    width: float
+    height: float
+    subtree_width: float
+    x: float
+    y: float
+    title_lines: List[str]
+    title_font_size: float
+    title_height: float
+    body_lines: List[str]
+
+
+@dataclass(frozen=True)
+class LayoutEdge:
+    parent_number: str
+    child_number: str
+    points: List[Tuple[float, float]]
+    relation_label: str
+    label_pos: Tuple[float, float]
+    label_max_width: float
+    label_angle: float = 0.0
+    label_bounds: Tuple[float, float, float, float] | None = None
+
+
+@dataclass
+class LayoutScene:
+    boxes: Dict[str, LayoutBox]
+    edges: List[LayoutEdge]
+    content_left: float
+    content_top: float
+    content_bottom: float
+    content_right: float

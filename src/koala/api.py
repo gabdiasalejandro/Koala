@@ -7,28 +7,26 @@ from dataclasses import dataclass
 from typing import TypedDict
 
 from koala.config import KoalaUserConfig, load_user_config
-from koala.core.io import load_input_text
-from koala.core.models import ParseWarning
-from koala.core.parser import parse_concept_text
-from koala.layout.models import LayoutKind
-from koala.render.context import MetadataValueResolver, RenderContextBuilder
-from koala.render.export import ExportConverter
-from koala.render.models import (
+from koala.core.shared.io import load_input_text
+from koala.core.tree.models import ParseWarning
+from koala.core.shared.registry import DocumentPipelineRegistry
+from koala.core.shared.types import DocumentType
+from koala.layout.shared.models import LayoutKind
+from koala.render.shared.export import ExportConverter
+from koala.render.shared.models import (
     ExportFormat,
     ExportQuality,
     ExportResult,
     RenderContext,
     RenderResult,
-    SvgRenderRequest,
 )
-from koala.render.settings import DEFAULT_LAYOUT_KIND
-from koala.render.svg_render import render_svg
 from typing_extensions import Unpack
 
 
 class ContextConfig(TypedDict, total=False):
     """Configuracion comun para resolver contexto sin escribir archivos."""
 
+    type: DocumentType
     layout: LayoutKind
     theme: str
     typography: str
@@ -43,6 +41,7 @@ class ContextConfig(TypedDict, total=False):
 class CompileConfig(TypedDict, total=False):
     """Configuracion aceptada por `koala.compile(path, **config)`."""
 
+    type: DocumentType
     layout: LayoutKind
     theme: str
     typography: str
@@ -105,6 +104,7 @@ def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
     _validate_config_keys(config, _ALLOWED_COMPILE_CONFIG_KEYS, "koala.compile")
 
     layout = config.get("layout")
+    document_type = config.get("type")
     theme = config.get("theme")
     typography = config.get("typography")
     size = config.get("size")
@@ -125,6 +125,7 @@ def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
         base_dir=input_path.parent,
         default_output_file_name_stem=input_path.stem,
         persist_output=True,
+        document_type=document_type,
         layout=layout,
         theme=theme,
         typography=typography,
@@ -153,6 +154,7 @@ def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult
     _validate_config_keys(config, _ALLOWED_COMPILE_TEXT_CONFIG_KEYS, "koala.compile_text")
 
     layout = config.get("layout")
+    document_type = config.get("type")
     theme = config.get("theme")
     typography = config.get("typography")
     size = config.get("size")
@@ -173,6 +175,7 @@ def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult
         base_dir=base_dir,
         default_output_file_name_stem=output_name or "concept_map",
         persist_output=True,
+        document_type=document_type,
         layout=layout,
         theme=theme,
         typography=typography,
@@ -210,6 +213,7 @@ def render_text(text: str, **config: Unpack[ContextConfig]) -> RenderResult:
         base_dir=Path.cwd(),
         default_output_file_name_stem="concept_map",
         persist_output=False,
+        document_type=config.get("type"),
         layout=config.get("layout"),
         theme=config.get("theme"),
         typography=config.get("typography"),
@@ -273,6 +277,7 @@ def export_file(
         base_dir=input_path.parent,
         default_output_file_name_stem=input_path.stem,
         persist_output=False,
+        document_type=config.get("type"),
         layout=config.get("layout"),
         theme=config.get("theme"),
         typography=config.get("typography"),
@@ -309,6 +314,7 @@ def inspect_text(text: str, **config: Unpack[ContextConfig]) -> RenderContext:
     _validate_config_keys(config, _ALLOWED_CONTEXT_CONFIG_KEYS, "koala.inspect_text")
     return _build_context_from_text(
         text,
+        document_type=config.get("type"),
         layout=config.get("layout"),
         theme=config.get("theme"),
         typography=config.get("typography"),
@@ -331,6 +337,7 @@ def validate_text(text: str, **config: Unpack[ValidateTextConfig]) -> RenderCont
     strict = config.get("strict", False)
     context = _build_context_from_text(
         text,
+        document_type=config.get("type"),
         layout=config.get("layout"),
         theme=config.get("theme"),
         typography=config.get("typography"),
@@ -352,6 +359,7 @@ def _render_source_text(
     base_dir: Path,
     default_output_file_name_stem: str,
     persist_output: bool,
+    document_type: DocumentType | None,
     layout: LayoutKind | None,
     theme: str | None,
     typography: str | None,
@@ -365,8 +373,8 @@ def _render_source_text(
     user_config: KoalaUserConfig,
     desktop_fallback_dir: Path,
 ) -> RenderResult:
-    parsed = parse_concept_text(source_text)
-    resolved_layout = _resolve_effective_layout(parsed, layout, user_config)
+    pipeline = DocumentPipelineRegistry.require(document_type)
+    parsed = pipeline.parse(source_text)
     explicit_output_svg_path = _resolve_explicit_output_path(output, base_dir)
     output_dir_name, default_output_dir_name = (None, None)
     if persist_output:
@@ -379,38 +387,39 @@ def _render_source_text(
             desktop_fallback_dir=desktop_fallback_dir,
         )
 
-    request = SvgRenderRequest(
-        parsed=parsed,
+    output_file_name = (
+        None
+        if not persist_output or explicit_output_svg_path is not None
+        else pipeline.resolve_output_file_name(
+            parsed,
+            stem=default_output_file_name_stem,
+            layout=layout,
+            user_config=user_config,
+        )
+    )
+    return pipeline.render_parsed(
+        parsed,
         base_dir=base_dir,
         persist_output=persist_output,
         output_svg_path=explicit_output_svg_path,
         output_dir_name=output_dir_name,
-        output_file_name=(
-            None
-            if not persist_output or explicit_output_svg_path is not None
-            else _resolve_output_file_name(default_output_file_name_stem, resolved_layout)
-        ),
+        output_file_name=output_file_name,
         default_output_dir_name=default_output_dir_name,
-        layout_kind=layout,
+        layout=layout,
         theme_name=theme,
         typography_name=typography,
         page_size_name=size,
         text_align=text_align,
         show_node_numbers=show_node_numbers,
         background_color=background,
-        default_layout_kind=user_config.default_layout,
-        default_theme_name=user_config.default_theme,
-        default_typography_name=user_config.default_typography,
-        default_page_size_name=user_config.default_size,
-        default_text_align=user_config.default_text_align,
-        default_show_node_numbers=user_config.default_show_node_numbers,
+        user_config=user_config,
     )
-    return render_svg(request)
 
 
 def _build_context_from_text(
     text: str,
     *,
+    document_type: DocumentType | None,
     layout: LayoutKind | None,
     theme: str | None,
     typography: str | None,
@@ -422,22 +431,17 @@ def _build_context_from_text(
     user_config: KoalaUserConfig | None,
 ) -> RenderContext:
     resolved_user_config = _resolve_user_config(use_user_config, user_config)
-    parsed = parse_concept_text(text)
-    return RenderContextBuilder.build(
-        parsed,
-        layout_kind=layout,
+    pipeline = DocumentPipelineRegistry.require(document_type)
+    return pipeline.inspect_text(
+        text,
+        layout=layout,
         theme_name=theme,
         typography_name=typography,
         page_size_name=size,
         text_align=text_align,
         show_node_numbers=show_node_numbers,
         background_color=background,
-        default_layout_kind=resolved_user_config.default_layout,
-        default_theme_name=resolved_user_config.default_theme,
-        default_typography_name=resolved_user_config.default_typography,
-        default_page_size_name=resolved_user_config.default_size,
-        default_text_align=resolved_user_config.default_text_align,
-        default_show_node_numbers=resolved_user_config.default_show_node_numbers,
+        user_config=resolved_user_config,
     )
 
 
@@ -463,15 +467,6 @@ def _resolve_user_config(
     if use_user_config:
         return load_user_config()
     return KoalaUserConfig(path=Path(), exists=False)
-
-
-def _resolve_effective_layout(
-    parsed,
-    explicit_layout: str | None,
-    config: KoalaUserConfig,
-) -> LayoutKind:
-    metadata_layout = MetadataValueResolver.resolve_value(parsed.metadata, "layout")
-    return explicit_layout or metadata_layout or config.default_layout or DEFAULT_LAYOUT_KIND
 
 
 def _resolve_explicit_output_path(raw_output: str | Path | None, base_dir: Path) -> Path | None:

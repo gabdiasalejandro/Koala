@@ -119,10 +119,10 @@
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "08_tree_default_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/08_tree_square_numbers_on.svg",
+    "case_id": "08_tree_black_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/black/left/08_tree_square_numbers_on.svg",
     "size_bytes": 30522
   },
   {
@@ -133,10 +133,10 @@
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "09_tree_default_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/09_tree_a4_numbers_off.svg",
+    "case_id": "09_tree_black_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/black/justify/09_tree_a4_numbers_off.svg",
     "size_bytes": 29900
   },
   {
@@ -147,10 +147,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "10_synoptic_default_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/10_synoptic_a4_landscape_numbers_on.svg",
+    "case_id": "10_synoptic_black_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/black/left/10_synoptic_a4_landscape_numbers_on.svg",
     "size_bytes": 10539
   },
   {
@@ -161,10 +161,10 @@
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "11_synoptic_default_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/11_synoptic_square_numbers_off.svg",
+    "case_id": "11_synoptic_black_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/black/justify/11_synoptic_square_numbers_off.svg",
     "size_bytes": 17527
   },
   {
@@ -175,10 +175,10 @@
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "12_synoptic_boxes_default_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/12_synoptic_boxes_a4_numbers_on.svg",
+    "case_id": "12_synoptic_boxes_black_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/black/left/12_synoptic_boxes_a4_numbers_on.svg",
     "size_bytes": 24009
   },
   {
@@ -189,10 +189,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "13_synoptic_boxes_default_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/13_synoptic_boxes_a4_landscape_numbers_off.svg",
+    "case_id": "13_synoptic_boxes_black_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/black/justify/13_synoptic_boxes_a4_landscape_numbers_off.svg",
     "size_bytes": 27014
   },
   {
@@ -203,10 +203,10 @@
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "14_radial_default_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/14_radial_square_numbers_on.svg",
+    "case_id": "14_radial_black_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/black/left/14_radial_square_numbers_on.svg",
     "size_bytes": 27386
   },
   {
@@ -217,10 +217,10 @@
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "default"
+      "theme": "black"
     },
-    "case_id": "15_radial_default_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/15_radial_a4_numbers_off.svg",
+    "case_id": "15_radial_black_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/black/justify/15_radial_a4_numbers_off.svg",
     "size_bytes": 29694
   },
   {
@@ -231,10 +231,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "16_tree_frutal_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/16_tree_a4_landscape_numbers_on.svg",
+    "case_id": "16_tree_colorblind_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/colorblind/left/16_tree_a4_landscape_numbers_on.svg",
     "size_bytes": 30521
   },
   {
@@ -245,10 +245,10 @@
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "17_tree_frutal_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/17_tree_square_numbers_off.svg",
+    "case_id": "17_tree_colorblind_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/colorblind/justify/17_tree_square_numbers_off.svg",
     "size_bytes": 29900
   },
   {
@@ -259,10 +259,10 @@
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "18_synoptic_frutal_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/18_synoptic_a4_numbers_on.svg",
+    "case_id": "18_synoptic_colorblind_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/colorblind/left/18_synoptic_a4_numbers_on.svg",
     "size_bytes": 10539
   },
   {
@@ -273,10 +273,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "19_synoptic_frutal_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/19_synoptic_a4_landscape_numbers_off.svg",
+    "case_id": "19_synoptic_colorblind_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/colorblind/justify/19_synoptic_a4_landscape_numbers_off.svg",
     "size_bytes": 17527
   },
   {
@@ -287,10 +287,10 @@
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "20_synoptic_boxes_frutal_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/20_synoptic_boxes_square_numbers_on.svg",
+    "case_id": "20_synoptic_boxes_colorblind_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/colorblind/left/20_synoptic_boxes_square_numbers_on.svg",
     "size_bytes": 24009
   },
   {
@@ -301,10 +301,10 @@
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "21_synoptic_boxes_frutal_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/21_synoptic_boxes_a4_numbers_off.svg",
+    "case_id": "21_synoptic_boxes_colorblind_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/colorblind/justify/21_synoptic_boxes_a4_numbers_off.svg",
     "size_bytes": 27016
   },
   {
@@ -315,10 +315,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "22_radial_frutal_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/22_radial_a4_landscape_numbers_on.svg",
+    "case_id": "22_radial_colorblind_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/colorblind/left/22_radial_a4_landscape_numbers_on.svg",
     "size_bytes": 27784
   },
   {
@@ -329,10 +329,10 @@
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "colorblind"
     },
-    "case_id": "23_radial_frutal_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/23_radial_square_numbers_off.svg",
+    "case_id": "23_radial_colorblind_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/colorblind/justify/23_radial_square_numbers_off.svg",
     "size_bytes": 29659
   },
   {
@@ -343,10 +343,10 @@
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "24_tree_jungle_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/24_tree_a4_numbers_on.svg",
+    "case_id": "24_tree_default_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/default/left/24_tree_a4_numbers_on.svg",
     "size_bytes": 30522
   },
   {
@@ -357,10 +357,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "25_tree_jungle_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/25_tree_a4_landscape_numbers_off.svg",
+    "case_id": "25_tree_default_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/default/justify/25_tree_a4_landscape_numbers_off.svg",
     "size_bytes": 29900
   },
   {
@@ -371,10 +371,10 @@
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "26_synoptic_jungle_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/26_synoptic_square_numbers_on.svg",
+    "case_id": "26_synoptic_default_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/default/left/26_synoptic_square_numbers_on.svg",
     "size_bytes": 10539
   },
   {
@@ -385,10 +385,10 @@
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "27_synoptic_jungle_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/27_synoptic_a4_numbers_off.svg",
+    "case_id": "27_synoptic_default_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/default/justify/27_synoptic_a4_numbers_off.svg",
     "size_bytes": 17529
   },
   {
@@ -399,10 +399,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "28_synoptic_boxes_jungle_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/28_synoptic_boxes_a4_landscape_numbers_on.svg",
+    "case_id": "28_synoptic_boxes_default_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/default/left/28_synoptic_boxes_a4_landscape_numbers_on.svg",
     "size_bytes": 24009
   },
   {
@@ -413,10 +413,10 @@
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "29_synoptic_boxes_jungle_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/29_synoptic_boxes_square_numbers_off.svg",
+    "case_id": "29_synoptic_boxes_default_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/default/justify/29_synoptic_boxes_square_numbers_off.svg",
     "size_bytes": 27014
   },
   {
@@ -427,10 +427,10 @@
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "30_radial_jungle_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/30_radial_a4_numbers_on.svg",
+    "case_id": "30_radial_default_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/default/left/30_radial_a4_numbers_on.svg",
     "size_bytes": 27361
   },
   {
@@ -441,10 +441,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "default"
     },
-    "case_id": "31_radial_jungle_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/31_radial_a4_landscape_numbers_off.svg",
+    "case_id": "31_radial_default_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/default/justify/31_radial_a4_landscape_numbers_off.svg",
     "size_bytes": 29662
   },
   {
@@ -455,10 +455,10 @@
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "terracotta"
+      "theme": "dusk"
     },
-    "case_id": "32_tree_terracotta_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/32_tree_square_numbers_on.svg",
+    "case_id": "32_tree_dusk_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/dusk/left/32_tree_square_numbers_on.svg",
     "size_bytes": 30522
   },
   {
@@ -469,10 +469,10 @@
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "terracotta"
+      "theme": "dusk"
     },
-    "case_id": "33_tree_terracotta_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/33_tree_a4_numbers_off.svg",
+    "case_id": "33_tree_dusk_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/dusk/justify/33_tree_a4_numbers_off.svg",
     "size_bytes": 29900
   },
   {
@@ -483,10 +483,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "terracotta"
+      "theme": "dusk"
     },
-    "case_id": "34_synoptic_terracotta_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/34_synoptic_a4_landscape_numbers_on.svg",
+    "case_id": "34_synoptic_dusk_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/dusk/left/34_synoptic_a4_landscape_numbers_on.svg",
     "size_bytes": 10539
   },
   {
@@ -497,10 +497,10 @@
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "terracotta"
+      "theme": "dusk"
     },
-    "case_id": "35_synoptic_terracotta_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/35_synoptic_square_numbers_off.svg",
+    "case_id": "35_synoptic_dusk_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/dusk/justify/35_synoptic_square_numbers_off.svg",
     "size_bytes": 17527
   },
   {
@@ -511,10 +511,10 @@
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "terracotta"
+      "theme": "dusk"
     },
-    "case_id": "36_synoptic_boxes_terracotta_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/36_synoptic_boxes_a4_numbers_on.svg",
+    "case_id": "36_synoptic_boxes_dusk_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/dusk/left/36_synoptic_boxes_a4_numbers_on.svg",
     "size_bytes": 24009
   },
   {
@@ -525,10 +525,10 @@
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "terracotta"
+      "theme": "dusk"
     },
-    "case_id": "37_synoptic_boxes_terracotta_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/37_synoptic_boxes_a4_landscape_numbers_off.svg",
+    "case_id": "37_synoptic_boxes_dusk_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/dusk/justify/37_synoptic_boxes_a4_landscape_numbers_off.svg",
     "size_bytes": 27014
   },
   {
@@ -539,10 +539,10 @@
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "terracotta"
+      "theme": "dusk"
     },
-    "case_id": "38_radial_terracotta_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/38_radial_square_numbers_on.svg",
+    "case_id": "38_radial_dusk_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/dusk/left/38_radial_square_numbers_on.svg",
     "size_bytes": 27386
   },
   {
@@ -553,10 +553,1130 @@
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
+      "theme": "dusk"
+    },
+    "case_id": "39_radial_dusk_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/dusk/justify/39_radial_a4_numbers_off.svg",
+    "size_bytes": 29694
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 40,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "frutal"
+    },
+    "case_id": "40_tree_frutal_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/frutal/left/40_tree_a4_landscape_numbers_on.svg",
+    "size_bytes": 30521
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 41,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "frutal"
+    },
+    "case_id": "41_tree_frutal_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/frutal/justify/41_tree_square_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 42,
+      "layout": "synoptic",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "frutal"
+    },
+    "case_id": "42_synoptic_frutal_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/frutal/left/42_synoptic_a4_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 43,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "frutal"
+    },
+    "case_id": "43_synoptic_frutal_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/frutal/justify/43_synoptic_a4_landscape_numbers_off.svg",
+    "size_bytes": 17527
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 44,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "frutal"
+    },
+    "case_id": "44_synoptic_boxes_frutal_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/frutal/left/44_synoptic_boxes_square_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 45,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "frutal"
+    },
+    "case_id": "45_synoptic_boxes_frutal_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/frutal/justify/45_synoptic_boxes_a4_numbers_off.svg",
+    "size_bytes": 27016
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 46,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "frutal"
+    },
+    "case_id": "46_radial_frutal_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/frutal/left/46_radial_a4_landscape_numbers_on.svg",
+    "size_bytes": 27784
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 47,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "frutal"
+    },
+    "case_id": "47_radial_frutal_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/frutal/justify/47_radial_square_numbers_off.svg",
+    "size_bytes": 29659
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 48,
+      "layout": "tree",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "inclusive"
+    },
+    "case_id": "48_tree_inclusive_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/inclusive/left/48_tree_a4_numbers_on.svg",
+    "size_bytes": 30522
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 49,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "inclusive"
+    },
+    "case_id": "49_tree_inclusive_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/inclusive/justify/49_tree_a4_landscape_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 50,
+      "layout": "synoptic",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "inclusive"
+    },
+    "case_id": "50_synoptic_inclusive_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/inclusive/left/50_synoptic_square_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 51,
+      "layout": "synoptic",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "inclusive"
+    },
+    "case_id": "51_synoptic_inclusive_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/inclusive/justify/51_synoptic_a4_numbers_off.svg",
+    "size_bytes": 17529
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 52,
+      "layout": "synoptic_boxes",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "inclusive"
+    },
+    "case_id": "52_synoptic_boxes_inclusive_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/inclusive/left/52_synoptic_boxes_a4_landscape_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 53,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "inclusive"
+    },
+    "case_id": "53_synoptic_boxes_inclusive_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/inclusive/justify/53_synoptic_boxes_square_numbers_off.svg",
+    "size_bytes": 27014
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 54,
+      "layout": "radial",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "inclusive"
+    },
+    "case_id": "54_radial_inclusive_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/inclusive/left/54_radial_a4_numbers_on.svg",
+    "size_bytes": 27361
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 55,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "inclusive"
+    },
+    "case_id": "55_radial_inclusive_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/inclusive/justify/55_radial_a4_landscape_numbers_off.svg",
+    "size_bytes": 29662
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 56,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "jungle"
+    },
+    "case_id": "56_tree_jungle_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/jungle/left/56_tree_square_numbers_on.svg",
+    "size_bytes": 30522
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 57,
+      "layout": "tree",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "jungle"
+    },
+    "case_id": "57_tree_jungle_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/jungle/justify/57_tree_a4_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 58,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "jungle"
+    },
+    "case_id": "58_synoptic_jungle_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/jungle/left/58_synoptic_a4_landscape_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 59,
+      "layout": "synoptic",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "jungle"
+    },
+    "case_id": "59_synoptic_jungle_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/jungle/justify/59_synoptic_square_numbers_off.svg",
+    "size_bytes": 17527
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 60,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "jungle"
+    },
+    "case_id": "60_synoptic_boxes_jungle_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/jungle/left/60_synoptic_boxes_a4_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 61,
+      "layout": "synoptic_boxes",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "jungle"
+    },
+    "case_id": "61_synoptic_boxes_jungle_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/jungle/justify/61_synoptic_boxes_a4_landscape_numbers_off.svg",
+    "size_bytes": 27014
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 62,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "jungle"
+    },
+    "case_id": "62_radial_jungle_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/jungle/left/62_radial_square_numbers_on.svg",
+    "size_bytes": 27386
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 63,
+      "layout": "radial",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "jungle"
+    },
+    "case_id": "63_radial_jungle_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/jungle/justify/63_radial_a4_numbers_off.svg",
+    "size_bytes": 29694
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 64,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "minimal"
+    },
+    "case_id": "64_tree_minimal_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/minimal/left/64_tree_a4_landscape_numbers_on.svg",
+    "size_bytes": 30521
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 65,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "minimal"
+    },
+    "case_id": "65_tree_minimal_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/minimal/justify/65_tree_square_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 66,
+      "layout": "synoptic",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "minimal"
+    },
+    "case_id": "66_synoptic_minimal_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/minimal/left/66_synoptic_a4_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 67,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "minimal"
+    },
+    "case_id": "67_synoptic_minimal_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/minimal/justify/67_synoptic_a4_landscape_numbers_off.svg",
+    "size_bytes": 17527
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 68,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "minimal"
+    },
+    "case_id": "68_synoptic_boxes_minimal_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/minimal/left/68_synoptic_boxes_square_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 69,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "minimal"
+    },
+    "case_id": "69_synoptic_boxes_minimal_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/minimal/justify/69_synoptic_boxes_a4_numbers_off.svg",
+    "size_bytes": 27016
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 70,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "minimal"
+    },
+    "case_id": "70_radial_minimal_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/minimal/left/70_radial_a4_landscape_numbers_on.svg",
+    "size_bytes": 27784
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 71,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "minimal"
+    },
+    "case_id": "71_radial_minimal_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/minimal/justify/71_radial_square_numbers_off.svg",
+    "size_bytes": 29659
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 72,
+      "layout": "tree",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "neon"
+    },
+    "case_id": "72_tree_neon_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/neon/left/72_tree_a4_numbers_on.svg",
+    "size_bytes": 30522
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 73,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "neon"
+    },
+    "case_id": "73_tree_neon_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/neon/justify/73_tree_a4_landscape_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 74,
+      "layout": "synoptic",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "neon"
+    },
+    "case_id": "74_synoptic_neon_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/neon/left/74_synoptic_square_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 75,
+      "layout": "synoptic",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "neon"
+    },
+    "case_id": "75_synoptic_neon_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/neon/justify/75_synoptic_a4_numbers_off.svg",
+    "size_bytes": 17529
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 76,
+      "layout": "synoptic_boxes",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "neon"
+    },
+    "case_id": "76_synoptic_boxes_neon_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/neon/left/76_synoptic_boxes_a4_landscape_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 77,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "neon"
+    },
+    "case_id": "77_synoptic_boxes_neon_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/neon/justify/77_synoptic_boxes_square_numbers_off.svg",
+    "size_bytes": 27014
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 78,
+      "layout": "radial",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "neon"
+    },
+    "case_id": "78_radial_neon_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/neon/left/78_radial_a4_numbers_on.svg",
+    "size_bytes": 27361
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 79,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "neon"
+    },
+    "case_id": "79_radial_neon_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/neon/justify/79_radial_a4_landscape_numbers_off.svg",
+    "size_bytes": 29662
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 80,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "ocean"
+    },
+    "case_id": "80_tree_ocean_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/ocean/left/80_tree_square_numbers_on.svg",
+    "size_bytes": 30522
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 81,
+      "layout": "tree",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "ocean"
+    },
+    "case_id": "81_tree_ocean_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/ocean/justify/81_tree_a4_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 82,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "ocean"
+    },
+    "case_id": "82_synoptic_ocean_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/ocean/left/82_synoptic_a4_landscape_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 83,
+      "layout": "synoptic",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "ocean"
+    },
+    "case_id": "83_synoptic_ocean_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/ocean/justify/83_synoptic_square_numbers_off.svg",
+    "size_bytes": 17527
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 84,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "ocean"
+    },
+    "case_id": "84_synoptic_boxes_ocean_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/ocean/left/84_synoptic_boxes_a4_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 85,
+      "layout": "synoptic_boxes",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "ocean"
+    },
+    "case_id": "85_synoptic_boxes_ocean_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/ocean/justify/85_synoptic_boxes_a4_landscape_numbers_off.svg",
+    "size_bytes": 27014
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 86,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "ocean"
+    },
+    "case_id": "86_radial_ocean_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/ocean/left/86_radial_square_numbers_on.svg",
+    "size_bytes": 27386
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 87,
+      "layout": "radial",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "ocean"
+    },
+    "case_id": "87_radial_ocean_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/ocean/justify/87_radial_a4_numbers_off.svg",
+    "size_bytes": 29694
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 88,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "pastel"
+    },
+    "case_id": "88_tree_pastel_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/pastel/left/88_tree_a4_landscape_numbers_on.svg",
+    "size_bytes": 30521
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 89,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "pastel"
+    },
+    "case_id": "89_tree_pastel_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/pastel/justify/89_tree_square_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 90,
+      "layout": "synoptic",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "pastel"
+    },
+    "case_id": "90_synoptic_pastel_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/pastel/left/90_synoptic_a4_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 91,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "pastel"
+    },
+    "case_id": "91_synoptic_pastel_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/pastel/justify/91_synoptic_a4_landscape_numbers_off.svg",
+    "size_bytes": 17527
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 92,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "pastel"
+    },
+    "case_id": "92_synoptic_boxes_pastel_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/pastel/left/92_synoptic_boxes_square_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 93,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "pastel"
+    },
+    "case_id": "93_synoptic_boxes_pastel_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/pastel/justify/93_synoptic_boxes_a4_numbers_off.svg",
+    "size_bytes": 27016
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 94,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "pastel"
+    },
+    "case_id": "94_radial_pastel_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/pastel/left/94_radial_a4_landscape_numbers_on.svg",
+    "size_bytes": 27784
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 95,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "pastel"
+    },
+    "case_id": "95_radial_pastel_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/pastel/justify/95_radial_square_numbers_off.svg",
+    "size_bytes": 29659
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 96,
+      "layout": "tree",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "sepia"
+    },
+    "case_id": "96_tree_sepia_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/sepia/left/96_tree_a4_numbers_on.svg",
+    "size_bytes": 30522
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 97,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "sepia"
+    },
+    "case_id": "97_tree_sepia_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/sepia/justify/97_tree_a4_landscape_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 98,
+      "layout": "synoptic",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "sepia"
+    },
+    "case_id": "98_synoptic_sepia_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/sepia/left/98_synoptic_square_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 99,
+      "layout": "synoptic",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "sepia"
+    },
+    "case_id": "99_synoptic_sepia_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/sepia/justify/99_synoptic_a4_numbers_off.svg",
+    "size_bytes": 17529
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 100,
+      "layout": "synoptic_boxes",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "sepia"
+    },
+    "case_id": "100_synoptic_boxes_sepia_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/sepia/left/100_synoptic_boxes_a4_landscape_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 101,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "sepia"
+    },
+    "case_id": "101_synoptic_boxes_sepia_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/sepia/justify/101_synoptic_boxes_square_numbers_off.svg",
+    "size_bytes": 27014
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 102,
+      "layout": "radial",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "sepia"
+    },
+    "case_id": "102_radial_sepia_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/sepia/left/102_radial_a4_numbers_on.svg",
+    "size_bytes": 27361
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 103,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "sepia"
+    },
+    "case_id": "103_radial_sepia_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/sepia/justify/103_radial_a4_landscape_numbers_off.svg",
+    "size_bytes": 29662
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 104,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
       "theme": "terracotta"
     },
-    "case_id": "39_radial_terracotta_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/39_radial_a4_numbers_off.svg",
+    "case_id": "104_tree_terracotta_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/terracotta/left/104_tree_square_numbers_on.svg",
+    "size_bytes": 30522
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 105,
+      "layout": "tree",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "terracotta"
+    },
+    "case_id": "105_tree_terracotta_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/terracotta/justify/105_tree_a4_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 106,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "terracotta"
+    },
+    "case_id": "106_synoptic_terracotta_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/terracotta/left/106_synoptic_a4_landscape_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 107,
+      "layout": "synoptic",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "terracotta"
+    },
+    "case_id": "107_synoptic_terracotta_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/terracotta/justify/107_synoptic_square_numbers_off.svg",
+    "size_bytes": 17527
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 108,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "terracotta"
+    },
+    "case_id": "108_synoptic_boxes_terracotta_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/terracotta/left/108_synoptic_boxes_a4_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 109,
+      "layout": "synoptic_boxes",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "terracotta"
+    },
+    "case_id": "109_synoptic_boxes_terracotta_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/terracotta/justify/109_synoptic_boxes_a4_landscape_numbers_off.svg",
+    "size_bytes": 27014
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 110,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "terracotta"
+    },
+    "case_id": "110_radial_terracotta_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/terracotta/left/110_radial_square_numbers_on.svg",
+    "size_bytes": 27386
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 111,
+      "layout": "radial",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "terracotta"
+    },
+    "case_id": "111_radial_terracotta_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/terracotta/justify/111_radial_a4_numbers_off.svg",
     "size_bytes": 29694
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "index": 112,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "vivid"
+    },
+    "case_id": "112_tree_vivid_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/vivid/left/112_tree_a4_landscape_numbers_on.svg",
+    "size_bytes": 30521
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 113,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "vivid"
+    },
+    "case_id": "113_tree_vivid_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/vivid/justify/113_tree_square_numbers_off.svg",
+    "size_bytes": 29900
+  },
+  {
+    "case": {
+      "background": "#F1F7FB",
+      "index": 114,
+      "layout": "synoptic",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "vivid"
+    },
+    "case_id": "114_synoptic_vivid_left_a4_numbers_on",
+    "output_svg": "tests/end_to_end/output/vivid/left/114_synoptic_a4_numbers_on.svg",
+    "size_bytes": 10539
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 115,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "vivid"
+    },
+    "case_id": "115_synoptic_vivid_justify_a4_landscape_numbers_off",
+    "output_svg": "tests/end_to_end/output/vivid/justify/115_synoptic_a4_landscape_numbers_off.svg",
+    "size_bytes": 17527
+  },
+  {
+    "case": {
+      "background": "#F8F3FF",
+      "index": 116,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "vivid"
+    },
+    "case_id": "116_synoptic_boxes_vivid_left_square_numbers_on",
+    "output_svg": "tests/end_to_end/output/vivid/left/116_synoptic_boxes_square_numbers_on.svg",
+    "size_bytes": 24009
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 117,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "vivid"
+    },
+    "case_id": "117_synoptic_boxes_vivid_justify_a4_numbers_off",
+    "output_svg": "tests/end_to_end/output/vivid/justify/117_synoptic_boxes_a4_numbers_off.svg",
+    "size_bytes": 27016
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "index": 118,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "vivid"
+    },
+    "case_id": "118_radial_vivid_left_a4_landscape_numbers_on",
+    "output_svg": "tests/end_to_end/output/vivid/left/118_radial_a4_landscape_numbers_on.svg",
+    "size_bytes": 27784
+  },
+  {
+    "case": {
+      "background": null,
+      "index": 119,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "vivid"
+    },
+    "case_id": "119_radial_vivid_justify_square_numbers_off",
+    "output_svg": "tests/end_to_end/output/vivid/justify/119_radial_square_numbers_off.svg",
+    "size_bytes": 29659
   }
 ]

@@ -53,10 +53,11 @@ Common commands:
 
 ```bash
 koala themes
+koala types
 koala layouts
 koala typographies
-koala compile docs/examples/tree.txt --layout tree --theme academic
-koala compile docs/examples/radial.txt --layout radial --theme frutal --size square
+koala compile docs/examples/tree.txt --type tree --layout tree --theme academic
+koala compile docs/examples/radial.txt --type tree --layout radial --theme frutal --size square
 koala compile docs/examples/tree.txt --background '#F7F4ED'
 koala export docs/examples/tree.txt --format png --quality high
 koala export docs/examples/tree.txt --format pdf --quality high
@@ -72,6 +73,7 @@ Current CLI subcommands:
 - `inspect`: resolve metadata and settings without writing output
 - `validate`: validate parsing and settings; `--strict` fails on warnings
 - `themes`: list available themes
+- `types`: list available document types
 - `layouts`: list available layouts
 - `typographies`: list typography presets
 - `config-path`: print the expected user config path
@@ -82,6 +84,8 @@ Output behavior from the CLI:
 - `--output` writes to an explicit SVG path
 - `--output-dir` writes to a specific folder
 - `--desktop` writes to `~/Desktop` when available and otherwise falls back to the input folder
+- `--type` chooses the document pipeline; today the only supported value is `tree`
+- `--layout` currently selects a layout inside the `tree` document type
 
 User config:
 
@@ -112,6 +116,7 @@ import koala
 
 result = koala.compile(
     "docs/examples/radial.txt",
+    type="tree",
     layout="radial",
     theme="academic",
     size="square",
@@ -136,6 +141,7 @@ result = koala.compile_text(
     1.1 First Branch
     Supporting detail.
     """,
+    type="tree",
     layout="tree",
     theme="frutal",
     base_dir="docs/examples",
@@ -159,12 +165,14 @@ import koala
 
 context = koala.inspect_text(
     "1 Root\nBody.\n",
+    type="tree",
     layout="tree",
     theme="academic",
 )
 
 validated = koala.validate_text(
     "1 Root\nBody.\n",
+    type="tree",
     layout="tree",
     theme="academic",
     strict=True,
@@ -185,6 +193,8 @@ If `strict=True` and the parser emits warnings, `validate_text(...)` raises `koa
 - `koala.inspect_text(text, **config)`: resolve `RenderContext` without writing SVG
 - `koala.validate_text(text, **config)`: resolve `RenderContext` and optionally fail on warnings
 
+All of these APIs accept `type="tree"` today. `tree` is the default for backward compatibility. Future document types such as `matrix` or `flowchart` should add their own implementation across `core/<type>`, `layout/<type>`, and `render/<type>` while reusing shared themes, config, page settings, and export.
+
 ### Export SVG, PNG, and decorated PDF
 
 Use export APIs when a server needs to send final bytes to a client.
@@ -203,6 +213,7 @@ In-memory export results.
 
 png = koala.export_text(
     source,
+    type="tree",
     format="png",
     quality="high",
     layout="tree",
@@ -211,6 +222,7 @@ png = koala.export_text(
 
 pdf = koala.export_text(
     source,
+    type="tree",
     format="pdf",
     quality="high",
     layout="tree",

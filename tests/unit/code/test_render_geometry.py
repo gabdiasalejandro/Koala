@@ -8,7 +8,7 @@ SRC_DIR = ROOT_DIR / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from koala.render.geometry import synoptic_brace_path_data
+from koala.render.shared.geometry import synoptic_brace_path_data
 
 
 class SynopticBracePathDataTests(unittest.TestCase):

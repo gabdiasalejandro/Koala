@@ -53,8 +53,9 @@ pipx install koala-diagrams
 ### CLI
 
 ```bash
-koala compile docs/examples/tree.txt --layout tree
-koala compile docs/examples/radial.txt --layout radial --theme jungle --size square
+koala types
+koala compile docs/examples/tree.txt --type tree --layout tree
+koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
 koala export docs/examples/tree.txt --format png --quality high
 koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
@@ -68,6 +69,7 @@ import koala
 
 file_result = koala.compile(
     "docs/examples/radial.txt",
+    type="tree",
     layout="radial",
     theme="academic",
     size="square",
@@ -81,6 +83,7 @@ svg_result = koala.render_text(
     1.1 First Branch
     Supporting detail.
     """,
+    type="tree",
     layout="tree",
     theme="frutal",
 )
@@ -96,6 +99,7 @@ print(source_path)
 
 png_result = koala.export_text(
     "main:: 1 Central Topic\nMain explanation.\n",
+    type="tree",
     format="png",
     quality="high",
     layout="tree",
@@ -104,6 +108,7 @@ png_result = koala.export_text(
 
 pdf_result = koala.export_text(
     "main:: 1 Central Topic\nMain explanation.\n",
+    type="tree",
     format="pdf",
     quality="high",
     layout="tree",
@@ -126,6 +131,7 @@ Library API summary:
 `RenderResult` now always includes the serialized SVG in `result.svg`. `result.output_svg` is only populated when the operation writes a file.
 `ExportResult` includes final bytes in `result.content`, the HTTP media type in `result.media_type`, and `result.output_path` when an explicit output is written.
 PNG export uses direct SVG conversion at `medium` or `high` quality. PDF export is vector-based and adds a professional frame with margins, a title resolved from the first `main::` node, and theme-aware colors.
+All render/export APIs accept `type="tree"`; it defaults to `tree` today. Layouts currently belong to the `tree` document type. If DSL syntax does not match the requested type, Koala raises `DocumentTypeMismatchError`.
 
 In general, avoid embedding `@show-node-numbers` in document metadata. Prefer CLI flags, library arguments, or user config defaults unless a file really needs to be self-descriptive about numbering.
 
