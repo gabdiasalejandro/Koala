@@ -23,8 +23,8 @@ from koala.render.shared.themes import ThemeCatalog
 
 TREE_LAYOUTS = ("tree", "synoptic", "synoptic_boxes", "radial")
 TEXT_ALIGN_SEQUENCE = ("left", "justify")
-TREE_TYPOGRAPHIES = ("default", "radial")
-MATRIX_TYPOGRAPHIES = ("formal", "default")
+TREE_TYPOGRAPHIES = ("default", "academic", "formal", "casual", "radial")
+MATRIX_TYPOGRAPHIES = ("formal", "default", "academic", "casual")
 PAGE_SIZES = ("a4", "a4_landscape", "square")
 BACKGROUND_COLORS = ("#F7F4ED", "#F1F7FB", "#F8F3FF", "#F4F9F1")
 TREE_MOCKS = {
@@ -125,13 +125,17 @@ class RenderEndToEndTest(unittest.TestCase):
     def _build_cases() -> list[E2ECase]:
         cases: list[E2ECase] = []
         index = 0
+        tree_case_count = 0
+        matrix_case_count = 0
 
         for theme in ThemeCatalog.available_names():
             for layout in TREE_LAYOUTS:
-                cases.append(_case(index, "tree", layout, theme))
+                cases.append(_case(index, "tree", layout, theme, tree_case_count))
                 index += 1
-            cases.append(_case(index, "matrix", "matrix", theme))
+                tree_case_count += 1
+            cases.append(_case(index, "matrix", "matrix", theme, matrix_case_count))
             index += 1
+            matrix_case_count += 1
 
         return cases
 
@@ -208,6 +212,8 @@ class RenderEndToEndTest(unittest.TestCase):
         self.assertIn("<svg", svg_text)
         self.assertIn("transform=", svg_text)
         self.assertIn("<text", svg_text)
+        self.assertIn(result.context.settings.typography.title_font, svg_text)
+        self.assertIn(result.context.settings.typography.body_font, svg_text)
 
         if case.document_type == "matrix":
             self.assertIn("<rect", svg_text)
@@ -350,7 +356,13 @@ class RenderEndToEndTest(unittest.TestCase):
         }
 
 
-def _case(index: int, document_type: str, layout: str, theme: str) -> E2ECase:
+def _case(
+    index: int,
+    document_type: str,
+    layout: str,
+    theme: str,
+    typography_index: int,
+) -> E2ECase:
     text_align = TEXT_ALIGN_SEQUENCE[index % len(TEXT_ALIGN_SEQUENCE)]
     typographies = MATRIX_TYPOGRAPHIES if document_type == "matrix" else TREE_TYPOGRAPHIES
     return E2ECase(
@@ -359,7 +371,7 @@ def _case(index: int, document_type: str, layout: str, theme: str) -> E2ECase:
         layout=layout,
         theme=theme,
         text_align=text_align,
-        typography=typographies[index % len(typographies)],
+        typography=typographies[typography_index % len(typographies)],
         page_size=PAGE_SIZES[index % len(PAGE_SIZES)],
         show_node_numbers=document_type == "tree" and index % 2 == 0,
         background=BACKGROUND_COLORS[(index // 2) % len(BACKGROUND_COLORS)] if index % 3 == 0 else None,

@@ -271,6 +271,7 @@ Tipos de documento:
 
 - [docs/syntax.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/syntax.md): sintaxis del DSL, metadata y reglas de precedencia
 - [docs/tutorial.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/tutorial.md): guía práctica de autoría con ejemplos, themes y sugerencias de uso
+- [docs/how-to-add-a-typography.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/how-to-add-a-typography.md): guía para agregar presets tipográficos y revisar SVG/PNG/PDF
 - [docs/layouts.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/layouts.md): comportamiento de layouts y reglas geométricas
 - [docs/architecture.md](https://github.com/gabdiasalejandro/Koala/blob/main/docs/architecture.md): estructura actual del paquete, flujo de API y pipeline de render
 - [docs/examples/tree.txt](https://github.com/gabdiasalejandro/Koala/blob/main/docs/examples/tree.txt): ejemplo mínimo tipo tree

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import Dict
 
 from koala.layout.shared.models import LayoutConfig, TypographyConfig
@@ -51,6 +52,28 @@ TYPOGRAPHIES: Dict[str, TypographyConfig] = {
         title_line_extra=1.0,
     ),
 }
+TYPOGRAPHIES["academic"] = replace(
+    TYPOGRAPHIES["default"],
+    title_font="Georgia",
+    body_font="Times New Roman",
+    title_size_base=19.2,
+    title_size_min=17.0,
+    body_size=10.3,
+    relation_size=9.4,
+    body_leading=13.4,
+    title_line_extra=1.0,
+)
+TYPOGRAPHIES["casual"] = replace(
+    TYPOGRAPHIES["default"],
+    title_font="Trebuchet MS",
+    body_font="Verdana",
+    title_size_base=18.2,
+    title_size_min=16.3,
+    body_size=10.0,
+    relation_size=9.2,
+    body_leading=13.0,
+    title_line_extra=1.0,
+)
 
 
 def _register_matrix_profiles() -> None:

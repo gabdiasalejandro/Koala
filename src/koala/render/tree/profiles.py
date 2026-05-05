@@ -75,6 +75,38 @@ TYPOGRAPHIES: Dict[str, TypographyConfig] = {
         title_line_extra=1.2,
     ),
 }
+TYPOGRAPHIES["academic"] = replace(
+    TYPOGRAPHIES["default"],
+    title_font="Georgia",
+    body_font="Times New Roman",
+    title_size_base=18.2,
+    title_size_min=16.4,
+    body_size=11.2,
+    relation_size=9.8,
+    body_leading=14.4,
+    title_line_extra=1.1,
+)
+TYPOGRAPHIES["formal"] = replace(
+    TYPOGRAPHIES["default"],
+    title_font="Times New Roman",
+    body_font="Arial",
+    title_size_base=18.4,
+    title_size_min=16.5,
+    body_size=11.0,
+    relation_size=9.8,
+    body_leading=13.8,
+    title_line_extra=1.0,
+)
+TYPOGRAPHIES["casual"] = replace(
+    TYPOGRAPHIES["default"],
+    title_font="Trebuchet MS",
+    body_font="Verdana",
+    title_size_base=17.2,
+    title_size_min=15.4,
+    body_size=10.9,
+    relation_size=9.8,
+    body_leading=13.8,
+)
 TYPOGRAPHIES["radial"] = replace(
     TYPOGRAPHIES["default"],
     title_font="Trebuchet MS",

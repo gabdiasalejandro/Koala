@@ -22,6 +22,10 @@ from koala.render.shared.models import (
     RenderContext,
     RenderResult,
 )
+from koala.render.shared.settings import (
+    available_typography_names,
+    available_typography_names_for,
+)
 from typing_extensions import Unpack
 
 
@@ -98,6 +102,27 @@ _ALLOWED_COMPILE_TEXT_CONFIG_KEYS = frozenset(CompileTextConfig.__annotations__)
 _ALLOWED_CONTEXT_CONFIG_KEYS = frozenset(ContextConfig.__annotations__)
 _ALLOWED_VALIDATE_TEXT_CONFIG_KEYS = frozenset(ValidateTextConfig.__annotations__)
 _ALLOWED_SAVE_TEXT_CONFIG_KEYS = frozenset(SaveTextConfig.__annotations__)
+
+
+def available_document_types() -> tuple[str, ...]:
+    """Retorna los tipos de documento disponibles para la API publica."""
+
+    return DocumentPipelineRegistry.available_types()
+
+
+def available_typographies(type: DocumentType | None = None) -> tuple[str, ...]:
+    """Retorna presets tipograficos disponibles.
+
+    Si `type` se omite, retorna la union de presets disponibles en Koala.
+    Si se pasa, retorna solo las tipografias registradas para ese tipo.
+    """
+
+    if type is None:
+        return available_typography_names()
+
+    document_type = DocumentPipelineRegistry.normalize_type(type)
+    DocumentPipelineRegistry.require(document_type)
+    return available_typography_names_for(document_type)
 
 
 def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:

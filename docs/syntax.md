@@ -295,6 +295,8 @@ The supported matrix layout name is:
 
 The built-in matrix typographies are:
 
+- `academic`
+- `casual`
 - `formal`
 - `default`
 

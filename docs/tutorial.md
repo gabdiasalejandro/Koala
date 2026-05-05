@@ -882,5 +882,6 @@ footer:: Recomendacion | Usar matrix cuando la decision depende de comparar opci
 - [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
 - [tests/end_to_end/mocks/comparative_matrix.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/comparative_matrix.txt)
 - [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md)
+- [docs/how-to-add-a-typography.md](/home/yaldapika/dev/koala/docs/how-to-add-a-typography.md)
 - [docs/layouts.md](/home/yaldapika/dev/koala/docs/layouts.md)
 - [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md)

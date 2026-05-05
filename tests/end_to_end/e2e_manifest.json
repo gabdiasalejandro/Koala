@@ -20,16 +20,16 @@
     },
     "sizes_bytes": {
       "pdf": 34477,
-      "png_high": 600302,
-      "png_medium": 232022,
+      "png_high": 685234,
+      "png_medium": 304706,
       "svg": 30522
     },
     "timings_seconds": {
-      "pdf": 0.049488,
-      "png_high": 0.512276,
-      "png_medium": 0.270208,
-      "render_svg": 0.01604,
-      "write_svg": 8.4e-05
+      "pdf": 0.045902,
+      "png_high": 0.587784,
+      "png_medium": 0.349909,
+      "render_svg": 0.021562,
+      "write_svg": 0.000126
     }
   },
   {
@@ -42,27 +42,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "academic",
-      "typography": "radial"
+      "typography": "academic"
     },
-    "case_id": "01_tree_synoptic_academic_justify_radial_a4_landscape_numbers_off",
+    "case_id": "01_tree_synoptic_academic_justify_academic_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/academic/01_synoptic_justify_academic_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/academic/01_synoptic_justify_academic_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/academic/01_synoptic_justify_academic_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/academic/01_synoptic_justify_academic_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 19565,
-      "png_high": 503541,
-      "png_medium": 199500,
-      "svg": 17931
+      "pdf": 23695,
+      "png_high": 571488,
+      "png_medium": 256055,
+      "svg": 19089
     },
     "timings_seconds": {
-      "pdf": 0.027305,
-      "png_high": 0.430562,
-      "png_medium": 0.120987,
-      "render_svg": 0.006882,
-      "write_svg": 8.8e-05
+      "pdf": 0.027055,
+      "png_high": 0.51296,
+      "png_medium": 0.152786,
+      "render_svg": 0.004825,
+      "write_svg": 6.4e-05
     }
   },
   {
@@ -75,27 +75,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "academic",
-      "typography": "default"
+      "typography": "formal"
     },
-    "case_id": "02_tree_synoptic_boxes_academic_left_default_square_numbers_on",
+    "case_id": "02_tree_synoptic_boxes_academic_left_formal_square_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.svg"
+      "pdf": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_formal_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_formal_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_formal_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34206,
-      "png_high": 632310,
-      "png_medium": 245899,
-      "svg": 23976
+      "pdf": 36903,
+      "png_high": 701394,
+      "png_medium": 293862,
+      "svg": 23983
     },
     "timings_seconds": {
-      "pdf": 0.036463,
-      "png_high": 0.360851,
-      "png_medium": 0.103679,
-      "render_svg": 0.006501,
-      "write_svg": 0.000256
+      "pdf": 0.036266,
+      "png_high": 0.411767,
+      "png_medium": 0.137027,
+      "render_svg": 0.006164,
+      "write_svg": 8.6e-05
     }
   },
   {
@@ -108,27 +108,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "academic",
-      "typography": "radial"
+      "typography": "casual"
     },
-    "case_id": "03_tree_radial_academic_justify_radial_a4_numbers_off",
+    "case_id": "03_tree_radial_academic_justify_casual_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/academic/03_radial_justify_casual_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/academic/03_radial_justify_casual_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/academic/03_radial_justify_casual_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/academic/03_radial_justify_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19779,
-      "png_high": 724323,
-      "png_medium": 291384,
-      "svg": 29727
+      "pdf": 19797,
+      "png_high": 843768,
+      "png_medium": 395759,
+      "svg": 30255
     },
     "timings_seconds": {
-      "pdf": 0.032207,
-      "png_high": 0.483401,
-      "png_medium": 0.128813,
-      "render_svg": 0.015042,
-      "write_svg": 9.8e-05
+      "pdf": 0.032156,
+      "png_high": 0.572108,
+      "png_medium": 0.178136,
+      "render_svg": 0.01475,
+      "write_svg": 6.7e-05
     }
   },
   {
@@ -152,16 +152,16 @@
     },
     "sizes_bytes": {
       "pdf": 29259,
-      "png_high": 481318,
-      "png_medium": 193917,
+      "png_high": 580809,
+      "png_medium": 265887,
       "svg": 10477
     },
     "timings_seconds": {
-      "pdf": 0.019841,
-      "png_high": 0.472648,
-      "png_medium": 0.115884,
-      "render_svg": 0.002938,
-      "write_svg": 5.6e-05
+      "pdf": 0.019646,
+      "png_high": 0.580667,
+      "png_medium": 0.162152,
+      "render_svg": 0.002783,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -185,16 +185,16 @@
     },
     "sizes_bytes": {
       "pdf": 19144,
-      "png_high": 386058,
-      "png_medium": 141690,
+      "png_high": 428648,
+      "png_medium": 189107,
       "svg": 30506
     },
     "timings_seconds": {
-      "pdf": 0.036171,
-      "png_high": 0.347863,
-      "png_medium": 0.097793,
-      "render_svg": 0.012931,
-      "write_svg": 8.1e-05
+      "pdf": 0.032127,
+      "png_high": 0.416189,
+      "png_medium": 0.131074,
+      "render_svg": 0.012048,
+      "write_svg": 4.8e-05
     }
   },
   {
@@ -218,16 +218,16 @@
     },
     "sizes_bytes": {
       "pdf": 24186,
-      "png_high": 668899,
-      "png_medium": 256078,
+      "png_high": 768275,
+      "png_medium": 344296,
       "svg": 10539
     },
     "timings_seconds": {
-      "pdf": 0.029699,
-      "png_high": 0.474972,
-      "png_medium": 0.124783,
-      "render_svg": 0.003097,
-      "write_svg": 6.1e-05
+      "pdf": 0.028883,
+      "png_high": 0.560411,
+      "png_medium": 0.172254,
+      "render_svg": 0.002976,
+      "write_svg": 4.4e-05
     }
   },
   {
@@ -240,27 +240,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "black",
-      "typography": "radial"
+      "typography": "academic"
     },
-    "case_id": "07_tree_synoptic_boxes_black_justify_radial_a4_landscape_numbers_off",
+    "case_id": "07_tree_synoptic_boxes_black_justify_academic_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_academic_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_academic_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_academic_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_academic_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 19094,
-      "png_high": 580148,
-      "png_medium": 228232,
-      "svg": 27412
+      "pdf": 31360,
+      "png_high": 646889,
+      "png_medium": 288764,
+      "svg": 28590
     },
     "timings_seconds": {
-      "pdf": 0.03059,
-      "png_high": 0.444887,
-      "png_medium": 0.115218,
-      "render_svg": 0.006188,
-      "write_svg": 6.8e-05
+      "pdf": 0.03343,
+      "png_high": 0.517836,
+      "png_medium": 0.156427,
+      "render_svg": 0.006442,
+      "write_svg": 6.7e-05
     }
   },
   {
@@ -273,27 +273,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "black",
-      "typography": "default"
+      "typography": "formal"
     },
-    "case_id": "08_tree_radial_black_left_default_square_numbers_on",
+    "case_id": "08_tree_radial_black_left_formal_square_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/black/08_radial_left_default_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/black/08_radial_left_default_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/black/08_radial_left_default_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/black/08_radial_left_default_square.svg"
+      "pdf": "tests/end_to_end/output/tree/black/08_radial_left_formal_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/black/08_radial_left_formal_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/black/08_radial_left_formal_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/black/08_radial_left_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35361,
-      "png_high": 908696,
-      "png_medium": 361933,
-      "svg": 27275
+      "pdf": 37931,
+      "png_high": 961173,
+      "png_medium": 440120,
+      "svg": 27312
     },
     "timings_seconds": {
-      "pdf": 0.038264,
-      "png_high": 0.376597,
-      "png_medium": 0.111938,
-      "render_svg": 0.012307,
-      "write_svg": 9.5e-05
+      "pdf": 0.038027,
+      "png_high": 0.432964,
+      "png_medium": 0.146528,
+      "render_svg": 0.012079,
+      "write_svg": 6.2e-05
     }
   },
   {
@@ -317,16 +317,16 @@
     },
     "sizes_bytes": {
       "pdf": 28387,
-      "png_high": 647432,
-      "png_medium": 258920,
+      "png_high": 726984,
+      "png_medium": 334768,
       "svg": 17649
     },
     "timings_seconds": {
-      "pdf": 0.027037,
-      "png_high": 0.502964,
-      "png_medium": 0.12044,
-      "render_svg": 0.004489,
-      "write_svg": 5.7e-05
+      "pdf": 0.023941,
+      "png_high": 0.578717,
+      "png_medium": 0.169276,
+      "render_svg": 0.004359,
+      "write_svg": 5.2e-05
     }
   },
   {
@@ -339,27 +339,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "colorblind",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "10_tree_tree_colorblind_left_default_a4_landscape_numbers_on",
+    "case_id": "10_tree_tree_colorblind_left_casual_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/colorblind/10_tree_left_casual_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/colorblind/10_tree_left_casual_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/colorblind/10_tree_left_casual_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/colorblind/10_tree_left_casual_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 34397,
-      "png_high": 851618,
-      "png_medium": 316027,
-      "svg": 30488
+      "pdf": 22067,
+      "png_high": 911906,
+      "png_medium": 416848,
+      "svg": 31322
     },
     "timings_seconds": {
-      "pdf": 0.041595,
-      "png_high": 0.512467,
-      "png_medium": 0.13804,
-      "render_svg": 0.01377,
-      "write_svg": 6.9e-05
+      "pdf": 0.04015,
+      "png_high": 0.587637,
+      "png_medium": 0.187123,
+      "render_svg": 0.013995,
+      "write_svg": 5.3e-05
     }
   },
   {
@@ -383,16 +383,16 @@
     },
     "sizes_bytes": {
       "pdf": 19561,
-      "png_high": 408911,
-      "png_medium": 161822,
+      "png_high": 465486,
+      "png_medium": 213668,
       "svg": 17931
     },
     "timings_seconds": {
-      "pdf": 0.027332,
-      "png_high": 0.34204,
-      "png_medium": 0.093025,
-      "render_svg": 0.004534,
-      "write_svg": 6.4e-05
+      "pdf": 0.026679,
+      "png_high": 0.385666,
+      "png_medium": 0.123182,
+      "render_svg": 0.004566,
+      "write_svg": 7e-05
     }
   },
   {
@@ -416,16 +416,16 @@
     },
     "sizes_bytes": {
       "pdf": 34292,
-      "png_high": 833602,
-      "png_medium": 325042,
+      "png_high": 955834,
+      "png_medium": 428836,
       "svg": 24009
     },
     "timings_seconds": {
-      "pdf": 0.037334,
-      "png_high": 0.502719,
-      "png_medium": 0.159848,
-      "render_svg": 0.005944,
-      "write_svg": 0.000122
+      "pdf": 0.037341,
+      "png_high": 0.585867,
+      "png_medium": 0.194695,
+      "render_svg": 0.00539,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -438,27 +438,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "colorblind",
-      "typography": "radial"
+      "typography": "academic"
     },
-    "case_id": "13_tree_radial_colorblind_justify_radial_a4_landscape_numbers_off",
+    "case_id": "13_tree_radial_colorblind_justify_academic_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/colorblind/13_radial_justify_academic_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/colorblind/13_radial_justify_academic_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/colorblind/13_radial_justify_academic_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/colorblind/13_radial_justify_academic_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 19823,
-      "png_high": 955377,
-      "png_medium": 395182,
-      "svg": 29662
+      "pdf": 31949,
+      "png_high": 1094056,
+      "png_medium": 514158,
+      "svg": 30704
     },
     "timings_seconds": {
-      "pdf": 0.033016,
-      "png_high": 0.476163,
-      "png_medium": 0.131126,
-      "render_svg": 0.014036,
-      "write_svg": 0.000119
+      "pdf": 0.033296,
+      "png_high": 0.589778,
+      "png_medium": 0.182055,
+      "render_svg": 0.014015,
+      "write_svg": 8.8e-05
     }
   },
   {
@@ -471,27 +471,27 @@
       "show_node_numbers": false,
       "text_align": "left",
       "theme": "colorblind",
-      "typography": "formal"
+      "typography": "academic"
     },
-    "case_id": "14_matrix_matrix_colorblind_left_formal_square_numbers_off",
+    "case_id": "14_matrix_matrix_colorblind_left_academic_square_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.pdf",
-      "png_high": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.high.png",
-      "png_medium": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.medium.png",
-      "svg": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.svg"
+      "pdf": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_academic_square.pdf",
+      "png_high": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_academic_square.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_academic_square.medium.png",
+      "svg": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 29272,
-      "png_high": 583548,
-      "png_medium": 237853,
-      "svg": 12711
+      "pdf": 28640,
+      "png_high": 613230,
+      "png_medium": 283361,
+      "svg": 13054
     },
     "timings_seconds": {
-      "pdf": 0.021206,
-      "png_high": 0.35313,
-      "png_medium": 0.092272,
-      "render_svg": 0.003184,
-      "write_svg": 3.8e-05
+      "pdf": 0.023745,
+      "png_high": 0.423989,
+      "png_medium": 0.126113,
+      "render_svg": 0.003164,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -504,27 +504,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "default",
-      "typography": "radial"
+      "typography": "formal"
     },
-    "case_id": "15_tree_tree_default_justify_radial_a4_numbers_off",
+    "case_id": "15_tree_tree_default_justify_formal_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/default/15_tree_justify_formal_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/default/15_tree_justify_formal_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/default/15_tree_justify_formal_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/default/15_tree_justify_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19193,
-      "png_high": 416445,
-      "png_medium": 151815,
-      "svg": 30538
+      "pdf": 32857,
+      "png_high": 485061,
+      "png_medium": 200921,
+      "svg": 29797
     },
     "timings_seconds": {
-      "pdf": 0.035816,
-      "png_high": 0.482855,
-      "png_medium": 0.123957,
-      "render_svg": 0.012027,
-      "write_svg": 7.6e-05
+      "pdf": 0.033635,
+      "png_high": 0.565106,
+      "png_medium": 0.169013,
+      "render_svg": 0.011786,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -537,27 +537,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "default",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "16_tree_synoptic_default_left_default_a4_landscape_numbers_on",
+    "case_id": "16_tree_synoptic_default_left_casual_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/default/16_synoptic_left_casual_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/default/16_synoptic_left_casual_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/default/16_synoptic_left_casual_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/default/16_synoptic_left_casual_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 24132,
-      "png_high": 562132,
-      "png_medium": 213063,
-      "svg": 10506
+      "pdf": 20302,
+      "png_high": 607987,
+      "png_medium": 260078,
+      "svg": 10681
     },
     "timings_seconds": {
-      "pdf": 0.028898,
-      "png_high": 0.450711,
-      "png_medium": 0.118518,
-      "render_svg": 0.002955,
-      "write_svg": 6.4e-05
+      "pdf": 0.029644,
+      "png_high": 0.519901,
+      "png_medium": 0.155789,
+      "render_svg": 0.003014,
+      "write_svg": 7.2e-05
     }
   },
   {
@@ -581,16 +581,16 @@
     },
     "sizes_bytes": {
       "pdf": 19129,
-      "png_high": 554009,
-      "png_medium": 222637,
+      "png_high": 620268,
+      "png_medium": 291542,
       "svg": 27412
     },
     "timings_seconds": {
-      "pdf": 0.031635,
-      "png_high": 0.334512,
-      "png_medium": 0.093749,
-      "render_svg": 0.00606,
-      "write_svg": 8.1e-05
+      "pdf": 0.043773,
+      "png_high": 0.405177,
+      "png_medium": 0.13013,
+      "render_svg": 0.005996,
+      "write_svg": 5.4e-05
     }
   },
   {
@@ -614,16 +614,16 @@
     },
     "sizes_bytes": {
       "pdf": 35319,
-      "png_high": 946100,
-      "png_medium": 373895,
+      "png_high": 1054565,
+      "png_medium": 480934,
       "svg": 27273
     },
     "timings_seconds": {
-      "pdf": 0.039867,
-      "png_high": 0.506887,
-      "png_medium": 0.153053,
-      "render_svg": 0.012195,
-      "write_svg": 0.000124
+      "pdf": 0.039647,
+      "png_high": 0.59407,
+      "png_medium": 0.201463,
+      "render_svg": 0.011928,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -636,27 +636,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "default",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "19_matrix_matrix_default_justify_default_a4_landscape_numbers_off",
+    "case_id": "19_matrix_matrix_default_justify_casual_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/matrix/default/19_matrix_justify_casual_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/matrix/default/19_matrix_justify_casual_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/default/19_matrix_justify_casual_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/matrix/default/19_matrix_justify_casual_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 28222,
-      "png_high": 558133,
-      "png_medium": 235415,
-      "svg": 15912
+      "pdf": 23792,
+      "png_high": 597568,
+      "png_medium": 281283,
+      "svg": 16307
     },
     "timings_seconds": {
-      "pdf": 0.023258,
-      "png_high": 0.475102,
-      "png_medium": 0.116197,
-      "render_svg": 0.004079,
-      "write_svg": 4.2e-05
+      "pdf": 0.022825,
+      "png_high": 0.574322,
+      "png_medium": 0.166833,
+      "render_svg": 0.004029,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -669,27 +669,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "dusk",
-      "typography": "default"
+      "typography": "academic"
     },
-    "case_id": "20_tree_tree_dusk_left_default_square_numbers_on",
+    "case_id": "20_tree_tree_dusk_left_academic_square_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.svg"
+      "pdf": "tests/end_to_end/output/tree/dusk/20_tree_left_academic_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/dusk/20_tree_left_academic_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/dusk/20_tree_left_academic_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/dusk/20_tree_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34603,
-      "png_high": 579202,
-      "png_medium": 227479,
-      "svg": 30489
+      "pdf": 35562,
+      "png_high": 602551,
+      "png_medium": 257279,
+      "svg": 31594
     },
     "timings_seconds": {
-      "pdf": 0.042544,
-      "png_high": 0.357676,
-      "png_medium": 0.108816,
-      "render_svg": 0.013923,
-      "write_svg": 7.8e-05
+      "pdf": 0.040923,
+      "png_high": 0.430611,
+      "png_medium": 0.142857,
+      "render_svg": 0.014347,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -702,27 +702,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "dusk",
-      "typography": "radial"
+      "typography": "formal"
     },
-    "case_id": "21_tree_synoptic_dusk_justify_radial_a4_numbers_off",
+    "case_id": "21_tree_synoptic_dusk_justify_formal_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_formal_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_formal_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_formal_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19680,
-      "png_high": 616693,
-      "png_medium": 247414,
-      "svg": 17964
+      "pdf": 24584,
+      "png_high": 731222,
+      "png_medium": 337083,
+      "svg": 18316
     },
     "timings_seconds": {
-      "pdf": 0.029237,
-      "png_high": 0.486784,
-      "png_medium": 0.119861,
-      "render_svg": 0.004582,
-      "write_svg": 7e-05
+      "pdf": 0.028812,
+      "png_high": 0.556317,
+      "png_medium": 0.169434,
+      "render_svg": 0.004668,
+      "write_svg": 7.4e-05
     }
   },
   {
@@ -735,27 +735,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "dusk",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "22_tree_synoptic_boxes_dusk_left_default_a4_landscape_numbers_on",
+    "case_id": "22_tree_synoptic_boxes_dusk_left_casual_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_casual_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_casual_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_casual_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_casual_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 34441,
-      "png_high": 668177,
-      "png_medium": 256283,
-      "svg": 23976
+      "pdf": 21986,
+      "png_high": 722889,
+      "png_medium": 314252,
+      "svg": 24130
     },
     "timings_seconds": {
-      "pdf": 0.037683,
-      "png_high": 0.454053,
-      "png_medium": 0.123743,
-      "render_svg": 0.005681,
-      "write_svg": 7.1e-05
+      "pdf": 0.038357,
+      "png_high": 0.55203,
+      "png_medium": 0.166859,
+      "render_svg": 0.005488,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -779,16 +779,16 @@
     },
     "sizes_bytes": {
       "pdf": 19843,
-      "png_high": 699693,
-      "png_medium": 285184,
+      "png_high": 794070,
+      "png_medium": 369403,
       "svg": 29659
     },
     "timings_seconds": {
-      "pdf": 0.033163,
-      "png_high": 0.352225,
-      "png_medium": 0.104403,
-      "render_svg": 0.014309,
-      "write_svg": 9.3e-05
+      "pdf": 0.043803,
+      "png_high": 0.421979,
+      "png_medium": 0.137967,
+      "render_svg": 0.014281,
+      "write_svg": 9.2e-05
     }
   },
   {
@@ -811,16 +811,16 @@
       "svg": "tests/end_to_end/output/matrix/dusk/24_matrix_left_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 29481,
-      "png_high": 619987,
-      "png_medium": 247626,
+      "pdf": 29480,
+      "png_high": 680351,
+      "png_medium": 318133,
       "svg": 12744
     },
     "timings_seconds": {
-      "pdf": 0.022099,
-      "png_high": 0.487446,
-      "png_medium": 0.124273,
-      "render_svg": 0.003256,
+      "pdf": 0.022331,
+      "png_high": 0.576417,
+      "png_medium": 0.16611,
+      "render_svg": 0.003168,
       "write_svg": 4.5e-05
     }
   },
@@ -834,27 +834,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "frutal",
-      "typography": "radial"
+      "typography": "default"
     },
-    "case_id": "25_tree_tree_frutal_justify_radial_a4_landscape_numbers_off",
+    "case_id": "25_tree_tree_frutal_justify_default_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/frutal/25_tree_justify_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/25_tree_justify_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/25_tree_justify_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/25_tree_justify_default_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 19174,
-      "png_high": 556334,
-      "png_medium": 227507,
-      "svg": 30504
+      "pdf": 30736,
+      "png_high": 695891,
+      "png_medium": 295998,
+      "svg": 29900
     },
     "timings_seconds": {
-      "pdf": 0.033199,
-      "png_high": 0.489095,
-      "png_medium": 0.138564,
-      "render_svg": 0.020706,
-      "write_svg": 9.4e-05
+      "pdf": 0.034495,
+      "png_high": 0.574172,
+      "png_medium": 0.174671,
+      "render_svg": 0.01191,
+      "write_svg": 6e-05
     }
   },
   {
@@ -867,27 +867,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "frutal",
-      "typography": "default"
+      "typography": "academic"
     },
-    "case_id": "26_tree_synoptic_frutal_left_default_square_numbers_on",
+    "case_id": "26_tree_synoptic_frutal_left_academic_square_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.svg"
+      "pdf": "tests/end_to_end/output/tree/frutal/26_synoptic_left_academic_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/26_synoptic_left_academic_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/26_synoptic_left_academic_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/26_synoptic_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24113,
-      "png_high": 523442,
-      "png_medium": 203555,
-      "svg": 10506
+      "pdf": 24994,
+      "png_high": 566779,
+      "png_medium": 255070,
+      "svg": 10965
     },
     "timings_seconds": {
-      "pdf": 0.02997,
-      "png_high": 0.327317,
-      "png_medium": 0.092376,
-      "render_svg": 0.002999,
-      "write_svg": 5.1e-05
+      "pdf": 0.030323,
+      "png_high": 0.388037,
+      "png_medium": 0.122837,
+      "render_svg": 0.003072,
+      "write_svg": 5.6e-05
     }
   },
   {
@@ -900,27 +900,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "frutal",
-      "typography": "radial"
+      "typography": "formal"
     },
-    "case_id": "27_tree_synoptic_boxes_frutal_justify_radial_a4_numbers_off",
+    "case_id": "27_tree_synoptic_boxes_frutal_justify_formal_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_formal_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_formal_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_formal_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19125,
-      "png_high": 692829,
-      "png_medium": 280567,
-      "svg": 27445
+      "pdf": 32712,
+      "png_high": 815050,
+      "png_medium": 377796,
+      "svg": 27774
     },
     "timings_seconds": {
-      "pdf": 0.038605,
-      "png_high": 0.478383,
-      "png_medium": 0.131489,
-      "render_svg": 0.007666,
-      "write_svg": 8.5e-05
+      "pdf": 0.033366,
+      "png_high": 0.572497,
+      "png_medium": 0.173409,
+      "render_svg": 0.006226,
+      "write_svg": 7.2e-05
     }
   },
   {
@@ -933,27 +933,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "frutal",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "28_tree_radial_frutal_left_default_a4_landscape_numbers_on",
+    "case_id": "28_tree_radial_frutal_left_casual_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/frutal/28_radial_left_casual_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/28_radial_left_casual_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/28_radial_left_casual_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/28_radial_left_casual_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 35369,
-      "png_high": 1110991,
-      "png_medium": 458006,
-      "svg": 27638
+      "pdf": 22901,
+      "png_high": 1158185,
+      "png_medium": 550107,
+      "svg": 27733
     },
     "timings_seconds": {
-      "pdf": 0.040986,
-      "png_high": 0.510385,
-      "png_medium": 0.141602,
-      "render_svg": 0.012357,
-      "write_svg": 9.9e-05
+      "pdf": 0.041372,
+      "png_high": 0.583904,
+      "png_medium": 0.193316,
+      "render_svg": 0.011955,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -977,16 +977,16 @@
     },
     "sizes_bytes": {
       "pdf": 28245,
-      "png_high": 643274,
-      "png_medium": 264492,
+      "png_high": 716165,
+      "png_medium": 334208,
       "svg": 17616
     },
     "timings_seconds": {
-      "pdf": 0.026399,
-      "png_high": 0.36348,
-      "png_medium": 0.097758,
-      "render_svg": 0.004674,
-      "write_svg": 6.5e-05
+      "pdf": 0.025851,
+      "png_high": 0.434341,
+      "png_medium": 0.131168,
+      "render_svg": 0.004505,
+      "write_svg": 4.9e-05
     }
   },
   {
@@ -999,27 +999,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "jungle",
-      "typography": "default"
+      "typography": "radial"
     },
-    "case_id": "30_tree_tree_jungle_left_default_a4_numbers_on",
+    "case_id": "30_tree_tree_jungle_left_radial_a4_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/jungle/30_tree_left_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/30_tree_left_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/30_tree_left_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/30_tree_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34545,
-      "png_high": 601963,
-      "png_medium": 233145,
-      "svg": 30522
+      "pdf": 22107,
+      "png_high": 642627,
+      "png_medium": 280859,
+      "svg": 31363
     },
     "timings_seconds": {
-      "pdf": 0.042809,
-      "png_high": 0.502613,
-      "png_medium": 0.135558,
-      "render_svg": 0.014275,
-      "write_svg": 6.9e-05
+      "pdf": 0.045661,
+      "png_high": 0.583907,
+      "png_medium": 0.181334,
+      "render_svg": 0.014002,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -1032,27 +1032,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "jungle",
-      "typography": "radial"
+      "typography": "default"
     },
-    "case_id": "31_tree_synoptic_jungle_justify_radial_a4_landscape_numbers_off",
+    "case_id": "31_tree_synoptic_jungle_justify_default_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_default_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 19594,
-      "png_high": 516377,
-      "png_medium": 204188,
-      "svg": 17931
+      "pdf": 23112,
+      "png_high": 633826,
+      "png_medium": 283049,
+      "svg": 17527
     },
     "timings_seconds": {
-      "pdf": 0.029778,
-      "png_high": 0.433027,
-      "png_medium": 0.113283,
-      "render_svg": 0.004991,
-      "write_svg": 0.000101
+      "pdf": 0.029432,
+      "png_high": 0.527118,
+      "png_medium": 0.154723,
+      "render_svg": 0.004508,
+      "write_svg": 4.7e-05
     }
   },
   {
@@ -1065,27 +1065,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "jungle",
-      "typography": "default"
+      "typography": "academic"
     },
-    "case_id": "32_tree_synoptic_boxes_jungle_left_default_square_numbers_on",
+    "case_id": "32_tree_synoptic_boxes_jungle_left_academic_square_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.svg"
+      "pdf": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_academic_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_academic_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_academic_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34281,
-      "png_high": 632465,
-      "png_medium": 246400,
-      "svg": 23976
+      "pdf": 35232,
+      "png_high": 677702,
+      "png_medium": 302925,
+      "svg": 24727
     },
     "timings_seconds": {
-      "pdf": 0.038976,
-      "png_high": 0.353912,
-      "png_medium": 0.101934,
-      "render_svg": 0.01298,
-      "write_svg": 0.000115
+      "pdf": 0.040373,
+      "png_high": 0.413059,
+      "png_medium": 0.135033,
+      "render_svg": 0.005666,
+      "write_svg": 6.4e-05
     }
   },
   {
@@ -1098,27 +1098,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "jungle",
-      "typography": "radial"
+      "typography": "formal"
     },
-    "case_id": "33_tree_radial_jungle_justify_radial_a4_numbers_off",
+    "case_id": "33_tree_radial_jungle_justify_formal_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/jungle/33_radial_justify_formal_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/33_radial_justify_formal_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/33_radial_justify_formal_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/33_radial_justify_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19827,
-      "png_high": 723126,
-      "png_medium": 290814,
-      "svg": 29727
+      "pdf": 33392,
+      "png_high": 841799,
+      "png_medium": 375847,
+      "svg": 29896
     },
     "timings_seconds": {
-      "pdf": 0.033742,
-      "png_high": 0.486444,
-      "png_medium": 0.130324,
-      "render_svg": 0.014612,
-      "write_svg": 0.000116
+      "pdf": 0.035197,
+      "png_high": 0.792307,
+      "png_medium": 0.176681,
+      "render_svg": 0.020003,
+      "write_svg": 9.8e-05
     }
   },
   {
@@ -1131,27 +1131,27 @@
       "show_node_numbers": false,
       "text_align": "left",
       "theme": "jungle",
-      "typography": "formal"
+      "typography": "academic"
     },
-    "case_id": "34_matrix_matrix_jungle_left_formal_a4_landscape_numbers_off",
+    "case_id": "34_matrix_matrix_jungle_left_academic_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/matrix/jungle/34_matrix_left_academic_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/matrix/jungle/34_matrix_left_academic_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/jungle/34_matrix_left_academic_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/matrix/jungle/34_matrix_left_academic_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 29261,
-      "png_high": 481457,
-      "png_medium": 194489,
-      "svg": 10477
+      "pdf": 28597,
+      "png_high": 561930,
+      "png_medium": 253606,
+      "svg": 10717
     },
     "timings_seconds": {
-      "pdf": 0.021285,
-      "png_high": 0.479149,
-      "png_medium": 0.11415,
-      "render_svg": 0.002843,
-      "write_svg": 6e-05
+      "pdf": 0.026426,
+      "png_high": 0.57707,
+      "png_medium": 0.177154,
+      "render_svg": 0.002803,
+      "write_svg": 4.1e-05
     }
   },
   {
@@ -1164,27 +1164,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "minimal",
-      "typography": "radial"
+      "typography": "casual"
     },
-    "case_id": "35_tree_tree_minimal_justify_radial_square_numbers_off",
+    "case_id": "35_tree_tree_minimal_justify_casual_square_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.svg"
+      "pdf": "tests/end_to_end/output/tree/minimal/35_tree_justify_casual_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/35_tree_justify_casual_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/35_tree_justify_casual_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/35_tree_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 19118,
-      "png_high": 389365,
-      "png_medium": 142596,
-      "svg": 30506
+      "pdf": 19071,
+      "png_high": 422422,
+      "png_medium": 181047,
+      "svg": 30157
     },
     "timings_seconds": {
-      "pdf": 0.036859,
-      "png_high": 0.351711,
-      "png_medium": 0.098509,
-      "render_svg": 0.012797,
-      "write_svg": 7.9e-05
+      "pdf": 0.03662,
+      "png_high": 0.413052,
+      "png_medium": 0.133386,
+      "render_svg": 0.012485,
+      "write_svg": 6e-05
     }
   },
   {
@@ -1197,27 +1197,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "minimal",
-      "typography": "default"
+      "typography": "radial"
     },
-    "case_id": "36_tree_synoptic_minimal_left_default_a4_numbers_on",
+    "case_id": "36_tree_synoptic_minimal_left_radial_a4_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/minimal/36_synoptic_left_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/36_synoptic_left_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/36_synoptic_left_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/36_synoptic_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 24107,
-      "png_high": 710981,
-      "png_medium": 275375,
-      "svg": 10539
+      "pdf": 20190,
+      "png_high": 730472,
+      "png_medium": 340376,
+      "svg": 10459
     },
     "timings_seconds": {
-      "pdf": 0.030386,
-      "png_high": 0.471662,
-      "png_medium": 0.123228,
-      "render_svg": 0.003268,
-      "write_svg": 8.4e-05
+      "pdf": 0.031491,
+      "png_high": 0.558184,
+      "png_medium": 0.171034,
+      "render_svg": 0.003045,
+      "write_svg": 0.000104
     }
   },
   {
@@ -1230,27 +1230,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "minimal",
-      "typography": "radial"
+      "typography": "default"
     },
-    "case_id": "37_tree_synoptic_boxes_minimal_justify_radial_a4_landscape_numbers_off",
+    "case_id": "37_tree_synoptic_boxes_minimal_justify_default_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_default_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 19056,
-      "png_high": 579346,
-      "png_medium": 229319,
-      "svg": 27412
+      "pdf": 30604,
+      "png_high": 701023,
+      "png_medium": 315506,
+      "svg": 27014
     },
     "timings_seconds": {
-      "pdf": 0.034489,
-      "png_high": 0.441789,
-      "png_medium": 0.117244,
-      "render_svg": 0.006633,
-      "write_svg": 8.5e-05
+      "pdf": 0.035385,
+      "png_high": 0.528649,
+      "png_medium": 0.201336,
+      "render_svg": 0.006394,
+      "write_svg": 8.4e-05
     }
   },
   {
@@ -1263,27 +1263,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "minimal",
-      "typography": "default"
+      "typography": "academic"
     },
-    "case_id": "38_tree_radial_minimal_left_default_square_numbers_on",
+    "case_id": "38_tree_radial_minimal_left_academic_square_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.svg"
+      "pdf": "tests/end_to_end/output/tree/minimal/38_radial_left_academic_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/38_radial_left_academic_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/38_radial_left_academic_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/38_radial_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35254,
-      "png_high": 915627,
-      "png_medium": 364905,
-      "svg": 27275
+      "pdf": 36173,
+      "png_high": 949861,
+      "png_medium": 432411,
+      "svg": 28224
     },
     "timings_seconds": {
-      "pdf": 0.041167,
-      "png_high": 0.372761,
-      "png_medium": 0.112891,
-      "render_svg": 0.012401,
-      "write_svg": 9e-05
+      "pdf": 0.042929,
+      "png_high": 0.437164,
+      "png_medium": 0.146383,
+      "render_svg": 0.012683,
+      "write_svg": 7.4e-05
     }
   },
   {
@@ -1296,27 +1296,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "minimal",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "39_matrix_matrix_minimal_justify_default_a4_numbers_off",
+    "case_id": "39_matrix_matrix_minimal_justify_casual_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.pdf",
-      "png_high": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.high.png",
-      "png_medium": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.medium.png",
-      "svg": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.svg"
+      "pdf": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_casual_a4.pdf",
+      "png_high": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_casual_a4.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_casual_a4.medium.png",
+      "svg": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 28262,
-      "png_high": 659446,
-      "png_medium": 265927,
-      "svg": 17649
+      "pdf": 23813,
+      "png_high": 683740,
+      "png_medium": 317740,
+      "svg": 17871
     },
     "timings_seconds": {
-      "pdf": 0.025594,
-      "png_high": 0.485366,
-      "png_medium": 0.121485,
-      "render_svg": 0.004528,
-      "write_svg": 4.2e-05
+      "pdf": 0.026498,
+      "png_high": 0.585482,
+      "png_medium": 0.170044,
+      "render_svg": 0.004487,
+      "write_svg": 5e-05
     }
   },
   {
@@ -1329,27 +1329,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "neon",
-      "typography": "default"
+      "typography": "formal"
     },
-    "case_id": "40_tree_tree_neon_left_default_a4_landscape_numbers_on",
+    "case_id": "40_tree_tree_neon_left_formal_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/neon/40_tree_left_formal_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/40_tree_left_formal_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/40_tree_left_formal_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/40_tree_left_formal_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 34392,
-      "png_high": 870989,
-      "png_medium": 325021,
-      "svg": 30488
+      "pdf": 37034,
+      "png_high": 934273,
+      "png_medium": 411019,
+      "svg": 30588
     },
     "timings_seconds": {
-      "pdf": 0.043871,
-      "png_high": 0.506544,
-      "png_medium": 0.140283,
-      "render_svg": 0.015011,
-      "write_svg": 7.3e-05
+      "pdf": 0.042521,
+      "png_high": 0.600707,
+      "png_medium": 0.189724,
+      "render_svg": 0.014334,
+      "write_svg": 8.3e-05
     }
   },
   {
@@ -1362,27 +1362,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "neon",
-      "typography": "radial"
+      "typography": "casual"
     },
-    "case_id": "41_tree_synoptic_neon_justify_radial_square_numbers_off",
+    "case_id": "41_tree_synoptic_neon_justify_casual_square_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.svg"
+      "pdf": "tests/end_to_end/output/tree/neon/41_synoptic_justify_casual_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/41_synoptic_justify_casual_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/41_synoptic_justify_casual_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/41_synoptic_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 19570,
-      "png_high": 482055,
-      "png_medium": 191906,
-      "svg": 17931
+      "pdf": 19551,
+      "png_high": 541825,
+      "png_medium": 249814,
+      "svg": 17842
     },
     "timings_seconds": {
-      "pdf": 0.029875,
-      "png_high": 0.329968,
-      "png_medium": 0.093931,
-      "render_svg": 0.004879,
-      "write_svg": 7.2e-05
+      "pdf": 0.028268,
+      "png_high": 0.399667,
+      "png_medium": 0.125058,
+      "render_svg": 0.00459,
+      "write_svg": 7.6e-05
     }
   },
   {
@@ -1395,27 +1395,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "neon",
-      "typography": "default"
+      "typography": "radial"
     },
-    "case_id": "42_tree_synoptic_boxes_neon_left_default_a4_numbers_on",
+    "case_id": "42_tree_synoptic_boxes_neon_left_radial_a4_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34293,
-      "png_high": 848676,
-      "png_medium": 330933,
-      "svg": 24009
+      "pdf": 21743,
+      "png_high": 871999,
+      "png_medium": 410899,
+      "svg": 23921
     },
     "timings_seconds": {
-      "pdf": 0.040069,
-      "png_high": 0.500044,
-      "png_medium": 0.136908,
-      "render_svg": 0.006369,
-      "write_svg": 0.000101
+      "pdf": 0.037731,
+      "png_high": 0.592255,
+      "png_medium": 0.182073,
+      "render_svg": 0.006099,
+      "write_svg": 8.8e-05
     }
   },
   {
@@ -1428,27 +1428,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "neon",
-      "typography": "radial"
+      "typography": "default"
     },
-    "case_id": "43_tree_radial_neon_justify_radial_a4_landscape_numbers_off",
+    "case_id": "43_tree_radial_neon_justify_default_a4_landscape_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/neon/43_radial_justify_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/43_radial_justify_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/43_radial_justify_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/43_radial_justify_default_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 19824,
-      "png_high": 958946,
-      "png_medium": 398795,
-      "svg": 29662
+      "pdf": 31367,
+      "png_high": 1167871,
+      "png_medium": 555356,
+      "svg": 29740
     },
     "timings_seconds": {
-      "pdf": 0.035244,
-      "png_high": 0.486972,
-      "png_medium": 0.13293,
-      "render_svg": 0.014851,
-      "write_svg": 0.000101
+      "pdf": 0.03499,
+      "png_high": 0.583015,
+      "png_medium": 0.187236,
+      "render_svg": 0.013987,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -1472,16 +1472,16 @@
     },
     "sizes_bytes": {
       "pdf": 29281,
-      "png_high": 596383,
-      "png_medium": 243962,
+      "png_high": 648602,
+      "png_medium": 307883,
       "svg": 12711
     },
     "timings_seconds": {
-      "pdf": 0.029951,
-      "png_high": 0.415166,
-      "png_medium": 0.093678,
-      "render_svg": 0.003445,
-      "write_svg": 4.2e-05
+      "pdf": 0.028488,
+      "png_high": 0.439837,
+      "png_medium": 0.129938,
+      "render_svg": 0.003254,
+      "write_svg": 4.3e-05
     }
   },
   {
@@ -1494,27 +1494,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "ocean",
-      "typography": "radial"
+      "typography": "academic"
     },
-    "case_id": "45_tree_tree_ocean_justify_radial_a4_numbers_off",
+    "case_id": "45_tree_tree_ocean_justify_academic_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/ocean/45_tree_justify_academic_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/45_tree_justify_academic_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/45_tree_justify_academic_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/45_tree_justify_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19178,
-      "png_high": 415319,
-      "png_medium": 150945,
-      "svg": 30538
+      "pdf": 31425,
+      "png_high": 479541,
+      "png_medium": 200787,
+      "svg": 31356
     },
     "timings_seconds": {
-      "pdf": 0.035346,
-      "png_high": 0.476971,
-      "png_medium": 0.138342,
-      "render_svg": 0.016411,
-      "write_svg": 9.8e-05
+      "pdf": 0.036209,
+      "png_high": 0.569907,
+      "png_medium": 0.171087,
+      "render_svg": 0.018602,
+      "write_svg": 0.0001
     }
   },
   {
@@ -1527,27 +1527,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "ocean",
-      "typography": "default"
+      "typography": "formal"
     },
-    "case_id": "46_tree_synoptic_ocean_left_default_a4_landscape_numbers_on",
+    "case_id": "46_tree_synoptic_ocean_left_formal_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/ocean/46_synoptic_left_formal_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/46_synoptic_left_formal_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/46_synoptic_left_formal_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/46_synoptic_left_formal_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 24131,
-      "png_high": 561184,
-      "png_medium": 212726,
-      "svg": 10506
+      "pdf": 25643,
+      "png_high": 598587,
+      "png_medium": 253230,
+      "svg": 10517
     },
     "timings_seconds": {
-      "pdf": 0.031264,
-      "png_high": 0.434395,
-      "png_medium": 0.113495,
-      "render_svg": 0.003185,
-      "write_svg": 5.5e-05
+      "pdf": 0.031171,
+      "png_high": 0.515974,
+      "png_medium": 0.155695,
+      "render_svg": 0.003092,
+      "write_svg": 6e-05
     }
   },
   {
@@ -1560,27 +1560,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "ocean",
-      "typography": "radial"
+      "typography": "casual"
     },
-    "case_id": "47_tree_synoptic_boxes_ocean_justify_radial_square_numbers_off",
+    "case_id": "47_tree_synoptic_boxes_ocean_justify_casual_square_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.svg"
+      "pdf": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_casual_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_casual_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_casual_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 19125,
-      "png_high": 553968,
-      "png_medium": 222513,
-      "svg": 27412
+      "pdf": 19096,
+      "png_high": 617610,
+      "png_medium": 290295,
+      "svg": 27338
     },
     "timings_seconds": {
-      "pdf": 0.032331,
-      "png_high": 0.343947,
-      "png_medium": 0.097597,
-      "render_svg": 0.00694,
-      "write_svg": 8.7e-05
+      "pdf": 0.032812,
+      "png_high": 0.405896,
+      "png_medium": 0.129963,
+      "render_svg": 0.006669,
+      "write_svg": 8.6e-05
     }
   },
   {
@@ -1593,27 +1593,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "ocean",
-      "typography": "default"
+      "typography": "radial"
     },
-    "case_id": "48_tree_radial_ocean_left_default_a4_numbers_on",
+    "case_id": "48_tree_radial_ocean_left_radial_a4_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/ocean/48_radial_left_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/48_radial_left_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/48_radial_left_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/48_radial_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 35316,
-      "png_high": 941308,
-      "png_medium": 372721,
-      "svg": 27273
+      "pdf": 22893,
+      "png_high": 974921,
+      "png_medium": 453497,
+      "svg": 27361
     },
     "timings_seconds": {
-      "pdf": 0.041354,
-      "png_high": 0.495165,
-      "png_medium": 0.138758,
-      "render_svg": 0.012566,
-      "write_svg": 9.2e-05
+      "pdf": 0.040782,
+      "png_high": 0.592312,
+      "png_medium": 0.187831,
+      "render_svg": 0.012202,
+      "write_svg": 8.1e-05
     }
   },
   {
@@ -1637,16 +1637,16 @@
     },
     "sizes_bytes": {
       "pdf": 28223,
-      "png_high": 557137,
-      "png_medium": 234741,
+      "png_high": 667363,
+      "png_medium": 301235,
       "svg": 15912
     },
     "timings_seconds": {
-      "pdf": 0.023922,
-      "png_high": 0.49146,
-      "png_medium": 0.116986,
-      "render_svg": 0.004205,
-      "write_svg": 5.5e-05
+      "pdf": 0.023947,
+      "png_high": 0.589148,
+      "png_medium": 0.168328,
+      "render_svg": 0.00402,
+      "write_svg": 5.2e-05
     }
   },
   {
@@ -1670,16 +1670,16 @@
     },
     "sizes_bytes": {
       "pdf": 34437,
-      "png_high": 577144,
-      "png_medium": 225985,
+      "png_high": 620444,
+      "png_medium": 283908,
       "svg": 30489
     },
     "timings_seconds": {
-      "pdf": 0.044239,
-      "png_high": 0.373457,
-      "png_medium": 0.111625,
-      "render_svg": 0.014839,
-      "write_svg": 0.000124
+      "pdf": 0.044396,
+      "png_high": 0.435011,
+      "png_medium": 0.146426,
+      "render_svg": 0.014565,
+      "write_svg": 7.5e-05
     }
   },
   {
@@ -1692,27 +1692,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "pastel",
-      "typography": "radial"
+      "typography": "academic"
     },
-    "case_id": "51_tree_synoptic_pastel_justify_radial_a4_numbers_off",
+    "case_id": "51_tree_synoptic_pastel_justify_academic_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_academic_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_academic_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_academic_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19587,
-      "png_high": 617633,
-      "png_medium": 247853,
-      "svg": 17964
+      "pdf": 23729,
+      "png_high": 737017,
+      "png_medium": 334135,
+      "svg": 19122
     },
     "timings_seconds": {
-      "pdf": 0.030226,
-      "png_high": 0.469467,
-      "png_medium": 0.12382,
-      "render_svg": 0.004891,
-      "write_svg": 7.5e-05
+      "pdf": 0.028748,
+      "png_high": 0.558222,
+      "png_medium": 0.168198,
+      "render_svg": 0.004666,
+      "write_svg": 0.000147
     }
   },
   {
@@ -1725,27 +1725,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "pastel",
-      "typography": "default"
+      "typography": "formal"
     },
-    "case_id": "52_tree_synoptic_boxes_pastel_left_default_a4_landscape_numbers_on",
+    "case_id": "52_tree_synoptic_boxes_pastel_left_formal_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_formal_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_formal_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_formal_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_formal_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 34281,
-      "png_high": 667084,
-      "png_medium": 255452,
-      "svg": 23976
+      "pdf": 36930,
+      "png_high": 712149,
+      "png_medium": 303735,
+      "svg": 23983
     },
     "timings_seconds": {
-      "pdf": 0.03902,
-      "png_high": 0.461629,
-      "png_medium": 0.124423,
-      "render_svg": 0.006207,
-      "write_svg": 0.00019
+      "pdf": 0.04035,
+      "png_high": 0.536496,
+      "png_medium": 0.165816,
+      "render_svg": 0.005601,
+      "write_svg": 7.8e-05
     }
   },
   {
@@ -1758,27 +1758,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "pastel",
-      "typography": "radial"
+      "typography": "casual"
     },
-    "case_id": "53_tree_radial_pastel_justify_radial_square_numbers_off",
+    "case_id": "53_tree_radial_pastel_justify_casual_square_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.pdf",
-      "png_high": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.high.png",
-      "png_medium": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.medium.png",
-      "svg": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.svg"
+      "pdf": "tests/end_to_end/output/tree/pastel/53_radial_justify_casual_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/pastel/53_radial_justify_casual_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/pastel/53_radial_justify_casual_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/pastel/53_radial_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 19735,
-      "png_high": 698962,
-      "png_medium": 284868,
-      "svg": 29659
+      "pdf": 19764,
+      "png_high": 802100,
+      "png_medium": 385589,
+      "svg": 30261
     },
     "timings_seconds": {
-      "pdf": 0.034292,
-      "png_high": 0.360919,
-      "png_medium": 0.104922,
-      "render_svg": 0.014096,
-      "write_svg": 7.7e-05
+      "pdf": 0.035793,
+      "png_high": 0.427106,
+      "png_medium": 0.140053,
+      "render_svg": 0.013723,
+      "write_svg": 8.6e-05
     }
   },
   {
@@ -1791,26 +1791,26 @@
       "show_node_numbers": false,
       "text_align": "left",
       "theme": "pastel",
-      "typography": "formal"
+      "typography": "academic"
     },
-    "case_id": "54_matrix_matrix_pastel_left_formal_a4_numbers_off",
+    "case_id": "54_matrix_matrix_pastel_left_academic_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.pdf",
-      "png_high": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.high.png",
-      "png_medium": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.medium.png",
-      "svg": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.svg"
+      "pdf": "tests/end_to_end/output/matrix/pastel/54_matrix_left_academic_a4.pdf",
+      "png_high": "tests/end_to_end/output/matrix/pastel/54_matrix_left_academic_a4.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/pastel/54_matrix_left_academic_a4.medium.png",
+      "svg": "tests/end_to_end/output/matrix/pastel/54_matrix_left_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 29310,
-      "png_high": 619629,
-      "png_medium": 247008,
-      "svg": 12744
+      "pdf": 28684,
+      "png_high": 647801,
+      "png_medium": 297399,
+      "svg": 13087
     },
     "timings_seconds": {
-      "pdf": 0.022134,
-      "png_high": 0.487097,
-      "png_medium": 0.120562,
-      "render_svg": 0.003554,
+      "pdf": 0.022226,
+      "png_high": 0.605172,
+      "png_medium": 0.171902,
+      "render_svg": 0.003332,
       "write_svg": 4.8e-05
     }
   },
@@ -1835,16 +1835,16 @@
     },
     "sizes_bytes": {
       "pdf": 19153,
-      "png_high": 553107,
-      "png_medium": 226989,
+      "png_high": 620844,
+      "png_medium": 286976,
       "svg": 30504
     },
     "timings_seconds": {
-      "pdf": 0.034262,
-      "png_high": 0.478692,
-      "png_medium": 0.126045,
-      "render_svg": 0.012316,
-      "write_svg": 6.7e-05
+      "pdf": 0.034382,
+      "png_high": 0.578129,
+      "png_medium": 0.182216,
+      "render_svg": 0.012118,
+      "write_svg": 6e-05
     }
   },
   {
@@ -1868,16 +1868,16 @@
     },
     "sizes_bytes": {
       "pdf": 24096,
-      "png_high": 525662,
-      "png_medium": 204113,
+      "png_high": 598688,
+      "png_medium": 275443,
       "svg": 10506
     },
     "timings_seconds": {
-      "pdf": 0.029949,
-      "png_high": 0.331107,
-      "png_medium": 0.09291,
-      "render_svg": 0.00317,
-      "write_svg": 0.000106
+      "pdf": 0.03132,
+      "png_high": 0.396447,
+      "png_medium": 0.127675,
+      "render_svg": 0.003048,
+      "write_svg": 7e-05
     }
   },
   {
@@ -1890,27 +1890,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "sepia",
-      "typography": "radial"
+      "typography": "academic"
     },
-    "case_id": "57_tree_synoptic_boxes_sepia_justify_radial_a4_numbers_off",
+    "case_id": "57_tree_synoptic_boxes_sepia_justify_academic_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_academic_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_academic_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_academic_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19116,
-      "png_high": 691504,
-      "png_medium": 279967,
-      "svg": 27445
+      "pdf": 31288,
+      "png_high": 818363,
+      "png_medium": 379095,
+      "svg": 28623
     },
     "timings_seconds": {
-      "pdf": 0.034562,
-      "png_high": 0.481101,
-      "png_medium": 0.126841,
-      "render_svg": 0.006324,
-      "write_svg": 8.4e-05
+      "pdf": 0.034181,
+      "png_high": 0.582027,
+      "png_medium": 0.174994,
+      "render_svg": 0.006291,
+      "write_svg": 7.8e-05
     }
   },
   {
@@ -1923,27 +1923,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "sepia",
-      "typography": "default"
+      "typography": "formal"
     },
-    "case_id": "58_tree_radial_sepia_left_default_a4_landscape_numbers_on",
+    "case_id": "58_tree_radial_sepia_left_formal_a4_landscape_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.pdf",
-      "png_high": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.high.png",
-      "png_medium": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.medium.png",
-      "svg": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.svg"
+      "pdf": "tests/end_to_end/output/tree/sepia/58_radial_left_formal_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/sepia/58_radial_left_formal_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/sepia/58_radial_left_formal_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/sepia/58_radial_left_formal_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 35349,
-      "png_high": 1114454,
-      "png_medium": 459918,
-      "svg": 27638
+      "pdf": 37987,
+      "png_high": 1193978,
+      "png_medium": 556778,
+      "svg": 27582
     },
     "timings_seconds": {
-      "pdf": 0.041197,
-      "png_high": 0.516323,
-      "png_medium": 0.141623,
-      "render_svg": 0.012474,
-      "write_svg": 0.000112
+      "pdf": 0.041153,
+      "png_high": 0.596972,
+      "png_medium": 0.19262,
+      "render_svg": 0.012359,
+      "write_svg": 8.9e-05
     }
   },
   {
@@ -1956,27 +1956,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "sepia",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "59_matrix_matrix_sepia_justify_default_square_numbers_off",
+    "case_id": "59_matrix_matrix_sepia_justify_casual_square_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.pdf",
-      "png_high": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.high.png",
-      "png_medium": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.medium.png",
-      "svg": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.svg"
+      "pdf": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_casual_square.pdf",
+      "png_high": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_casual_square.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_casual_square.medium.png",
+      "svg": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 28255,
-      "png_high": 643564,
-      "png_medium": 264968,
-      "svg": 17616
+      "pdf": 23830,
+      "png_high": 653399,
+      "png_medium": 307640,
+      "svg": 17838
     },
     "timings_seconds": {
-      "pdf": 0.026653,
-      "png_high": 0.389222,
-      "png_medium": 0.094994,
-      "render_svg": 0.004418,
-      "write_svg": 5.7e-05
+      "pdf": 0.02546,
+      "png_high": 0.435709,
+      "png_medium": 0.132236,
+      "render_svg": 0.00443,
+      "write_svg": 9.3e-05
     }
   },
   {
@@ -1989,27 +1989,27 @@
       "show_node_numbers": true,
       "text_align": "left",
       "theme": "terracotta",
-      "typography": "default"
+      "typography": "casual"
     },
-    "case_id": "60_tree_tree_terracotta_left_default_a4_numbers_on",
+    "case_id": "60_tree_tree_terracotta_left_casual_a4_numbers_on",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/terracotta/60_tree_left_casual_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/terracotta/60_tree_left_casual_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/terracotta/60_tree_left_casual_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/terracotta/60_tree_left_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34563,
-      "png_high": 602872,
-      "png_medium": 233514,
-      "svg": 30522
+      "pdf": 22154,
+      "png_high": 670939,
+      "png_medium": 285039,
+      "svg": 31353
     },
     "timings_seconds": {
-      "pdf": 0.042513,
-      "png_high": 0.529114,
-      "png_medium": 0.141749,
-      "render_svg": 0.013873,
-      "write_svg": 9.2e-05
+      "pdf": 0.042997,
+      "png_high": 0.593488,
+      "png_medium": 0.185318,
+      "render_svg": 0.013936,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -2033,16 +2033,16 @@
     },
     "sizes_bytes": {
       "pdf": 19616,
-      "png_high": 515033,
-      "png_medium": 203569,
+      "png_high": 589076,
+      "png_medium": 270639,
       "svg": 17931
     },
     "timings_seconds": {
-      "pdf": 0.032196,
-      "png_high": 0.43743,
-      "png_medium": 0.112204,
-      "render_svg": 0.004648,
-      "write_svg": 7.9e-05
+      "pdf": 0.02976,
+      "png_high": 0.515357,
+      "png_medium": 0.155917,
+      "render_svg": 0.00446,
+      "write_svg": 7.2e-05
     }
   },
   {
@@ -2066,16 +2066,16 @@
     },
     "sizes_bytes": {
       "pdf": 34300,
-      "png_high": 632556,
-      "png_medium": 246368,
+      "png_high": 713100,
+      "png_medium": 331390,
       "svg": 23976
     },
     "timings_seconds": {
-      "pdf": 0.041717,
-      "png_high": 0.362496,
-      "png_medium": 0.107262,
-      "render_svg": 0.007505,
-      "write_svg": 8.3e-05
+      "pdf": 0.038453,
+      "png_high": 0.416769,
+      "png_medium": 0.137484,
+      "render_svg": 0.005403,
+      "write_svg": 5.5e-05
     }
   },
   {
@@ -2088,27 +2088,27 @@
       "show_node_numbers": false,
       "text_align": "justify",
       "theme": "terracotta",
-      "typography": "radial"
+      "typography": "academic"
     },
-    "case_id": "63_tree_radial_terracotta_justify_radial_a4_numbers_off",
+    "case_id": "63_tree_radial_terracotta_justify_academic_a4_numbers_off",
     "outputs": {
-      "pdf": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.pdf",
-      "png_high": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.high.png",
-      "png_medium": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.medium.png",
-      "svg": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.svg"
+      "pdf": "tests/end_to_end/output/tree/terracotta/63_radial_justify_academic_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/terracotta/63_radial_justify_academic_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/terracotta/63_radial_justify_academic_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/terracotta/63_radial_justify_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 19870,
-      "png_high": 722590,
-      "png_medium": 290203,
-      "svg": 29727
+      "pdf": 32056,
+      "png_high": 845458,
+      "png_medium": 388542,
+      "svg": 30734
     },
     "timings_seconds": {
-      "pdf": 0.033813,
-      "png_high": 0.480174,
-      "png_medium": 0.130269,
-      "render_svg": 0.014711,
-      "write_svg": 8.8e-05
+      "pdf": 0.035313,
+      "png_high": 0.581798,
+      "png_medium": 0.17838,
+      "render_svg": 0.013808,
+      "write_svg": 9.2e-05
     }
   },
   {
@@ -2132,16 +2132,16 @@
     },
     "sizes_bytes": {
       "pdf": 29271,
-      "png_high": 483534,
-      "png_medium": 195353,
+      "png_high": 584845,
+      "png_medium": 269107,
       "svg": 10477
     },
     "timings_seconds": {
-      "pdf": 0.02009,
-      "png_high": 0.481222,
-      "png_medium": 0.112455,
-      "render_svg": 0.002918,
-      "write_svg": 7.7e-05
+      "pdf": 0.021522,
+      "png_high": 0.576213,
+      "png_medium": 0.164785,
+      "render_svg": 0.002795,
+      "write_svg": 6e-05
     }
   }
 ]

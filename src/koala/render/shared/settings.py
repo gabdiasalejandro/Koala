@@ -111,6 +111,12 @@ class RenderProfileCatalog:
     def available_typography_names(cls) -> tuple[str, ...]:
         return tuple(sorted({name for _dt, name in cls._TYPOGRAPHIES.keys()}))
 
+    @classmethod
+    def available_typography_names_for(cls, document_type: str) -> tuple[str, ...]:
+        return tuple(
+            sorted(name for dt, name in cls._TYPOGRAPHIES.keys() if dt == document_type)
+        )
+
 
 class RenderSettingsCatalog:
     """Resolucion central de settings de render compartidos."""
@@ -186,3 +192,7 @@ def available_page_size_names() -> tuple[str, ...]:
 
 def available_typography_names() -> tuple[str, ...]:
     return RenderProfileCatalog.available_typography_names()
+
+
+def available_typography_names_for(document_type: str) -> tuple[str, ...]:
+    return RenderProfileCatalog.available_typography_names_for(document_type)

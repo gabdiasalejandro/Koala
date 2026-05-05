@@ -18,6 +18,7 @@ from koala.render.shared.export import ExportConverter
 from koala.render.shared.settings import (
     available_page_size_names,
     available_typography_names,
+    available_typography_names_for,
 )
 from koala.render.shared.themes import available_theme_names
 
@@ -124,6 +125,13 @@ def build_parser() -> argparse.ArgumentParser:
     typographies_parser = subparsers.add_parser(
         "typographies",
         help="Lista las tipografias disponibles.",
+    )
+    typographies_parser.add_argument(
+        "--type",
+        choices=AVAILABLE_DOCUMENT_TYPES,
+        default=None,
+        dest="document_type",
+        help="Filtra tipografias por tipo de documento.",
     )
     typographies_parser.set_defaults(handler=_handle_typographies)
 
@@ -356,8 +364,13 @@ def _handle_layouts(_: argparse.Namespace) -> int:
     return 0
 
 
-def _handle_typographies(_: argparse.Namespace) -> int:
-    for name in available_typography_names():
+def _handle_typographies(args: argparse.Namespace) -> int:
+    names = (
+        available_typography_names_for(args.document_type)
+        if args.document_type is not None
+        else available_typography_names()
+    )
+    for name in names:
         print(name)
     return 0
 

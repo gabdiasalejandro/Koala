@@ -1,6 +1,8 @@
+import io
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
 from pathlib import Path
 
 
@@ -10,6 +12,7 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 import koala
+from koala.cli import main as cli_main
 
 
 class LibraryApiTests(unittest.TestCase):
@@ -124,6 +127,55 @@ class LibraryApiTests(unittest.TestCase):
         self.assertEqual(result.context.settings.layout_kind, "matrix")
         self.assertIn("Decision Matrix", result.svg)
         self.assertIn("<rect", result.svg)
+
+    def test_available_typographies_exposes_academic_formal_and_casual_presets(self) -> None:
+        self.assertEqual(koala.available_document_types(), ("matrix", "tree"))
+
+        all_typographies = koala.available_typographies()
+        tree_typographies = koala.available_typographies(type="tree")
+        matrix_typographies = koala.available_typographies(type="matrix")
+
+        for name in ("academic", "formal", "casual"):
+            self.assertIn(name, all_typographies)
+            self.assertIn(name, tree_typographies)
+            self.assertIn(name, matrix_typographies)
+        self.assertIn("radial", tree_typographies)
+        self.assertNotIn("radial", matrix_typographies)
+
+    def test_render_text_accepts_new_typography_presets_from_python_api(self) -> None:
+        tree_result = koala.render_text(
+            "1 Root\nBody.\n",
+            type="tree",
+            layout="tree",
+            typography="academic",
+        )
+        matrix_result = koala.render_text(
+            "matrix:: Decision Matrix\n"
+            "columns:: Criterion | Option A | Option B\n"
+            "row:: Cost | Lower initial cost | Higher initial cost\n",
+            type="matrix",
+            layout="matrix",
+            typography="casual",
+        )
+
+        self.assertEqual(tree_result.context.settings.typography_name, "academic")
+        self.assertIn("Times New Roman", tree_result.svg)
+        self.assertEqual(matrix_result.context.settings.typography_name, "casual")
+        self.assertIn("Trebuchet MS", matrix_result.svg)
+        self.assertIn("Verdana", matrix_result.svg)
+
+    def test_cli_typographies_can_be_filtered_by_document_type(self) -> None:
+        stdout = io.StringIO()
+
+        with redirect_stdout(stdout):
+            exit_code = cli_main(["typographies", "--type", "matrix"])
+
+        output = stdout.getvalue().splitlines()
+        self.assertEqual(exit_code, 0)
+        self.assertIn("academic", output)
+        self.assertIn("casual", output)
+        self.assertIn("formal", output)
+        self.assertNotIn("radial", output)
 
     def test_render_text_rejects_unknown_document_type(self) -> None:
         with self.assertRaises(koala.UnknownDocumentTypeError):

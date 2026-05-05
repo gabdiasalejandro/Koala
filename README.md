@@ -172,6 +172,7 @@ hl:: 1.2 Highlighted Node
 
 - [Full syntax guide](https://github.com/gabdiasalejandro/Koala/blob/main/docs/syntax.md)
 - [Authoring tutorial](https://github.com/gabdiasalejandro/Koala/blob/main/docs/tutorial.md)
+- [How to add a typography](https://github.com/gabdiasalejandro/Koala/blob/main/docs/how-to-add-a-typography.md)
 - [Examples](https://github.com/gabdiasalejandro/Koala/tree/main/docs/examples)
 - [LLM prompts](https://github.com/gabdiasalejandro/Koala/tree/main/docs/prompts)
 
