@@ -1,8 +1,6 @@
-"""Placeholder para los layouts de `flowchart`.
+"""Layouts del doctype `flowchart`."""
 
-Para implementarlo, este paquete debe contener:
-- `models.py`: `FlowchartLayoutKind` (Literal con los layouts soportados).
-- `registry.py`: `FLOWCHART_LAYOUTS: tuple[str, ...]` y un builder
-  `build_flowchart_layout_scene(layout_kind, parsed, config, typography) -> LayoutScene`.
-- un modulo por engine de layout (top-down, left-right, swim, etc.).
-"""
+from koala.layout.flowchart.models import FlowchartLayoutKind
+from koala.layout.flowchart.registry import FLOWCHART_LAYOUTS, build_flowchart_layout_scene
+
+__all__ = ["FLOWCHART_LAYOUTS", "FlowchartLayoutKind", "build_flowchart_layout_scene"]

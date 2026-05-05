@@ -1,30 +1,16 @@
 # Tutorial
 
-This tutorial is a practical guide to writing Koala documents and choosing good render settings.
+This tutorial is a practical guide to writing Koala documents and choosing render settings that match the current Python API and CLI.
 
-It covers:
+Koala currently supports three document types:
 
-- installation
-- CLI usage
-- library usage
-- in-memory APIs such as `compile_text(...)`, `inspect_text(...)`, and `validate_text(...)`
-- user config
-- core DSL syntax
-- matrix DSL syntax
-- flowchart DSL syntax
-- optional metadata with `@...`
-- available themes
-- available typography presets
-- semantic kinds with `kind::`
-- available page sizes
-- practical suggestions for getting better visuals
+- `tree`: numbered hierarchical concept maps
+- `matrix`: comparative tables
+- `flowchart`: process diagrams with steps, decisions, and directed edges
 
-## 1. Install and choose your interface
+The default document type is `tree`.
 
-Koala can be used in two ways:
-
-- from the CLI through the installed `koala` command
-- from Python through `import koala`
+## 1. Install
 
 Install from PyPI:
 
@@ -32,13 +18,13 @@ Install from PyPI:
 pip install koala-diagrams==1.3.6
 ```
 
-If you mainly want the CLI as an isolated user tool:
+Or install the CLI as an isolated user tool:
 
 ```bash
 pipx install koala-diagrams==1.3.6
 ```
 
-If you are developing from the repository:
+For local development from this repository:
 
 ```bash
 python3 -m venv .venv
@@ -47,79 +33,98 @@ python3 -m venv .venv
 PYTHONPATH=src ./.venv/bin/python -m koala themes
 ```
 
-## 2. CLI quickstart
+## 2. CLI Quickstart
 
 The installed command is `koala`.
 
-Common commands:
+Useful discovery commands:
 
 ```bash
-koala themes
 koala types
 koala layouts
+koala themes
 koala typographies
-koala compile docs/examples/tree.txt --type tree --layout tree --theme academic
-koala compile docs/examples/radial.txt --type tree --layout radial --theme frutal --size square
-koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
-koala compile docs/examples/tree.txt --background '#F7F4ED'
-koala export docs/examples/tree.txt --format png --quality high
-koala export comparison.txt --type matrix --layout matrix --format png --quality medium
-koala export docs/examples/tree.txt --format pdf --quality high
-koala inspect docs/examples/tree.txt
-koala validate docs/examples/radial.txt --strict
+koala typographies --type tree
+koala typographies --type matrix
+koala typographies --type flowchart
 koala config-path
+```
+
+Render and inspect commands:
+
+```bash
+koala compile map.txt --type tree --layout tree --theme academic
+koala compile map.txt --type tree --layout radial --theme frutal --size square
+koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
+koala compile process.txt --type flowchart --layout flowchart --theme ocean
+
+koala export map.txt --type tree --layout tree --format png --quality high
+koala export comparison.txt --type matrix --layout matrix --format pdf --quality high
+koala export process.txt --type flowchart --layout flowchart --format pdf --quality high
+
+koala inspect map.txt --type tree --layout tree
+koala validate map.txt --type tree --layout tree --strict
 ```
 
 Current CLI subcommands:
 
-- `compile`: render a source file to SVG
+- `compile`: render a `.txt` or `.docx` source file to SVG
 - `export`: export a source file to SVG, PNG, or PDF
-- `inspect`: resolve metadata and settings without writing output
-- `validate`: validate parsing and settings; `--strict` fails on warnings
+- `inspect`: resolve parsing, metadata, layout, theme, typography, and page settings without writing output
+- `validate`: validate parsing and settings; `--strict` exits with failure on parser warnings
 - `themes`: list available themes
 - `types`: list available document types
 - `layouts`: list available layouts
-- `typographies`: list typography presets
+- `typographies`: list typography presets, optionally filtered with `--type`
 - `config-path`: print the expected user config path
 
-Output behavior from the CLI:
+CLI output behavior:
 
-- by default, output goes next to the input file as `<input_stem>.<layout>.svg`
+- by default, `compile` writes next to the input file
+- default SVG names use `<input_stem>.<layout>.svg`
 - `--output` writes to an explicit SVG path
 - `--output-dir` writes to a specific folder
 - `--desktop` writes to `~/Desktop` when available and otherwise falls back to the input folder
-- `--type` chooses the document pipeline; supported values are `tree` and `matrix`
-- `--layout` selects a layout inside the chosen document type
+- `export -o` writes the requested SVG, PNG, or PDF path
 
-User config:
+## 3. Python API Quickstart
 
-- default path: `~/.config/koala/config.toml`
-- fallback path: `~/.koala.toml`
+Use the Python API when another program needs Koala as a library.
 
-Example:
+### Render SVG In Memory
 
-```toml
-[tool.koala]
-default_layout = "tree"
-default_theme = "academic"
-default_typography = "default"
-default_size = "a4_landscape"
-default_text_align = "left"
-default_show_node_numbers = false
-default_output_mode = "next_to_input"
+`render_text(...)` is the clearest API for in-memory SVG rendering. It does not write files.
+
+```python
+import koala
+
+result = koala.render_text(
+    """
+    main:: 1 Central Topic
+    Main explanation.
+
+    supports -> 1.1 First Branch
+    Supporting detail.
+    """,
+    type="tree",
+    layout="tree",
+    theme="frutal",
+)
+
+print(result.svg)
+print(result.output_svg)  # None
+print(result.context.settings.layout_kind)
 ```
 
-## 3. Library quickstart
+### Compile A File To SVG
 
-Use the library API when you want to render from another Python program.
-
-### Render from a source file
+`compile(...)` reads a `.txt` or `.docx` file and writes an SVG.
 
 ```python
 import koala
 
 result = koala.compile(
-    "docs/examples/radial.txt",
+    "map.txt",
     type="tree",
     layout="radial",
     theme="academic",
@@ -128,41 +133,92 @@ result = koala.compile(
 )
 
 print(result.output_svg)
-print(result.context.settings.layout_kind)
-print(len(result.context.parsed.node_index))
+print(result.svg)
 ```
 
-### Render from raw text in memory
+`compile_file(...)` is an explicit alias for `compile(...)`.
+
+### Legacy Text Compile
+
+`compile_text(...)` writes an SVG from raw text. It is kept for compatibility, while `render_text(...)` is preferred for pure in-memory rendering.
 
 ```python
 import koala
 
 result = koala.compile_text(
-    """
-    1 Central Topic
-    Main explanation.
-
-    1.1 First Branch
-    Supporting detail.
-    """,
+    "1 Root\nBody.\n",
     type="tree",
     layout="tree",
-    theme="frutal",
-    base_dir="docs/examples",
+    theme="academic",
+    base_dir=".",
     output_name="inline_demo",
 )
 
-print(result.output_svg)
+print(result.output_svg)  # inline_demo.tree.svg
 ```
 
-Current output behavior for `compile_text(...)`:
+For `compile_text(...)`:
 
 - relative output paths are resolved against `base_dir` when provided
 - if `base_dir` is omitted, Koala uses `Path.cwd()`
-- if you do not pass `output` or `output_dir`, the default file is `concept_map.<layout>.svg`
-- if you pass `output_name="demo"`, the default file becomes `demo.<layout>.svg`
+- if neither `output` nor `output_dir` is provided, the default file is `concept_map.<layout>.svg`
+- if `output_name="demo"` is provided, the default file is `demo.<layout>.svg`
 
-### Inspect and validate text without writing files
+### Export Bytes
+
+`export_text(...)` and `export_file(...)` return bytes suitable for web responses or storage.
+
+```python
+import koala
+
+source = """
+main:: 1 Product Map
+Direction and scope.
+
+supports -> 1.1 API
+In-memory export results.
+"""
+
+png = koala.export_text(
+    source,
+    type="tree",
+    layout="tree",
+    format="png",
+    quality="high",
+    theme="jungle",
+)
+
+pdf = koala.export_text(
+    source,
+    type="tree",
+    layout="tree",
+    format="pdf",
+    quality="high",
+    theme="jungle",
+)
+
+print(png.media_type, len(png.content))
+print(pdf.media_type, len(pdf.content))
+```
+
+Supported export formats:
+
+- `svg`
+- `png`
+- `pdf`
+
+PNG quality values:
+
+- `medium`: 200 DPI
+- `high`: 450 DPI
+
+PDF export is vector based and adds a framed page, title, margins, and theme-aware accent colors. If `title` is omitted, Koala resolves it from the first `main::` node, then from the first root.
+
+### Inspect And Validate
+
+Use `inspect_text(...)` to resolve a `RenderContext` without writing files.
+
+Use `validate_text(...)` when you want the same resolution step plus optional strict failure on parser warnings.
 
 ```python
 import koala
@@ -188,87 +244,166 @@ print(len(validated.parsed.warnings))
 
 If `strict=True` and the parser emits warnings, `validate_text(...)` raises `koala.ValidationError`.
 
-### Current in-memory API surface
+### API Surface
 
-- `koala.compile(path, **config)`: render from `.txt` or `.docx`
-- `koala.compile_text(text, **config)`: render from raw Koala DSL text
-- `koala.export_text(text, format="svg"|"png"|"pdf", **config)`: export raw Koala DSL text to bytes
-- `koala.export_file(path, format="svg"|"png"|"pdf", **config)`: export `.txt` or `.docx` source to bytes
-- `koala.inspect_text(text, **config)`: resolve `RenderContext` without writing SVG
-- `koala.validate_text(text, **config)`: resolve `RenderContext` and optionally fail on warnings
+Current public API:
 
-All of these APIs accept `type="tree"` or `type="matrix"`. `tree` is the default for backward compatibility. Future document types such as `flowchart` should add their own implementation across `core/<type>`, `layout/<type>`, and `render/<type>` while reusing shared themes, config, page settings, and export.
+- `koala.compile(path, **config)`: render `.txt` or `.docx` to SVG on disk
+- `koala.compile_file(path, **config)`: explicit alias for `compile(...)`
+- `koala.render_text(text, **config)`: render raw DSL to in-memory SVG
+- `koala.compile_text(text, **config)`: legacy helper that renders raw DSL and writes SVG to disk
+- `koala.export_text(text, format="svg"|"png"|"pdf", **config)`: export raw DSL to bytes
+- `koala.export_file(path, format="svg"|"png"|"pdf", **config)`: export a source file to bytes
+- `koala.save_text(text, output, **config)`: save raw DSL text as `.txt`
+- `koala.inspect_text(text, **config)`: resolve `RenderContext` without writing output
+- `koala.validate_text(text, **config)`: inspect and optionally fail on parser warnings
+- `koala.available_document_types()`: return available document types
+- `koala.available_typographies(type=None)`: return typography presets globally or by document type
 
-### Export SVG, PNG, and decorated PDF
+All render, compile, inspect, validate, and export APIs accept:
 
-Use export APIs when a server needs to send final bytes to a client.
-The SVG renderer remains the canonical source; PNG and PDF are produced from that SVG in memory.
+- `type="tree"`
+- `type="matrix"`
+- `type="flowchart"`
 
-```python
-import koala
+The Python type alias `koala.DocumentType` also reflects those three values. If the DSL syntax does not match the requested type, Koala raises `koala.DocumentTypeMismatchError`. If the type is unknown, Koala raises `koala.UnknownDocumentTypeError`.
 
-source = """
-main:: 1 Product Map
-Direction and scope.
+Common config kwargs:
 
-supports -> 1.1 API
-In-memory export results.
-"""
+- `type`
+- `layout`
+- `theme`
+- `typography`
+- `size`
+- `text_align`
+- `show_node_numbers`
+- `background`
+- `use_user_config`
+- `user_config`
 
-png = koala.export_text(
-    source,
-    type="tree",
-    format="png",
-    quality="high",
-    layout="tree",
-    theme="jungle",
-)
+File-writing APIs also accept output controls such as `output`, `output_dir`, `desktop`, `base_dir`, and `output_name`, depending on the function.
 
-pdf = koala.export_text(
-    source,
-    type="tree",
-    format="pdf",
-    quality="high",
-    layout="tree",
-    theme="jungle",
-)
+## 4. User Config
 
-print(png.media_type, len(png.content))
-print(pdf.media_type, len(pdf.content))
+Default config path:
+
+```text
+~/.config/koala/config.toml
 ```
 
-PNG export is direct and quality-based:
+Legacy fallback path:
 
-- `medium`: 200 DPI
-- `high`: 450 DPI
+```text
+~/.koala.toml
+```
 
-PDF export is vector-based and always high quality. It adds a professional frame with margins, an accent line, and a title. If `title` is omitted, Koala uses the first `main::` node title; if there is no `main::` node, it uses the first root title.
+Example:
 
-## 4. Smallest useful document
+```toml
+[tool.koala]
+default_layout = "tree"
+default_theme = "academic"
+default_typography = "default"
+default_size = "a4_landscape"
+default_text_align = "left"
+default_show_node_numbers = false
+default_output_mode = "next_to_input"
+```
 
-The smallest meaningful Koala file looks like this:
+Config precedence for render settings:
+
+1. explicit CLI flag or explicit Python kwarg
+2. document metadata
+3. user config default
+4. built-in default
+
+Output location is controlled by CLI flags, Python output kwargs, or user config. It is not controlled by document metadata.
+
+## 5. Tree Documents
+
+Use `type="tree"` for numbered hierarchical concept maps.
+
+Smallest useful tree document:
 
 ```text
 1 DSL Platform
 Defines the main concept.
 
 organizes -> 1.1 Core
-Contains parser, models, and validations.
+Contains parser, models, and validation.
 
 renders -> 1.2 Render
 Generates SVG output.
 ```
 
-What this means:
+Tree syntax:
 
-- `1` creates a root node
-- the following line becomes its body text
-- `1.1` and `1.2` become children of `1`
-- `organizes` and `renders` are relation labels from the parent
+- `1`, `2`, `3` are root nodes
+- `1.1`, `1.2` are children of `1`
+- `1.1.1` is a child of `1.1`
+- body text is any non-empty line after a node header until the next node header
+- relation labels are optional and appear before the node number as `label -> 1.1 Child`
+- both `->` and `→` are accepted
+- `0` can be used as an optional super-root
 
-## 5. Smallest useful flowchart
+Example with relation labels:
 
-Use `type="flowchart"` when the goal is a process diagram: steps, decisions, and branching logic.
+```text
+main:: 1 Biology
+Study of life.
+
+contains -> 1.1 Cell
+Basic unit of life.
+
+depends on -> 1.2 Genetics
+Study of heredity.
+```
+
+Tree layouts:
+
+- `tree`
+- `synoptic`
+- `synoptic_boxes`
+- `radial`
+
+## 6. Matrix Documents
+
+Use `type="matrix"` for formal comparisons.
+
+Smallest useful matrix document:
+
+```text
+matrix:: Format Comparison
+columns:: Criterion | Tree | Matrix
+row:: Best for | Hierarchical concept maps | Side-by-side evaluation
+row:: Reading path | From parent to children | Across consistent criteria
+footer:: Recommendation | Use matrix when the decision depends on comparing options.
+```
+
+Render it:
+
+```bash
+koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
+```
+
+Matrix syntax:
+
+- `matrix::` defines the title and is required
+- `columns::` defines the header row and is required
+- `row::` defines one comparison row; at least one row is required
+- cells are separated with `|`
+- `footer::` is optional and renders as a full-width conclusion row
+- `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work as document metadata
+
+Matrix layout:
+
+- `matrix`
+
+## 7. Flowchart Documents
+
+Use `type="flowchart"` for process diagrams, decision paths, and branching workflows.
+
+Smallest useful flowchart document:
 
 ```text
 flowchart:: Content publishing process
@@ -281,201 +416,44 @@ end:: published :: Published
 
 draft -> review
 review -> corrections :: no
-review -> design :: si
+review -> design :: yes
 corrections -> draft
 design -> published
 ```
 
-Render it from the CLI:
+Render it:
 
 ```bash
 koala compile process.txt --type flowchart --layout flowchart --theme ocean
-koala export process.txt --type flowchart --layout flowchart --format pdf --quality high
 ```
 
-Flowchart syntax rules:
+Flowchart syntax:
 
 - `flowchart::` defines the title and is required
 - nodes are declared with `<kind>:: <id>` or `<kind>:: <id> :: <label>`
 - if `<label>` is omitted, the `<id>` is used as the label
 - edges are declared with `<source_id> -> <target_id>` or `<source_id> -> <target_id> :: <label>`
-- `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work like they do for tree and matrix documents
 - node ids are case-sensitive and must be unique
+- `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work as document metadata
 
-Available node kinds and their shapes:
+Flowchart node kinds:
 
 | Kind | Shape | Palette slot |
 |---|---|---|
 | `start` | rounded capsule | `main` |
 | `end` | rounded capsule | `main` |
-| `step` or `process` | rounded rectangle | `default` |
+| `step` | rounded rectangle | `default` |
+| `process` | rounded rectangle | `default` |
 | `decision` | diamond | `focus` |
 | `note` | rectangle with folded corner | `note` |
 
-The palette mapping means that decision nodes automatically use the `focus` tone from the active theme — the same slot used for `focus::` in tree documents. Start and end nodes use `main`. This keeps the visual language consistent across all document types.
+Flowchart layout:
 
-## 7. Smallest useful matrix
+- `flowchart`
 
-Use `type="matrix"` when the goal is a formal comparison instead of a hierarchy.
+## 8. Metadata
 
-```text
-matrix:: Format Comparison
-columns:: Criterion | Tree | Matrix
-row:: Best for | Hierarchical concept maps | Side-by-side evaluation
-row:: Reading path | From parent to children | Across consistent criteria
-footer:: Recommendation | Use matrix when the decision depends on comparing options.
-```
-
-Render it from the CLI:
-
-```bash
-koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
-koala export comparison.txt --type matrix --layout matrix --format pdf --quality high
-```
-
-Matrix syntax rules:
-
-- `matrix::` defines the title and is required
-- `columns::` defines the header row and is required
-- `row::` defines one comparison row; at least one row is required
-- cells are separated with `|`
-- `footer::` is optional and renders as a full-width conclusion row
-- `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work like they do for tree documents
-
-## 8. Hierarchy syntax
-
-Koala uses numbered hierarchy:
-
-- `1`, `2`, `3` are roots
-- `1.1`, `1.2` are children of `1`
-- `1.1.1` is a child of `1.1`
-
-Example:
-
-```text
-1 Biology
-General topic.
-
-1.1 Cell
-Basic unit of life.
-
-1.1.1 Membrane
-Defines the boundary of the cell.
-```
-
-### Optional super-root
-
-You can use `0` as an optional super-root:
-
-```text
-0 Biology
-Global topic.
-
-1 Cell
-Basic unit of life.
-
-2 Genetics
-Study of heredity.
-```
-
-In that case, `1` and `2` become children of `0`.
-
-## 9. Body text
-
-Any non-empty line after a valid node header becomes body text for that node until a new node header appears.
-
-Example:
-
-```text
-1 Cell
-The cell is the basic unit of life.
-All living organisms are composed of one or more cells.
-```
-
-That produces one node with two body lines.
-
-## 10. Relations
-
-Relations are optional and appear before the node number:
-
-```text
-contains -> 1.1 Nucleus
-depends on -> 1.2 Membrane
-```
-
-Both `->` and `→` are accepted.
-
-If you do not include a relation, the parent-child connector still exists, but is treated as implicit.
-
-## 11. Semantic kinds with `kind::`
-
-`kind::` lets you mark a node semantically so themes can style it differently.
-
-Example:
-
-```text
-main:: 1 Main Topic
-hl:: contains -> 1.1 Highlighted Child
-note:: 1.2 Supporting Note
-warn:: 1.2.1 Caution
-soft:: 1.2.2 Secondary Detail
-focus:: 1.3 Central Idea
-```
-
-Current behavior:
-
-- kinds are normalized to lowercase
-- if omitted, the kind becomes `default`
-- built-in universal kinds are `note`, `warn`, and `soft`
-- built-in theme-owned kinds are `main`, `hl`, and `focus`
-
-### What each built-in kind is for
-
-- `note`: supporting context that should read as useful but not dominant
-- `warn`: caution, constraint, tradeoff, or risk
-- `soft`: lower-priority supporting detail
-- `main`: the primary root concept; built-in themes reserve it for the top-level anchor
-- `hl`: a highlighted concept the active theme wants to emphasize strongly
-- `focus`: the key thesis, core idea, or primary anchor of a branch
-
-### Universal vs theme-owned kinds
-
-Koala currently ships with two semantic groups:
-
-- universal kinds: `note`, `warn`, `soft`
-- theme-owned kinds: `main`, `hl`, `focus`
-
-Universal kinds are defined once and then recolored by the active theme.
-Theme-owned kinds also exist in every built-in theme, but each theme defines their specific treatment directly.
-
-### Full example using all built-in kinds
-
-```text
-main:: 1 Render Pipeline
-Coordinates the full SVG export process.
-
-hl:: orchestrates -> 1.1 Render Context
-Combines layout selection, theme resolution, and viewport fitting.
-
-note:: includes -> 1.1.1 Metadata
-Allows the source file to carry render preferences.
-
-warn:: constrains -> 1.1.2 Viewport
-Very dense scenes may still require scale reduction.
-
-soft:: documents -> 1.1.3 Defaults
-Presets keep the CLI small and predictable.
-```
-
-If the root node uses `main::` in a boxed layout such as `tree`, `synoptic_boxes`, or `radial`, Koala also draws it with a thicker border to make the visual hierarchy more explicit.
-
-Use `kind::` when a concept should visually stand out, not on every node.
-
-## 13. Metadata with `@`
-
-Koala supports optional document-level metadata using lines that start with `@`.
-
-Example:
+Koala supports optional document-level metadata with lines that start with `@`.
 
 ```text
 @layout tree
@@ -487,64 +465,34 @@ Example:
 @show-node-numbers false
 ```
 
-Accepted styles:
+Accepted metadata styles:
 
 ```text
 @layout tree
 @layout: tree
 ```
 
-### Available metadata keys
-
-Current supported metadata keys:
+Supported metadata keys:
 
 - `@layout`
 - `@theme`
 - `@typography`
 - `@text-align`
+- `@text_align`
 - `@size`
 - `@page-size`
 - `@background`
-- `@text_align`
 - `@show-node-numbers`
 - `@show_node_numbers`
 - `@node-numbers`
 - `@node_numbers`
 
-For text alignment, supported values are `left` and `justify`. The default is `left`.
+Supported text alignment values:
 
-For background, pass a hex color such as `#F7F4ED`. If you omit it, Koala keeps the current default behavior and does not add an explicit page background.
+- `left`
+- `justify`
 
-### Metadata precedence
-
-Render options are resolved in this order:
-
-1. explicit CLI flag or explicit library kwarg
-2. metadata from the document
-3. user config default
-4. built-in default
-
-This means metadata is good for self-contained demo files, but the CLI and the library API can still override it.
-
-Output location is not part of document metadata anymore. Use CLI output flags, library output kwargs, or user config defaults for that.
-
-### Disabling node numbers
-
-By default Koala hides node numbers in the final map.
-
-You can enable them in metadata:
-
-```text
-@show-node-numbers true
-```
-
-Or keep them disabled explicitly:
-
-```text
-@show-node-numbers false
-```
-
-Accepted false-like values:
+Accepted false-like values for node numbers:
 
 - `false`
 - `no`
@@ -562,52 +510,64 @@ Accepted true-like values:
 - `shown`
 - `1`
 
-## 12. Available layouts
+## 9. Semantic Kinds
 
-Current layouts:
+Tree nodes can use `kind::` before the node header:
 
-- `tree`
-- `synoptic`
-- `synoptic_boxes`
-- `radial`
-- `matrix`
-- `flowchart`
+```text
+main:: 1 Main Topic
+hl:: contains -> 1.1 Highlighted Child
+note:: 1.2 Supporting Note
+warn:: 1.2.1 Caution
+soft:: 1.2.2 Secondary Detail
+focus:: 1.3 Central Idea
+```
+
+Current behavior:
+
+- kinds are normalized to lowercase
+- if omitted, the kind becomes `default`
+- universal kinds are `note`, `warn`, and `soft`
+- theme-owned kinds are `main`, `hl`, and `focus`
+
+Universal kinds are defined once and then recolored by the active theme. Theme-owned kinds exist in every built-in theme, but each theme defines their exact treatment directly.
+
+Flowchart node roles map to the same palette slots. For example, `decision` uses the `focus` tone, while `start` and `end` use `main`.
+
+## 10. Layouts
+
+Current layouts by document type:
+
+| Document type | Layouts |
+|---|---|
+| `tree` | `tree`, `synoptic`, `synoptic_boxes`, `radial` |
+| `matrix` | `matrix` |
+| `flowchart` | `flowchart` |
 
 ### `tree`
 
-Best for:
-
-- classic hierarchies
-- explanatory maps
-- concept decomposition
+Best for classic hierarchies, explanatory maps, and concept decomposition.
 
 Characteristics:
 
 - top-down
 - adaptive parent widths
+- relation labels preserved
 - strong page-aware fitting
 
 ### `synoptic`
 
-Best for:
-
-- category trees
-- grouped outlines
-- compact classification charts
+Best for category trees, grouped outlines, and compact classification charts.
 
 Characteristics:
 
 - left-to-right
 - bracket connectors
-- no relation labels
+- relation labels intentionally omitted
 
 ### `synoptic_boxes`
 
-Best for:
-
-- left-to-right teaching diagrams
-- structured breakdowns
-- content where each sibling group is conceptually parallel
+Best for left-to-right teaching diagrams and structured breakdowns.
 
 Characteristics:
 
@@ -617,11 +577,7 @@ Characteristics:
 
 ### `radial`
 
-Best for:
-
-- mind maps
-- central topic plus balanced branches
-- star-like concept structures
+Best for mind maps and central-topic diagrams with balanced branches.
 
 Characteristics:
 
@@ -631,11 +587,7 @@ Characteristics:
 
 ### `matrix`
 
-Best for:
-
-- formal comparative tables
-- option evaluation
-- executive summaries with consistent criteria
+Best for formal comparative tables, option evaluation, and executive summaries with consistent criteria.
 
 Characteristics:
 
@@ -645,113 +597,71 @@ Characteristics:
 
 ### `flowchart`
 
-Best for:
-
-- process diagrams
-- step-by-step workflows
-- decision trees and branching logic
-- approval or review pipelines
+Best for process diagrams, step-by-step workflows, and decision trees.
 
 Characteristics:
 
-- top-down layout with automatic depth assignment via BFS
-- each node rendered with a shape that reflects its semantic role
-- directed edges with arrowheads; orthogonal routing when source and target are not aligned
-- edge labels supported for annotating branches
+- top-down layout with automatic depth assignment
+- node shape reflects semantic role
+- directed edges with arrowheads
+- edge labels supported for branches
 
-## 15. Available themes
+## 11. Themes
 
-Current built-in themes:
-
-- `default`
-- `terracotta`
-- `jungle`
-- `frutal`
-- `academic`
-
-All built-in themes currently support:
+Themes apply to `tree`, `matrix`, and `flowchart` documents. All built-in themes support:
 
 - universal kinds: `note`, `warn`, `soft`
 - theme-owned kinds: `main`, `hl`, `focus`
 
-### `default`
+Current built-in themes:
 
-Best when:
+- `academic`
+- `black`
+- `colorblind`
+- `default`
+- `dusk`
+- `frutal`
+- `jungle`
+- `minimal`
+- `neon`
+- `ocean`
+- `pastel`
+- `sepia`
+- `terracotta`
 
-- you want a neutral technical look
-- readability is the priority
-- you want the least opinionated color palette
+Theme notes:
 
-Kind tone:
+- `academic`: sober editorial palette for reports, notes, and formal teaching material
+- `black`: grayscale, high-contrast output for print-friendly diagrams
+- `colorblind`: accessible palette with strong color separation
+- `default`: neutral technical look with warm highlights
+- `dusk`: purple-toned palette for polished presentation material
+- `frutal`: bright, playful, high-energy palette
+- `jungle`: green and aqua palette for fresh, organic material
+- `minimal`: restrained grayscale palette with a dark `focus` treatment
+- `neon`: dark theme with electric cyan accents
+- `ocean`: blue and teal palette for calm technical diagrams
+- `pastel`: soft pink and muted presentation palette
+- `sepia`: warm brown print-like palette
+- `terracotta`: warm clay editorial palette
 
-- `main` reads as the strongest root-level accent
-- `hl` reads as a warm highlight against a neutral base
-- `focus` reads as a cooler, primary emphasis
+Inspect the live list from the CLI:
 
-### `terracotta`
+```bash
+koala themes
+```
 
-Best when:
+Or from Python:
 
-- you want a warmer editorial tone
-- the document should feel more didactic or presentation-oriented
+```python
+from koala.render.shared.themes import available_theme_names
 
-Kind tone:
+print(available_theme_names())
+```
 
-- `main` reads as the strongest terracotta root accent
-- `hl` reads as a strong terracotta-accent highlight
-- `focus` reads as a softer clay emphasis
+## 12. Typographies
 
-### `jungle`
-
-Best when:
-
-- you want a fresher, greener palette
-- the content benefits from a lighter organic tone
-
-Kind tone:
-
-- `main` reads as the strongest green root accent
-- `hl` reads as an aqua-highlighted concept
-- `focus` reads as a greener structural emphasis
-
-### `frutal`
-
-Best when:
-
-- you want a brighter and more playful palette
-- the diagram should feel more energetic or more didactic
-
-Kind tone:
-
-- `main` reads as the strongest fruit-like accent
-- `hl` reads as the most vivid emphasis
-- `focus` reads as a softer but still warm accent
-
-### `academic`
-
-Best when:
-
-- you want the most sober built-in presentation
-- black text and restrained contrast matter more than colorful accents
-
-Kind tone:
-
-- `main` reads as the strongest sober anchor
-- `hl` reads as a restrained emphasis instead of a loud accent
-- `focus` reads as a neutral structural highlight
-
-### Theme demo files
-
-The repository currently includes usage examples and test fixtures instead of root-level theme mocks:
-
-- [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
-- [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
-- [tests/end_to_end/mocks/alignment_left.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_left.txt)
-- [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
-
-## 16. Available typographies
-
-Current built-in typography presets:
+Current typography presets:
 
 - `default`
 - `academic`
@@ -761,11 +671,21 @@ Current built-in typography presets:
 
 Preset availability by document type:
 
-- `tree`: `default`, `academic`, `formal`, `casual`, `radial`
-- `matrix`: `formal`, `default`, `academic`, `casual`
-- `flowchart`: `default`, `formal`, `academic`, `casual`
+| Document type | Typographies |
+|---|---|
+| `tree` | `default`, `academic`, `formal`, `casual`, `radial` |
+| `matrix` | `default`, `academic`, `formal`, `casual` |
+| `flowchart` | `default`, `academic`, `formal`, `casual` |
 
-You can inspect the same lists from the CLI:
+Preset notes:
+
+- `default`: general-purpose readable diagrams
+- `academic`: serif body text for scholarly or editorial material
+- `formal`: sober report-ready typography, default for `matrix`
+- `casual`: friendlier workshop and draft style
+- `radial`: compact typography tuned for the `radial` tree layout
+
+Inspect typography lists:
 
 ```bash
 koala typographies
@@ -774,100 +694,18 @@ koala typographies --type matrix
 koala typographies --type flowchart
 ```
 
-### `default`
+Python:
 
-Used by:
+```python
+import koala
 
-- `tree`
-- `synoptic`
-- `synoptic_boxes`
-
-Characteristics:
-
-- stronger title presence
-- balanced body size for boxed layouts
-- good all-purpose readability
-
-### `academic`
-
-Best when:
-
-- the diagram should feel more scholarly or editorial
-- longer body text benefits from a serif reading texture
-- the output is aimed at notes, essays, reports, or academic material
-
-Characteristics:
-
-- Georgia title text
-- Times New Roman body text
-- slightly more body leading for serif readability
-
-### `formal`
-
-Used by default in:
-
-- `matrix`
-
-Best when:
-
-- the output should feel sober and report-ready
-- the diagram is intended for PDFs, executive summaries, or comparison tables
-
-Characteristics:
-
-- Times New Roman title text
-- Arial body text for scanability
-- compact table-oriented metrics in `matrix`
-
-### `casual`
-
-Best when:
-
-- the diagram should feel lighter and less institutional
-- you want a friendlier visual tone for workshops, drafts, or learning material
-
-Characteristics:
-
-- Trebuchet MS title text
-- Verdana body text
-- compact but approachable spacing
-
-### `radial`
-
-Used by default in:
-
-- `radial`
-
-Characteristics:
-
-- slightly smaller type
-- tuned for denser circular compositions
-
-### Visual typography review
-
-The end-to-end gallery includes focused typography cases so you can compare how each preset behaves in SVG, PNG, and PDF under consistent settings.
-
-Run:
-
-```bash
-.venv/bin/python -m unittest tests.end_to_end.code.test_render_e2e.RenderEndToEndTest.test_render_gallery
+print(koala.available_typographies())
+print(koala.available_typographies(type="tree"))
+print(koala.available_typographies(type="matrix"))
+print(koala.available_typographies(type="flowchart"))
 ```
 
-Typography-specific outputs are written to:
-
-```text
-tests/end_to_end/output/typography/tree/<typography>/
-tests/end_to_end/output/typography/matrix/<typography>/
-tests/end_to_end/output/typography/flowchart/<typography>/
-```
-
-The manifest records these cases with `"gallery": "typography"` in:
-
-```text
-tests/end_to_end/e2e_manifest.json
-```
-
-## 17. Available page sizes
+## 13. Page Sizes
 
 Current page presets:
 
@@ -877,119 +715,79 @@ Current page presets:
 
 ### `a4`
 
-Size:
+Portrait A4, `210 x 297 mm`.
 
-- `210 x 297 mm`
+Best for:
 
-Best when:
-
-- the structure is taller
-- the tree is deep
-- you want stronger vertical reading rhythm
+- deeper trees
+- tall linear flowcharts
+- vertical reading rhythm
 
 ### `a4_landscape`
 
-Size:
+Landscape A4, `297 x 210 mm`.
 
-- `297 x 210 mm`
+Best for:
 
-Best when:
-
-- you want the safest general-purpose page
-- you are using `synoptic` or `synoptic_boxes`
-- the tree has medium horizontal spread
+- most general-purpose diagrams
+- `tree`
+- `synoptic`
+- `synoptic_boxes`
+- `matrix`
+- medium-width flowcharts
 
 Current default page size:
 
 - `a4_landscape`
 
-This is a fixed fallback, not an automatic layout-specific choice:
-
-- explicit CLI or library `size` wins first
-- then `@size` or `@page-size`
-- then user config `default_size`
-- if none of those exist, Koala falls back to `a4_landscape`
-
 ### `square`
 
-Size:
+Square page, `210 x 210 mm`.
 
-- `210 x 210 mm`
+Best for:
 
-Best when:
+- radial maps
+- compact flowcharts
+- shallow but wide trees
 
-- you want denser, centered compositions
-- you are using `radial`
-- a `tree` would otherwise spread too wide
+## 14. Practical Suggestions
 
-## 18. Suggestions for better visual results
+General:
 
-These are practical writing heuristics for the current engines.
+- keep titles short and concept-oriented
+- move explanation into body text
+- avoid extremely long paragraphs
+- use relation labels only when they add meaning
+- prefer balanced sibling groups over very uneven branching
+- use metadata when a file is meant to be self-contained
 
-Main suggestion:
+Tree:
 
-- avoid having more than 8 children in the deepest ring of a branch
+- use `tree` for classic hierarchies and explanatory branching
+- use `synoptic` for classification charts where grouping matters more than relation labels
+- use `synoptic_boxes` for structured left-to-right explanations
+- use `radial` when a central concept has several balanced branches
+- avoid more than 8 children in the deepest ring of a branch
 
-### General suggestions
+Matrix:
 
-- Keep titles short and concept-oriented
-- Move explanation into body text
-- Avoid extremely long paragraphs
-- Use relation labels only when they add meaning
-- Prefer balanced sibling groups over very uneven branching
-- Use metadata when a file is intended for a specific render style
+- keep row labels short and criteria parallel
+- prefer concise cell text over long prose
+- use `formal` typography for reports and PDFs
+- use `justify` only when cells have enough words to benefit from it
 
-### Suggestions for `tree`
+Flowchart:
 
-- Use it for classic hierarchies and explanatory branching
-- Keep child titles compact when a node has many children
-- `a4_landscape` is the safest default
-- `square` often improves shallow but wide trees
-- `a4` works well for deeper trees
+- keep node labels short
+- use one concept per node
+- use `decision` for conditional choices
+- use edge labels on decision outputs, such as `yes`, `no`, or short phrases
+- use `note` for supporting context that is not a step in the flow
+- avoid more than two outputs from a single decision node
 
-### Suggestions for `synoptic`
+## 15. Complete Examples
 
-- Use it for category refinement and outline-like content
-- Keep titles short
-- Keep body text light
-- `a4_landscape` is currently the safest size
-- Use this layout when grouping matters more than relation labels
-
-### Suggestions for `synoptic_boxes`
-
-- Use it for structured left-to-right explanation
-- Keep sibling groups parallel in meaning
-- Prefer short-to-medium body text
-- `a4_landscape` is currently the safest size
-- `square` is supported, but content should stay tighter
-
-### Suggestions for `radial`
-
-- Use it when a central concept has several balanced branches
-- Keep first-level branches relatively even in size
-- Avoid one giant branch plus many tiny branches
-- `square` and `a4_landscape` usually give the cleanest balance
-
-### Suggestions for `matrix`
-
-- Use it for decisions, tradeoffs, and option comparisons
-- Keep row labels short and criteria parallel
-- Prefer concise cell text over long prose
-- Use `formal` typography for reports and PDFs
-- Use `justify` only when cells have enough words to benefit from it
-
-### Suggestions for `flowchart`
-
-- Use it for processes with clear steps and decision points
-- Keep node labels short — one concept per node
-- Use `decision` for binary or conditional choices only
-- Use `note` for supporting context that is not a step in the flow
-- Use edge labels on `decision` outputs to name the branches (`si`, `no`, or short phrases)
-- Avoid more than two outputs from a single `decision` node; split into sub-decisions instead
-- `a4_landscape` is the safest default; `a4` works better for tall linear flows
-- `square` is best for compact flows with few parallel branches
-
-## 19. Example tutorial document
+### Tree
 
 ```text
 @layout tree
@@ -997,7 +795,7 @@ Main suggestion:
 @size square
 @show-node-numbers false
 
-1 DSL Platform
+main:: 1 DSL Platform
 Coordinates parser, layout, and render.
 
 organizes -> 1.1 Core
@@ -1010,21 +808,21 @@ hl:: includes -> 1.2.1 Viewport
 Fits the scene into the selected page size.
 ```
 
-## 20. Example matrix document
+### Matrix
 
 ```text
 @theme academic
 @typography formal
 @text-align left
 
-matrix:: Cuadro comparativo de formatos Koala
-columns:: Criterio | Tree | Matrix | Flowchart
-row:: Proposito | Jerarquias de conocimiento | Comparacion lado a lado | Procesos y decisiones
-row:: Lectura | De lo general a lo particular | Horizontal y comparativa | Cronologica
-footer:: Recomendacion | Usar matrix cuando la decision depende de comparar opciones con los mismos criterios.
+matrix:: Koala Format Comparison
+columns:: Criterion | Tree | Matrix | Flowchart
+row:: Purpose | Knowledge hierarchies | Side-by-side comparison | Processes and decisions
+row:: Reading path | General to specific | Horizontal and comparative | Chronological or conditional
+footer:: Recommendation | Choose the document type that matches the structure of the source material.
 ```
 
-## 21. Example flowchart document
+### Flowchart
 
 ```text
 @theme ocean
@@ -1033,38 +831,50 @@ footer:: Recomendacion | Usar matrix cuando la decision depende de comparar opci
 
 flowchart:: Content publishing process
 
-start:: inicio :: Start
-step:: revision :: Review draft
-decision:: aprobado :: Approved?
-step:: correcciones :: Apply corrections
-step:: diseno :: Design and layout
-decision:: calidad :: Passes QA?
-step:: ajustes :: Final adjustments
-step:: publicar :: Publish
-note:: nota :: Notify the team by email
-end:: fin :: End
+start:: start :: Start
+step:: review :: Review draft
+decision:: approved :: Approved?
+step:: corrections :: Apply corrections
+step:: design :: Design and layout
+decision:: quality :: Passes QA?
+step:: adjustments :: Final adjustments
+step:: publish :: Publish
+note:: note :: Notify the team by email
+end:: end :: End
 
-inicio -> revision
-revision -> aprobado
-aprobado -> correcciones :: no
-aprobado -> diseno :: yes
-correcciones -> revision
-diseno -> calidad
-calidad -> ajustes :: no
-calidad -> publicar :: yes
-ajustes -> diseno
-publicar -> nota
-nota -> fin
+start -> review
+review -> approved
+approved -> corrections :: no
+approved -> design :: yes
+corrections -> review
+design -> quality
+quality -> adjustments :: no
+quality -> publish :: yes
+adjustments -> design
+publish -> note
+note -> end
 ```
 
-## 22. Recommended files to inspect
+## 16. Files To Inspect
 
-- [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
-- [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
-- [tests/end_to_end/mocks/alignment_left.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_left.txt)
-- [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
-- [tests/end_to_end/mocks/comparative_matrix.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/comparative_matrix.txt)
-- [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md)
-- [docs/how-to-add-a-typography.md](/home/yaldapika/dev/koala/docs/how-to-add-a-typography.md)
-- [docs/layouts.md](/home/yaldapika/dev/koala/docs/layouts.md)
-- [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md)
+Useful repository files:
+
+- `tests/end_to_end/mocks/alignment_left.txt`
+- `tests/end_to_end/mocks/alignment_justify.txt`
+- `tests/end_to_end/mocks/comparative_matrix.txt`
+- `tests/end_to_end/mocks/flowchart.txt`
+- `docs/syntax.md`
+- `docs/layouts.md`
+- `docs/how-to-add-a-typography.md`
+
+Run the end-to-end gallery to compare themes, typographies, SVG, PNG, and PDF output:
+
+```bash
+.venv/bin/python -m unittest tests.end_to_end.code.test_render_e2e.RenderEndToEndTest.test_render_gallery
+```
+
+Generated gallery output is written under:
+
+```text
+tests/end_to_end/output/
+```

@@ -57,11 +57,14 @@ koala types
 koala typographies
 koala typographies --type tree
 koala typographies --type matrix
+koala typographies --type flowchart
 koala compile docs/examples/tree.txt --type tree --layout tree
 koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
 koala compile comparison.txt --type matrix --layout matrix --typography formal
+koala compile process.txt --type flowchart --layout flowchart --theme ocean
 koala export docs/examples/tree.txt --format png --quality high
 koala export comparison.txt --type matrix --layout matrix --format png --quality medium
+koala export process.txt --type flowchart --layout flowchart --format pdf --quality high
 koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
@@ -132,6 +135,7 @@ import koala
 print(koala.available_typographies())
 print(koala.available_typographies(type="tree"))
 print(koala.available_typographies(type="matrix"))
+print(koala.available_typographies(type="flowchart"))
 ```
 
 Matrix documents use an explicit comparative-table syntax:
@@ -163,7 +167,7 @@ Library API summary:
 `RenderResult` now always includes the serialized SVG in `result.svg`. `result.output_svg` is only populated when the operation writes a file.
 `ExportResult` includes final bytes in `result.content`, the HTTP media type in `result.media_type`, and `result.output_path` when an explicit output is written.
 PNG export uses direct SVG conversion at `medium` or `high` quality. PDF export is vector-based and adds a professional frame with margins, a title resolved from the first `main::` node, and theme-aware colors.
-All render/export APIs accept `type="tree"` or `type="matrix"`; it defaults to `tree`. Tree layouts are `tree`, `radial`, `synoptic`, and `synoptic_boxes`. Matrix uses `layout="matrix"`. If DSL syntax does not match the requested type, Koala raises `DocumentTypeMismatchError`.
+All render/export APIs accept `type="tree"`, `type="matrix"`, or `type="flowchart"`; it defaults to `tree`. Tree layouts are `tree`, `radial`, `synoptic`, and `synoptic_boxes`. Matrix uses `layout="matrix"`. Flowchart uses `layout="flowchart"`. If DSL syntax does not match the requested type, Koala raises `DocumentTypeMismatchError`.
 
 In general, avoid embedding `@show-node-numbers` in document metadata. Prefer CLI flags, library arguments, or user config defaults unless a file really needs to be self-descriptive about numbering.
 

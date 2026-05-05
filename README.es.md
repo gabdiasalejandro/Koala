@@ -55,11 +55,14 @@ koala layouts
 koala typographies
 koala typographies --type tree
 koala typographies --type matrix
+koala typographies --type flowchart
 koala compile docs/examples/tree.txt --type tree --layout tree
 koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
 koala compile comparison.txt --type matrix --layout matrix --typography formal
+koala compile process.txt --type flowchart --layout flowchart --theme ocean
 koala export docs/examples/tree.txt --format png --quality high
 koala export comparison.txt --type matrix --layout matrix --format png --quality medium
+koala export process.txt --type flowchart --layout flowchart --format pdf --quality high
 koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
@@ -140,6 +143,7 @@ import koala
 print(koala.available_typographies())
 print(koala.available_typographies(type="tree"))
 print(koala.available_typographies(type="matrix"))
+print(koala.available_typographies(type="flowchart"))
 ```
 
 Ejemplo mínimo de `matrix`:
@@ -245,7 +249,7 @@ Subcomandos disponibles:
 - `themes`: lista themes disponibles
 - `types`: lista tipos de documento disponibles
 - `layouts`: lista layouts disponibles
-- `typographies`: lista presets tipográficos disponibles; acepta `--type tree` o `--type matrix` para filtrar
+- `typographies`: lista presets tipográficos disponibles; acepta `--type tree`, `--type matrix` o `--type flowchart` para filtrar
 - `config-path`: muestra la ruta esperada de la config de usuario
 
 Config de usuario:
@@ -294,11 +298,13 @@ Tipos de documento:
 
 - `type="tree"` es el default y usa el DSL jerárquico actual
 - `type="matrix"` usa sintaxis explícita de cuadro comparativo con `matrix::`, `columns::`, `row::` y `footer::`
+- `type="flowchart"` usa sintaxis explícita de proceso con `flowchart::`, nodos declarados por rol y aristas `source -> target`
 - los layouts de `tree` son `tree`, `synoptic`, `synoptic_boxes` y `radial`
 - el layout de `matrix` es `matrix`
+- el layout de `flowchart` es `flowchart`
 - si el DSL no coincide con el `type` solicitado, Koala lanza `DocumentTypeMismatchError`
 - la arquitectura interna está organizada por capas: `core/<type>`, `layout/<type>` y `render/<type>`
-- `core/shared`, `layout/shared` y `render/shared` contienen config, themes, tipografía, tamaño de página, background y export compartidos para tipos actuales y futuros como `flowchart`
+- `core/shared`, `layout/shared` y `render/shared` contienen config, themes, tipografía, tamaño de página, background y export compartidos por los tipos de documento
 
 ## Documentación
 

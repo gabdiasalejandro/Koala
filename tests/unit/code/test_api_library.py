@@ -128,19 +128,41 @@ class LibraryApiTests(unittest.TestCase):
         self.assertIn("Decision Matrix", result.svg)
         self.assertIn("<rect", result.svg)
 
+    def test_render_text_accepts_explicit_flowchart_type(self) -> None:
+        result = koala.render_text(
+            "flowchart:: Publish\n\n"
+            "start:: draft :: Draft\n"
+            "decision:: review :: Approved?\n"
+            "end:: done :: Done\n\n"
+            "draft -> review\n"
+            "review -> done :: yes\n",
+            type="flowchart",
+            layout="flowchart",
+            theme="ocean",
+            typography="default",
+        )
+
+        self.assertEqual(result.document_type, "flowchart")
+        self.assertEqual(result.context.settings.layout_kind, "flowchart")
+        self.assertIn("Approved?", result.svg)
+        self.assertIn("<polygon", result.svg)
+
     def test_available_typographies_exposes_academic_formal_and_casual_presets(self) -> None:
-        self.assertEqual(koala.available_document_types(), ("matrix", "tree"))
+        self.assertEqual(koala.available_document_types(), ("flowchart", "matrix", "tree"))
 
         all_typographies = koala.available_typographies()
         tree_typographies = koala.available_typographies(type="tree")
         matrix_typographies = koala.available_typographies(type="matrix")
+        flowchart_typographies = koala.available_typographies(type="flowchart")
 
         for name in ("academic", "formal", "casual"):
             self.assertIn(name, all_typographies)
             self.assertIn(name, tree_typographies)
             self.assertIn(name, matrix_typographies)
+            self.assertIn(name, flowchart_typographies)
         self.assertIn("radial", tree_typographies)
         self.assertNotIn("radial", matrix_typographies)
+        self.assertNotIn("radial", flowchart_typographies)
 
     def test_render_text_accepts_new_typography_presets_from_python_api(self) -> None:
         tree_result = koala.render_text(
@@ -181,7 +203,7 @@ class LibraryApiTests(unittest.TestCase):
         with self.assertRaises(koala.UnknownDocumentTypeError):
             koala.render_text(
                 "1 Root\nBody.\n",
-                type="flowchart",
+                type="timeline",
                 layout="tree",
                 theme="academic",
             )

@@ -12,6 +12,7 @@ from koala.api import inspect_text as inspect_document_text
 from koala.config import default_user_config_path, load_user_config
 from koala.core.shared.io import load_input_text
 from koala.core.shared.registry import DocumentPipelineRegistry
+from koala.layout.flowchart import FLOWCHART_LAYOUTS
 from koala.layout.matrix import MATRIX_LAYOUTS
 from koala.layout.tree import TREE_LAYOUTS
 from koala.render.shared.export import ExportConverter
@@ -24,7 +25,7 @@ from koala.render.shared.themes import available_theme_names
 
 
 AVAILABLE_DOCUMENT_TYPES = DocumentPipelineRegistry.available_types()
-AVAILABLE_LAYOUTS = tuple(dict.fromkeys((*TREE_LAYOUTS, *MATRIX_LAYOUTS)))
+AVAILABLE_LAYOUTS = tuple(dict.fromkeys((*TREE_LAYOUTS, *MATRIX_LAYOUTS, *FLOWCHART_LAYOUTS)))
 
 
 def build_parser() -> argparse.ArgumentParser:
