@@ -107,11 +107,29 @@ class LibraryApiTests(unittest.TestCase):
         self.assertEqual(result.document_type, "tree")
         self.assertEqual(result.context.settings.layout_kind, "tree")
 
+    def test_render_text_accepts_explicit_matrix_type(self) -> None:
+        result = koala.render_text(
+            "matrix:: Decision Matrix\n"
+            "columns:: Criterion | Option A | Option B\n"
+            "row:: Cost | Lower initial cost | Higher initial cost\n"
+            "row:: Fit | Good for teams | Strong for governance\n"
+            "footer:: Recommendation | Choose the option that best matches operating maturity.\n",
+            type="matrix",
+            layout="matrix",
+            theme="academic",
+            typography="formal",
+        )
+
+        self.assertEqual(result.document_type, "matrix")
+        self.assertEqual(result.context.settings.layout_kind, "matrix")
+        self.assertIn("Decision Matrix", result.svg)
+        self.assertIn("<rect", result.svg)
+
     def test_render_text_rejects_unknown_document_type(self) -> None:
         with self.assertRaises(koala.UnknownDocumentTypeError):
             koala.render_text(
                 "1 Root\nBody.\n",
-                type="matrix",
+                type="flowchart",
                 layout="tree",
                 theme="academic",
             )
@@ -122,6 +140,15 @@ class LibraryApiTests(unittest.TestCase):
                 "matrix:: Comparison\ncolumns:: A | B\nrow:: Cost | Low\n",
                 type="tree",
                 layout="tree",
+                theme="academic",
+            )
+
+    def test_matrix_type_rejects_tree_syntax(self) -> None:
+        with self.assertRaises(koala.DocumentTypeMismatchError):
+            koala.render_text(
+                "main:: 1 Strategic Map\nBody.\n",
+                type="matrix",
+                layout="matrix",
                 theme="academic",
             )
 

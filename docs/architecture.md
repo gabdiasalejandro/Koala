@@ -42,13 +42,13 @@ Koala does not infer document type from metadata. If the caller requests
 `type="tree"` and sends matrix-like syntax, the selected pipeline raises
 `DocumentTypeMismatchError`.
 
-Current supported type:
+Current supported types:
 
 - `tree`
+- `matrix`
 
 Prepared future types:
 
-- `matrix`
 - `flowchart`
 
 ## Target folder shape
@@ -89,9 +89,14 @@ src/koala/
 - `parser.py`: numbered tree DSL parser
 - `pipeline.py`: `TreeDocumentPipeline`
 
-`src/koala/core/matrix/` and `src/koala/core/flowchart/` are intentionally
-present as placeholders. Their future parsers, models, and pipelines should be
-added there.
+`src/koala/core/matrix/` owns matrix semantics:
+
+- `models.py`: `MatrixCell`, `ParsedMatrixDocument`, rows, footer, warnings, metadata
+- `parser.py`: explicit comparative-table DSL parser
+- `pipeline.py`: `MatrixDocumentPipeline`
+
+`src/koala/core/flowchart/` is intentionally present as a placeholder. Its
+future parser, models, and pipeline should be added there.
 
 ## Layout layer
 
@@ -109,8 +114,13 @@ added there.
 - `synoptic_boxes.py`: boxed synoptic layout
 - `radial.py`: center-out radial layout
 
-`src/koala/layout/matrix/` and `src/koala/layout/flowchart/` are placeholders
-for future geometry engines.
+`src/koala/layout/matrix/` owns matrix-only geometry engines:
+
+- `models.py`: `MatrixLayoutKind`
+- `registry.py`: matrix layout dispatch
+- `matrix.py`: formal comparative-table geometry
+
+`src/koala/layout/flowchart/` is a placeholder for future geometry engines.
 
 ### Layout kinds are scoped per document type
 
@@ -145,8 +155,14 @@ surface area.
 - `nodes.py`: tree node drawing
 - `edges.py`: tree edge drawing
 
-`src/koala/render/matrix/` and `src/koala/render/flowchart/` are placeholders
-for future renderers.
+`src/koala/render/matrix/` owns matrix-only SVG rendering:
+
+- `profiles.py`: registers matrix `RenderProfile`s and typographies on import
+- `context.py`: matrix render context construction
+- `svg_render.py`: matrix SVG pipeline
+- `canvas.py`: formal table drawing
+
+`src/koala/render/flowchart/` is a placeholder for future renderers.
 
 ### Profile registration
 
@@ -180,15 +196,18 @@ A theme is responsible for picking concrete fill/stroke/title/body colors for
 each slot. Renderers ask the theme for a slot (`theme.style_for("focus")`) and
 get a fully resolved `NodeStyle`. Slots are the cross-type contract.
 
-### Document-type kinds (current, tree-only)
+### Document-type kinds
 
-In the current `tree` parser, the DSL accepts a `kind::` prefix (`focus::`,
+In the `tree` parser, the DSL accepts a `kind::` prefix (`focus::`,
 `main::`, `note::`, …) that maps 1:1 to a palette slot. So in `tree`, a "kind"
 is just a direct user-facing name for a slot.
 
-### Roles (target model for non-tree types)
+In `matrix`, the parser assigns local roles (`title`, `header`, `row_header`,
+`cell`, `footer`) and the renderer maps those roles to universal palette slots.
 
-`flowchart` and other graph-like types will introduce **node roles**: semantic
+### Roles
+
+`matrix`, `flowchart`, and other graph-like types use or will use **node roles**: semantic
 labels driven by the DSL or topology, not by author intent on a single node.
 Examples:
 
@@ -199,9 +218,11 @@ Each type defines its own role enum and a **role-to-slot mapping**. The
 mapping is the only place a type couples its semantics to the shared palette:
 
 ```
+matrix role "header"       →  palette slot "main"
+matrix role "row_header"   →  palette slot "hl"
+matrix role "cell"         →  palette slot (default node)
+matrix role "footer"       →  palette slot "soft"
 flowchart role "decision"  →  palette slot "focus"
-flowchart role "process"   →  palette slot (default node)
-flowchart role "data"      →  palette slot "soft"
 ```
 
 Why this split:
@@ -220,11 +241,10 @@ Why this split:
   `ThemeDefinition.kind_overrides`, `ThemeConfig.style_for(slot)`).
 - Tree's "kind" today: parsed in `core/tree/parser.py`, used directly as a
   slot name.
-- Future role-to-slot mapping: each type owns a small dict (e.g.
-  `render/flowchart/roles.py`) and consults `ThemeConfig.style_for(slot)`.
+- Role-to-slot mapping: each type owns the mapping near its renderer and
+  consults `ThemeConfig.style_for(slot)`.
 
-Until a non-tree type lands, no code-level role layer is implemented; tree
-keeps using its `kind::` syntax.
+Tree keeps using its `kind::` syntax directly.
 
 ## Tree render flow
 

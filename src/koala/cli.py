@@ -12,6 +12,7 @@ from koala.api import inspect_text as inspect_document_text
 from koala.config import default_user_config_path, load_user_config
 from koala.core.shared.io import load_input_text
 from koala.core.shared.registry import DocumentPipelineRegistry
+from koala.layout.matrix import MATRIX_LAYOUTS
 from koala.layout.tree import TREE_LAYOUTS
 from koala.render.shared.export import ExportConverter
 from koala.render.shared.settings import (
@@ -22,7 +23,7 @@ from koala.render.shared.themes import available_theme_names
 
 
 AVAILABLE_DOCUMENT_TYPES = DocumentPipelineRegistry.available_types()
-AVAILABLE_TREE_LAYOUTS = TREE_LAYOUTS
+AVAILABLE_LAYOUTS = tuple(dict.fromkeys((*TREE_LAYOUTS, *MATRIX_LAYOUTS)))
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -145,14 +146,14 @@ def _add_render_arguments(parser: argparse.ArgumentParser) -> None:
         choices=AVAILABLE_DOCUMENT_TYPES,
         default="tree",
         dest="document_type",
-        help="Tipo de documento a parsear. Por ahora disponible: tree.",
+        help="Tipo de documento a parsear.",
     )
     parser.add_argument(
         "-l",
         "--layout",
-        choices=AVAILABLE_TREE_LAYOUTS,
+        choices=AVAILABLE_LAYOUTS,
         default=None,
-        help="Layout a usar para documentos tree. Precedencia: CLI > metadata > config de usuario > default interno.",
+        help="Layout a usar. Cada tipo valida sus layouts propios. Precedencia: CLI > metadata > config de usuario > default interno.",
     )
     parser.add_argument(
         "-t",
@@ -350,7 +351,7 @@ def _handle_types(_: argparse.Namespace) -> int:
 
 
 def _handle_layouts(_: argparse.Namespace) -> int:
-    for name in AVAILABLE_TREE_LAYOUTS:
+    for name in AVAILABLE_LAYOUTS:
         print(name)
     return 0
 

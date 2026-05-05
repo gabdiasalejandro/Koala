@@ -3,5 +3,5 @@
 from typing import Literal
 
 
-DocumentType = Literal["tree"]
+DocumentType = Literal["tree", "matrix"]
 DEFAULT_DOCUMENT_TYPE: DocumentType = "tree"

@@ -1,6 +1,6 @@
 # DSL Syntax
 
-This document describes the current syntax accepted by Koala and how the parser interprets it.
+This document describes the current syntax accepted by Koala and how each parser interprets it.
 
 ## Supported input files
 
@@ -13,7 +13,7 @@ The loader lives in `src/koala/core/io.py`.
 
 After loading, both formats become plain text and are parsed the same way.
 
-## Conceptual model
+## Tree conceptual model
 
 Each node in the DSL has:
 
@@ -23,7 +23,7 @@ Each node in the DSL has:
 - an optional semantic kind
 - optional body text lines
 
-The parser turns that into a `ConceptNode`.
+The `tree` parser turns that into a `ConceptNode`.
 
 ## Node line syntax
 
@@ -266,6 +266,37 @@ Important limitations:
 - there is no explicit multi-relation graph syntax outside tree numbering
 - body text is plain text, not rich Markdown
 - node titles and bodies are inferred from line positions rather than explicit blocks
+
+## Matrix syntax
+
+The `matrix` doctype is explicit and does not infer a table from tree syntax.
+Use it for formal comparative tables:
+
+```text
+matrix:: Cuadro comparativo de formatos Koala
+columns:: Criterio | Tree | Matrix | Flowchart
+row:: Proposito | Jerarquias de conocimiento | Comparacion lado a lado | Procesos y decisiones
+row:: Lectura | De lo general a lo particular | Horizontal y comparativa | Cronologica
+footer:: Recomendacion | Usar matrix cuando la decision depende de comparar opciones con los mismos criterios.
+```
+
+Rules:
+
+- `matrix::` defines the table title and is required
+- `columns::` defines the header row and is required
+- each `row::` defines one comparative row and is required at least once
+- cells are separated with `|`
+- `footer::` is optional and renders as a full-width conclusion row
+- metadata lines with `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work the same way as in `tree`
+
+The supported matrix layout name is:
+
+- `matrix`
+
+The built-in matrix typographies are:
+
+- `formal`
+- `default`
 
 ## Minimal valid example
 

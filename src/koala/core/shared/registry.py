@@ -117,7 +117,9 @@ class DocumentPipelineRegistry:
         return tuple(sorted(cls._PIPELINES.keys()))
 
 
+from koala.core.matrix.pipeline import MatrixDocumentPipeline
 from koala.core.tree.pipeline import TreeDocumentPipeline
 
 
+DocumentPipelineRegistry.register(MatrixDocumentPipeline())
 DocumentPipelineRegistry.register(TreeDocumentPipeline())

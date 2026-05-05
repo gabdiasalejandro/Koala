@@ -2,1457 +2,1691 @@
   {
     "case": {
       "background": "#F7F4ED",
+      "document_type": "tree",
       "index": 0,
       "layout": "tree",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "academic"
+      "theme": "academic",
+      "typography": "default"
     },
-    "case_id": "00_tree_academic_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/academic/left/00_tree_a4_numbers_on.svg",
-    "size_bytes": 30522
+    "case_id": "00_tree_tree_academic_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/academic/00_tree_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/academic/00_tree_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/academic/00_tree_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/academic/00_tree_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34477,
+      "png_high": 391534,
+      "png_medium": 163302,
+      "svg": 30522
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 1,
-      "layout": "tree",
+      "layout": "synoptic",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "academic"
+      "theme": "academic",
+      "typography": "radial"
     },
-    "case_id": "01_tree_academic_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/academic/justify/01_tree_a4_landscape_numbers_off.svg",
-    "size_bytes": 29900
+    "case_id": "01_tree_synoptic_academic_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/academic/01_synoptic_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19565,
+      "png_high": 323985,
+      "png_medium": 143081,
+      "svg": 17931
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 2,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "academic",
+      "typography": "default"
+    },
+    "case_id": "02_tree_synoptic_boxes_academic_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34206,
+      "png_high": 407466,
+      "png_medium": 171564,
+      "svg": 23976
+    }
   },
   {
     "case": {
       "background": "#F1F7FB",
-      "index": 2,
-      "layout": "synoptic",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "academic"
-    },
-    "case_id": "02_synoptic_academic_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/academic/left/02_synoptic_square_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "tree",
       "index": 3,
-      "layout": "synoptic",
+      "layout": "radial",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "academic"
+      "theme": "academic",
+      "typography": "radial"
     },
-    "case_id": "03_synoptic_academic_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/academic/justify/03_synoptic_a4_numbers_off.svg",
-    "size_bytes": 17529
-  },
-  {
-    "case": {
-      "background": "#F8F3FF",
-      "index": 4,
-      "layout": "synoptic_boxes",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "academic"
+    "case_id": "03_tree_radial_academic_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/academic/03_radial_justify_radial_a4.svg"
     },
-    "case_id": "04_synoptic_boxes_academic_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/academic/left/04_synoptic_boxes_a4_landscape_numbers_on.svg",
-    "size_bytes": 24009
+    "sizes_bytes": {
+      "pdf": 19779,
+      "png_high": 468496,
+      "png_medium": 214012,
+      "svg": 29727
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "matrix",
+      "index": 4,
+      "layout": "matrix",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "left",
+      "theme": "academic",
+      "typography": "formal"
+    },
+    "case_id": "04_matrix_matrix_academic_left_formal_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/academic/04_matrix_left_formal_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/matrix/academic/04_matrix_left_formal_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/academic/04_matrix_left_formal_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/matrix/academic/04_matrix_left_formal_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 29259,
+      "png_high": 305410,
+      "png_medium": 124908,
+      "svg": 10477
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
       "index": 5,
-      "layout": "synoptic_boxes",
+      "layout": "tree",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "academic"
+      "theme": "black",
+      "typography": "radial"
     },
-    "case_id": "05_synoptic_boxes_academic_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/academic/justify/05_synoptic_boxes_square_numbers_off.svg",
-    "size_bytes": 27014
+    "case_id": "05_tree_tree_black_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/black/05_tree_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/black/05_tree_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/black/05_tree_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/black/05_tree_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19144,
+      "png_high": 228728,
+      "png_medium": 101125,
+      "svg": 30506
+    }
   },
   {
     "case": {
       "background": "#F4F9F1",
+      "document_type": "tree",
       "index": 6,
-      "layout": "radial",
+      "layout": "synoptic",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "academic"
+      "theme": "black",
+      "typography": "default"
     },
-    "case_id": "06_radial_academic_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/academic/left/06_radial_a4_numbers_on.svg",
-    "size_bytes": 27361
+    "case_id": "06_tree_synoptic_black_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/black/06_synoptic_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/black/06_synoptic_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/black/06_synoptic_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/black/06_synoptic_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 24186,
+      "png_high": 428847,
+      "png_medium": 177867,
+      "svg": 10539
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 7,
-      "layout": "radial",
+      "layout": "synoptic_boxes",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "academic"
+      "theme": "black",
+      "typography": "radial"
     },
-    "case_id": "07_radial_academic_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/academic/justify/07_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 29662
+    "case_id": "07_tree_synoptic_boxes_black_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/black/07_synoptic_boxes_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19094,
+      "png_high": 372490,
+      "png_medium": 164880,
+      "svg": 27412
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 8,
+      "layout": "radial",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "black",
+      "typography": "default"
+    },
+    "case_id": "08_tree_radial_black_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/black/08_radial_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/black/08_radial_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/black/08_radial_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/black/08_radial_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 35361,
+      "png_high": 576816,
+      "png_medium": 253183,
+      "svg": 27275
+    }
   },
   {
     "case": {
       "background": "#F7F4ED",
-      "index": 8,
-      "layout": "tree",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "black"
-    },
-    "case_id": "08_tree_black_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/black/left/08_tree_square_numbers_on.svg",
-    "size_bytes": 30522
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "matrix",
       "index": 9,
-      "layout": "tree",
+      "layout": "matrix",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "black"
+      "theme": "black",
+      "typography": "default"
     },
-    "case_id": "09_tree_black_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/black/justify/09_tree_a4_numbers_off.svg",
-    "size_bytes": 29900
-  },
-  {
-    "case": {
-      "background": "#F1F7FB",
-      "index": 10,
-      "layout": "synoptic",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "black"
+    "case_id": "09_matrix_matrix_black_justify_default_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/black/09_matrix_justify_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/matrix/black/09_matrix_justify_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/black/09_matrix_justify_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/matrix/black/09_matrix_justify_default_a4.svg"
     },
-    "case_id": "10_synoptic_black_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/black/left/10_synoptic_a4_landscape_numbers_on.svg",
-    "size_bytes": 10539
+    "sizes_bytes": {
+      "pdf": 28387,
+      "png_high": 392211,
+      "png_medium": 178971,
+      "svg": 17649
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
+      "index": 10,
+      "layout": "tree",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "colorblind",
+      "typography": "default"
+    },
+    "case_id": "10_tree_tree_colorblind_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/colorblind/10_tree_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34397,
+      "png_high": 523371,
+      "png_medium": 224303,
+      "svg": 30488
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
       "index": 11,
       "layout": "synoptic",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "black"
+      "theme": "colorblind",
+      "typography": "radial"
     },
-    "case_id": "11_synoptic_black_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/black/justify/11_synoptic_square_numbers_off.svg",
-    "size_bytes": 17527
+    "case_id": "11_tree_synoptic_colorblind_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/colorblind/11_synoptic_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/colorblind/11_synoptic_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/colorblind/11_synoptic_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/colorblind/11_synoptic_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19561,
+      "png_high": 261771,
+      "png_medium": 116455,
+      "svg": 17931
+    }
   },
   {
     "case": {
       "background": "#F8F3FF",
+      "document_type": "tree",
       "index": 12,
       "layout": "synoptic_boxes",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "black"
+      "theme": "colorblind",
+      "typography": "default"
     },
-    "case_id": "12_synoptic_boxes_black_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/black/left/12_synoptic_boxes_a4_numbers_on.svg",
-    "size_bytes": 24009
+    "case_id": "12_tree_synoptic_boxes_colorblind_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/colorblind/12_synoptic_boxes_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/colorblind/12_synoptic_boxes_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/colorblind/12_synoptic_boxes_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/colorblind/12_synoptic_boxes_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34292,
+      "png_high": 532837,
+      "png_medium": 227252,
+      "svg": 24009
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 13,
-      "layout": "synoptic_boxes",
+      "layout": "radial",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "black"
+      "theme": "colorblind",
+      "typography": "radial"
     },
-    "case_id": "13_synoptic_boxes_black_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/black/justify/13_synoptic_boxes_a4_landscape_numbers_off.svg",
-    "size_bytes": 27014
+    "case_id": "13_tree_radial_colorblind_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/colorblind/13_radial_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19823,
+      "png_high": 607995,
+      "png_medium": 282824,
+      "svg": 29662
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "matrix",
+      "index": 14,
+      "layout": "matrix",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "left",
+      "theme": "colorblind",
+      "typography": "formal"
+    },
+    "case_id": "14_matrix_matrix_colorblind_left_formal_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.pdf",
+      "png_high": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.medium.png",
+      "svg": "tests/end_to_end/output/matrix/colorblind/14_matrix_left_formal_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 29272,
+      "png_high": 342119,
+      "png_medium": 156929,
+      "svg": 12711
+    }
   },
   {
     "case": {
       "background": "#F4F9F1",
-      "index": 14,
-      "layout": "radial",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "black"
-    },
-    "case_id": "14_radial_black_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/black/left/14_radial_square_numbers_on.svg",
-    "size_bytes": 27386
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "tree",
       "index": 15,
-      "layout": "radial",
+      "layout": "tree",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "black"
+      "theme": "default",
+      "typography": "radial"
     },
-    "case_id": "15_radial_black_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/black/justify/15_radial_a4_numbers_off.svg",
-    "size_bytes": 29694
-  },
-  {
-    "case": {
-      "background": "#F7F4ED",
-      "index": 16,
-      "layout": "tree",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "colorblind"
+    "case_id": "15_tree_tree_default_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/default/15_tree_justify_radial_a4.svg"
     },
-    "case_id": "16_tree_colorblind_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/colorblind/left/16_tree_a4_landscape_numbers_on.svg",
-    "size_bytes": 30521
+    "sizes_bytes": {
+      "pdf": 19193,
+      "png_high": 243573,
+      "png_medium": 105246,
+      "svg": 30538
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
+      "index": 16,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "default",
+      "typography": "default"
+    },
+    "case_id": "16_tree_synoptic_default_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/default/16_synoptic_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 24132,
+      "png_high": 357819,
+      "png_medium": 147985,
+      "svg": 10506
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
       "index": 17,
-      "layout": "tree",
+      "layout": "synoptic_boxes",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "colorblind"
+      "theme": "default",
+      "typography": "radial"
     },
-    "case_id": "17_tree_colorblind_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/colorblind/justify/17_tree_square_numbers_off.svg",
-    "size_bytes": 29900
+    "case_id": "17_tree_synoptic_boxes_default_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/default/17_synoptic_boxes_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/default/17_synoptic_boxes_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/default/17_synoptic_boxes_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/default/17_synoptic_boxes_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19129,
+      "png_high": 359729,
+      "png_medium": 161151,
+      "svg": 27412
+    }
   },
   {
     "case": {
       "background": "#F1F7FB",
+      "document_type": "tree",
       "index": 18,
-      "layout": "synoptic",
+      "layout": "radial",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "colorblind"
+      "theme": "default",
+      "typography": "default"
     },
-    "case_id": "18_synoptic_colorblind_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/colorblind/left/18_synoptic_a4_numbers_on.svg",
-    "size_bytes": 10539
+    "case_id": "18_tree_radial_default_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/default/18_radial_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/default/18_radial_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/default/18_radial_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/default/18_radial_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 35319,
+      "png_high": 597392,
+      "png_medium": 262577,
+      "svg": 27273
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "matrix",
       "index": 19,
-      "layout": "synoptic",
+      "layout": "matrix",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "colorblind"
+      "theme": "default",
+      "typography": "default"
     },
-    "case_id": "19_synoptic_colorblind_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/colorblind/justify/19_synoptic_a4_landscape_numbers_off.svg",
-    "size_bytes": 17527
+    "case_id": "19_matrix_matrix_default_justify_default_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/matrix/default/19_matrix_justify_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 28222,
+      "png_high": 358049,
+      "png_medium": 151692,
+      "svg": 15912
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 20,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "dusk",
+      "typography": "default"
+    },
+    "case_id": "20_tree_tree_dusk_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/dusk/20_tree_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34603,
+      "png_high": 382948,
+      "png_medium": 160244,
+      "svg": 30489
+    }
   },
   {
     "case": {
       "background": "#F8F3FF",
-      "index": 20,
-      "layout": "synoptic_boxes",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "colorblind"
-    },
-    "case_id": "20_synoptic_boxes_colorblind_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/colorblind/left/20_synoptic_boxes_square_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "tree",
       "index": 21,
-      "layout": "synoptic_boxes",
+      "layout": "synoptic",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "colorblind"
+      "theme": "dusk",
+      "typography": "radial"
     },
-    "case_id": "21_synoptic_boxes_colorblind_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/colorblind/justify/21_synoptic_boxes_a4_numbers_off.svg",
-    "size_bytes": 27016
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 22,
-      "layout": "radial",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "colorblind"
+    "case_id": "21_tree_synoptic_dusk_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/dusk/21_synoptic_justify_radial_a4.svg"
     },
-    "case_id": "22_radial_colorblind_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/colorblind/left/22_radial_a4_landscape_numbers_on.svg",
-    "size_bytes": 27784
+    "sizes_bytes": {
+      "pdf": 19680,
+      "png_high": 386639,
+      "png_medium": 176128,
+      "svg": 17964
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
+      "index": 22,
+      "layout": "synoptic_boxes",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "dusk",
+      "typography": "default"
+    },
+    "case_id": "22_tree_synoptic_boxes_dusk_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/dusk/22_synoptic_boxes_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34441,
+      "png_high": 425136,
+      "png_medium": 177121,
+      "svg": 23976
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
       "index": 23,
       "layout": "radial",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "colorblind"
+      "theme": "dusk",
+      "typography": "radial"
     },
-    "case_id": "23_radial_colorblind_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/colorblind/justify/23_radial_square_numbers_off.svg",
-    "size_bytes": 29659
+    "case_id": "23_tree_radial_dusk_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/dusk/23_radial_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/dusk/23_radial_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/dusk/23_radial_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/dusk/23_radial_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19843,
+      "png_high": 456075,
+      "png_medium": 212023,
+      "svg": 29659
+    }
   },
   {
     "case": {
       "background": "#F7F4ED",
+      "document_type": "matrix",
       "index": 24,
-      "layout": "tree",
+      "layout": "matrix",
       "page_size": "a4",
-      "show_node_numbers": true,
+      "show_node_numbers": false,
       "text_align": "left",
-      "theme": "default"
+      "theme": "dusk",
+      "typography": "formal"
     },
-    "case_id": "24_tree_default_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/24_tree_a4_numbers_on.svg",
-    "size_bytes": 30522
+    "case_id": "24_matrix_matrix_dusk_left_formal_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/dusk/24_matrix_left_formal_a4.pdf",
+      "png_high": "tests/end_to_end/output/matrix/dusk/24_matrix_left_formal_a4.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/dusk/24_matrix_left_formal_a4.medium.png",
+      "svg": "tests/end_to_end/output/matrix/dusk/24_matrix_left_formal_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 29481,
+      "png_high": 361021,
+      "png_medium": 163892,
+      "svg": 12744
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 25,
       "layout": "tree",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "default"
+      "theme": "frutal",
+      "typography": "radial"
     },
-    "case_id": "25_tree_default_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/25_tree_a4_landscape_numbers_off.svg",
-    "size_bytes": 29900
+    "case_id": "25_tree_tree_frutal_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/25_tree_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19174,
+      "png_high": 344523,
+      "png_medium": 157575,
+      "svg": 30504
+    }
   },
   {
     "case": {
-      "background": "#F1F7FB",
+      "background": null,
+      "document_type": "tree",
       "index": 26,
       "layout": "synoptic",
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "default"
+      "theme": "frutal",
+      "typography": "default"
     },
-    "case_id": "26_synoptic_default_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/26_synoptic_square_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 27,
-      "layout": "synoptic",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "default"
+    "case_id": "26_tree_synoptic_frutal_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/26_synoptic_left_default_square.svg"
     },
-    "case_id": "27_synoptic_default_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/27_synoptic_a4_numbers_off.svg",
-    "size_bytes": 17529
-  },
-  {
-    "case": {
-      "background": "#F8F3FF",
-      "index": 28,
-      "layout": "synoptic_boxes",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "default"
-    },
-    "case_id": "28_synoptic_boxes_default_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/28_synoptic_boxes_a4_landscape_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 29,
-      "layout": "synoptic_boxes",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "default"
-    },
-    "case_id": "29_synoptic_boxes_default_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/29_synoptic_boxes_square_numbers_off.svg",
-    "size_bytes": 27014
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 30,
-      "layout": "radial",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "default"
-    },
-    "case_id": "30_radial_default_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/default/left/30_radial_a4_numbers_on.svg",
-    "size_bytes": 27361
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 31,
-      "layout": "radial",
-      "page_size": "a4_landscape",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "default"
-    },
-    "case_id": "31_radial_default_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/default/justify/31_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 29662
-  },
-  {
-    "case": {
-      "background": "#F7F4ED",
-      "index": 32,
-      "layout": "tree",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "dusk"
-    },
-    "case_id": "32_tree_dusk_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/dusk/left/32_tree_square_numbers_on.svg",
-    "size_bytes": 30522
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 33,
-      "layout": "tree",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "dusk"
-    },
-    "case_id": "33_tree_dusk_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/dusk/justify/33_tree_a4_numbers_off.svg",
-    "size_bytes": 29900
+    "sizes_bytes": {
+      "pdf": 24113,
+      "png_high": 339691,
+      "png_medium": 142787,
+      "svg": 10506
+    }
   },
   {
     "case": {
       "background": "#F1F7FB",
-      "index": 34,
-      "layout": "synoptic",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "dusk"
+      "document_type": "tree",
+      "index": 27,
+      "layout": "synoptic_boxes",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "frutal",
+      "typography": "radial"
     },
-    "case_id": "34_synoptic_dusk_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/dusk/left/34_synoptic_a4_landscape_numbers_on.svg",
-    "size_bytes": 10539
+    "case_id": "27_tree_synoptic_boxes_frutal_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/27_synoptic_boxes_justify_radial_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19125,
+      "png_high": 437862,
+      "png_medium": 200862,
+      "svg": 27445
+    }
   },
   {
     "case": {
       "background": null,
-      "index": 35,
-      "layout": "synoptic",
+      "document_type": "tree",
+      "index": 28,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "frutal",
+      "typography": "default"
+    },
+    "case_id": "28_tree_radial_frutal_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/frutal/28_radial_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 35369,
+      "png_high": 711369,
+      "png_medium": 326546,
+      "svg": 27638
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "matrix",
+      "index": 29,
+      "layout": "matrix",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "dusk"
+      "theme": "frutal",
+      "typography": "default"
     },
-    "case_id": "35_synoptic_dusk_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/dusk/justify/35_synoptic_square_numbers_off.svg",
-    "size_bytes": 17527
+    "case_id": "29_matrix_matrix_frutal_justify_default_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/frutal/29_matrix_justify_default_square.pdf",
+      "png_high": "tests/end_to_end/output/matrix/frutal/29_matrix_justify_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/frutal/29_matrix_justify_default_square.medium.png",
+      "svg": "tests/end_to_end/output/matrix/frutal/29_matrix_justify_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 28245,
+      "png_high": 394965,
+      "png_medium": 184029,
+      "svg": 17616
+    }
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "document_type": "tree",
+      "index": 30,
+      "layout": "tree",
+      "page_size": "a4",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "jungle",
+      "typography": "default"
+    },
+    "case_id": "30_tree_tree_jungle_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/30_tree_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34545,
+      "png_high": 392907,
+      "png_medium": 162501,
+      "svg": 30522
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 31,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "jungle",
+      "typography": "radial"
+    },
+    "case_id": "31_tree_synoptic_jungle_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/31_synoptic_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19594,
+      "png_high": 331575,
+      "png_medium": 146661,
+      "svg": 17931
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 32,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "jungle",
+      "typography": "default"
+    },
+    "case_id": "32_tree_synoptic_boxes_jungle_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/32_synoptic_boxes_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34281,
+      "png_high": 408233,
+      "png_medium": 171576,
+      "svg": 23976
+    }
+  },
+  {
+    "case": {
+      "background": "#F7F4ED",
+      "document_type": "tree",
+      "index": 33,
+      "layout": "radial",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "jungle",
+      "typography": "radial"
+    },
+    "case_id": "33_tree_radial_jungle_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/jungle/33_radial_justify_radial_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19827,
+      "png_high": 467684,
+      "png_medium": 213936,
+      "svg": 29727
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "matrix",
+      "index": 34,
+      "layout": "matrix",
+      "page_size": "a4_landscape",
+      "show_node_numbers": false,
+      "text_align": "left",
+      "theme": "jungle",
+      "typography": "formal"
+    },
+    "case_id": "34_matrix_matrix_jungle_left_formal_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/matrix/jungle/34_matrix_left_formal_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 29261,
+      "png_high": 306559,
+      "png_medium": 125279,
+      "svg": 10477
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 35,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "minimal",
+      "typography": "radial"
+    },
+    "case_id": "35_tree_tree_minimal_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/35_tree_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19119,
+      "png_high": 230242,
+      "png_medium": 100989,
+      "svg": 30506
+    }
   },
   {
     "case": {
       "background": "#F8F3FF",
+      "document_type": "tree",
       "index": 36,
-      "layout": "synoptic_boxes",
+      "layout": "synoptic",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "dusk"
+      "theme": "minimal",
+      "typography": "default"
     },
-    "case_id": "36_synoptic_boxes_dusk_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/dusk/left/36_synoptic_boxes_a4_numbers_on.svg",
-    "size_bytes": 24009
+    "case_id": "36_tree_synoptic_minimal_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/36_synoptic_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 24107,
+      "png_high": 457646,
+      "png_medium": 191656,
+      "svg": 10539
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 37,
       "layout": "synoptic_boxes",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "dusk"
+      "theme": "minimal",
+      "typography": "radial"
     },
-    "case_id": "37_synoptic_boxes_dusk_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/dusk/justify/37_synoptic_boxes_a4_landscape_numbers_off.svg",
-    "size_bytes": 27014
+    "case_id": "37_tree_synoptic_boxes_minimal_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/37_synoptic_boxes_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19056,
+      "png_high": 372025,
+      "png_medium": 165025,
+      "svg": 27412
+    }
   },
   {
     "case": {
-      "background": "#F4F9F1",
+      "background": null,
+      "document_type": "tree",
       "index": 38,
       "layout": "radial",
       "page_size": "square",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "dusk"
+      "theme": "minimal",
+      "typography": "default"
     },
-    "case_id": "38_radial_dusk_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/dusk/left/38_radial_square_numbers_on.svg",
-    "size_bytes": 27386
+    "case_id": "38_tree_radial_minimal_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/minimal/38_radial_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 35254,
+      "png_high": 582203,
+      "png_medium": 256265,
+      "svg": 27275
+    }
+  },
+  {
+    "case": {
+      "background": "#F4F9F1",
+      "document_type": "matrix",
+      "index": 39,
+      "layout": "matrix",
+      "page_size": "a4",
+      "show_node_numbers": false,
+      "text_align": "justify",
+      "theme": "minimal",
+      "typography": "default"
+    },
+    "case_id": "39_matrix_matrix_minimal_justify_default_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/matrix/minimal/39_matrix_justify_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 28262,
+      "png_high": 402026,
+      "png_medium": 185419,
+      "svg": 17649
+    }
   },
   {
     "case": {
       "background": null,
-      "index": 39,
-      "layout": "radial",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "dusk"
-    },
-    "case_id": "39_radial_dusk_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/dusk/justify/39_radial_a4_numbers_off.svg",
-    "size_bytes": 29694
-  },
-  {
-    "case": {
-      "background": "#F7F4ED",
+      "document_type": "tree",
       "index": 40,
       "layout": "tree",
       "page_size": "a4_landscape",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "frutal"
+      "theme": "neon",
+      "typography": "default"
     },
-    "case_id": "40_tree_frutal_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/40_tree_a4_landscape_numbers_on.svg",
-    "size_bytes": 30521
+    "case_id": "40_tree_tree_neon_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/40_tree_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34392,
+      "png_high": 537003,
+      "png_medium": 229844,
+      "svg": 30488
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 41,
-      "layout": "tree",
+      "layout": "synoptic",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "neon",
+      "typography": "radial"
     },
-    "case_id": "41_tree_frutal_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/41_tree_square_numbers_off.svg",
-    "size_bytes": 29900
+    "case_id": "41_tree_synoptic_neon_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/41_synoptic_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19570,
+      "png_high": 311069,
+      "png_medium": 138121,
+      "svg": 17931
+    }
   },
   {
     "case": {
       "background": "#F1F7FB",
+      "document_type": "tree",
       "index": 42,
-      "layout": "synoptic",
+      "layout": "synoptic_boxes",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "frutal"
+      "theme": "neon",
+      "typography": "default"
     },
-    "case_id": "42_synoptic_frutal_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/42_synoptic_a4_numbers_on.svg",
-    "size_bytes": 10539
+    "case_id": "42_tree_synoptic_boxes_neon_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/42_synoptic_boxes_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34293,
+      "png_high": 547031,
+      "png_medium": 230786,
+      "svg": 24009
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 43,
-      "layout": "synoptic",
+      "layout": "radial",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "neon",
+      "typography": "radial"
     },
-    "case_id": "43_synoptic_frutal_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/43_synoptic_a4_landscape_numbers_off.svg",
-    "size_bytes": 17527
+    "case_id": "43_tree_radial_neon_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/neon/43_radial_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19824,
+      "png_high": 610896,
+      "png_medium": 284910,
+      "svg": 29662
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "matrix",
+      "index": 44,
+      "layout": "matrix",
+      "page_size": "square",
+      "show_node_numbers": false,
+      "text_align": "left",
+      "theme": "neon",
+      "typography": "formal"
+    },
+    "case_id": "44_matrix_matrix_neon_left_formal_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/neon/44_matrix_left_formal_square.pdf",
+      "png_high": "tests/end_to_end/output/matrix/neon/44_matrix_left_formal_square.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/neon/44_matrix_left_formal_square.medium.png",
+      "svg": "tests/end_to_end/output/matrix/neon/44_matrix_left_formal_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 29281,
+      "png_high": 348794,
+      "png_medium": 161246,
+      "svg": 12711
+    }
   },
   {
     "case": {
       "background": "#F8F3FF",
-      "index": 44,
-      "layout": "synoptic_boxes",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "frutal"
-    },
-    "case_id": "44_synoptic_boxes_frutal_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/44_synoptic_boxes_square_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "tree",
       "index": 45,
-      "layout": "synoptic_boxes",
+      "layout": "tree",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "ocean",
+      "typography": "radial"
     },
-    "case_id": "45_synoptic_boxes_frutal_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/45_synoptic_boxes_a4_numbers_off.svg",
-    "size_bytes": 27016
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 46,
-      "layout": "radial",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "frutal"
+    "case_id": "45_tree_tree_ocean_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/45_tree_justify_radial_a4.svg"
     },
-    "case_id": "46_radial_frutal_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/frutal/left/46_radial_a4_landscape_numbers_on.svg",
-    "size_bytes": 27784
+    "sizes_bytes": {
+      "pdf": 19178,
+      "png_high": 243022,
+      "png_medium": 104969,
+      "svg": 30538
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
+      "index": 46,
+      "layout": "synoptic",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "ocean",
+      "typography": "default"
+    },
+    "case_id": "46_tree_synoptic_ocean_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/46_synoptic_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 24131,
+      "png_high": 357313,
+      "png_medium": 147580,
+      "svg": 10506
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
       "index": 47,
-      "layout": "radial",
+      "layout": "synoptic_boxes",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "frutal"
+      "theme": "ocean",
+      "typography": "radial"
     },
-    "case_id": "47_radial_frutal_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/frutal/justify/47_radial_square_numbers_off.svg",
-    "size_bytes": 29659
+    "case_id": "47_tree_synoptic_boxes_ocean_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/47_synoptic_boxes_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19124,
+      "png_high": 359044,
+      "png_medium": 161130,
+      "svg": 27412
+    }
   },
   {
     "case": {
       "background": "#F7F4ED",
+      "document_type": "tree",
       "index": 48,
-      "layout": "tree",
+      "layout": "radial",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "jungle"
+      "theme": "ocean",
+      "typography": "default"
     },
-    "case_id": "48_tree_jungle_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/48_tree_a4_numbers_on.svg",
-    "size_bytes": 30522
+    "case_id": "48_tree_radial_ocean_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/ocean/48_radial_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 35316,
+      "png_high": 595331,
+      "png_medium": 261947,
+      "svg": 27273
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "matrix",
       "index": 49,
-      "layout": "tree",
+      "layout": "matrix",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "ocean",
+      "typography": "default"
     },
-    "case_id": "49_tree_jungle_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/49_tree_a4_landscape_numbers_off.svg",
-    "size_bytes": 29900
+    "case_id": "49_matrix_matrix_ocean_justify_default_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/ocean/49_matrix_justify_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/matrix/ocean/49_matrix_justify_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/ocean/49_matrix_justify_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/matrix/ocean/49_matrix_justify_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 28223,
+      "png_high": 357292,
+      "png_medium": 152205,
+      "svg": 15912
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 50,
+      "layout": "tree",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "pastel",
+      "typography": "default"
+    },
+    "case_id": "50_tree_tree_pastel_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/pastel/50_tree_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/pastel/50_tree_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/pastel/50_tree_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/pastel/50_tree_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34437,
+      "png_high": 381937,
+      "png_medium": 159456,
+      "svg": 30489
+    }
   },
   {
     "case": {
       "background": "#F1F7FB",
-      "index": 50,
-      "layout": "synoptic",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "jungle"
-    },
-    "case_id": "50_synoptic_jungle_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/50_synoptic_square_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "tree",
       "index": 51,
       "layout": "synoptic",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "pastel",
+      "typography": "radial"
     },
-    "case_id": "51_synoptic_jungle_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/51_synoptic_a4_numbers_off.svg",
-    "size_bytes": 17529
+    "case_id": "51_tree_synoptic_pastel_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/pastel/51_synoptic_justify_radial_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19587,
+      "png_high": 388097,
+      "png_medium": 176988,
+      "svg": 17964
+    }
   },
   {
     "case": {
-      "background": "#F8F3FF",
+      "background": null,
+      "document_type": "tree",
       "index": 52,
       "layout": "synoptic_boxes",
       "page_size": "a4_landscape",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "jungle"
+      "theme": "pastel",
+      "typography": "default"
     },
-    "case_id": "52_synoptic_boxes_jungle_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/52_synoptic_boxes_a4_landscape_numbers_on.svg",
-    "size_bytes": 24009
+    "case_id": "52_tree_synoptic_boxes_pastel_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/pastel/52_synoptic_boxes_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34281,
+      "png_high": 423243,
+      "png_medium": 175555,
+      "svg": 23976
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 53,
-      "layout": "synoptic_boxes",
+      "layout": "radial",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "pastel",
+      "typography": "radial"
     },
-    "case_id": "53_synoptic_boxes_jungle_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/53_synoptic_boxes_square_numbers_off.svg",
-    "size_bytes": 27014
+    "case_id": "53_tree_radial_pastel_justify_radial_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/pastel/53_radial_justify_radial_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19735,
+      "png_high": 455313,
+      "png_medium": 211391,
+      "svg": 29659
+    }
   },
   {
     "case": {
       "background": "#F4F9F1",
+      "document_type": "matrix",
       "index": 54,
-      "layout": "radial",
+      "layout": "matrix",
       "page_size": "a4",
-      "show_node_numbers": true,
+      "show_node_numbers": false,
       "text_align": "left",
-      "theme": "jungle"
+      "theme": "pastel",
+      "typography": "formal"
     },
-    "case_id": "54_radial_jungle_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/jungle/left/54_radial_a4_numbers_on.svg",
-    "size_bytes": 27361
+    "case_id": "54_matrix_matrix_pastel_left_formal_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.pdf",
+      "png_high": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.medium.png",
+      "svg": "tests/end_to_end/output/matrix/pastel/54_matrix_left_formal_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 29310,
+      "png_high": 360177,
+      "png_medium": 163608,
+      "svg": 12744
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 55,
-      "layout": "radial",
+      "layout": "tree",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "jungle"
+      "theme": "sepia",
+      "typography": "radial"
     },
-    "case_id": "55_radial_jungle_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/jungle/justify/55_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 29662
+    "case_id": "55_tree_tree_sepia_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/sepia/55_tree_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/sepia/55_tree_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/sepia/55_tree_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/sepia/55_tree_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19153,
+      "png_high": 343080,
+      "png_medium": 157012,
+      "svg": 30504
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 56,
+      "layout": "synoptic",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "sepia",
+      "typography": "default"
+    },
+    "case_id": "56_tree_synoptic_sepia_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/sepia/56_synoptic_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/sepia/56_synoptic_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/sepia/56_synoptic_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/sepia/56_synoptic_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 24096,
+      "png_high": 340734,
+      "png_medium": 143305,
+      "svg": 10506
+    }
   },
   {
     "case": {
       "background": "#F7F4ED",
-      "index": 56,
-      "layout": "tree",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "minimal"
-    },
-    "case_id": "56_tree_minimal_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/minimal/left/56_tree_square_numbers_on.svg",
-    "size_bytes": 30522
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "tree",
       "index": 57,
-      "layout": "tree",
+      "layout": "synoptic_boxes",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "minimal"
+      "theme": "sepia",
+      "typography": "radial"
     },
-    "case_id": "57_tree_minimal_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/minimal/justify/57_tree_a4_numbers_off.svg",
-    "size_bytes": 29900
-  },
-  {
-    "case": {
-      "background": "#F1F7FB",
-      "index": 58,
-      "layout": "synoptic",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "minimal"
+    "case_id": "57_tree_synoptic_boxes_sepia_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/sepia/57_synoptic_boxes_justify_radial_a4.svg"
     },
-    "case_id": "58_synoptic_minimal_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/minimal/left/58_synoptic_a4_landscape_numbers_on.svg",
-    "size_bytes": 10539
+    "sizes_bytes": {
+      "pdf": 19116,
+      "png_high": 436558,
+      "png_medium": 201214,
+      "svg": 27445
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
+      "index": 58,
+      "layout": "radial",
+      "page_size": "a4_landscape",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "sepia",
+      "typography": "default"
+    },
+    "case_id": "58_tree_radial_sepia_left_default_a4_landscape_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/sepia/58_radial_left_default_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 35349,
+      "png_high": 713592,
+      "png_medium": 328005,
+      "svg": 27638
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "matrix",
       "index": 59,
-      "layout": "synoptic",
+      "layout": "matrix",
       "page_size": "square",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "minimal"
+      "theme": "sepia",
+      "typography": "default"
     },
-    "case_id": "59_synoptic_minimal_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/minimal/justify/59_synoptic_square_numbers_off.svg",
-    "size_bytes": 17527
+    "case_id": "59_matrix_matrix_sepia_justify_default_square_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.pdf",
+      "png_high": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.medium.png",
+      "svg": "tests/end_to_end/output/matrix/sepia/59_matrix_justify_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 28255,
+      "png_high": 396481,
+      "png_medium": 184870,
+      "svg": 17616
+    }
   },
   {
     "case": {
       "background": "#F8F3FF",
+      "document_type": "tree",
       "index": 60,
-      "layout": "synoptic_boxes",
+      "layout": "tree",
       "page_size": "a4",
       "show_node_numbers": true,
       "text_align": "left",
-      "theme": "minimal"
+      "theme": "terracotta",
+      "typography": "default"
     },
-    "case_id": "60_synoptic_boxes_minimal_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/minimal/left/60_synoptic_boxes_a4_numbers_on.svg",
-    "size_bytes": 24009
+    "case_id": "60_tree_tree_terracotta_left_default_a4_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/terracotta/60_tree_left_default_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34563,
+      "png_high": 393660,
+      "png_medium": 162960,
+      "svg": 30522
+    }
   },
   {
     "case": {
       "background": null,
+      "document_type": "tree",
       "index": 61,
-      "layout": "synoptic_boxes",
+      "layout": "synoptic",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "minimal"
+      "theme": "terracotta",
+      "typography": "radial"
     },
-    "case_id": "61_synoptic_boxes_minimal_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/minimal/justify/61_synoptic_boxes_a4_landscape_numbers_off.svg",
-    "size_bytes": 27014
+    "case_id": "61_tree_synoptic_terracotta_justify_radial_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/terracotta/61_synoptic_justify_radial_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/tree/terracotta/61_synoptic_justify_radial_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/tree/terracotta/61_synoptic_justify_radial_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/tree/terracotta/61_synoptic_justify_radial_a4_landscape.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19616,
+      "png_high": 330292,
+      "png_medium": 146052,
+      "svg": 17931
+    }
+  },
+  {
+    "case": {
+      "background": null,
+      "document_type": "tree",
+      "index": 62,
+      "layout": "synoptic_boxes",
+      "page_size": "square",
+      "show_node_numbers": true,
+      "text_align": "left",
+      "theme": "terracotta",
+      "typography": "default"
+    },
+    "case_id": "62_tree_synoptic_boxes_terracotta_left_default_square_numbers_on",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/terracotta/62_synoptic_boxes_left_default_square.pdf",
+      "png_high": "tests/end_to_end/output/tree/terracotta/62_synoptic_boxes_left_default_square.high.png",
+      "png_medium": "tests/end_to_end/output/tree/terracotta/62_synoptic_boxes_left_default_square.medium.png",
+      "svg": "tests/end_to_end/output/tree/terracotta/62_synoptic_boxes_left_default_square.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 34300,
+      "png_high": 408496,
+      "png_medium": 171873,
+      "svg": 23976
+    }
   },
   {
     "case": {
       "background": "#F4F9F1",
-      "index": 62,
-      "layout": "radial",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "minimal"
-    },
-    "case_id": "62_radial_minimal_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/minimal/left/62_radial_square_numbers_on.svg",
-    "size_bytes": 27386
-  },
-  {
-    "case": {
-      "background": null,
+      "document_type": "tree",
       "index": 63,
       "layout": "radial",
       "page_size": "a4",
       "show_node_numbers": false,
       "text_align": "justify",
-      "theme": "minimal"
+      "theme": "terracotta",
+      "typography": "radial"
     },
-    "case_id": "63_radial_minimal_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/minimal/justify/63_radial_a4_numbers_off.svg",
-    "size_bytes": 29694
+    "case_id": "63_tree_radial_terracotta_justify_radial_a4_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.pdf",
+      "png_high": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.high.png",
+      "png_medium": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.medium.png",
+      "svg": "tests/end_to_end/output/tree/terracotta/63_radial_justify_radial_a4.svg"
+    },
+    "sizes_bytes": {
+      "pdf": 19870,
+      "png_high": 466839,
+      "png_medium": 213499,
+      "svg": 29727
+    }
   },
   {
     "case": {
-      "background": "#F7F4ED",
+      "background": null,
+      "document_type": "matrix",
       "index": 64,
-      "layout": "tree",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "neon"
-    },
-    "case_id": "64_tree_neon_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/neon/left/64_tree_a4_landscape_numbers_on.svg",
-    "size_bytes": 30521
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 65,
-      "layout": "tree",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "neon"
-    },
-    "case_id": "65_tree_neon_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/neon/justify/65_tree_square_numbers_off.svg",
-    "size_bytes": 29900
-  },
-  {
-    "case": {
-      "background": "#F1F7FB",
-      "index": 66,
-      "layout": "synoptic",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "neon"
-    },
-    "case_id": "66_synoptic_neon_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/neon/left/66_synoptic_a4_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 67,
-      "layout": "synoptic",
+      "layout": "matrix",
       "page_size": "a4_landscape",
       "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "neon"
-    },
-    "case_id": "67_synoptic_neon_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/neon/justify/67_synoptic_a4_landscape_numbers_off.svg",
-    "size_bytes": 17527
-  },
-  {
-    "case": {
-      "background": "#F8F3FF",
-      "index": 68,
-      "layout": "synoptic_boxes",
-      "page_size": "square",
-      "show_node_numbers": true,
       "text_align": "left",
-      "theme": "neon"
+      "theme": "terracotta",
+      "typography": "formal"
     },
-    "case_id": "68_synoptic_boxes_neon_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/neon/left/68_synoptic_boxes_square_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 69,
-      "layout": "synoptic_boxes",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "neon"
+    "case_id": "64_matrix_matrix_terracotta_left_formal_a4_landscape_numbers_off",
+    "outputs": {
+      "pdf": "tests/end_to_end/output/matrix/terracotta/64_matrix_left_formal_a4_landscape.pdf",
+      "png_high": "tests/end_to_end/output/matrix/terracotta/64_matrix_left_formal_a4_landscape.high.png",
+      "png_medium": "tests/end_to_end/output/matrix/terracotta/64_matrix_left_formal_a4_landscape.medium.png",
+      "svg": "tests/end_to_end/output/matrix/terracotta/64_matrix_left_formal_a4_landscape.svg"
     },
-    "case_id": "69_synoptic_boxes_neon_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/neon/justify/69_synoptic_boxes_a4_numbers_off.svg",
-    "size_bytes": 27016
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 70,
-      "layout": "radial",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "neon"
-    },
-    "case_id": "70_radial_neon_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/neon/left/70_radial_a4_landscape_numbers_on.svg",
-    "size_bytes": 27784
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 71,
-      "layout": "radial",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "neon"
-    },
-    "case_id": "71_radial_neon_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/neon/justify/71_radial_square_numbers_off.svg",
-    "size_bytes": 29659
-  },
-  {
-    "case": {
-      "background": "#F7F4ED",
-      "index": 72,
-      "layout": "tree",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "ocean"
-    },
-    "case_id": "72_tree_ocean_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/ocean/left/72_tree_a4_numbers_on.svg",
-    "size_bytes": 30522
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 73,
-      "layout": "tree",
-      "page_size": "a4_landscape",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "ocean"
-    },
-    "case_id": "73_tree_ocean_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/ocean/justify/73_tree_a4_landscape_numbers_off.svg",
-    "size_bytes": 29900
-  },
-  {
-    "case": {
-      "background": "#F1F7FB",
-      "index": 74,
-      "layout": "synoptic",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "ocean"
-    },
-    "case_id": "74_synoptic_ocean_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/ocean/left/74_synoptic_square_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 75,
-      "layout": "synoptic",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "ocean"
-    },
-    "case_id": "75_synoptic_ocean_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/ocean/justify/75_synoptic_a4_numbers_off.svg",
-    "size_bytes": 17529
-  },
-  {
-    "case": {
-      "background": "#F8F3FF",
-      "index": 76,
-      "layout": "synoptic_boxes",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "ocean"
-    },
-    "case_id": "76_synoptic_boxes_ocean_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/ocean/left/76_synoptic_boxes_a4_landscape_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 77,
-      "layout": "synoptic_boxes",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "ocean"
-    },
-    "case_id": "77_synoptic_boxes_ocean_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/ocean/justify/77_synoptic_boxes_square_numbers_off.svg",
-    "size_bytes": 27014
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 78,
-      "layout": "radial",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "ocean"
-    },
-    "case_id": "78_radial_ocean_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/ocean/left/78_radial_a4_numbers_on.svg",
-    "size_bytes": 27361
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 79,
-      "layout": "radial",
-      "page_size": "a4_landscape",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "ocean"
-    },
-    "case_id": "79_radial_ocean_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/ocean/justify/79_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 29662
-  },
-  {
-    "case": {
-      "background": "#F7F4ED",
-      "index": 80,
-      "layout": "tree",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "pastel"
-    },
-    "case_id": "80_tree_pastel_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/pastel/left/80_tree_square_numbers_on.svg",
-    "size_bytes": 30522
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 81,
-      "layout": "tree",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "pastel"
-    },
-    "case_id": "81_tree_pastel_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/pastel/justify/81_tree_a4_numbers_off.svg",
-    "size_bytes": 29900
-  },
-  {
-    "case": {
-      "background": "#F1F7FB",
-      "index": 82,
-      "layout": "synoptic",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "pastel"
-    },
-    "case_id": "82_synoptic_pastel_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/pastel/left/82_synoptic_a4_landscape_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 83,
-      "layout": "synoptic",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "pastel"
-    },
-    "case_id": "83_synoptic_pastel_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/pastel/justify/83_synoptic_square_numbers_off.svg",
-    "size_bytes": 17527
-  },
-  {
-    "case": {
-      "background": "#F8F3FF",
-      "index": 84,
-      "layout": "synoptic_boxes",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "pastel"
-    },
-    "case_id": "84_synoptic_boxes_pastel_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/pastel/left/84_synoptic_boxes_a4_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 85,
-      "layout": "synoptic_boxes",
-      "page_size": "a4_landscape",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "pastel"
-    },
-    "case_id": "85_synoptic_boxes_pastel_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/pastel/justify/85_synoptic_boxes_a4_landscape_numbers_off.svg",
-    "size_bytes": 27014
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 86,
-      "layout": "radial",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "pastel"
-    },
-    "case_id": "86_radial_pastel_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/pastel/left/86_radial_square_numbers_on.svg",
-    "size_bytes": 27386
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 87,
-      "layout": "radial",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "pastel"
-    },
-    "case_id": "87_radial_pastel_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/pastel/justify/87_radial_a4_numbers_off.svg",
-    "size_bytes": 29694
-  },
-  {
-    "case": {
-      "background": "#F7F4ED",
-      "index": 88,
-      "layout": "tree",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "sepia"
-    },
-    "case_id": "88_tree_sepia_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/sepia/left/88_tree_a4_landscape_numbers_on.svg",
-    "size_bytes": 30521
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 89,
-      "layout": "tree",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "sepia"
-    },
-    "case_id": "89_tree_sepia_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/sepia/justify/89_tree_square_numbers_off.svg",
-    "size_bytes": 29900
-  },
-  {
-    "case": {
-      "background": "#F1F7FB",
-      "index": 90,
-      "layout": "synoptic",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "sepia"
-    },
-    "case_id": "90_synoptic_sepia_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/sepia/left/90_synoptic_a4_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 91,
-      "layout": "synoptic",
-      "page_size": "a4_landscape",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "sepia"
-    },
-    "case_id": "91_synoptic_sepia_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/sepia/justify/91_synoptic_a4_landscape_numbers_off.svg",
-    "size_bytes": 17527
-  },
-  {
-    "case": {
-      "background": "#F8F3FF",
-      "index": 92,
-      "layout": "synoptic_boxes",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "sepia"
-    },
-    "case_id": "92_synoptic_boxes_sepia_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/sepia/left/92_synoptic_boxes_square_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 93,
-      "layout": "synoptic_boxes",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "sepia"
-    },
-    "case_id": "93_synoptic_boxes_sepia_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/sepia/justify/93_synoptic_boxes_a4_numbers_off.svg",
-    "size_bytes": 27016
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 94,
-      "layout": "radial",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "sepia"
-    },
-    "case_id": "94_radial_sepia_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/sepia/left/94_radial_a4_landscape_numbers_on.svg",
-    "size_bytes": 27784
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 95,
-      "layout": "radial",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "sepia"
-    },
-    "case_id": "95_radial_sepia_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/sepia/justify/95_radial_square_numbers_off.svg",
-    "size_bytes": 29659
-  },
-  {
-    "case": {
-      "background": "#F7F4ED",
-      "index": 96,
-      "layout": "tree",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "terracotta"
-    },
-    "case_id": "96_tree_terracotta_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/96_tree_a4_numbers_on.svg",
-    "size_bytes": 30522
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 97,
-      "layout": "tree",
-      "page_size": "a4_landscape",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "terracotta"
-    },
-    "case_id": "97_tree_terracotta_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/97_tree_a4_landscape_numbers_off.svg",
-    "size_bytes": 29900
-  },
-  {
-    "case": {
-      "background": "#F1F7FB",
-      "index": 98,
-      "layout": "synoptic",
-      "page_size": "square",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "terracotta"
-    },
-    "case_id": "98_synoptic_terracotta_left_square_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/98_synoptic_square_numbers_on.svg",
-    "size_bytes": 10539
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 99,
-      "layout": "synoptic",
-      "page_size": "a4",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "terracotta"
-    },
-    "case_id": "99_synoptic_terracotta_justify_a4_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/99_synoptic_a4_numbers_off.svg",
-    "size_bytes": 17529
-  },
-  {
-    "case": {
-      "background": "#F8F3FF",
-      "index": 100,
-      "layout": "synoptic_boxes",
-      "page_size": "a4_landscape",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "terracotta"
-    },
-    "case_id": "100_synoptic_boxes_terracotta_left_a4_landscape_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/100_synoptic_boxes_a4_landscape_numbers_on.svg",
-    "size_bytes": 24009
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 101,
-      "layout": "synoptic_boxes",
-      "page_size": "square",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "terracotta"
-    },
-    "case_id": "101_synoptic_boxes_terracotta_justify_square_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/101_synoptic_boxes_square_numbers_off.svg",
-    "size_bytes": 27014
-  },
-  {
-    "case": {
-      "background": "#F4F9F1",
-      "index": 102,
-      "layout": "radial",
-      "page_size": "a4",
-      "show_node_numbers": true,
-      "text_align": "left",
-      "theme": "terracotta"
-    },
-    "case_id": "102_radial_terracotta_left_a4_numbers_on",
-    "output_svg": "tests/end_to_end/output/terracotta/left/102_radial_a4_numbers_on.svg",
-    "size_bytes": 27361
-  },
-  {
-    "case": {
-      "background": null,
-      "index": 103,
-      "layout": "radial",
-      "page_size": "a4_landscape",
-      "show_node_numbers": false,
-      "text_align": "justify",
-      "theme": "terracotta"
-    },
-    "case_id": "103_radial_terracotta_justify_a4_landscape_numbers_off",
-    "output_svg": "tests/end_to_end/output/terracotta/justify/103_radial_a4_landscape_numbers_off.svg",
-    "size_bytes": 29662
+    "sizes_bytes": {
+      "pdf": 29271,
+      "png_high": 307411,
+      "png_medium": 125745,
+      "svg": 10477
+    }
   }
 ]

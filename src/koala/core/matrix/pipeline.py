@@ -1,8 +1,4 @@
-"""Pipeline para documentos jerarquicos tipo `tree`.
-
-Este pipeline encapsula la semantica historica de Koala: parsear nodos
-jerarquicos, aplicar un layout exclusivo de arbol y producir el SVG canonico.
-"""
+"""Pipeline para documentos comparativos tipo `matrix`."""
 
 from __future__ import annotations
 
@@ -10,56 +6,68 @@ from pathlib import Path
 from typing import Literal
 
 from koala.config import KoalaUserConfig
-from koala.core.tree.models import ParsedDocument
-from koala.core.tree.parser import parse_concept_text
+from koala.core.matrix.models import ParsedMatrixDocument
+from koala.core.matrix.parser import parse_matrix_text
 from koala.core.shared.errors import DocumentTypeMismatchError
-from koala.layout.tree.registry import TREE_LAYOUTS
-from koala.layout.tree.models import TreeLayoutKind
-from koala.render.tree.context import TreeRenderContextBuilder
+from koala.layout.matrix.registry import MATRIX_LAYOUTS
+from koala.render.matrix.context import MATRIX_TYPOGRAPHIES
+from koala.render.matrix.context import MatrixRenderContextBuilder
+from koala.render.matrix.svg_render import render_matrix_svg
 from koala.render.shared.context import MetadataValueResolver
 from koala.render.shared.models import RenderContext, RenderResult, SvgRenderRequest
-from koala.render.shared.settings import DEFAULT_LAYOUT_KIND
-from koala.render.tree.svg_render import render_tree_svg
 
 
-TreeDocumentType = Literal["tree"]
+MatrixDocumentType = Literal["matrix"]
 
 
-class TreeDocumentPipeline:
-    """Implementacion del flujo para documentos jerarquicos."""
+class MatrixDocumentPipeline:
+    """Implementacion del flujo para cuadros comparativos."""
 
-    type_name: TreeDocumentType = "tree"
-    supported_layouts: tuple[TreeLayoutKind, ...] = TREE_LAYOUTS
+    type_name: MatrixDocumentType = "matrix"
+    supported_layouts = MATRIX_LAYOUTS
 
-    def parse(self, source_text: str) -> ParsedDocument:
-        self._raise_if_known_non_tree_syntax(source_text)
-        parsed = parse_concept_text(source_text)
-        if not parsed.root_nodes:
+    def parse(self, source_text: str) -> ParsedMatrixDocument:
+        self._raise_if_known_tree_syntax(source_text)
+        parsed = parse_matrix_text(source_text)
+        if not parsed.title:
             raise DocumentTypeMismatchError(
                 expected_type=self.type_name,
                 line_no=None,
                 line="",
-                reason="se esperaba al menos una linea de nodo jerarquico como '1 Titulo'",
+                reason="se esperaba una linea inicial como 'matrix:: Titulo'",
+            )
+        if len(parsed.columns) < 2:
+            raise DocumentTypeMismatchError(
+                expected_type=self.type_name,
+                line_no=None,
+                line="",
+                reason="se esperaban al menos dos columnas con 'columns:: A | B'",
+            )
+        if not parsed.rows:
+            raise DocumentTypeMismatchError(
+                expected_type=self.type_name,
+                line_no=None,
+                line="",
+                reason="se esperaba al menos una fila con 'row:: ... | ...'",
             )
         return parsed
 
     def resolve_output_file_name(
         self,
-        parsed: ParsedDocument,
+        parsed: ParsedMatrixDocument,
         *,
         stem: str,
-        layout: TreeLayoutKind | None,
+        layout,
         user_config: KoalaUserConfig,
     ) -> str:
-        sanitized_stem = stem.strip() or "concept_map"
+        sanitized_stem = stem.strip() or "comparison_matrix"
         if sanitized_stem.lower().endswith(".svg"):
             return sanitized_stem
-
         resolved_layout = (
             layout
             or MetadataValueResolver.resolve_value(parsed.metadata, "layout")
-            or user_config.default_layout
-            or DEFAULT_LAYOUT_KIND
+            or self._valid_default_layout(user_config.default_layout)
+            or "matrix"
         )
         return f"{sanitized_stem}.{resolved_layout}.svg"
 
@@ -73,7 +81,7 @@ class TreeDocumentPipeline:
         output_dir_name: str | None,
         output_file_name: str | None,
         default_output_dir_name: str | None,
-        layout: TreeLayoutKind | None,
+        layout,
         theme_name: str | None,
         typography_name: str | None,
         page_size_name: str | None,
@@ -103,7 +111,7 @@ class TreeDocumentPipeline:
 
     def render_parsed(
         self,
-        parsed: ParsedDocument,
+        parsed: ParsedMatrixDocument,
         *,
         base_dir: Path,
         persist_output: bool,
@@ -111,7 +119,7 @@ class TreeDocumentPipeline:
         output_dir_name: str | None,
         output_file_name: str | None,
         default_output_dir_name: str | None,
-        layout: TreeLayoutKind | None,
+        layout,
         theme_name: str | None,
         typography_name: str | None,
         page_size_name: str | None,
@@ -121,7 +129,7 @@ class TreeDocumentPipeline:
         user_config: KoalaUserConfig,
     ) -> RenderResult:
         request = SvgRenderRequest(
-            parsed=parsed,
+            parsed=parsed,  # type: ignore[arg-type]
             base_dir=base_dir,
             persist_output=persist_output,
             output_svg_path=output_svg_path,
@@ -135,21 +143,21 @@ class TreeDocumentPipeline:
             text_align=text_align,
             show_node_numbers=show_node_numbers,
             background_color=background_color,
-            default_layout_kind=user_config.default_layout,
+            default_layout_kind=self._valid_default_layout(user_config.default_layout),
             default_theme_name=user_config.default_theme,
-            default_typography_name=user_config.default_typography,
+            default_typography_name=self._valid_default_typography(user_config.default_typography),
             default_page_size_name=user_config.default_size,
             default_text_align=user_config.default_text_align,
-            default_show_node_numbers=user_config.default_show_node_numbers,
+            default_show_node_numbers=False,
             document_type=self.type_name,
         )
-        return render_tree_svg(request)
+        return render_matrix_svg(request)
 
     def inspect_text(
         self,
         source_text: str,
         *,
-        layout: TreeLayoutKind | None,
+        layout,
         theme_name: str | None,
         typography_name: str | None,
         page_size_name: str | None,
@@ -159,7 +167,7 @@ class TreeDocumentPipeline:
         user_config: KoalaUserConfig,
     ) -> RenderContext:
         parsed = self.parse(source_text)
-        return TreeRenderContextBuilder.build(
+        return MatrixRenderContextBuilder.build(
             parsed,
             layout_kind=layout,
             theme_name=theme_name,
@@ -168,32 +176,35 @@ class TreeDocumentPipeline:
             text_align=text_align,
             show_node_numbers=show_node_numbers,
             background_color=background_color,
-            default_layout_kind=user_config.default_layout,
+            default_layout_kind=self._valid_default_layout(user_config.default_layout),
             default_theme_name=user_config.default_theme,
-            default_typography_name=user_config.default_typography,
+            default_typography_name=self._valid_default_typography(user_config.default_typography),
             default_page_size_name=user_config.default_size,
             default_text_align=user_config.default_text_align,
-            default_show_node_numbers=user_config.default_show_node_numbers,
+            default_show_node_numbers=False,
         )
 
     @staticmethod
-    def _raise_if_known_non_tree_syntax(source_text: str) -> None:
-        matrix_markers = ("matrix::", "columns::", "row::", "footer::")
-        flowchart_markers = ("flowchart::", "step::", "decision::")
+    def _valid_default_layout(layout: str | None) -> str | None:
+        return layout if layout in MATRIX_LAYOUTS else None
+
+    @staticmethod
+    def _valid_default_typography(typography: str | None) -> str | None:
+        return typography if typography in MATRIX_TYPOGRAPHIES else None
+
+    @staticmethod
+    def _raise_if_known_tree_syntax(source_text: str) -> None:
         for line_no, raw_line in enumerate(source_text.splitlines(), start=1):
             stripped = raw_line.strip()
+            if not stripped or stripped.startswith("@"):
+                continue
             lowered = stripped.lower()
-            if lowered.startswith(matrix_markers):
+            if lowered.startswith(("matrix::", "columns::", "row::", "footer::")):
+                return
+            if stripped[0].isdigit() or "::" in stripped and any(ch.isdigit() for ch in stripped):
                 raise DocumentTypeMismatchError(
-                    expected_type="tree",
+                    expected_type="matrix",
                     line_no=line_no,
                     line=stripped,
-                    reason="parece sintaxis de matrix, no de tree",
-                )
-            if lowered.startswith(flowchart_markers):
-                raise DocumentTypeMismatchError(
-                    expected_type="tree",
-                    line_no=line_no,
-                    line=stripped,
-                    reason="parece sintaxis de flowchart, no de tree",
+                    reason="parece sintaxis jerarquica de tree, no de matrix",
                 )

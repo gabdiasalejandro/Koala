@@ -1,0 +1,7 @@
+matrix:: Cuadro comparativo de formatos Koala
+columns:: Criterio | Tree | Matrix | Flowchart
+row:: Proposito | Representar jerarquias de conocimiento con relaciones y lectura por niveles | Evaluar alternativas lado a lado con criterios constantes y conclusion clara | Describir procesos secuenciales con decisiones, entradas y salidas
+row:: Mejor uso | Arquitectura conceptual, mapas de contenido y descomposicion de temas | Seleccion de estrategia, analisis de opciones y reportes ejecutivos | Operaciones, automatizaciones y flujos de aprobacion
+row:: Lectura | De lo general a lo particular, con ramas y dependencias visibles | Horizontal y comparativa, favoreciendo contraste formal entre columnas | Cronologica, con pasos conectados y bifurcaciones
+row:: Riesgo visual | Saturacion si hay demasiados hijos en un mismo nivel | Celdas extensas si los criterios no estan sintetizados | Cruces o ciclos dificiles si el proceso no se delimita
+footer:: Recomendacion | Usar matrix cuando la decision depende de comparar opciones con los mismos criterios y presentar una conclusion ejecutiva.

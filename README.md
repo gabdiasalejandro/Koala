@@ -2,7 +2,7 @@
 
 Koala is a DSL for generating diagrams from structured text.
 
-Write once, render in multiple layouts.
+Write once, render as trees, radial maps, synoptic layouts, or formal comparison matrices.
 
 [GitHub Repository](https://github.com/gabdiasalejandro/Koala)
 [Español](https://github.com/gabdiasalejandro/Koala/blob/main/README.es.md)
@@ -56,7 +56,9 @@ pipx install koala-diagrams
 koala types
 koala compile docs/examples/tree.txt --type tree --layout tree
 koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
+koala compile comparison.txt --type matrix --layout matrix --typography formal
 koala export docs/examples/tree.txt --format png --quality high
+koala export comparison.txt --type matrix --layout matrix --format png --quality medium
 koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
@@ -119,6 +121,23 @@ print(png_result.media_type, len(png_result.content))
 print(pdf_result.media_type, len(pdf_result.content))
 ```
 
+Matrix documents use an explicit comparative-table syntax:
+
+```text
+matrix:: Format Comparison
+columns:: Criterion | Tree | Matrix
+row:: Best for | Hierarchical concept maps | Side-by-side evaluation
+row:: Reading path | From parent to children | Across consistent criteria
+footer:: Recommendation | Use matrix when the decision depends on comparing options.
+```
+
+Render it with:
+
+```bash
+koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
+koala export comparison.txt --type matrix --layout matrix --format pdf --quality high
+```
+
 Library API summary:
 
 - `koala.compile(path, **config)` or `koala.compile_file(path, **config)`: source file to `.svg`
@@ -131,7 +150,7 @@ Library API summary:
 `RenderResult` now always includes the serialized SVG in `result.svg`. `result.output_svg` is only populated when the operation writes a file.
 `ExportResult` includes final bytes in `result.content`, the HTTP media type in `result.media_type`, and `result.output_path` when an explicit output is written.
 PNG export uses direct SVG conversion at `medium` or `high` quality. PDF export is vector-based and adds a professional frame with margins, a title resolved from the first `main::` node, and theme-aware colors.
-All render/export APIs accept `type="tree"`; it defaults to `tree` today. Layouts currently belong to the `tree` document type. If DSL syntax does not match the requested type, Koala raises `DocumentTypeMismatchError`.
+All render/export APIs accept `type="tree"` or `type="matrix"`; it defaults to `tree`. Tree layouts are `tree`, `radial`, `synoptic`, and `synoptic_boxes`. Matrix uses `layout="matrix"`. If DSL syntax does not match the requested type, Koala raises `DocumentTypeMismatchError`.
 
 In general, avoid embedding `@show-node-numbers` in document metadata. Prefer CLI flags, library arguments, or user config defaults unless a file really needs to be self-descriptive about numbering.
 
@@ -159,7 +178,8 @@ hl:: 1.2 Highlighted Node
 ## Features
 
 - Simple hierarchical DSL
-- Multiple layouts (`tree`, `radial`, `synoptic`)
+- Multiple tree layouts (`tree`, `radial`, `synoptic`, `synoptic_boxes`)
+- Formal comparative matrices with `type="matrix"`
 - Theme system
 - CLI and Python API
 - SVG output to disk or in memory
@@ -167,7 +187,7 @@ hl:: 1.2 Highlighted Node
 
 ## Multiple Layouts
 
-Tree, radial, and synoptic layouts from the same source.
+Tree, radial, and synoptic layouts from the same hierarchical source. Matrix documents use a separate table-oriented source and the same theme/export system.
 
 ![Radial example](https://raw.githubusercontent.com/gabdiasalejandro/Koala/main/docs/assets/example.radial.png)
 

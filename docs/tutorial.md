@@ -10,6 +10,7 @@ It covers:
 - in-memory APIs such as `compile_text(...)`, `inspect_text(...)`, and `validate_text(...)`
 - user config
 - core DSL syntax
+- matrix DSL syntax
 - optional metadata with `@...`
 - available themes
 - available typography presets
@@ -27,13 +28,13 @@ Koala can be used in two ways:
 Install from PyPI:
 
 ```bash
-pip install koala-diagrams==1.0.0
+pip install koala-diagrams==1.3.6
 ```
 
 If you mainly want the CLI as an isolated user tool:
 
 ```bash
-pipx install koala-diagrams==1.0.0
+pipx install koala-diagrams==1.3.6
 ```
 
 If you are developing from the repository:
@@ -58,8 +59,10 @@ koala layouts
 koala typographies
 koala compile docs/examples/tree.txt --type tree --layout tree --theme academic
 koala compile docs/examples/radial.txt --type tree --layout radial --theme frutal --size square
+koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
 koala compile docs/examples/tree.txt --background '#F7F4ED'
 koala export docs/examples/tree.txt --format png --quality high
+koala export comparison.txt --type matrix --layout matrix --format png --quality medium
 koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
@@ -84,8 +87,8 @@ Output behavior from the CLI:
 - `--output` writes to an explicit SVG path
 - `--output-dir` writes to a specific folder
 - `--desktop` writes to `~/Desktop` when available and otherwise falls back to the input folder
-- `--type` chooses the document pipeline; today the only supported value is `tree`
-- `--layout` currently selects a layout inside the `tree` document type
+- `--type` chooses the document pipeline; supported values are `tree` and `matrix`
+- `--layout` selects a layout inside the chosen document type
 
 User config:
 
@@ -193,7 +196,7 @@ If `strict=True` and the parser emits warnings, `validate_text(...)` raises `koa
 - `koala.inspect_text(text, **config)`: resolve `RenderContext` without writing SVG
 - `koala.validate_text(text, **config)`: resolve `RenderContext` and optionally fail on warnings
 
-All of these APIs accept `type="tree"` today. `tree` is the default for backward compatibility. Future document types such as `matrix` or `flowchart` should add their own implementation across `core/<type>`, `layout/<type>`, and `render/<type>` while reusing shared themes, config, page settings, and export.
+All of these APIs accept `type="tree"` or `type="matrix"`. `tree` is the default for backward compatibility. Future document types such as `flowchart` should add their own implementation across `core/<type>`, `layout/<type>`, and `render/<type>` while reusing shared themes, config, page settings, and export.
 
 ### Export SVG, PNG, and decorated PDF
 
@@ -262,7 +265,35 @@ What this means:
 - `1.1` and `1.2` become children of `1`
 - `organizes` and `renders` are relation labels from the parent
 
-## 5. Hierarchy syntax
+## 5. Smallest useful matrix
+
+Use `type="matrix"` when the goal is a formal comparison instead of a hierarchy.
+
+```text
+matrix:: Format Comparison
+columns:: Criterion | Tree | Matrix
+row:: Best for | Hierarchical concept maps | Side-by-side evaluation
+row:: Reading path | From parent to children | Across consistent criteria
+footer:: Recommendation | Use matrix when the decision depends on comparing options.
+```
+
+Render it from the CLI:
+
+```bash
+koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
+koala export comparison.txt --type matrix --layout matrix --format pdf --quality high
+```
+
+Matrix syntax rules:
+
+- `matrix::` defines the title and is required
+- `columns::` defines the header row and is required
+- `row::` defines one comparison row; at least one row is required
+- cells are separated with `|`
+- `footer::` is optional and renders as a full-width conclusion row
+- `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work like they do for tree documents
+
+## 6. Hierarchy syntax
 
 Koala uses numbered hierarchy:
 
@@ -300,7 +331,7 @@ Study of heredity.
 
 In that case, `1` and `2` become children of `0`.
 
-## 6. Body text
+## 7. Body text
 
 Any non-empty line after a valid node header becomes body text for that node until a new node header appears.
 
@@ -314,7 +345,7 @@ All living organisms are composed of one or more cells.
 
 That produces one node with two body lines.
 
-## 7. Relations
+## 8. Relations
 
 Relations are optional and appear before the node number:
 
@@ -327,7 +358,7 @@ Both `->` and `→` are accepted.
 
 If you do not include a relation, the parent-child connector still exists, but is treated as implicit.
 
-## 8. Semantic kinds with `kind::`
+## 9. Semantic kinds with `kind::`
 
 `kind::` lets you mark a node semantically so themes can style it differently.
 
@@ -391,7 +422,7 @@ If the root node uses `main::` in a boxed layout such as `tree`, `synoptic_boxes
 
 Use `kind::` when a concept should visually stand out, not on every node.
 
-## 9. Metadata with `@`
+## 10. Metadata with `@`
 
 Koala supports optional document-level metadata using lines that start with `@`.
 
@@ -482,7 +513,7 @@ Accepted true-like values:
 - `shown`
 - `1`
 
-## 10. Available layouts
+## 11. Available layouts
 
 Current layouts:
 
@@ -490,6 +521,7 @@ Current layouts:
 - `synoptic`
 - `synoptic_boxes`
 - `radial`
+- `matrix`
 
 ### `tree`
 
@@ -547,7 +579,21 @@ Characteristics:
 - branch distribution by angular span
 - overlap-aware radial separation
 
-## 11. Available themes
+### `matrix`
+
+Best for:
+
+- formal comparative tables
+- option evaluation
+- executive summaries with consistent criteria
+
+Characteristics:
+
+- table geometry
+- theme-aware headers, row labels, body cells, and footer
+- respects typography and `left` or `justify` alignment for body cells
+
+## 12. Available themes
 
 Current built-in themes:
 
@@ -637,11 +683,12 @@ The repository currently includes usage examples and test fixtures instead of ro
 - [tests/end_to_end/mocks/alignment_left.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_left.txt)
 - [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
 
-## 12. Available typographies
+## 13. Available typographies
 
 Current built-in typography presets:
 
 - `default`
+- `formal`
 - `radial`
 
 ### `default`
@@ -669,7 +716,19 @@ Characteristics:
 - slightly smaller type
 - tuned for denser circular compositions
 
-## 13. Available page sizes
+### `formal`
+
+Used by default in:
+
+- `matrix`
+
+Characteristics:
+
+- sober table-oriented title typography
+- compact body size for comparison cells
+- tuned for PDF and executive-style outputs
+
+## 14. Available page sizes
 
 Current page presets:
 
@@ -724,7 +783,7 @@ Best when:
 - you are using `radial`
 - a `tree` would otherwise spread too wide
 
-## 14. Suggestions for better visual results
+## 15. Suggestions for better visual results
 
 These are practical writing heuristics for the current engines.
 
@@ -772,7 +831,15 @@ Main suggestion:
 - Avoid one giant branch plus many tiny branches
 - `square` and `a4_landscape` usually give the cleanest balance
 
-## 15. Example tutorial document
+### Suggestions for `matrix`
+
+- Use it for decisions, tradeoffs, and option comparisons
+- Keep row labels short and criteria parallel
+- Prefer concise cell text over long prose
+- Use `formal` typography for reports and PDFs
+- Use `justify` only when cells have enough words to benefit from it
+
+## 16. Example tutorial document
 
 ```text
 @layout tree
@@ -793,12 +860,27 @@ hl:: includes -> 1.2.1 Viewport
 Fits the scene into the selected page size.
 ```
 
-## 16. Recommended files to inspect
+## 17. Example matrix document
+
+```text
+@theme academic
+@typography formal
+@text-align left
+
+matrix:: Cuadro comparativo de formatos Koala
+columns:: Criterio | Tree | Matrix | Flowchart
+row:: Proposito | Jerarquias de conocimiento | Comparacion lado a lado | Procesos y decisiones
+row:: Lectura | De lo general a lo particular | Horizontal y comparativa | Cronologica
+footer:: Recomendacion | Usar matrix cuando la decision depende de comparar opciones con los mismos criterios.
+```
+
+## 18. Recommended files to inspect
 
 - [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
 - [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
 - [tests/end_to_end/mocks/alignment_left.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_left.txt)
 - [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
+- [tests/end_to_end/mocks/comparative_matrix.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/comparative_matrix.txt)
 - [docs/syntax.md](/home/yaldapika/dev/koala/docs/syntax.md)
 - [docs/layouts.md](/home/yaldapika/dev/koala/docs/layouts.md)
 - [docs/architecture.md](/home/yaldapika/dev/koala/docs/architecture.md)

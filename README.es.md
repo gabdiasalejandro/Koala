@@ -4,7 +4,7 @@
 
 Koala es un DSL para generar diagramas a partir de texto estructurado.
 
-La idea central del proyecto es simple: un mismo archivo fuente debe poder renderizarse en múltiples layouts y estilos sin reescribir el contenido.
+La idea central del proyecto es simple: un mismo archivo fuente debe poder renderizarse en múltiples layouts y estilos sin reescribir el contenido. Hoy soporta mapas jerárquicos tipo `tree` y cuadros comparativos formales tipo `matrix`.
 
 ## Uso rápido
 
@@ -18,13 +18,13 @@ Koala se puede usar de dos formas:
 Instalación desde PyPI:
 
 ```bash
-pip install koala-diagrams==1.2.1
+pip install koala-diagrams==1.3.6
 ```
 
 Si prefieres una instalación aislada para usar el CLI:
 
 ```bash
-pipx install koala-diagrams==1.2.1
+pipx install koala-diagrams==1.3.6
 ```
 
 Instalación directa desde GitHub:
@@ -55,7 +55,9 @@ koala layouts
 koala typographies
 koala compile docs/examples/tree.txt --type tree --layout tree
 koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
+koala compile comparison.txt --type matrix --layout matrix --typography formal
 koala export docs/examples/tree.txt --format png --quality high
+koala export comparison.txt --type matrix --layout matrix --format png --quality medium
 koala export docs/examples/tree.txt --format pdf --quality high
 koala inspect docs/examples/tree.txt
 koala validate docs/examples/radial.txt --strict
@@ -128,13 +130,30 @@ print(png_result.media_type, len(png_result.content))
 print(pdf_result.media_type, len(pdf_result.content))
 ```
 
+Ejemplo mínimo de `matrix`:
+
+```text
+matrix:: Cuadro comparativo de formatos Koala
+columns:: Criterio | Tree | Matrix
+row:: Mejor uso | Mapas jerárquicos de conceptos | Comparación lado a lado con criterios constantes
+row:: Lectura | De lo general a lo particular | Horizontal y orientada a decisión
+footer:: Recomendación | Usa matrix cuando quieras presentar una conclusión comparativa.
+```
+
+Render:
+
+```bash
+koala compile comparison.txt --type matrix --layout matrix --theme academic --typography formal
+koala export comparison.txt --type matrix --layout matrix --format pdf --quality high
+```
+
 En general conviene evitar `@show-node-numbers` dentro de la metadata del documento. Es mejor controlar esa preferencia desde flags de CLI, argumentos de librería o config de usuario, salvo que el archivo necesite dejar esa intención embebida explícitamente.
 
 Inputs aceptados por `koala.compile(path, **config)`:
 
 - `path`: archivo fuente `.txt` o `.docx` a compilar
-- `type`: tipo de documento a parsear; por ahora `tree` y default `tree`
-- `layout`: uno de `tree`, `synoptic`, `synoptic_boxes`, `radial`
+- `type`: tipo de documento a parsear; `tree` o `matrix`; default `tree`
+- `layout`: para `tree`, uno de `tree`, `synoptic`, `synoptic_boxes`, `radial`; para `matrix`, `matrix`
 - `theme`: nombre de theme como `academic`, `frutal`, `terracotta`, `default`, `jungle`
 - `typography`: nombre del preset tipográfico
 - `size`: preset de tamaño como `a4`, `a4_landscape`, `square`
@@ -241,10 +260,12 @@ Comportamiento de salida:
 Tipos de documento:
 
 - `type="tree"` es el default y usa el DSL jerárquico actual
-- los layouts disponibles hoy son exclusivos de `tree`
+- `type="matrix"` usa sintaxis explícita de cuadro comparativo con `matrix::`, `columns::`, `row::` y `footer::`
+- los layouts de `tree` son `tree`, `synoptic`, `synoptic_boxes` y `radial`
+- el layout de `matrix` es `matrix`
 - si el DSL no coincide con el `type` solicitado, Koala lanza `DocumentTypeMismatchError`
 - la arquitectura interna está organizada por capas: `core/<type>`, `layout/<type>` y `render/<type>`
-- `core/shared`, `layout/shared` y `render/shared` contienen config, themes, tipografía, tamaño de página, background y export compartidos para futuros tipos como `matrix` o `flowchart`
+- `core/shared`, `layout/shared` y `render/shared` contienen config, themes, tipografía, tamaño de página, background y export compartidos para tipos actuales y futuros como `flowchart`
 
 ## Documentación
 
