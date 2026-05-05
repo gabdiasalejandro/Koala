@@ -54,6 +54,9 @@ pipx install koala-diagrams
 
 ```bash
 koala types
+koala typographies
+koala typographies --type tree
+koala typographies --type matrix
 koala compile docs/examples/tree.txt --type tree --layout tree
 koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
 koala compile comparison.txt --type matrix --layout matrix --typography formal
@@ -121,6 +124,16 @@ print(png_result.media_type, len(png_result.content))
 print(pdf_result.media_type, len(pdf_result.content))
 ```
 
+Typography presets can be inspected from Python too:
+
+```python
+import koala
+
+print(koala.available_typographies())
+print(koala.available_typographies(type="tree"))
+print(koala.available_typographies(type="matrix"))
+```
+
 Matrix documents use an explicit comparative-table syntax:
 
 ```text
@@ -153,6 +166,29 @@ PNG export uses direct SVG conversion at `medium` or `high` quality. PDF export 
 All render/export APIs accept `type="tree"` or `type="matrix"`; it defaults to `tree`. Tree layouts are `tree`, `radial`, `synoptic`, and `synoptic_boxes`. Matrix uses `layout="matrix"`. If DSL syntax does not match the requested type, Koala raises `DocumentTypeMismatchError`.
 
 In general, avoid embedding `@show-node-numbers` in document metadata. Prefer CLI flags, library arguments, or user config defaults unless a file really needs to be self-descriptive about numbering.
+
+## Typographies
+
+Koala ships typography presets for different tones:
+
+- `default`: general-purpose readable diagrams
+- `academic`: more editorial and academic, with serif body text
+- `formal`: sober report-style output, especially useful for PDFs and matrices
+- `casual`: softer and more approachable diagrams
+- `radial`: compact typography tuned for radial tree layouts
+
+Run the end-to-end gallery to compare typography behavior in SVG, PNG, and PDF:
+
+```bash
+.venv/bin/python -m unittest tests.end_to_end.code.test_render_e2e.RenderEndToEndTest.test_render_gallery
+```
+
+The focused typography outputs are written under:
+
+```text
+tests/end_to_end/output/typography/tree/<typography>/
+tests/end_to_end/output/typography/matrix/<typography>/
+```
 
 ## DSL Syntax
 

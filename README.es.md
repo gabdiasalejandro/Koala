@@ -53,6 +53,8 @@ koala themes
 koala types
 koala layouts
 koala typographies
+koala typographies --type tree
+koala typographies --type matrix
 koala compile docs/examples/tree.txt --type tree --layout tree
 koala compile docs/examples/radial.txt --type tree --layout radial --theme jungle --size square
 koala compile comparison.txt --type matrix --layout matrix --typography formal
@@ -130,6 +132,16 @@ print(png_result.media_type, len(png_result.content))
 print(pdf_result.media_type, len(pdf_result.content))
 ```
 
+También puedes consultar presets tipográficos desde Python:
+
+```python
+import koala
+
+print(koala.available_typographies())
+print(koala.available_typographies(type="tree"))
+print(koala.available_typographies(type="matrix"))
+```
+
 Ejemplo mínimo de `matrix`:
 
 ```text
@@ -148,6 +160,27 @@ koala export comparison.txt --type matrix --layout matrix --format pdf --quality
 ```
 
 En general conviene evitar `@show-node-numbers` dentro de la metadata del documento. Es mejor controlar esa preferencia desde flags de CLI, argumentos de librería o config de usuario, salvo que el archivo necesite dejar esa intención embebida explícitamente.
+
+Tipografías disponibles:
+
+- `default`: lectura general para diagramas cotidianos
+- `academic`: tono académico/editorial, con cuerpo serif
+- `formal`: tono sobrio de reporte, especialmente útil para PDFs y matrices
+- `casual`: tono más cercano y ligero
+- `radial`: variante compacta afinada para layouts radiales
+
+Para comparar cómo se comportan visualmente, el e2e genera una galería enfocada por tipografía:
+
+```bash
+.venv/bin/python -m unittest tests.end_to_end.code.test_render_e2e.RenderEndToEndTest.test_render_gallery
+```
+
+Las salidas quedan en:
+
+```text
+tests/end_to_end/output/typography/tree/<typography>/
+tests/end_to_end/output/typography/matrix/<typography>/
+```
 
 Inputs aceptados por `koala.compile(path, **config)`:
 
@@ -212,7 +245,7 @@ Subcomandos disponibles:
 - `themes`: lista themes disponibles
 - `types`: lista tipos de documento disponibles
 - `layouts`: lista layouts disponibles
-- `typographies`: lista presets tipográficos disponibles
+- `typographies`: lista presets tipográficos disponibles; acepta `--type tree` o `--type matrix` para filtrar
 - `config-path`: muestra la ruta esperada de la config de usuario
 
 Config de usuario:

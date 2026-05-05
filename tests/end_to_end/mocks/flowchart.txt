@@ -1,0 +1,26 @@
+flowchart:: Proceso de publicación de contenido
+@theme default
+
+start:: inicio :: Inicio
+
+step:: revision :: Revisar borrador
+decision:: aprobado :: ¿Aprobado?
+step:: correcciones :: Aplicar correcciones
+step:: diseno :: Diseño y maquetación
+decision:: calidad :: ¿Pasa control de calidad?
+step:: ajustes :: Ajustes finales
+step:: publicar :: Publicar contenido
+note:: nota :: Notificar al equipo por correo
+end:: fin :: Fin
+
+inicio -> revision
+revision -> aprobado
+aprobado -> correcciones :: no
+aprobado -> diseno :: si
+correcciones -> revision
+diseno -> calidad
+calidad -> ajustes :: no
+calidad -> publicar :: si
+ajustes -> diseno
+publicar -> nota
+nota -> fin

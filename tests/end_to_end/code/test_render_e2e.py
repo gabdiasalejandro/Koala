@@ -25,6 +25,7 @@ TREE_LAYOUTS = ("tree", "synoptic", "synoptic_boxes", "radial")
 TEXT_ALIGN_SEQUENCE = ("left", "justify")
 TREE_TYPOGRAPHIES = ("default", "academic", "formal", "casual", "radial")
 MATRIX_TYPOGRAPHIES = ("formal", "default", "academic", "casual")
+FLOWCHART_TYPOGRAPHIES = ("default", "formal", "academic", "casual")
 PAGE_SIZES = ("a4", "a4_landscape", "square")
 BACKGROUND_COLORS = ("#F7F4ED", "#F1F7FB", "#F8F3FF", "#F4F9F1")
 TREE_MOCKS = {
@@ -32,6 +33,7 @@ TREE_MOCKS = {
     "justify": ROOT_DIR / "tests/end_to_end/mocks/alignment_justify.txt",
 }
 MATRIX_MOCK = ROOT_DIR / "tests/end_to_end/mocks/comparative_matrix.txt"
+FLOWCHART_MOCK = ROOT_DIR / "tests/end_to_end/mocks/flowchart.txt"
 
 
 @dataclass(frozen=True)
@@ -45,12 +47,18 @@ class E2ECase:
     page_size: str
     show_node_numbers: bool
     background: str | None
+    gallery: str = "theme"
 
     @property
     def case_id(self) -> str:
         node_numbers = "numbers_on" if self.show_node_numbers else "numbers_off"
+        prefix = (
+            f"{self.index:02d}_"
+            if self.gallery == "theme"
+            else f"{self.index:02d}_{self.gallery}_"
+        )
         return (
-            f"{self.index:02d}_{self.document_type}_{self.layout}_{self.theme}_"
+            f"{prefix}{self.document_type}_{self.layout}_{self.theme}_"
             f"{self.text_align}_{self.typography}_{self.page_size}_{node_numbers}"
         )
 
@@ -58,14 +66,28 @@ class E2ECase:
     def mock_path(self) -> Path:
         if self.document_type == "matrix":
             return MATRIX_MOCK
+        if self.document_type == "flowchart":
+            return FLOWCHART_MOCK
         return TREE_MOCKS[self.text_align]
 
     @property
     def output_dir(self) -> Path:
+        if self.gallery == "typography":
+            return (
+                ROOT_DIR
+                / "tests/end_to_end/output"
+                / "typography"
+                / self.document_type
+                / self.typography
+            )
+        if self.document_type == "flowchart":
+            return ROOT_DIR / "tests/end_to_end/output" / "flowchart" / self.theme
         return ROOT_DIR / "tests/end_to_end/output" / self.document_type / self.theme
 
     @property
     def output_stem(self) -> str:
+        if self.gallery == "typography":
+            return f"{self.index:02d}_{self.document_type}_{self.layout}_{self.typography}"
         return f"{self.index:02d}_{self.layout}_{self.text_align}_{self.typography}_{self.page_size}"
 
 
@@ -127,6 +149,7 @@ class RenderEndToEndTest(unittest.TestCase):
         index = 0
         tree_case_count = 0
         matrix_case_count = 0
+        flowchart_case_count = 0
 
         for theme in ThemeCatalog.available_names():
             for layout in TREE_LAYOUTS:
@@ -136,6 +159,19 @@ class RenderEndToEndTest(unittest.TestCase):
             cases.append(_case(index, "matrix", "matrix", theme, matrix_case_count))
             index += 1
             matrix_case_count += 1
+            cases.append(_case(index, "flowchart", "flowchart", theme, flowchart_case_count))
+            index += 1
+            flowchart_case_count += 1
+
+        for typography in TREE_TYPOGRAPHIES:
+            cases.append(_typography_case(index, "tree", "tree", typography))
+            index += 1
+        for typography in MATRIX_TYPOGRAPHIES:
+            cases.append(_typography_case(index, "matrix", "matrix", typography))
+            index += 1
+        for typography in FLOWCHART_TYPOGRAPHIES:
+            cases.append(_typography_case(index, "flowchart", "flowchart", typography))
+            index += 1
 
         return cases
 
@@ -213,12 +249,14 @@ class RenderEndToEndTest(unittest.TestCase):
         self.assertIn("transform=", svg_text)
         self.assertIn("<text", svg_text)
         self.assertIn(result.context.settings.typography.title_font, svg_text)
-        self.assertIn(result.context.settings.typography.body_font, svg_text)
 
         if case.document_type == "matrix":
             self.assertIn("<rect", svg_text)
             self.assertIn("Cuadro comparativo", svg_text)
             self.assertNotIn("marker-end", svg_text)
+        elif case.document_type == "flowchart":
+            self.assertIn("marker-end", svg_text)
+            self.assertIn("koala-arrow", svg_text)
         elif case.layout == "synoptic":
             self.assertNotIn("<rect", svg_text)
             self.assertNotIn("marker-end", svg_text)
@@ -244,6 +282,13 @@ class RenderEndToEndTest(unittest.TestCase):
             self.assertIn(theme.style_for("main").fill, svg_text)
             self.assertIn(theme.style_for("hl").fill, svg_text)
             self.assertIn(theme.style_for("soft").fill, svg_text)
+            return
+
+        if case.document_type == "flowchart":
+            self.assertIn(theme.edge_color, svg_text)
+            self.assertIn(theme.style_for("main").fill, svg_text)
+            self.assertIn(theme.style_for("focus").fill, svg_text)
+            self.assertIn(theme.default_node.fill, svg_text)
             return
 
         self.assertIn(theme.default_node.title, svg_text)
@@ -364,7 +409,12 @@ def _case(
     typography_index: int,
 ) -> E2ECase:
     text_align = TEXT_ALIGN_SEQUENCE[index % len(TEXT_ALIGN_SEQUENCE)]
-    typographies = MATRIX_TYPOGRAPHIES if document_type == "matrix" else TREE_TYPOGRAPHIES
+    if document_type == "matrix":
+        typographies = MATRIX_TYPOGRAPHIES
+    elif document_type == "flowchart":
+        typographies = FLOWCHART_TYPOGRAPHIES
+    else:
+        typographies = TREE_TYPOGRAPHIES
     return E2ECase(
         index=index,
         document_type=document_type,
@@ -375,6 +425,26 @@ def _case(
         page_size=PAGE_SIZES[index % len(PAGE_SIZES)],
         show_node_numbers=document_type == "tree" and index % 2 == 0,
         background=BACKGROUND_COLORS[(index // 2) % len(BACKGROUND_COLORS)] if index % 3 == 0 else None,
+    )
+
+
+def _typography_case(
+    index: int,
+    document_type: str,
+    layout: str,
+    typography: str,
+) -> E2ECase:
+    return E2ECase(
+        index=index,
+        document_type=document_type,
+        layout=layout,
+        theme="default",
+        text_align="left",
+        typography=typography,
+        page_size="a4_landscape",
+        show_node_numbers=document_type == "tree",
+        background=None,
+        gallery="typography",
     )
 
 

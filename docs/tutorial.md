@@ -11,6 +11,7 @@ It covers:
 - user config
 - core DSL syntax
 - matrix DSL syntax
+- flowchart DSL syntax
 - optional metadata with `@...`
 - available themes
 - available typography presets
@@ -265,7 +266,55 @@ What this means:
 - `1.1` and `1.2` become children of `1`
 - `organizes` and `renders` are relation labels from the parent
 
-## 5. Smallest useful matrix
+## 5. Smallest useful flowchart
+
+Use `type="flowchart"` when the goal is a process diagram: steps, decisions, and branching logic.
+
+```text
+flowchart:: Content publishing process
+
+start:: draft :: Draft ready
+decision:: review :: Approved?
+step:: corrections :: Apply corrections
+step:: design :: Design and layout
+end:: published :: Published
+
+draft -> review
+review -> corrections :: no
+review -> design :: si
+corrections -> draft
+design -> published
+```
+
+Render it from the CLI:
+
+```bash
+koala compile process.txt --type flowchart --layout flowchart --theme ocean
+koala export process.txt --type flowchart --layout flowchart --format pdf --quality high
+```
+
+Flowchart syntax rules:
+
+- `flowchart::` defines the title and is required
+- nodes are declared with `<kind>:: <id>` or `<kind>:: <id> :: <label>`
+- if `<label>` is omitted, the `<id>` is used as the label
+- edges are declared with `<source_id> -> <target_id>` or `<source_id> -> <target_id> :: <label>`
+- `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work like they do for tree and matrix documents
+- node ids are case-sensitive and must be unique
+
+Available node kinds and their shapes:
+
+| Kind | Shape | Palette slot |
+|---|---|---|
+| `start` | rounded capsule | `main` |
+| `end` | rounded capsule | `main` |
+| `step` or `process` | rounded rectangle | `default` |
+| `decision` | diamond | `focus` |
+| `note` | rectangle with folded corner | `note` |
+
+The palette mapping means that decision nodes automatically use the `focus` tone from the active theme — the same slot used for `focus::` in tree documents. Start and end nodes use `main`. This keeps the visual language consistent across all document types.
+
+## 7. Smallest useful matrix
 
 Use `type="matrix"` when the goal is a formal comparison instead of a hierarchy.
 
@@ -293,7 +342,7 @@ Matrix syntax rules:
 - `footer::` is optional and renders as a full-width conclusion row
 - `@theme`, `@typography`, `@text-align`, `@size`, and `@background` work like they do for tree documents
 
-## 6. Hierarchy syntax
+## 8. Hierarchy syntax
 
 Koala uses numbered hierarchy:
 
@@ -331,7 +380,7 @@ Study of heredity.
 
 In that case, `1` and `2` become children of `0`.
 
-## 7. Body text
+## 9. Body text
 
 Any non-empty line after a valid node header becomes body text for that node until a new node header appears.
 
@@ -345,7 +394,7 @@ All living organisms are composed of one or more cells.
 
 That produces one node with two body lines.
 
-## 8. Relations
+## 10. Relations
 
 Relations are optional and appear before the node number:
 
@@ -358,7 +407,7 @@ Both `->` and `→` are accepted.
 
 If you do not include a relation, the parent-child connector still exists, but is treated as implicit.
 
-## 9. Semantic kinds with `kind::`
+## 11. Semantic kinds with `kind::`
 
 `kind::` lets you mark a node semantically so themes can style it differently.
 
@@ -422,7 +471,7 @@ If the root node uses `main::` in a boxed layout such as `tree`, `synoptic_boxes
 
 Use `kind::` when a concept should visually stand out, not on every node.
 
-## 10. Metadata with `@`
+## 13. Metadata with `@`
 
 Koala supports optional document-level metadata using lines that start with `@`.
 
@@ -513,7 +562,7 @@ Accepted true-like values:
 - `shown`
 - `1`
 
-## 11. Available layouts
+## 12. Available layouts
 
 Current layouts:
 
@@ -522,6 +571,7 @@ Current layouts:
 - `synoptic_boxes`
 - `radial`
 - `matrix`
+- `flowchart`
 
 ### `tree`
 
@@ -593,7 +643,23 @@ Characteristics:
 - theme-aware headers, row labels, body cells, and footer
 - respects typography and `left` or `justify` alignment for body cells
 
-## 12. Available themes
+### `flowchart`
+
+Best for:
+
+- process diagrams
+- step-by-step workflows
+- decision trees and branching logic
+- approval or review pipelines
+
+Characteristics:
+
+- top-down layout with automatic depth assignment via BFS
+- each node rendered with a shape that reflects its semantic role
+- directed edges with arrowheads; orthogonal routing when source and target are not aligned
+- edge labels supported for annotating branches
+
+## 15. Available themes
 
 Current built-in themes:
 
@@ -683,13 +749,30 @@ The repository currently includes usage examples and test fixtures instead of ro
 - [tests/end_to_end/mocks/alignment_left.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_left.txt)
 - [tests/end_to_end/mocks/alignment_justify.txt](/home/yaldapika/dev/koala/tests/end_to_end/mocks/alignment_justify.txt)
 
-## 13. Available typographies
+## 16. Available typographies
 
 Current built-in typography presets:
 
 - `default`
+- `academic`
 - `formal`
+- `casual`
 - `radial`
+
+Preset availability by document type:
+
+- `tree`: `default`, `academic`, `formal`, `casual`, `radial`
+- `matrix`: `formal`, `default`, `academic`, `casual`
+- `flowchart`: `default`, `formal`, `academic`, `casual`
+
+You can inspect the same lists from the CLI:
+
+```bash
+koala typographies
+koala typographies --type tree
+koala typographies --type matrix
+koala typographies --type flowchart
+```
 
 ### `default`
 
@@ -705,6 +788,50 @@ Characteristics:
 - balanced body size for boxed layouts
 - good all-purpose readability
 
+### `academic`
+
+Best when:
+
+- the diagram should feel more scholarly or editorial
+- longer body text benefits from a serif reading texture
+- the output is aimed at notes, essays, reports, or academic material
+
+Characteristics:
+
+- Georgia title text
+- Times New Roman body text
+- slightly more body leading for serif readability
+
+### `formal`
+
+Used by default in:
+
+- `matrix`
+
+Best when:
+
+- the output should feel sober and report-ready
+- the diagram is intended for PDFs, executive summaries, or comparison tables
+
+Characteristics:
+
+- Times New Roman title text
+- Arial body text for scanability
+- compact table-oriented metrics in `matrix`
+
+### `casual`
+
+Best when:
+
+- the diagram should feel lighter and less institutional
+- you want a friendlier visual tone for workshops, drafts, or learning material
+
+Characteristics:
+
+- Trebuchet MS title text
+- Verdana body text
+- compact but approachable spacing
+
 ### `radial`
 
 Used by default in:
@@ -716,19 +843,31 @@ Characteristics:
 - slightly smaller type
 - tuned for denser circular compositions
 
-### `formal`
+### Visual typography review
 
-Used by default in:
+The end-to-end gallery includes focused typography cases so you can compare how each preset behaves in SVG, PNG, and PDF under consistent settings.
 
-- `matrix`
+Run:
 
-Characteristics:
+```bash
+.venv/bin/python -m unittest tests.end_to_end.code.test_render_e2e.RenderEndToEndTest.test_render_gallery
+```
 
-- sober table-oriented title typography
-- compact body size for comparison cells
-- tuned for PDF and executive-style outputs
+Typography-specific outputs are written to:
 
-## 14. Available page sizes
+```text
+tests/end_to_end/output/typography/tree/<typography>/
+tests/end_to_end/output/typography/matrix/<typography>/
+tests/end_to_end/output/typography/flowchart/<typography>/
+```
+
+The manifest records these cases with `"gallery": "typography"` in:
+
+```text
+tests/end_to_end/e2e_manifest.json
+```
+
+## 17. Available page sizes
 
 Current page presets:
 
@@ -783,7 +922,7 @@ Best when:
 - you are using `radial`
 - a `tree` would otherwise spread too wide
 
-## 15. Suggestions for better visual results
+## 18. Suggestions for better visual results
 
 These are practical writing heuristics for the current engines.
 
@@ -839,7 +978,18 @@ Main suggestion:
 - Use `formal` typography for reports and PDFs
 - Use `justify` only when cells have enough words to benefit from it
 
-## 16. Example tutorial document
+### Suggestions for `flowchart`
+
+- Use it for processes with clear steps and decision points
+- Keep node labels short — one concept per node
+- Use `decision` for binary or conditional choices only
+- Use `note` for supporting context that is not a step in the flow
+- Use edge labels on `decision` outputs to name the branches (`si`, `no`, or short phrases)
+- Avoid more than two outputs from a single `decision` node; split into sub-decisions instead
+- `a4_landscape` is the safest default; `a4` works better for tall linear flows
+- `square` is best for compact flows with few parallel branches
+
+## 19. Example tutorial document
 
 ```text
 @layout tree
@@ -860,7 +1010,7 @@ hl:: includes -> 1.2.1 Viewport
 Fits the scene into the selected page size.
 ```
 
-## 17. Example matrix document
+## 20. Example matrix document
 
 ```text
 @theme academic
@@ -874,7 +1024,40 @@ row:: Lectura | De lo general a lo particular | Horizontal y comparativa | Crono
 footer:: Recomendacion | Usar matrix cuando la decision depende de comparar opciones con los mismos criterios.
 ```
 
-## 18. Recommended files to inspect
+## 21. Example flowchart document
+
+```text
+@theme ocean
+@typography default
+@size a4_landscape
+
+flowchart:: Content publishing process
+
+start:: inicio :: Start
+step:: revision :: Review draft
+decision:: aprobado :: Approved?
+step:: correcciones :: Apply corrections
+step:: diseno :: Design and layout
+decision:: calidad :: Passes QA?
+step:: ajustes :: Final adjustments
+step:: publicar :: Publish
+note:: nota :: Notify the team by email
+end:: fin :: End
+
+inicio -> revision
+revision -> aprobado
+aprobado -> correcciones :: no
+aprobado -> diseno :: yes
+correcciones -> revision
+diseno -> calidad
+calidad -> ajustes :: no
+calidad -> publicar :: yes
+ajustes -> diseno
+publicar -> nota
+nota -> fin
+```
+
+## 22. Recommended files to inspect
 
 - [docs/examples/tree.txt](/home/yaldapika/dev/koala/docs/examples/tree.txt)
 - [docs/examples/radial.txt](/home/yaldapika/dev/koala/docs/examples/radial.txt)
