@@ -238,8 +238,8 @@ print(pdf.media_type, len(pdf.content))
 
 PNG export is direct and quality-based:
 
-- `medium`: 150 DPI
-- `high`: 300 DPI
+- `medium`: 200 DPI
+- `high`: 450 DPI
 
 PDF export is vector-based and always high quality. It adds a professional frame with margins, an accent line, and a title. If `title` is omitted, Koala uses the first `main::` node title; if there is no `main::` node, it uses the first root title.
 

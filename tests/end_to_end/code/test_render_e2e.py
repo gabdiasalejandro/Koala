@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import shutil
 import sys
+import time
 import unittest
 import xml.etree.ElementTree as ET
 from dataclasses import asdict, dataclass
@@ -96,22 +97,28 @@ class RenderEndToEndTest(unittest.TestCase):
                 f"diagrams={cls.summary['diagrams']} "
                 f"exports={cls.summary['exports']} "
                 f"files={cls.summary['files']} "
-                f"types={cls.summary['type_count']} ({cls.summary['types']})"
+                f"types={cls.summary['type_count']} ({cls.summary['types']}) "
+                f"render_svg={cls.summary['render_svg_seconds']:.3f}s "
+                f"write_svg={cls.summary['write_svg_seconds']:.3f}s "
+                f"png_medium={cls.summary['png_medium_seconds']:.3f}s "
+                f"png_high={cls.summary['png_high_seconds']:.3f}s "
+                f"pdf={cls.summary['pdf_seconds']:.3f}s"
             )
 
     def test_render_gallery(self) -> None:
         cases = self._build_cases()
         for case in cases:
             with self.subTest(case=case.case_id):
-                result = self._render_case(case)
-                output_paths = self._write_outputs(case, result)
+                result, render_seconds = self._render_case(case)
+                output_paths, export_timings = self._write_outputs(case, result)
+                timings = {"render_svg": render_seconds, **export_timings}
                 svg_text = output_paths["svg"].read_text(encoding="utf-8")
 
                 self._assert_settings(case, result)
                 self._assert_svg_structure(case, result, svg_text)
                 self._assert_theme_serialization(case, result, svg_text)
                 self._assert_exports(output_paths)
-                self._record_manifest(case, output_paths)
+                self._record_manifest(case, output_paths, timings)
         self._record_summary(cases)
 
     @staticmethod
@@ -129,7 +136,8 @@ class RenderEndToEndTest(unittest.TestCase):
         return cases
 
     def _render_case(self, case: E2ECase):
-        return koala.render_text(
+        started_at = time.perf_counter()
+        result = koala.render_text(
             load_input_text(str(case.mock_path)),
             type=case.document_type,
             layout=case.layout,
@@ -140,28 +148,49 @@ class RenderEndToEndTest(unittest.TestCase):
             show_node_numbers=case.show_node_numbers,
             background=case.background,
         )
+        return result, time.perf_counter() - started_at
 
-    def _write_outputs(self, case: E2ECase, result) -> dict[str, Path]:
+    def _write_outputs(self, case: E2ECase, result) -> tuple[dict[str, Path], dict[str, float]]:
         case.output_dir.mkdir(parents=True, exist_ok=True)
         svg_path = case.output_dir / f"{case.output_stem}.svg"
         png_medium_path = case.output_dir / f"{case.output_stem}.medium.png"
         png_high_path = case.output_dir / f"{case.output_stem}.high.png"
         pdf_path = case.output_dir / f"{case.output_stem}.pdf"
 
+        started_at = time.perf_counter()
         svg_path.write_text(result.svg, encoding="utf-8")
+        write_svg_seconds = time.perf_counter() - started_at
+
+        started_at = time.perf_counter()
         png_medium = ExportConverter.convert(result, format="png", quality="medium")
+        png_medium_seconds = time.perf_counter() - started_at
+
+        started_at = time.perf_counter()
         png_high = ExportConverter.convert(result, format="png", quality="high")
+        png_high_seconds = time.perf_counter() - started_at
+
+        started_at = time.perf_counter()
         pdf = ExportConverter.convert(result, format="pdf", quality="high", title=result.title)
+        pdf_seconds = time.perf_counter() - started_at
+
         ExportConverter.write(png_medium, png_medium_path)
         ExportConverter.write(png_high, png_high_path)
         ExportConverter.write(pdf, pdf_path)
 
-        return {
-            "svg": svg_path,
-            "png_medium": png_medium_path,
-            "png_high": png_high_path,
-            "pdf": pdf_path,
-        }
+        return (
+            {
+                "svg": svg_path,
+                "png_medium": png_medium_path,
+                "png_high": png_high_path,
+                "pdf": pdf_path,
+            },
+            {
+                "write_svg": write_svg_seconds,
+                "png_medium": png_medium_seconds,
+                "png_high": png_high_seconds,
+                "pdf": pdf_seconds,
+            },
+        )
 
     def _assert_settings(self, case: E2ECase, result) -> None:
         self.assertIsNone(result.output_svg)
@@ -261,7 +290,12 @@ class RenderEndToEndTest(unittest.TestCase):
         self.assertGreater(output_paths["pdf"].stat().st_size, 500)
 
     @classmethod
-    def _record_manifest(cls, case: E2ECase, output_paths: dict[str, Path]) -> None:
+    def _record_manifest(
+        cls,
+        case: E2ECase,
+        output_paths: dict[str, Path],
+        timings: dict[str, float],
+    ) -> None:
         cls.manifest.append(
             {
                 "case": asdict(case),
@@ -274,6 +308,10 @@ class RenderEndToEndTest(unittest.TestCase):
                     extension: path.stat().st_size
                     for extension, path in sorted(output_paths.items())
                 },
+                "timings_seconds": {
+                    name: round(seconds, 6)
+                    for name, seconds in sorted(timings.items())
+                },
             }
         )
 
@@ -282,12 +320,33 @@ class RenderEndToEndTest(unittest.TestCase):
         types = sorted({case.document_type for case in cases})
         export_count = len(cases) * 3
         file_count = len(cases) * 4
+        timing_totals = {
+            "render_svg": 0.0,
+            "write_svg": 0.0,
+            "png_medium": 0.0,
+            "png_high": 0.0,
+            "pdf": 0.0,
+        }
+        for entry in cls.manifest:
+            timings = entry.get("timings_seconds", {})
+            if not isinstance(timings, dict):
+                continue
+            for name in timing_totals:
+                seconds = timings.get(name, 0.0)
+                if isinstance(seconds, int | float):
+                    timing_totals[name] += float(seconds)
+
         cls.summary = {
             "diagrams": len(cases),
             "exports": export_count,
             "files": file_count,
             "type_count": len(types),
             "types": ", ".join(types),
+            "render_svg_seconds": timing_totals["render_svg"],
+            "write_svg_seconds": timing_totals["write_svg"],
+            "png_medium_seconds": timing_totals["png_medium"],
+            "png_high_seconds": timing_totals["png_high"],
+            "pdf_seconds": timing_totals["pdf"],
         }
 
 

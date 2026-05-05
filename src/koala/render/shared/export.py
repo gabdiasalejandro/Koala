@@ -15,8 +15,8 @@ from koala.render.shared.models import ExportFormat, ExportQuality, ExportResult
 
 
 PNG_DPI_BY_QUALITY: dict[ExportQuality, int] = {
-    "medium": 150,
-    "high": 300,
+    "medium": 250,
+    "high": 500,
 }
 
 PDF_QUALITY: ExportQuality = "high"
