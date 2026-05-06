@@ -5,6 +5,8 @@ import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
 
+from lxml import etree
+
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
 SRC_DIR = ROOT_DIR / "src"
@@ -13,6 +15,8 @@ if str(SRC_DIR) not in sys.path:
 
 import koala
 from koala.cli import main as cli_main
+from koala.layout.shared.measurement import measure_text_width
+from koala.render.shared.export import PdfFrameSvgBuilder
 
 
 class LibraryApiTests(unittest.TestCase):
@@ -127,6 +131,75 @@ class LibraryApiTests(unittest.TestCase):
         self.assertEqual(result.context.settings.layout_kind, "matrix")
         self.assertIn("Decision Matrix", result.svg)
         self.assertIn("<rect", result.svg)
+
+    def test_matrix_title_and_footer_wrap_unspaced_text_inside_boxes(self) -> None:
+        long_token = "Supercalifragilisticexpialidocious" * 6
+        result = koala.render_text(
+            f"matrix:: {long_token}\n"
+            "columns:: Criterion | Option A | Option B\n"
+            "row:: Fit | Good | Better\n"
+            f"footer:: Recommendation | {long_token}\n",
+            type="matrix",
+            layout="matrix",
+            theme="academic",
+            typography="formal",
+        )
+        config = result.context.settings.layout_config
+        typography = result.context.settings.typography
+        title_box = result.context.scene.boxes["title"]
+        footer_box = result.context.scene.boxes["footer"]
+
+        self.assertGreater(len(title_box.title_lines), 1)
+        self.assertGreater(len(footer_box.title_lines), 1)
+
+        title_width = title_box.width - (2 * config.inner_pad_x)
+        for line in title_box.title_lines:
+            self.assertLessEqual(
+                measure_text_width(line, typography.title_font, title_box.title_font_size),
+                title_width,
+            )
+
+        footer_width = footer_box.width - (2 * config.inner_pad_x)
+        for line in footer_box.title_lines:
+            self.assertLessEqual(
+                measure_text_width(line, typography.body_font, footer_box.title_font_size),
+                footer_width,
+            )
+
+    def test_pdf_title_wraps_in_decorated_header(self) -> None:
+        long_title = " ".join(["Supercalifragilisticexpialidocious"] * 8)
+        render = koala.render_text(
+            "matrix:: Decision Matrix\n"
+            "columns:: Criterion | Option A | Option B\n"
+            "row:: Fit | Good | Better\n",
+            type="matrix",
+            layout="matrix",
+            theme="academic",
+            typography="formal",
+        )
+
+        svg = PdfFrameSvgBuilder.build(render, title=long_title)
+        root = etree.fromstring(svg.encode("utf-8"))
+        title_texts = [
+            element
+            for element in root.xpath("//*[local-name()='text']")
+            if element.get("font-size") == str(PdfFrameSvgBuilder.TITLE_SIZE)
+        ]
+        max_width = (
+            render.context.settings.layout_config.page_width
+            - (2 * PdfFrameSvgBuilder.MARGIN_X)
+        )
+
+        self.assertEqual(len(title_texts), PdfFrameSvgBuilder.MAX_TITLE_LINES)
+        for text in title_texts:
+            self.assertLessEqual(
+                measure_text_width(
+                    text.text or "",
+                    render.context.settings.typography.title_font,
+                    PdfFrameSvgBuilder.TITLE_SIZE,
+                ),
+                max_width,
+            )
 
     def test_render_text_accepts_explicit_flowchart_type(self) -> None:
         result = koala.render_text(

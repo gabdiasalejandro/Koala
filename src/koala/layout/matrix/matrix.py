@@ -93,7 +93,8 @@ def _title_box(
     typography: TypographyConfig,
 ) -> LayoutBox:
     content_width = width - (2 * config.inner_pad_x)
-    lines = wrap_text_lines(node.title, typography.title_font, typography.title_size_base + 2.0, content_width)
+    measure_font = _weighted_font_family(typography.title_font, "600")
+    lines = wrap_text_lines(node.title, measure_font, typography.title_size_base + 2.0, content_width)
     if not lines:
         lines = [node.title]
     font_size = typography.title_size_base + 2.0
@@ -167,7 +168,8 @@ def _cell_box(
     x: float = 0.0,
 ) -> LayoutBox:
     content_width = max(1.0, width - (2 * config.inner_pad_x))
-    lines = wrap_text_lines(node.title, font_family, font_size, content_width)
+    measure_font_family = _weighted_font_family(font_family, _cell_font_weight(node))
+    lines = wrap_text_lines(node.title, measure_font_family, font_size, content_width)
     if not lines and node.title:
         lines = [node.title]
     line_step = _line_step(font_size, typography)
@@ -194,6 +196,20 @@ def _cell_typography(cell: MatrixCell, typography: TypographyConfig) -> tuple[fl
     if cell.role == "row_header":
         return typography.body_size * ROW_HEADER_FACTOR, typography.title_font
     return typography.body_size * BODY_FACTOR, typography.body_font
+
+
+def _cell_font_weight(cell: MatrixCell) -> str | None:
+    if cell.role in {"header", "row_header", "footer"}:
+        return "600"
+    return None
+
+
+def _weighted_font_family(font_family: str, font_weight: str | None) -> str:
+    if font_weight is None:
+        return font_family
+    if font_weight in {"600", "700", "bold"}:
+        return f"{font_family} bold"
+    return font_family
 
 
 def _line_step(font_size: float, typography: TypographyConfig) -> float:

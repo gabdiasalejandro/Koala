@@ -136,17 +136,49 @@ def wrap_text_lines(text: str, font_name: str, font_size: float, max_width: floa
     current = ""
 
     for word in words:
-        trial = f"{current} {word}".strip()
-        if measure_text_width(trial, font_name, font_size) <= effective_max_width or not current:
-            current = trial
-        else:
-            lines.append(current)
-            current = word
+        word_segments = _split_word_to_width(word, font_name, font_size, effective_max_width)
+        for segment_index, segment in enumerate(word_segments):
+            if segment_index > 0 and current:
+                lines.append(current)
+                current = ""
+
+            trial = f"{current} {segment}".strip()
+            if measure_text_width(trial, font_name, font_size) <= effective_max_width or not current:
+                current = trial
+            else:
+                lines.append(current)
+                current = segment
 
     if current:
         lines.append(current)
 
     return lines
+
+
+def _split_word_to_width(
+    word: str,
+    font_name: str,
+    font_size: float,
+    max_width: float,
+) -> List[str]:
+    if measure_text_width(word, font_name, font_size) <= max_width:
+        return [word]
+
+    segments: List[str] = []
+    current = ""
+
+    for char in word:
+        trial = f"{current}{char}"
+        if current and measure_text_width(trial, font_name, font_size) > max_width:
+            segments.append(current)
+            current = char
+        else:
+            current = trial
+
+    if current:
+        segments.append(current)
+
+    return segments or [word]
 
 
 def measure_longest_word_width(text: str, font_name: str, font_size: float) -> float:

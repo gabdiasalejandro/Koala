@@ -8,10 +8,24 @@ SRC_DIR = ROOT_DIR / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
+from koala.layout.shared.measurement import measure_text_width, wrap_text_lines
 from koala.render.shared.geometry import synoptic_brace_path_data
 
 
 class SynopticBracePathDataTests(unittest.TestCase):
+    def test_wrap_text_lines_splits_unspaced_tokens_to_fit_width(self) -> None:
+        max_width = 86.0
+        lines = wrap_text_lines(
+            "Recommendation: SupercalifragilisticexpialidociousSupercalifragilisticexpialidocious",
+            "Helvetica",
+            12.0,
+            max_width,
+        )
+
+        self.assertGreater(len(lines), 2)
+        for line in lines:
+            self.assertLessEqual(measure_text_width(line, "Helvetica", 12.0), max_width)
+
     def test_builds_brace_without_parent_chase_segment(self) -> None:
         path_data = synoptic_brace_path_data(
             [

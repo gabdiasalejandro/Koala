@@ -12,6 +12,7 @@ from pathlib import Path
 from lxml import etree
 
 from koala.core.shared.errors import InvalidRenderConfigError
+from koala.layout.shared.measurement import measure_text_width, wrap_text_lines
 from koala.render.shared.models import ExportFormat, ExportQuality, ExportResult, RenderResult
 
 
@@ -175,6 +176,8 @@ class PdfFrameSvgBuilder:
     TITLE_SIZE = 20.0
     SUBTITLE_SIZE = 7.5
     ACCENT_HEIGHT = 2.0
+    TITLE_LINE_STEP = 13.5
+    MAX_TITLE_LINES = 2
 
     @classmethod
     def build(cls, render: RenderResult, *, title: str | None = None) -> str:
@@ -232,19 +235,26 @@ class PdfFrameSvgBuilder:
         page_width: float,
     ) -> None:
         if title:
-            text = etree.SubElement(
-                outer,
-                f"{{{SVG_NS}}}text",
-                x=str(cls.MARGIN_X),
-                y="35",
-                fill=title_color,
-                **{
-                    "font-family": typography_family,
-                    "font-size": str(cls.TITLE_SIZE),
-                    "font-weight": "600",
-                },
+            title_lines = cls._wrapped_title_lines(
+                title,
+                f"{typography_family} bold",
+                max(24.0, page_width - (2 * cls.MARGIN_X)),
             )
-            text.text = title
+            first_title_y = 35.0 if len(title_lines) == 1 else 27.0
+            for index, line in enumerate(title_lines):
+                text = etree.SubElement(
+                    outer,
+                    f"{{{SVG_NS}}}text",
+                    x=str(cls.MARGIN_X),
+                    y=str(first_title_y + (index * cls.TITLE_LINE_STEP)),
+                    fill=title_color,
+                    **{
+                        "font-family": typography_family,
+                        "font-size": str(cls.TITLE_SIZE),
+                        "font-weight": "600",
+                    },
+                )
+                text.text = line
 
         subtitle = etree.SubElement(
             outer,
@@ -295,3 +305,16 @@ class PdfFrameSvgBuilder:
     @staticmethod
     def _resolve_main_title(render: RenderResult) -> str:
         return render.title or "Koala diagram"
+
+    @classmethod
+    def _wrapped_title_lines(cls, title: str, font_family: str, max_width: float) -> list[str]:
+        lines = wrap_text_lines(title, font_family, cls.TITLE_SIZE, max_width)
+        if len(lines) <= cls.MAX_TITLE_LINES:
+            return lines
+
+        visible_lines = lines[: cls.MAX_TITLE_LINES]
+        last = visible_lines[-1]
+        while last and measure_text_width(f"{last}...", font_family, cls.TITLE_SIZE) > max_width:
+            last = last[:-1]
+        visible_lines[-1] = f"{last}..." if last else "..."
+        return visible_lines
