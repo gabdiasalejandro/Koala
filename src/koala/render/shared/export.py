@@ -14,6 +14,7 @@ from lxml import etree
 from koala.core.shared.errors import InvalidRenderConfigError
 from koala.layout.shared.measurement import measure_text_width, wrap_text_lines
 from koala.render.shared.models import ExportFormat, ExportQuality, ExportResult, RenderResult
+from koala.render.shared.svg.text import svg_font_family
 
 
 PNG_DPI_BY_QUALITY: dict[ExportQuality, int] = {
@@ -249,7 +250,7 @@ class PdfFrameSvgBuilder:
                     y=str(first_title_y + (index * cls.TITLE_LINE_STEP)),
                     fill=title_color,
                     **{
-                        "font-family": typography_family,
+                        "font-family": svg_font_family(typography_family),
                         "font-size": str(cls.TITLE_SIZE),
                         "font-weight": "600",
                     },
@@ -263,7 +264,7 @@ class PdfFrameSvgBuilder:
             y="51",
             fill=accent_color,
             **{
-                "font-family": body_family,
+                "font-family": svg_font_family(body_family),
                 "font-size": str(cls.SUBTITLE_SIZE),
                 "letter-spacing": "0.4",
             },

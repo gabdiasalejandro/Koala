@@ -131,12 +131,13 @@ def wrap_text_lines(text: str, font_name: str, font_size: float, max_width: floa
     if not words:
         return []
 
+    hard_max_width = max(1.0, max_width)
     effective_max_width = max(1.0, max_width - _wrap_safety_padding(font_name, font_size))
     lines: List[str] = []
     current = ""
 
     for word in words:
-        word_segments = _split_word_to_width(word, font_name, font_size, effective_max_width)
+        word_segments = _split_word_to_width(word, font_name, font_size, hard_max_width)
         for segment_index, segment in enumerate(word_segments):
             if segment_index > 0 and current:
                 lines.append(current)

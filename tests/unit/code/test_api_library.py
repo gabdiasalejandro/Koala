@@ -191,6 +191,7 @@ class LibraryApiTests(unittest.TestCase):
         )
 
         self.assertEqual(len(title_texts), PdfFrameSvgBuilder.MAX_TITLE_LINES)
+        self.assertIn("Liberation Serif", title_texts[0].get("font-family", ""))
         for text in title_texts:
             self.assertLessEqual(
                 measure_text_width(
@@ -258,6 +259,7 @@ class LibraryApiTests(unittest.TestCase):
         self.assertEqual(matrix_result.context.settings.typography_name, "casual")
         self.assertIn("Trebuchet MS", matrix_result.svg)
         self.assertIn("Verdana", matrix_result.svg)
+        self.assertIn("Liberation Sans", matrix_result.svg)
 
     def test_cli_typographies_can_be_filtered_by_document_type(self) -> None:
         stdout = io.StringIO()

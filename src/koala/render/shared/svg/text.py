@@ -14,6 +14,22 @@ from koala.layout.shared.measurement import measure_text_width
 from koala.render.shared.models import SvgTextBlockSpec, SvgTextLineSpec
 
 
+_SVG_FONT_STACKS = {
+    "arial": "Arial, Liberation Sans, DejaVu Sans, sans-serif",
+    "helvetica": "Helvetica, Arial, Liberation Sans, DejaVu Sans, sans-serif",
+    "helvetica-bold": "Helvetica, Arial, Liberation Sans, DejaVu Sans, sans-serif",
+    "georgia": "Georgia, Noto Serif, Liberation Serif, DejaVu Serif, serif",
+    "times new roman": "Times New Roman, Liberation Serif, DejaVu Serif, serif",
+    "trebuchet ms": "Trebuchet MS, Liberation Sans, DejaVu Sans, sans-serif",
+    "verdana": "Verdana, Liberation Sans, DejaVu Sans, sans-serif",
+}
+
+
+def svg_font_family(font_family: str) -> str:
+    normalized = " ".join(font_family.strip().lower().split())
+    return _SVG_FONT_STACKS.get(normalized, font_family)
+
+
 class SvgTextRenderer:
     """Renderer especializado en bloques y lineas de texto SVG."""
 
@@ -67,7 +83,7 @@ class SvgTextRenderer:
                 "text_anchor": "middle",
                 "font_size": spec.style.font_size,
                 "fill": spec.style.fill,
-                "font_family": spec.style.font_family,
+                "font_family": svg_font_family(spec.style.font_family),
             }
             if spec.style.font_weight is not None:
                 text_kwargs["font_weight"] = spec.style.font_weight
@@ -120,7 +136,7 @@ class SvgTextRenderer:
             "insert": (spec.x, spec.y),
             "font_size": spec.style.font_size,
             "fill": spec.style.fill,
-            "font_family": spec.style.font_family,
+            "font_family": svg_font_family(spec.style.font_family),
         }
         if spec.style.font_weight is not None:
             text_kwargs["font_weight"] = spec.style.font_weight

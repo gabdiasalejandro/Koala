@@ -13,6 +13,14 @@ from koala.render.shared.geometry import synoptic_brace_path_data
 
 
 class SynopticBracePathDataTests(unittest.TestCase):
+    def test_wrap_text_lines_does_not_split_words_that_fit_hard_width(self) -> None:
+        font_name = "Georgia"
+        font_size = 18.2
+        word = "Alimentación"
+        max_width = measure_text_width(word, font_name, font_size) + 0.1
+
+        self.assertEqual(wrap_text_lines(word, font_name, font_size, max_width), [word])
+
     def test_wrap_text_lines_splits_unspaced_tokens_to_fit_width(self) -> None:
         max_width = 86.0
         lines = wrap_text_lines(
