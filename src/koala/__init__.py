@@ -8,6 +8,7 @@ from koala.api import (
     ExportQuality,
     ExportResult,
     SaveTextConfig,
+    SafeRenderConfig,
     ValidateTextConfig,
     ValidationError,
     available_document_types,
@@ -19,12 +20,18 @@ from koala.api import (
     export_text,
     inspect_text,
     render_text,
+    safe_export_text,
+    safe_render_text,
     save_text,
     validate_text,
 )
 from koala.core.shared import (
     DocumentType,
     DocumentTypeMismatchError,
+    InputLimitExceededError,
+    InvalidRenderConfigError,
+    KoalaError,
+    KoalaInputError,
     UnknownDocumentTypeError,
 )
 
@@ -37,7 +44,12 @@ __all__ = [
     "ExportFormat",
     "ExportQuality",
     "ExportResult",
+    "InputLimitExceededError",
+    "InvalidRenderConfigError",
+    "KoalaError",
+    "KoalaInputError",
     "SaveTextConfig",
+    "SafeRenderConfig",
     "ValidateTextConfig",
     "ValidationError",
     "UnknownDocumentTypeError",
@@ -50,6 +62,8 @@ __all__ = [
     "export_text",
     "inspect_text",
     "render_text",
+    "safe_export_text",
+    "safe_render_text",
     "save_text",
     "validate_text",
 ]

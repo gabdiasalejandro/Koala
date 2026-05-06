@@ -12,6 +12,7 @@ La regla es simple:
 
 from typing import Dict
 
+from koala.core.shared.errors import InvalidRenderConfigError
 from koala.render.shared.models import NodeStyle, NodeStyleOverride, ThemeConfig, ThemeDefinition
 
 
@@ -484,7 +485,11 @@ class ThemeCatalog:
         definition = cls.DEFINITIONS.get(resolved_name)
         if definition is None:
             available = ", ".join(sorted(cls.DEFINITIONS.keys()))
-            raise ValueError(f"theme '{resolved_name}' no existe. Disponibles: {available}.")
+            raise InvalidRenderConfigError(
+                key="theme",
+                value=resolved_name,
+                expected=f"uno de: {available}",
+            )
         return cls._build_config(definition)
 
     @classmethod

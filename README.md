@@ -159,7 +159,9 @@ Library API summary:
 
 - `koala.compile(path, **config)` or `koala.compile_file(path, **config)`: source file to `.svg`
 - `koala.render_text(text, **config)`: Koala DSL text to in-memory SVG via `result.svg`
+- `koala.safe_render_text(text, **config)`: in-memory SVG with defensive limits for server/LLM input
 - `koala.export_text(text, format="svg"|"png"|"pdf", **config)`: Koala DSL text to in-memory export bytes via `result.content`
+- `koala.safe_export_text(text, format="svg"|"png"|"pdf", **config)`: in-memory export with defensive limits and no file writes
 - `koala.export_file(path, format="svg"|"png"|"pdf", **config)`: source file to in-memory export bytes
 - `koala.save_text(text, output, **config)`: raw Koala DSL text to `.txt`
 - `koala.compile_text(text, **config)`: legacy helper that still writes `.svg` to disk
@@ -168,6 +170,7 @@ Library API summary:
 `ExportResult` includes final bytes in `result.content`, the HTTP media type in `result.media_type`, and `result.output_path` when an explicit output is written.
 PNG export uses direct SVG conversion at `medium` or `high` quality. PDF export is vector-based and adds a professional frame with margins, a title resolved from the first `main::` node, and theme-aware colors.
 All render/export APIs accept `type="tree"`, `type="matrix"`, or `type="flowchart"`; it defaults to `tree`. Tree layouts are `tree`, `radial`, `synoptic`, and `synoptic_boxes`. Matrix uses `layout="matrix"`. Flowchart uses `layout="flowchart"`. If DSL syntax does not match the requested type, Koala raises `DocumentTypeMismatchError`.
+For untrusted or LLM-generated source, prefer `safe_render_text(...)` or `safe_export_text(...)`. The safe APIs currently accept only `tree` and `matrix`, enforce default limits, reject parser warnings by default, and raise `KoalaInputError` subclasses that can be mapped to HTTP 422 responses.
 
 In general, avoid embedding `@show-node-numbers` in document metadata. Prefer CLI flags, library arguments, or user config defaults unless a file really needs to be self-descriptive about numbering.
 

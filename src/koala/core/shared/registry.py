@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Protocol
 
-from koala.core.shared.errors import UnknownDocumentTypeError
+from koala.core.shared.errors import InvalidRenderConfigError, UnknownDocumentTypeError
 from koala.core.shared.types import DEFAULT_DOCUMENT_TYPE, DocumentType
 from koala.render.shared.models import RenderContext, RenderResult
 
@@ -110,6 +110,12 @@ class DocumentPipelineRegistry:
     def normalize_type(cls, document_type: str | None) -> str:
         if document_type is None:
             return DEFAULT_DOCUMENT_TYPE
+        if not isinstance(document_type, str):
+            raise InvalidRenderConfigError(
+                key="type",
+                value=document_type,
+                expected="string: tree, matrix o flowchart",
+            )
         return document_type.strip().lower().replace("-", "_")
 
     @classmethod

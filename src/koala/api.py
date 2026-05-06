@@ -9,6 +9,7 @@ from typing import TypedDict
 from koala.config import KoalaUserConfig, load_user_config
 from koala.core.shared.io import load_input_text
 from koala.core.tree.models import ParseWarning
+from koala.core.shared.errors import InputLimitExceededError, InvalidRenderConfigError, KoalaInputError
 from koala.core.shared.registry import DocumentPipelineRegistry
 from koala.core.shared.types import DocumentType
 # `layout` es un identificador opaco a nivel API. Cada pipeline de documento
@@ -42,6 +43,10 @@ class ContextConfig(TypedDict, total=False):
     background: str
     use_user_config: bool
     user_config: KoalaUserConfig
+    max_input_bytes: int
+    max_input_lines: int
+    max_nodes: int
+    max_warnings: int
 
 
 class CompileConfig(TypedDict, total=False):
@@ -60,6 +65,10 @@ class CompileConfig(TypedDict, total=False):
     desktop: bool
     use_user_config: bool
     user_config: KoalaUserConfig
+    max_input_bytes: int
+    max_input_lines: int
+    max_nodes: int
+    max_warnings: int
 
 
 class CompileTextConfig(CompileConfig, total=False):
@@ -75,6 +84,10 @@ class ValidateTextConfig(ContextConfig, total=False):
     strict: bool
 
 
+class SafeRenderConfig(ContextConfig, total=False):
+    """Configuracion aceptada por `koala.safe_render_text(text, **config)`."""
+
+
 class SaveTextConfig(TypedDict, total=False):
     """Configuracion aceptada por `koala.save_text(text, output, **config)`."""
 
@@ -82,7 +95,7 @@ class SaveTextConfig(TypedDict, total=False):
 
 
 @dataclass(frozen=True)
-class ValidationError(ValueError):
+class ValidationError(KoalaInputError):
     """Error de validacion para la API de libreria."""
 
     warnings: tuple[ParseWarning, ...]
@@ -97,10 +110,28 @@ class ValidationError(ValueError):
         return f"Validacion fallida con {count} warning(s). Primero: {location}: {first_warning.message}"
 
 
+@dataclass(frozen=True)
+class _RenderLimits:
+    max_input_bytes: int | None = None
+    max_input_lines: int | None = None
+    max_nodes: int | None = None
+    max_warnings: int | None = None
+
+
+SAFE_RENDER_DEFAULT_LIMITS = {
+    "max_input_bytes": 80_000,
+    "max_input_lines": 800,
+    "max_nodes": 250,
+    "max_warnings": 0,
+}
+SAFE_RENDER_DOCUMENT_TYPES = ("matrix", "tree")
+
+
 _ALLOWED_COMPILE_CONFIG_KEYS = frozenset(CompileConfig.__annotations__)
 _ALLOWED_COMPILE_TEXT_CONFIG_KEYS = frozenset(CompileTextConfig.__annotations__)
 _ALLOWED_CONTEXT_CONFIG_KEYS = frozenset(ContextConfig.__annotations__)
 _ALLOWED_VALIDATE_TEXT_CONFIG_KEYS = frozenset(ValidateTextConfig.__annotations__)
+_ALLOWED_SAFE_RENDER_CONFIG_KEYS = frozenset(SafeRenderConfig.__annotations__)
 _ALLOWED_SAVE_TEXT_CONFIG_KEYS = frozenset(SaveTextConfig.__annotations__)
 
 
@@ -165,6 +196,7 @@ def compile(path: str | Path, **config: Unpack[CompileConfig]) -> RenderResult:
         desktop=desktop,
         user_config=resolved_user_config,
         desktop_fallback_dir=input_path.parent,
+        limits=_limits_from_config(config),
     )
 
 
@@ -215,6 +247,7 @@ def compile_text(text: str, **config: Unpack[CompileTextConfig]) -> RenderResult
         desktop=desktop,
         user_config=resolved_user_config,
         desktop_fallback_dir=base_dir,
+        limits=_limits_from_config(config),
     )
 
 
@@ -253,7 +286,22 @@ def render_text(text: str, **config: Unpack[ContextConfig]) -> RenderResult:
         desktop=False,
         user_config=resolved_user_config,
         desktop_fallback_dir=Path.cwd(),
+        limits=_limits_from_config(config),
     )
+
+
+def safe_render_text(text: str, **config: Unpack[SafeRenderConfig]) -> RenderResult:
+    """Renderiza texto con defaults defensivos para inputs no confiables.
+
+    Esta entrada esta pensada para servidores que reciben DSL generado por IA:
+    limita tamano/lineas/nodos, falla si hay warnings y por ahora solo acepta
+    `type="tree"` o `type="matrix"`.
+    """
+
+    _validate_config_keys(config, _ALLOWED_SAFE_RENDER_CONFIG_KEYS, "koala.safe_render_text")
+    safe_config = _merge_safe_render_config(config)
+    _require_safe_document_type(safe_config.get("type"))
+    return render_text(text, **safe_config)  # type: ignore[arg-type]
 
 
 def export_text(
@@ -278,6 +326,27 @@ def export_text(
     if output is None:
         return export
     return ExportConverter.write(export, _resolve_export_output_path(output, Path.cwd()))
+
+
+def safe_export_text(
+    text: str,
+    *,
+    format: ExportFormat = "svg",
+    quality: ExportQuality = "high",
+    title: str | None = None,
+    **config: Unpack[SafeRenderConfig],
+) -> ExportResult:
+    """Exporta texto con los mismos limites defensivos de `safe_render_text`.
+
+    No acepta `output`: el resultado vuelve en memoria para que el servidor
+    decida como responder o almacenar los bytes.
+    """
+
+    _validate_config_keys(config, _ALLOWED_SAFE_RENDER_CONFIG_KEYS, "koala.safe_export_text")
+    safe_config = _merge_safe_render_config(config)
+    _require_safe_document_type(safe_config.get("type"))
+    render = render_text(text, **safe_config)  # type: ignore[arg-type]
+    return ExportConverter.convert(render, format=format, quality=quality, title=title)
 
 
 def export_file(
@@ -317,6 +386,7 @@ def export_file(
         desktop=False,
         user_config=resolved_user_config,
         desktop_fallback_dir=input_path.parent,
+        limits=_limits_from_config(config),
     )
     export = ExportConverter.convert(render, format=format, quality=quality, title=title)
     if output is None:
@@ -328,6 +398,7 @@ def save_text(text: str, output: str | Path, **config: Unpack[SaveTextConfig]) -
     """Guarda texto plano en un archivo `.txt` y retorna la ruta final."""
 
     _validate_config_keys(config, _ALLOWED_SAVE_TEXT_CONFIG_KEYS, "koala.save_text")
+    _require_text(text)
     base_dir = _resolve_base_dir(config.get("base_dir"))
     output_path = _resolve_text_output_path(output, base_dir)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -351,6 +422,7 @@ def inspect_text(text: str, **config: Unpack[ContextConfig]) -> RenderContext:
         background=config.get("background"),
         use_user_config=config.get("use_user_config", False),
         user_config=config.get("user_config"),
+        limits=_limits_from_config(config),
     )
 
 
@@ -374,6 +446,7 @@ def validate_text(text: str, **config: Unpack[ValidateTextConfig]) -> RenderCont
         background=config.get("background"),
         use_user_config=config.get("use_user_config", False),
         user_config=config.get("user_config"),
+        limits=_limits_from_config(config),
     )
     if strict and context.parsed.warnings:
         raise ValidationError(tuple(context.parsed.warnings))
@@ -399,9 +472,12 @@ def _render_source_text(
     desktop: bool,
     user_config: KoalaUserConfig,
     desktop_fallback_dir: Path,
+    limits: "_RenderLimits",
 ) -> RenderResult:
+    _enforce_source_text_limits(source_text, limits)
     pipeline = DocumentPipelineRegistry.require(document_type)
     parsed = pipeline.parse(source_text)
+    _enforce_parsed_document_limits(parsed, limits)
     explicit_output_svg_path = _resolve_explicit_output_path(output, base_dir)
     output_dir_name, default_output_dir_name = (None, None)
     if persist_output:
@@ -456,10 +532,12 @@ def _build_context_from_text(
     background: str | None,
     use_user_config: bool,
     user_config: KoalaUserConfig | None,
+    limits: "_RenderLimits",
 ) -> RenderContext:
+    _enforce_source_text_limits(text, limits)
     resolved_user_config = _resolve_user_config(use_user_config, user_config)
     pipeline = DocumentPipelineRegistry.require(document_type)
-    return pipeline.inspect_text(
+    context = pipeline.inspect_text(
         text,
         layout=layout,
         theme_name=theme,
@@ -470,6 +548,8 @@ def _build_context_from_text(
         background_color=background,
         user_config=resolved_user_config,
     )
+    _enforce_parsed_document_limits(context.parsed, limits)
+    return context
 
 
 def _validate_config_keys(config: dict, allowed_keys: frozenset[str], func_name: str) -> None:
@@ -483,6 +563,96 @@ def _validate_config_keys(config: dict, allowed_keys: frozenset[str], func_name:
         f"Parametros invalidos para {func_name}(...): {invalid_keys}. "
         f"Disponibles: {available_keys}."
     )
+
+
+def _limits_from_config(config: dict) -> _RenderLimits:
+    return _RenderLimits(
+        max_input_bytes=_optional_positive_int(config.get("max_input_bytes"), "max_input_bytes"),
+        max_input_lines=_optional_positive_int(config.get("max_input_lines"), "max_input_lines"),
+        max_nodes=_optional_positive_int(config.get("max_nodes"), "max_nodes"),
+        max_warnings=_optional_positive_int(
+            config.get("max_warnings"),
+            "max_warnings",
+            allow_zero=True,
+        ),
+    )
+
+
+def _merge_safe_render_config(config: dict) -> dict:
+    merged = dict(SAFE_RENDER_DEFAULT_LIMITS)
+    merged.update(config)
+    return merged
+
+
+def _require_safe_document_type(document_type: object) -> None:
+    normalized = DocumentPipelineRegistry.normalize_type(document_type)  # type: ignore[arg-type]
+    if normalized not in SAFE_RENDER_DOCUMENT_TYPES:
+        available = ", ".join(SAFE_RENDER_DOCUMENT_TYPES)
+        raise InvalidRenderConfigError(
+            key="type",
+            value=document_type if document_type is not None else normalized,
+            expected=f"uno de: {available}",
+        )
+
+
+def _optional_positive_int(value: object, key: str, *, allow_zero: bool = False) -> int | None:
+    if value is None:
+        return None
+    minimum = 0 if allow_zero else 1
+    if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
+        raise InvalidRenderConfigError(
+            key=key,
+            value=value,
+            expected="entero positivo" if not allow_zero else "entero >= 0",
+        )
+    return value
+
+
+def _require_text(text: object) -> str:
+    if not isinstance(text, str):
+        raise InvalidRenderConfigError(
+            key="text",
+            value=text,
+            expected="string con DSL Koala",
+        )
+    return text
+
+
+def _enforce_source_text_limits(source_text: object, limits: _RenderLimits) -> str:
+    text = _require_text(source_text)
+    if limits.max_input_bytes is not None:
+        byte_count = len(text.encode("utf-8"))
+        if byte_count > limits.max_input_bytes:
+            raise InputLimitExceededError("max_input_bytes", byte_count, limits.max_input_bytes)
+
+    if limits.max_input_lines is not None:
+        line_count = len(text.splitlines())
+        if line_count > limits.max_input_lines:
+            raise InputLimitExceededError("max_input_lines", line_count, limits.max_input_lines)
+
+    return text
+
+
+def _enforce_parsed_document_limits(parsed, limits: _RenderLimits) -> None:
+    if limits.max_nodes is not None:
+        node_count = _count_parsed_nodes(parsed)
+        if node_count > limits.max_nodes:
+            raise InputLimitExceededError("max_nodes", node_count, limits.max_nodes)
+
+    if limits.max_warnings is not None:
+        warning_count = len(getattr(parsed, "warnings", ()))
+        if warning_count > limits.max_warnings:
+            raise InputLimitExceededError("max_warnings", warning_count, limits.max_warnings)
+
+
+def _count_parsed_nodes(parsed) -> int:
+    node_index = getattr(parsed, "node_index", None)
+    if node_index is not None:
+        return len(node_index)
+    nodes = getattr(parsed, "nodes", None)
+    if nodes is not None:
+        return len(nodes)
+    return 0
 
 
 def _resolve_user_config(

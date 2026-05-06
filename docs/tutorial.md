@@ -251,8 +251,10 @@ Current public API:
 - `koala.compile(path, **config)`: render `.txt` or `.docx` to SVG on disk
 - `koala.compile_file(path, **config)`: explicit alias for `compile(...)`
 - `koala.render_text(text, **config)`: render raw DSL to in-memory SVG
+- `koala.safe_render_text(text, **config)`: render raw DSL with server-oriented limits
 - `koala.compile_text(text, **config)`: legacy helper that renders raw DSL and writes SVG to disk
 - `koala.export_text(text, format="svg"|"png"|"pdf", **config)`: export raw DSL to bytes
+- `koala.safe_export_text(text, format="svg"|"png"|"pdf", **config)`: export raw DSL with server-oriented limits and no file writes
 - `koala.export_file(path, format="svg"|"png"|"pdf", **config)`: export a source file to bytes
 - `koala.save_text(text, output, **config)`: save raw DSL text as `.txt`
 - `koala.inspect_text(text, **config)`: resolve `RenderContext` without writing output
@@ -282,6 +284,47 @@ Common config kwargs:
 - `user_config`
 
 File-writing APIs also accept output controls such as `output`, `output_dir`, `desktop`, `base_dir`, and `output_name`, depending on the function.
+
+### Safe Rendering For Servers
+
+Use `safe_render_text(...)` or `safe_export_text(...)` when the source text comes from an LLM, user input, or an HTTP request.
+
+Safe rendering currently accepts only:
+
+- `type="tree"`
+- `type="matrix"`
+
+It deliberately rejects `flowchart` for now.
+
+Default limits:
+
+- `max_input_bytes=80000`
+- `max_input_lines=800`
+- `max_nodes=250`
+- `max_warnings=0`
+
+You can override those limits per call.
+
+```python
+import koala
+
+try:
+    export = koala.safe_export_text(
+        generated_dsl,
+        type="tree",
+        layout="tree",
+        format="svg",
+        max_nodes=180,
+    )
+except koala.KoalaInputError as exc:
+    # In FastAPI this is usually a 422 response.
+    raise ValueError(str(exc))
+
+print(export.media_type)
+print(export.content)
+```
+
+`safe_export_text(...)` always returns bytes in memory. It does not accept `output`, so the server owns all storage and response handling.
 
 ## 4. User Config
 

@@ -224,6 +224,14 @@ Inputs aceptados por `koala.render_text(text, **config)`:
 - `use_user_config` y `user_config`
 - no escribe archivos; el SVG serializado queda en `result.svg`
 
+Para input no confiable o generado por IA, usa `koala.safe_render_text(...)` o `koala.safe_export_text(...)`:
+
+- aceptan por ahora solo `type="tree"` y `type="matrix"`
+- aplican límites defensivos por default: `max_input_bytes=80000`, `max_input_lines=800`, `max_nodes=250`, `max_warnings=0`
+- fallan si el parser genera warnings, salvo que sobreescribas `max_warnings`
+- levantan subclases de `koala.KoalaInputError`, fáciles de mapear a HTTP 422
+- `safe_export_text(...)` retorna bytes en memoria y no acepta rutas de salida
+
 Inputs aceptados por `koala.export_text(text, format=..., **config)` y `koala.export_file(path, format=..., **config)`:
 
 - `format`: `svg`, `png` o `pdf`

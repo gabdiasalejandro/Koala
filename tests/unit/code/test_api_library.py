@@ -226,6 +226,100 @@ class LibraryApiTests(unittest.TestCase):
                 theme="academic",
             )
 
+    def test_render_text_rejects_non_string_text_with_domain_error(self) -> None:
+        with self.assertRaises(koala.InvalidRenderConfigError):
+            koala.render_text(123, type="tree", layout="tree")  # type: ignore[arg-type]
+
+    def test_render_text_rejects_invalid_text_align_with_domain_error(self) -> None:
+        with self.assertRaises(koala.InvalidRenderConfigError):
+            koala.render_text(
+                "1 Root\nBody.\n",
+                type="tree",
+                layout="tree",
+                text_align="center",
+            )
+
+    def test_export_text_rejects_invalid_format_type_with_domain_error(self) -> None:
+        with self.assertRaises(koala.InvalidRenderConfigError):
+            koala.export_text(
+                "1 Root\nBody.\n",
+                type="tree",
+                layout="tree",
+                format=123,  # type: ignore[arg-type]
+            )
+
+    def test_render_text_can_enforce_server_side_input_limits(self) -> None:
+        with self.assertRaises(koala.InputLimitExceededError):
+            koala.render_text(
+                "1 Root\nBody.\n\n1.1 Child\nBody.\n",
+                type="tree",
+                layout="tree",
+                max_nodes=1,
+            )
+
+    def test_validate_text_can_treat_warnings_as_limit_errors(self) -> None:
+        with self.assertRaises(koala.InputLimitExceededError):
+            koala.validate_text(
+                "1.2 Missing parent\nBody.\n",
+                type="tree",
+                layout="tree",
+                max_warnings=0,
+            )
+
+    def test_safe_render_text_renders_tree_with_server_defaults(self) -> None:
+        result = koala.safe_render_text(
+            "1 Root\nBody.\n",
+            type="tree",
+            layout="tree",
+            theme="academic",
+        )
+
+        self.assertEqual(result.document_type, "tree")
+        self.assertIsNone(result.output_svg)
+        self.assertIn("<svg", result.svg)
+
+    def test_safe_render_text_rejects_warnings_by_default(self) -> None:
+        with self.assertRaises(koala.InputLimitExceededError):
+            koala.safe_render_text(
+                "1.2 Missing parent\nBody.\n",
+                type="tree",
+                layout="tree",
+            )
+
+    def test_safe_render_text_allows_warning_limit_override(self) -> None:
+        result = koala.safe_render_text(
+            "1.2 Missing parent\nBody.\n",
+            type="tree",
+            layout="tree",
+            max_warnings=2,
+        )
+
+        self.assertEqual(result.document_type, "tree")
+        self.assertGreater(len(result.context.parsed.warnings), 0)
+
+    def test_safe_render_text_rejects_flowchart_for_now(self) -> None:
+        with self.assertRaises(koala.InvalidRenderConfigError):
+            koala.safe_render_text(
+                "flowchart:: Publish\nstep:: draft\n",
+                type="flowchart",
+                layout="flowchart",
+            )
+
+    def test_safe_export_text_returns_svg_bytes_without_writing(self) -> None:
+        export = koala.safe_export_text(
+            "matrix:: Decision Matrix\n"
+            "columns:: Criterion | Option A | Option B\n"
+            "row:: Cost | Low | High\n",
+            type="matrix",
+            layout="matrix",
+            format="svg",
+            max_warnings=0,
+        )
+
+        self.assertEqual(export.media_type, "image/svg+xml")
+        self.assertIsNone(export.output_path)
+        self.assertIn(b"<svg", export.content)
+
     def test_compile_text_legacy_persists_svg_and_returns_svg_text(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             base_dir = Path(tmp_dir)

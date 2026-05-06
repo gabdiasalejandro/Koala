@@ -14,6 +14,7 @@ from dataclasses import replace
 from typing import Optional
 
 from koala.core.tree.models import ParsedDocument
+from koala.core.shared.errors import InvalidRenderConfigError
 from koala.layout.shared.models import LayoutScene
 from koala.render.shared.models import RenderContext, RenderSettings
 from koala.render.shared.settings import DEFAULT_LAYOUT_KIND, PageSizeName, RenderSettingsCatalog
@@ -66,6 +67,8 @@ class MetadataValueResolver:
     def normalize_text_align(cls, value: str | None) -> str | None:
         if value is None:
             return None
+        if not isinstance(value, str):
+            return None
 
         normalized = value.strip().lower()
         if normalized in cls.TEXT_ALIGN_VALUES:
@@ -81,8 +84,10 @@ class MetadataValueResolver:
 
             normalized = cls.normalize_hex_color(raw_value)
             if normalized is None:
-                raise ValueError(
-                    f"Metadata '{key}' invalida: '{raw_value}'. Usa un color hex como #F7F4ED."
+                raise InvalidRenderConfigError(
+                    key=key,
+                    value=raw_value,
+                    expected="color hex como #F7F4ED",
                 )
             return normalized
         return None
@@ -90,6 +95,8 @@ class MetadataValueResolver:
     @classmethod
     def normalize_hex_color(cls, value: str | None) -> str | None:
         if value is None:
+            return None
+        if not isinstance(value, str):
             return None
 
         normalized = value.strip()
@@ -141,6 +148,12 @@ class RenderSettingsResolver:
                 "node_numbers",
             )
         )
+        if resolved_show_node_numbers is not None and not isinstance(resolved_show_node_numbers, bool):
+            raise InvalidRenderConfigError(
+                key="show_node_numbers",
+                value=resolved_show_node_numbers,
+                expected="booleano",
+            )
         if resolved_show_node_numbers is None:
             resolved_show_node_numbers = default_show_node_numbers
 
@@ -152,15 +165,23 @@ class RenderSettingsResolver:
             page_size_name=resolved_page_size_name,
             show_node_numbers=resolved_show_node_numbers,
         )
-        resolved_text_align = (
-            MetadataValueResolver.normalize_text_align(text_align)
-            or MetadataValueResolver.resolve_text_align(
-                parsed.metadata,
-                "text-align",
-                "text_align",
+        if text_align is not None:
+            resolved_text_align = MetadataValueResolver.normalize_text_align(text_align)
+            if resolved_text_align is None:
+                raise InvalidRenderConfigError(
+                    key="text_align",
+                    value=text_align,
+                    expected="'left' o 'justify'",
+                )
+        else:
+            resolved_text_align = (
+                MetadataValueResolver.resolve_text_align(
+                    parsed.metadata,
+                    "text-align",
+                    "text_align",
+                )
+                or MetadataValueResolver.normalize_text_align(default_text_align)
             )
-            or MetadataValueResolver.normalize_text_align(default_text_align)
-        )
         if resolved_text_align is not None:
             settings = replace(
                 settings,
@@ -215,8 +236,10 @@ class RenderSettingsResolver:
         if explicit_background_color is not None:
             normalized = MetadataValueResolver.normalize_hex_color(explicit_background_color)
             if normalized is None:
-                raise ValueError(
-                    "Background invalido. Usa un color hex como #F7F4ED."
+                raise InvalidRenderConfigError(
+                    key="background",
+                    value=explicit_background_color,
+                    expected="color hex como #F7F4ED",
                 )
             return normalized
 

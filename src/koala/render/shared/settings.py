@@ -17,6 +17,7 @@ from dataclasses import dataclass, replace
 from typing import Dict, Literal, Optional
 
 from koala.layout.shared.models import LayoutConfig, TypographyConfig
+from koala.core.shared.errors import InvalidRenderConfigError
 from koala.render.shared.models import RenderSettings
 from koala.render.shared.themes import DEFAULT_THEME_NAME, ThemeCatalog
 
@@ -80,9 +81,10 @@ class RenderProfileCatalog:
             available = ", ".join(
                 sorted(f"{dt}/{lk}" for dt, lk in cls._PROFILES.keys())
             )
-            raise ValueError(
-                f"profile para document_type='{document_type}' layout='{layout_kind}' "
-                f"no esta registrado. Disponibles: {available or '(ninguno)'}."
+            raise InvalidRenderConfigError(
+                key="layout",
+                value=layout_kind,
+                expected=f"layout registrado para document_type='{document_type}'. Disponibles: {available or '(ninguno)'}",
             )
         return profile
 
@@ -95,9 +97,10 @@ class RenderProfileCatalog:
             available = ", ".join(
                 sorted(n for dt, n in cls._TYPOGRAPHIES.keys() if dt == document_type)
             )
-            raise ValueError(
-                f"typography '{name}' no existe para document_type='{document_type}'. "
-                f"Disponibles: {available or '(ninguno)'}."
+            raise InvalidRenderConfigError(
+                key="typography",
+                value=name,
+                expected=f"typography para document_type='{document_type}'. Disponibles: {available or '(ninguno)'}",
             )
         return typography
 
@@ -182,7 +185,11 @@ class RenderSettingsCatalog:
         preset = presets.get(name)
         if preset is None:
             available = ", ".join(sorted(presets.keys()))
-            raise ValueError(f"{preset_type} '{name}' no existe. Disponibles: {available}.")
+            raise InvalidRenderConfigError(
+                key=preset_type,
+                value=name,
+                expected=f"uno de: {available}",
+            )
         return preset
 
 

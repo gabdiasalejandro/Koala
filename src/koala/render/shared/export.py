@@ -11,6 +11,7 @@ from pathlib import Path
 
 from lxml import etree
 
+from koala.core.shared.errors import InvalidRenderConfigError
 from koala.render.shared.models import ExportFormat, ExportQuality, ExportResult, RenderResult
 
 
@@ -66,7 +67,11 @@ class ExportConverter:
             )
 
         if normalized_quality != PDF_QUALITY:
-            raise ValueError("PDF solo soporta quality='high'.")
+            raise InvalidRenderConfigError(
+                key="quality",
+                value=quality,
+                expected="PDF solo soporta quality='high'",
+            )
 
         content = cls._export_pdf(render, title=title)
         return ExportResult(
@@ -97,16 +102,36 @@ class ExportConverter:
 
     @staticmethod
     def _normalize_format(format: str) -> ExportFormat:
+        if not isinstance(format, str):
+            raise InvalidRenderConfigError(
+                key="format",
+                value=format,
+                expected="'svg', 'png' o 'pdf'",
+            )
         normalized = format.strip().lower()
         if normalized not in {"svg", "png", "pdf"}:
-            raise ValueError("Formato de exportacion invalido. Usa 'svg', 'png' o 'pdf'.")
+            raise InvalidRenderConfigError(
+                key="format",
+                value=format,
+                expected="'svg', 'png' o 'pdf'",
+            )
         return normalized  # type: ignore[return-value]
 
     @staticmethod
     def _normalize_quality(quality: str) -> ExportQuality:
+        if not isinstance(quality, str):
+            raise InvalidRenderConfigError(
+                key="quality",
+                value=quality,
+                expected="'medium' o 'high'",
+            )
         normalized = quality.strip().lower()
         if normalized not in {"medium", "high"}:
-            raise ValueError("Calidad de exportacion invalida. Usa 'medium' o 'high'.")
+            raise InvalidRenderConfigError(
+                key="quality",
+                value=quality,
+                expected="'medium' o 'high'",
+            )
         return normalized  # type: ignore[return-value]
 
     @staticmethod
