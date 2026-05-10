@@ -71,7 +71,7 @@ TYPOGRAPHIES: Dict[str, TypographyConfig] = {
         body_size=11.4,
         relation_size=10.0,
         body_leading=14.2,
-        max_title_lines=3,
+        max_title_lines=5,
         title_line_extra=1.2,
     ),
 }

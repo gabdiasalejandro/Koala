@@ -37,7 +37,7 @@ TYPOGRAPHIES: Dict[str, TypographyConfig] = {
         body_size=10.6,
         relation_size=9.5,
         body_leading=13.2,
-        max_title_lines=3,
+        max_title_lines=5,
         title_line_extra=1.2,
     ),
     "formal": TypographyConfig(
@@ -48,7 +48,7 @@ TYPOGRAPHIES: Dict[str, TypographyConfig] = {
         body_size=10.4,
         relation_size=9.4,
         body_leading=13.0,
-        max_title_lines=3,
+        max_title_lines=5,
         title_line_extra=1.0,
     ),
 }

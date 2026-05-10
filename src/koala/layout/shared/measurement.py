@@ -27,10 +27,11 @@ _FONT_WIDTH_FACTORS = {
     "verdana": 1.04,
 }
 _FONT_WRAP_PADDING_EM = {
-    "georgia": 0.12,
-    "trebuchet ms": 0.18,
-    "verdana": 0.20,
+    "georgia": 0.16,
+    "trebuchet ms": 0.22,
+    "verdana": 0.24,
 }
+_MIN_SPLIT_TAIL_CHARS = 3
 
 
 def sort_node_key(number: str) -> List[int]:
@@ -90,8 +91,8 @@ def _wrap_safety_padding(font_name: str, font_size: float) -> float:
     """
 
     normalized = _normalize_font_name(font_name)
-    padding_em = _FONT_WRAP_PADDING_EM.get(normalized, 0.10)
-    return max(1.2, font_size * padding_em)
+    padding_em = _FONT_WRAP_PADDING_EM.get(normalized, 0.14)
+    return max(1.6, font_size * padding_em)
 
 
 def measure_text_width(text: str, font_name: str, font_size: float) -> float:
@@ -179,7 +180,42 @@ def _split_word_to_width(
     if current:
         segments.append(current)
 
+    _rebalance_split_tail(segments, font_name, font_size, max_width)
     return segments or [word]
+
+
+def _rebalance_split_tail(
+    segments: List[str],
+    font_name: str,
+    font_size: float,
+    max_width: float,
+) -> None:
+    """Evita que el último segmento quede con 1 o 2 caracteres.
+
+    Una cola muy corta se ve mal cuando el wrap parte una palabra. Si el
+    último segmento es demasiado corto, se mueven caracteres del segmento
+    anterior siempre que el último resultante siga cabiendo en `max_width`.
+    """
+
+    if len(segments) < 2:
+        return
+
+    last = segments[-1]
+    if len(last) >= _MIN_SPLIT_TAIL_CHARS:
+        return
+
+    prev = segments[-2]
+    needed = _MIN_SPLIT_TAIL_CHARS - len(last)
+    if len(prev) <= needed + 1:
+        return
+
+    moved = prev[-needed:]
+    candidate = moved + last
+    if measure_text_width(candidate, font_name, font_size) > max_width:
+        return
+
+    segments[-2] = prev[:-needed]
+    segments[-1] = candidate
 
 
 def measure_longest_word_width(text: str, font_name: str, font_size: float) -> float:
@@ -282,7 +318,31 @@ def choose_title_layout(
     content_width: float,
     typography: TypographyConfig,
 ) -> Tuple[List[str], float, float]:
+    """Elige tipografia del titulo en dos fases.
+
+    Fase 1: bajar tamano hasta que la palabra mas larga entre en el ancho
+    disponible, sin pasar de un piso conservador
+    (`title_size_base - title_word_fit_max_drop`, nunca menor a
+    `title_size_min`). El char-split queda como ultimo recurso real.
+
+    Fase 2: desde ese tamano, seguir bajando hasta `title_size_min` si hace
+    falta para no exceder `max_title_lines`. Si igual no entra, se truncan
+    las lineas extra con elipsis al final.
+    """
+
+    word_fit_floor = max(
+        typography.title_size_min,
+        typography.title_size_base - typography.title_word_fit_max_drop,
+    )
+
     font_size = typography.title_size_base
+    while font_size > word_fit_floor:
+        longest = measure_longest_word_width(title, typography.title_font, font_size)
+        if longest <= content_width:
+            break
+        font_size -= 0.5
+    if font_size < word_fit_floor:
+        font_size = word_fit_floor
 
     while font_size >= typography.title_size_min:
         lines = wrap_text_lines(title, typography.title_font, font_size, content_width)

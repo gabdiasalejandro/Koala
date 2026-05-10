@@ -26,8 +26,9 @@ class TypographyConfig:
     body_size: float = 12.0
     relation_size: float = 11.0
     body_leading: float = 15.0
-    max_title_lines: int = 3
+    max_title_lines: int = 5
     title_line_extra: float = 1.8
+    title_word_fit_max_drop: float = 2.0
 
 
 @dataclass(frozen=True)
