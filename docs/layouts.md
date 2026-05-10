@@ -72,45 +72,50 @@ Create a top-down hierarchy where parents sit above their descendants, while sti
    - base node width
    - horizontal gap
    - vertical gap
-3. For each profile, recursively compute subtree widths.
+3. For each profile, run a parent re-measurement pass and then place nodes
+   using a contour-based packing algorithm.
 4. Choose the profile whose resulting scene best fits the page.
 
-### How subtree width is computed
+### How parent width is chosen
 
-For leaf nodes:
+Parent re-measurement still runs bottom-up before placement. For leaves,
+`box.width` stays as measured. For internal nodes:
 
-- `subtree_width = box.width`
-
-For internal nodes:
-
-1. Recursively compute every child subtree width.
-2. Sum child subtree widths and horizontal gaps.
-3. Compute a visible parent width from text and child band:
+1. Recursively measure every child first.
+2. Compute the naive sum of child widths plus horizontal gaps.
+3. Choose a visible parent width clamped between:
    - minimum: enough width to avoid breaking words
-   - preferred: width required by the current text content
-   - maximum: based on children width
-     - `100%` of combined child width if there is only one child
-     - `90%` if there are multiple children
-4. Re-measure the parent text using that final visible width.
-5. Set:
-   - `box.width = visible parent width`
-   - `box.subtree_width = max(box.width, total_children_width)`
+   - preferred: the width the parent text would naturally need
+   - maximum: a fraction of the combined child width
+     (`100%` for one child, `90%` for multiple)
+4. Re-measure the parent text using that final width.
 
-Important detail:
-
-- the visible parent box can be narrower than the subtree band
-- the subtree band remains the real placement width used to center the parent above the children
+This step decides only the parent box size. The horizontal placement of the
+subtree is decided in the next step.
 
 ### How positions are assigned
 
-Placement is recursive:
+Placement uses Walker's algorithm with the linear-time improvement from
+Buchheim, Jünger, and Leipert (2002). Concretely:
 
-- roots are placed from left to right
-- each node is centered inside its subtree band
-- children are placed in one row below the parent
-- child row width is centered inside the parent subtree band
+1. A bottom-up pass assigns a preliminary `x` to each node and resolves
+   conflicts between sibling subtrees by walking their left and right
+   contours through threaded pointers. When a subtree would overlap its
+   left neighbor, the algorithm shifts it just enough to clear the contour.
+2. A top-down pass adds accumulated modifiers and writes the final
+   `box.x = preliminary_x + accumulated_modifier - box.width / 2`.
+3. Y positions are aligned per depth: each level uses the maximum height of
+   the boxes at that depth plus the per-depth vertical gap.
+4. A final offset moves the leftmost point of each tree to `config.margin_x`,
+   then multi-root layouts move the cursor by the actual subtree footprint
+   plus `config.h_gap_base`.
 
-So the visible parent width and the subtree band are separate concepts.
+Why this matters: with the contour-based packing, two sibling subtrees can
+**interpenetrate** their empty halves. A subtree that is wide at the top and
+narrow at the bottom can sit next to one shaped the opposite way without
+each reserving its own column. For asymmetric maps this typically yields
+20–25% narrower scenes than a strict band-sum approach, while leaves and
+non-overlapping subtrees still produce the same visual result.
 
 ### Edge geometry
 
@@ -272,16 +277,29 @@ If there are multiple roots:
 
 ### Radial distance calculation
 
-The radial engine now works in two passes:
+The radial engine works in three passes:
 
 1. Build conservative per-depth radii:
    - based on radial projected extents between adjacent depths
    - then increased when needed for tangential separation around the ring
-2. Run a local compaction pass:
+2. Auto-tune for saturated parents using the multi-ring chooser:
+   - when a single parent has many children at the same depth, those
+     children are alternated by angular order into two sub-rings (inner
+     and outer)
+   - the chooser computes radii for both the single-ring and multi-ring
+     options and keeps the configuration with the smaller maximum radius
+   - sub-ring assignment is per parent: a hub with twenty children may
+     split while smaller siblings on the same depth stay on one ring
+3. Run a local compaction pass:
    - each node is tested closer to the center along its own ray
    - the move is accepted only if the box still avoids collisions
 
-This keeps the layout stable while recovering slack left by the conservative ring estimate.
+The chooser is automatic and has no public configuration. For typical maps
+with ≤ 12 children per parent the single-ring layout always wins, so
+behavior matches the classic radial output exactly. The crossover where
+multi-ring starts to win sits around 13 children per parent and grows
+significantly from there: a hub with fifty children produces roughly half
+the maximum radius compared to forcing all of them onto a single ring.
 
 ### Position assignment
 
@@ -326,19 +344,24 @@ After scene construction:
 
 | Layout | Primary axis | Recursive metric | Connector style | Labels |
 | --- | --- | --- | --- | --- |
-| `tree` | Top-down | Subtree width | Orthogonal vertical-horizontal-vertical | Yes |
+| `tree` | Top-down | Walker contour packing on remeasured widths | Orthogonal vertical-horizontal-vertical | Yes |
 | `synoptic_boxes` | Left-to-right | Subtree height | Orthogonal horizontal-vertical-horizontal | Yes |
 | `synoptic` | Left-to-right | Subtree height | Bracket polyline per child group | No |
-| `radial` | Center-out | Subtree weight + compacted per-node radius | Straight line from border anchor to border anchor, split around relation labels | Yes |
+| `radial` | Center-out | Subtree weight + auto-tuned single/multi-ring radius + per-node compaction | Straight line from border anchor to border anchor, split around relation labels | Yes |
 
 ## Notes about current heuristics
 
 Some layout behavior is intentionally heuristic rather than purely formulaic:
 
 - `tree` tries multiple compactness profiles before choosing a final scene
-- `tree` remeasures parents after final width selection
+- `tree` remeasures parents before running Walker's contour-based placement
 - `radial` uses projected extents plus a post-placement collision-aware compaction pass
+- `radial` chooses between single-ring and multi-ring layouts per rotation by
+  picking the option with the smaller maximum radius
 - `radial` also resolves relation labels in a separate post-layout pass instead of feeding them back into node placement
 - shared text measurement is deterministic but approximate
+- shared title sizing first reduces font size to fit the longest word
+  (capped by `title_word_fit_max_drop`), then keeps reducing for line count
+  down to `title_size_min`; character-level word splitting is a last resort
 
 This is enough for stable diagram generation while keeping the system simple to modify.

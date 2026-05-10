@@ -20,17 +20,17 @@
       "svg": "tests/end_to_end/output/tree/academic/00_tree_left_default_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34423,
+      "pdf": 34424,
       "png_high": 710776,
       "png_medium": 300563,
       "svg": 36818
     },
     "timings_seconds": {
-      "pdf": 0.043519,
-      "png_high": 0.590183,
-      "png_medium": 0.352687,
-      "render_svg": 0.028022,
-      "write_svg": 9.5e-05
+      "pdf": 0.045331,
+      "png_high": 0.602613,
+      "png_medium": 0.350672,
+      "render_svg": 0.023239,
+      "write_svg": 0.000107
     }
   },
   {
@@ -60,11 +60,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.038608,
-      "png_high": 0.516755,
-      "png_medium": 0.153083,
-      "render_svg": 0.00487,
-      "write_svg": 5.7e-05
+      "pdf": 0.027071,
+      "png_high": 0.510185,
+      "png_medium": 0.156194,
+      "render_svg": 0.004918,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -94,11 +94,11 @@
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.037945,
-      "png_high": 0.415731,
-      "png_medium": 0.152833,
-      "render_svg": 0.006259,
-      "write_svg": 0.000106
+      "pdf": 0.037995,
+      "png_high": 0.419074,
+      "png_medium": 0.135901,
+      "render_svg": 0.00576,
+      "write_svg": 5.1e-05
     }
   },
   {
@@ -128,11 +128,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.033164,
-      "png_high": 0.571779,
-      "png_medium": 0.183228,
-      "render_svg": 0.015871,
-      "write_svg": 0.000107
+      "pdf": 0.033078,
+      "png_high": 0.583524,
+      "png_medium": 0.178601,
+      "render_svg": 0.014645,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -156,17 +156,17 @@
       "svg": "tests/end_to_end/output/matrix/academic/04_matrix_left_formal_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 29257,
+      "pdf": 29259,
       "png_high": 580809,
       "png_medium": 265887,
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.020876,
-      "png_high": 0.571383,
-      "png_medium": 0.161912,
-      "render_svg": 0.003058,
-      "write_svg": 3.8e-05
+      "pdf": 0.019465,
+      "png_high": 0.581092,
+      "png_medium": 0.16459,
+      "render_svg": 0.003522,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -190,17 +190,17 @@
       "svg": "tests/end_to_end/output/flowchart/academic/05_flowchart_justify_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24127,
+      "pdf": 24129,
       "png_high": 332291,
       "png_medium": 140826,
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.010001,
-      "png_high": 0.35854,
-      "png_medium": 0.098853,
-      "render_svg": 0.002431,
-      "write_svg": 3.6e-05
+      "pdf": 0.010171,
+      "png_high": 0.343843,
+      "png_medium": 0.096521,
+      "render_svg": 0.002435,
+      "write_svg": 4e-05
     }
   },
   {
@@ -230,11 +230,11 @@
       "svg": 37322
     },
     "timings_seconds": {
-      "pdf": 0.039793,
-      "png_high": 0.578578,
-      "png_medium": 0.190653,
-      "render_svg": 0.017303,
-      "write_svg": 5.7e-05
+      "pdf": 0.039461,
+      "png_high": 0.585656,
+      "png_medium": 0.183857,
+      "render_svg": 0.01649,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -264,11 +264,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.026543,
-      "png_high": 0.511211,
-      "png_medium": 0.151782,
-      "render_svg": 0.004795,
-      "write_svg": 6.4e-05
+      "pdf": 0.026864,
+      "png_high": 0.517014,
+      "png_medium": 0.154721,
+      "render_svg": 0.004567,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -292,17 +292,17 @@
       "svg": "tests/end_to_end/output/tree/black/08_synoptic_boxes_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35326,
+      "pdf": 35329,
       "png_high": 673301,
       "png_medium": 299311,
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.037018,
-      "png_high": 0.408229,
-      "png_medium": 0.134266,
-      "render_svg": 0.006572,
-      "write_svg": 7.6e-05
+      "pdf": 0.036431,
+      "png_high": 0.423431,
+      "png_medium": 0.134619,
+      "render_svg": 0.005772,
+      "write_svg": 6.3e-05
     }
   },
   {
@@ -332,11 +332,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.041362,
-      "png_high": 0.571921,
-      "png_medium": 0.178598,
-      "render_svg": 0.014732,
-      "write_svg": 8e-05
+      "pdf": 0.033478,
+      "png_high": 0.59407,
+      "png_medium": 0.177804,
+      "render_svg": 0.014255,
+      "write_svg": 5.5e-05
     }
   },
   {
@@ -366,11 +366,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.019578,
-      "png_high": 0.583658,
-      "png_medium": 0.162672,
-      "render_svg": 0.002927,
-      "write_svg": 3.7e-05
+      "pdf": 0.019811,
+      "png_high": 0.578648,
+      "png_medium": 0.163876,
+      "render_svg": 0.002958,
+      "write_svg": 4e-05
     }
   },
   {
@@ -400,11 +400,11 @@
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010021,
-      "png_high": 0.336879,
-      "png_medium": 0.092035,
-      "render_svg": 0.002278,
-      "write_svg": 3.4e-05
+      "pdf": 0.010039,
+      "png_high": 0.34282,
+      "png_medium": 0.092377,
+      "render_svg": 0.002255,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -434,11 +434,11 @@
       "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.039811,
-      "png_high": 0.576743,
-      "png_medium": 0.181442,
-      "render_svg": 0.016639,
-      "write_svg": 6.1e-05
+      "pdf": 0.039378,
+      "png_high": 0.582398,
+      "png_medium": 0.180882,
+      "render_svg": 0.016463,
+      "write_svg": 4.8e-05
     }
   },
   {
@@ -468,11 +468,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.026749,
-      "png_high": 0.514905,
-      "png_medium": 0.152606,
-      "render_svg": 0.004581,
-      "write_svg": 5.7e-05
+      "pdf": 0.042842,
+      "png_high": 0.508852,
+      "png_medium": 0.152534,
+      "render_svg": 0.004523,
+      "write_svg": 5.2e-05
     }
   },
   {
@@ -502,10 +502,10 @@
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.037314,
-      "png_high": 0.408175,
-      "png_medium": 0.133007,
-      "render_svg": 0.005663,
+      "pdf": 0.038135,
+      "png_high": 0.413727,
+      "png_medium": 0.133084,
+      "render_svg": 0.005538,
       "write_svg": 5.3e-05
     }
   },
@@ -536,11 +536,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.033424,
-      "png_high": 0.570795,
-      "png_medium": 0.174998,
-      "render_svg": 0.014433,
-      "write_svg": 0.000102
+      "pdf": 0.033585,
+      "png_high": 0.585086,
+      "png_medium": 0.175513,
+      "render_svg": 0.01446,
+      "write_svg": 7e-05
     }
   },
   {
@@ -570,10 +570,10 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.020074,
-      "png_high": 0.567613,
-      "png_medium": 0.160407,
-      "render_svg": 0.003017,
+      "pdf": 0.019969,
+      "png_high": 0.580704,
+      "png_medium": 0.163218,
+      "render_svg": 0.003037,
       "write_svg": 3.6e-05
     }
   },
@@ -598,17 +598,17 @@
       "svg": "tests/end_to_end/output/flowchart/colorblind/17_flowchart_justify_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24545,
+      "pdf": 24544,
       "png_high": 318958,
       "png_medium": 134753,
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.009839,
-      "png_high": 0.335574,
-      "png_medium": 0.091534,
+      "pdf": 0.010969,
+      "png_high": 0.340193,
+      "png_medium": 0.092107,
       "render_svg": 0.002254,
-      "write_svg": 3.6e-05
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -638,11 +638,11 @@
       "svg": 36212
     },
     "timings_seconds": {
-      "pdf": 0.041703,
-      "png_high": 0.5822,
-      "png_medium": 0.182155,
-      "render_svg": 0.016502,
-      "write_svg": 6.9e-05
+      "pdf": 0.042394,
+      "png_high": 0.605163,
+      "png_medium": 0.186058,
+      "render_svg": 0.01678,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -672,11 +672,11 @@
       "svg": 23218
     },
     "timings_seconds": {
-      "pdf": 0.03951,
-      "png_high": 0.511429,
-      "png_medium": 0.155049,
-      "render_svg": 0.004578,
-      "write_svg": 6.2e-05
+      "pdf": 0.028933,
+      "png_high": 0.518951,
+      "png_medium": 0.155943,
+      "render_svg": 0.004684,
+      "write_svg": 6.1e-05
     }
   },
   {
@@ -706,11 +706,11 @@
       "svg": 26996
     },
     "timings_seconds": {
-      "pdf": 0.037373,
-      "png_high": 0.412673,
-      "png_medium": 0.13575,
-      "render_svg": 0.005579,
-      "write_svg": 5.8e-05
+      "pdf": 0.036891,
+      "png_high": 0.423584,
+      "png_medium": 0.137708,
+      "render_svg": 0.005823,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -740,11 +740,11 @@
       "svg": 37066
     },
     "timings_seconds": {
-      "pdf": 0.034195,
-      "png_high": 0.579254,
-      "png_medium": 0.178483,
-      "render_svg": 0.014887,
-      "write_svg": 0.000106
+      "pdf": 0.033402,
+      "png_high": 0.588542,
+      "png_medium": 0.179707,
+      "render_svg": 0.014687,
+      "write_svg": 7.1e-05
     }
   },
   {
@@ -774,11 +774,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.020435,
-      "png_high": 0.57216,
-      "png_medium": 0.202159,
-      "render_svg": 0.002952,
-      "write_svg": 3.5e-05
+      "pdf": 0.03679,
+      "png_high": 0.584873,
+      "png_medium": 0.165189,
+      "render_svg": 0.002947,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -802,17 +802,17 @@
       "svg": "tests/end_to_end/output/flowchart/default/23_flowchart_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 17051,
+      "pdf": 17052,
       "png_high": 297599,
       "png_medium": 122959,
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.009567,
-      "png_high": 0.337668,
-      "png_medium": 0.092212,
-      "render_svg": 0.002332,
-      "write_svg": 3.7e-05
+      "pdf": 0.010708,
+      "png_high": 0.343856,
+      "png_medium": 0.092841,
+      "render_svg": 0.002202,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -842,11 +842,11 @@
       "svg": 37424
     },
     "timings_seconds": {
-      "pdf": 0.042839,
-      "png_high": 0.580433,
-      "png_medium": 0.180872,
-      "render_svg": 0.017409,
-      "write_svg": 5.8e-05
+      "pdf": 0.043153,
+      "png_high": 0.591245,
+      "png_medium": 0.18275,
+      "render_svg": 0.01771,
+      "write_svg": 8.2e-05
     }
   },
   {
@@ -876,11 +876,11 @@
       "svg": 23804
     },
     "timings_seconds": {
-      "pdf": 0.02765,
-      "png_high": 0.512968,
-      "png_medium": 0.15289,
-      "render_svg": 0.004883,
-      "write_svg": 6.6e-05
+      "pdf": 0.029203,
+      "png_high": 0.51737,
+      "png_medium": 0.154498,
+      "render_svg": 0.004862,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -904,17 +904,17 @@
       "svg": "tests/end_to_end/output/tree/dusk/26_synoptic_boxes_left_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 21982,
+      "pdf": 21983,
       "png_high": 686789,
       "png_medium": 306054,
       "svg": 27322
     },
     "timings_seconds": {
-      "pdf": 0.037947,
-      "png_high": 0.43415,
-      "png_medium": 0.13506,
-      "render_svg": 0.00573,
-      "write_svg": 6.6e-05
+      "pdf": 0.037798,
+      "png_high": 0.422606,
+      "png_medium": 0.136685,
+      "render_svg": 0.005883,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -944,11 +944,11 @@
       "svg": 37150
     },
     "timings_seconds": {
-      "pdf": 0.032807,
-      "png_high": 0.573232,
-      "png_medium": 0.176784,
-      "render_svg": 0.014709,
-      "write_svg": 8.1e-05
+      "pdf": 0.03376,
+      "png_high": 0.585301,
+      "png_medium": 0.1775,
+      "render_svg": 0.014641,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -978,11 +978,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.021136,
-      "png_high": 0.573045,
-      "png_medium": 0.161807,
-      "render_svg": 0.003006,
-      "write_svg": 3.9e-05
+      "pdf": 0.030175,
+      "png_high": 0.580822,
+      "png_medium": 0.164843,
+      "render_svg": 0.003005,
+      "write_svg": 3.7e-05
     }
   },
   {
@@ -1012,11 +1012,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.010072,
-      "png_high": 0.339131,
-      "png_medium": 0.092665,
-      "render_svg": 0.002585,
-      "write_svg": 3.4e-05
+      "pdf": 0.011294,
+      "png_high": 0.346986,
+      "png_medium": 0.092563,
+      "render_svg": 0.002248,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -1046,11 +1046,11 @@
       "svg": 36818
     },
     "timings_seconds": {
-      "pdf": 0.041823,
-      "png_high": 0.60684,
-      "png_medium": 0.183565,
-      "render_svg": 0.01659,
-      "write_svg": 8.3e-05
+      "pdf": 0.043679,
+      "png_high": 0.593502,
+      "png_medium": 0.183209,
+      "render_svg": 0.016831,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -1080,10 +1080,10 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.030084,
-      "png_high": 0.52746,
-      "png_medium": 0.159831,
-      "render_svg": 0.004823,
+      "pdf": 0.030141,
+      "png_high": 0.529131,
+      "png_medium": 0.153895,
+      "render_svg": 0.004803,
       "write_svg": 5.9e-05
     }
   },
@@ -1114,11 +1114,11 @@
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.038841,
-      "png_high": 0.420705,
-      "png_medium": 0.136597,
-      "render_svg": 0.006087,
-      "write_svg": 6.8e-05
+      "pdf": 0.051331,
+      "png_high": 0.423503,
+      "png_medium": 0.136059,
+      "render_svg": 0.006017,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -1148,11 +1148,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.035893,
-      "png_high": 0.583202,
-      "png_medium": 0.180621,
-      "render_svg": 0.015248,
-      "write_svg": 0.000124
+      "pdf": 0.035879,
+      "png_high": 0.58651,
+      "png_medium": 0.183224,
+      "render_svg": 0.01565,
+      "write_svg": 0.000145
     }
   },
   {
@@ -1182,11 +1182,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.029365,
-      "png_high": 0.579245,
-      "png_medium": 0.164958,
-      "render_svg": 0.003185,
-      "write_svg": 6.8e-05
+      "pdf": 0.021488,
+      "png_high": 0.583978,
+      "png_medium": 0.165986,
+      "render_svg": 0.003114,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -1216,11 +1216,11 @@
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.011761,
-      "png_high": 0.339085,
-      "png_medium": 0.093573,
-      "render_svg": 0.00233,
-      "write_svg": 3.6e-05
+      "pdf": 0.011308,
+      "png_high": 0.343114,
+      "png_medium": 0.092629,
+      "render_svg": 0.002369,
+      "write_svg": 4e-05
     }
   },
   {
@@ -1250,11 +1250,11 @@
       "svg": 37322
     },
     "timings_seconds": {
-      "pdf": 0.042276,
-      "png_high": 0.590701,
-      "png_medium": 0.183854,
-      "render_svg": 0.017024,
-      "write_svg": 5.4e-05
+      "pdf": 0.04385,
+      "png_high": 0.592741,
+      "png_medium": 0.184975,
+      "render_svg": 0.02132,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -1284,11 +1284,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.029118,
-      "png_high": 0.521653,
-      "png_medium": 0.155828,
-      "render_svg": 0.004508,
-      "write_svg": 5.8e-05
+      "pdf": 0.03339,
+      "png_high": 0.523749,
+      "png_medium": 0.155636,
+      "render_svg": 0.004697,
+      "write_svg": 6e-05
     }
   },
   {
@@ -1312,17 +1312,17 @@
       "svg": "tests/end_to_end/output/tree/jungle/38_synoptic_boxes_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35234,
+      "pdf": 35232,
       "png_high": 677702,
       "png_medium": 302925,
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.03946,
-      "png_high": 0.414488,
-      "png_medium": 0.135196,
-      "render_svg": 0.005892,
-      "write_svg": 5.4e-05
+      "pdf": 0.038371,
+      "png_high": 0.421158,
+      "png_medium": 0.136869,
+      "render_svg": 0.00588,
+      "write_svg": 6.1e-05
     }
   },
   {
@@ -1352,11 +1352,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.035469,
-      "png_high": 0.576832,
-      "png_medium": 0.177507,
-      "render_svg": 0.014749,
-      "write_svg": 8.6e-05
+      "pdf": 0.037172,
+      "png_high": 0.587628,
+      "png_medium": 0.179313,
+      "render_svg": 0.016103,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -1386,11 +1386,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.020294,
-      "png_high": 0.575264,
-      "png_medium": 0.163447,
-      "render_svg": 0.003293,
-      "write_svg": 4.7e-05
+      "pdf": 0.02173,
+      "png_high": 0.577273,
+      "png_medium": 0.162391,
+      "render_svg": 0.002995,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -1420,11 +1420,11 @@
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.012196,
-      "png_high": 0.339417,
-      "png_medium": 0.09231,
-      "render_svg": 0.00238,
-      "write_svg": 3.4e-05
+      "pdf": 0.011514,
+      "png_high": 0.344894,
+      "png_medium": 0.093619,
+      "render_svg": 0.002336,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -1454,11 +1454,11 @@
       "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.04434,
-      "png_high": 0.614622,
-      "png_medium": 0.183417,
-      "render_svg": 0.017224,
-      "write_svg": 6.8e-05
+      "pdf": 0.044974,
+      "png_high": 0.595064,
+      "png_medium": 0.185053,
+      "render_svg": 0.018134,
+      "write_svg": 6.3e-05
     }
   },
   {
@@ -1488,11 +1488,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.029475,
-      "png_high": 0.513327,
-      "png_medium": 0.158061,
-      "render_svg": 0.004674,
-      "write_svg": 5.1e-05
+      "pdf": 0.030401,
+      "png_high": 0.52699,
+      "png_medium": 0.155791,
+      "render_svg": 0.005296,
+      "write_svg": 0.000116
     }
   },
   {
@@ -1522,11 +1522,11 @@
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.0398,
-      "png_high": 0.414133,
-      "png_medium": 0.136682,
-      "render_svg": 0.006331,
-      "write_svg": 9.6e-05
+      "pdf": 0.039921,
+      "png_high": 0.431038,
+      "png_medium": 0.139882,
+      "render_svg": 0.006168,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -1556,11 +1556,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.035953,
-      "png_high": 0.572191,
-      "png_medium": 0.177315,
-      "render_svg": 0.014916,
-      "write_svg": 8.4e-05
+      "pdf": 0.035383,
+      "png_high": 0.649458,
+      "png_medium": 0.183591,
+      "render_svg": 0.015626,
+      "write_svg": 7.6e-05
     }
   },
   {
@@ -1590,11 +1590,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.021929,
-      "png_high": 0.56927,
-      "png_medium": 0.162271,
-      "render_svg": 0.003019,
-      "write_svg": 3.9e-05
+      "pdf": 0.020679,
+      "png_high": 0.583519,
+      "png_medium": 0.16615,
+      "render_svg": 0.003133,
+      "write_svg": 4.6e-05
     }
   },
   {
@@ -1618,17 +1618,17 @@
       "svg": "tests/end_to_end/output/flowchart/minimal/47_flowchart_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 17024,
+      "pdf": 17023,
       "png_high": 295447,
       "png_medium": 123464,
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.011934,
-      "png_high": 0.338642,
-      "png_medium": 0.092648,
-      "render_svg": 0.002331,
-      "write_svg": 4.3e-05
+      "pdf": 0.010947,
+      "png_high": 0.344355,
+      "png_medium": 0.093484,
+      "render_svg": 0.002379,
+      "write_svg": 4e-05
     }
   },
   {
@@ -1658,11 +1658,11 @@
       "svg": 36212
     },
     "timings_seconds": {
-      "pdf": 0.043872,
-      "png_high": 0.583942,
-      "png_medium": 0.182864,
-      "render_svg": 0.017128,
-      "write_svg": 6.9e-05
+      "pdf": 0.043412,
+      "png_high": 0.589235,
+      "png_medium": 0.183987,
+      "render_svg": 0.017055,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -1692,11 +1692,11 @@
       "svg": 23218
     },
     "timings_seconds": {
-      "pdf": 0.029104,
-      "png_high": 0.510642,
-      "png_medium": 0.154961,
-      "render_svg": 0.004721,
-      "write_svg": 8e-05
+      "pdf": 0.03111,
+      "png_high": 0.515577,
+      "png_medium": 0.156089,
+      "render_svg": 0.004625,
+      "write_svg": 6.1e-05
     }
   },
   {
@@ -1726,11 +1726,11 @@
       "svg": 26996
     },
     "timings_seconds": {
-      "pdf": 0.038538,
-      "png_high": 0.424223,
-      "png_medium": 0.136924,
-      "render_svg": 0.005948,
-      "write_svg": 6.7e-05
+      "pdf": 0.039272,
+      "png_high": 0.424999,
+      "png_medium": 0.138364,
+      "render_svg": 0.005891,
+      "write_svg": 8.8e-05
     }
   },
   {
@@ -1760,11 +1760,11 @@
       "svg": 37066
     },
     "timings_seconds": {
-      "pdf": 0.036276,
-      "png_high": 0.583697,
-      "png_medium": 0.196225,
-      "render_svg": 0.015434,
-      "write_svg": 0.000103
+      "pdf": 0.035013,
+      "png_high": 0.594295,
+      "png_medium": 0.181424,
+      "render_svg": 0.014833,
+      "write_svg": 9.6e-05
     }
   },
   {
@@ -1794,11 +1794,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.021352,
-      "png_high": 0.574512,
-      "png_medium": 0.164559,
-      "render_svg": 0.002986,
-      "write_svg": 3.6e-05
+      "pdf": 0.020474,
+      "png_high": 0.587692,
+      "png_medium": 0.164075,
+      "render_svg": 0.002938,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -1822,17 +1822,17 @@
       "svg": "tests/end_to_end/output/flowchart/neon/53_flowchart_justify_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 23948,
+      "pdf": 23947,
       "png_high": 318431,
       "png_medium": 135240,
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.012036,
-      "png_high": 0.347493,
-      "png_medium": 0.093027,
-      "render_svg": 0.002324,
-      "write_svg": 3.7e-05
+      "pdf": 0.011022,
+      "png_high": 0.342612,
+      "png_medium": 0.093563,
+      "render_svg": 0.002263,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -1862,11 +1862,11 @@
       "svg": 37424
     },
     "timings_seconds": {
-      "pdf": 0.041937,
-      "png_high": 0.588649,
-      "png_medium": 0.184309,
-      "render_svg": 0.021005,
-      "write_svg": 8.3e-05
+      "pdf": 0.045416,
+      "png_high": 0.590796,
+      "png_medium": 0.183213,
+      "render_svg": 0.017702,
+      "write_svg": 7.1e-05
     }
   },
   {
@@ -1896,11 +1896,11 @@
       "svg": 23804
     },
     "timings_seconds": {
-      "pdf": 0.029889,
-      "png_high": 0.52112,
-      "png_medium": 0.154819,
-      "render_svg": 0.004913,
-      "write_svg": 7e-05
+      "pdf": 0.029738,
+      "png_high": 0.522956,
+      "png_medium": 0.156225,
+      "render_svg": 0.004719,
+      "write_svg": 5.6e-05
     }
   },
   {
@@ -1924,17 +1924,17 @@
       "svg": "tests/end_to_end/output/tree/ocean/56_synoptic_boxes_left_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 21894,
+      "pdf": 21893,
       "png_high": 685788,
       "png_medium": 305792,
       "svg": 27322
     },
     "timings_seconds": {
-      "pdf": 0.040067,
-      "png_high": 0.423807,
-      "png_medium": 0.138776,
-      "render_svg": 0.005685,
-      "write_svg": 5.2e-05
+      "pdf": 0.038884,
+      "png_high": 0.423966,
+      "png_medium": 0.137203,
+      "render_svg": 0.005777,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -1964,11 +1964,11 @@
       "svg": 37150
     },
     "timings_seconds": {
-      "pdf": 0.035602,
-      "png_high": 0.586011,
-      "png_medium": 0.178186,
-      "render_svg": 0.014669,
-      "write_svg": 9.1e-05
+      "pdf": 0.034985,
+      "png_high": 0.585481,
+      "png_medium": 0.178439,
+      "render_svg": 0.014756,
+      "write_svg": 7.5e-05
     }
   },
   {
@@ -1998,11 +1998,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.022487,
-      "png_high": 0.575734,
-      "png_medium": 0.164966,
-      "render_svg": 0.00295,
-      "write_svg": 3.9e-05
+      "pdf": 0.021506,
+      "png_high": 0.585465,
+      "png_medium": 0.169512,
+      "render_svg": 0.002938,
+      "write_svg": 4.1e-05
     }
   },
   {
@@ -2026,17 +2026,17 @@
       "svg": "tests/end_to_end/output/flowchart/ocean/59_flowchart_justify_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 26111,
+      "pdf": 26112,
       "png_high": 294641,
       "png_medium": 123077,
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010216,
-      "png_high": 0.343122,
-      "png_medium": 0.093611,
-      "render_svg": 0.002289,
-      "write_svg": 3.6e-05
+      "pdf": 0.011525,
+      "png_high": 0.345687,
+      "png_medium": 0.093906,
+      "render_svg": 0.002283,
+      "write_svg": 4.5e-05
     }
   },
   {
@@ -2066,11 +2066,11 @@
       "svg": 36818
     },
     "timings_seconds": {
-      "pdf": 0.042807,
-      "png_high": 0.58766,
-      "png_medium": 0.190667,
-      "render_svg": 0.016682,
-      "write_svg": 7e-05
+      "pdf": 0.044284,
+      "png_high": 0.600722,
+      "png_medium": 0.186189,
+      "render_svg": 0.034393,
+      "write_svg": 9.1e-05
     }
   },
   {
@@ -2100,11 +2100,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.02812,
-      "png_high": 0.509848,
-      "png_medium": 0.153866,
-      "render_svg": 0.00481,
-      "write_svg": 5.5e-05
+      "pdf": 0.030335,
+      "png_high": 0.522533,
+      "png_medium": 0.155618,
+      "render_svg": 0.0049,
+      "write_svg": 6.7e-05
     }
   },
   {
@@ -2134,11 +2134,11 @@
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.039332,
-      "png_high": 0.415499,
-      "png_medium": 0.134643,
-      "render_svg": 0.005699,
-      "write_svg": 5.2e-05
+      "pdf": 0.040634,
+      "png_high": 0.428813,
+      "png_medium": 0.136985,
+      "render_svg": 0.006034,
+      "write_svg": 7.2e-05
     }
   },
   {
@@ -2168,11 +2168,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.035297,
-      "png_high": 0.578063,
-      "png_medium": 0.1791,
-      "render_svg": 0.023949,
-      "write_svg": 0.000112
+      "pdf": 0.036331,
+      "png_high": 0.593102,
+      "png_medium": 0.181344,
+      "render_svg": 0.015092,
+      "write_svg": 7.4e-05
     }
   },
   {
@@ -2202,11 +2202,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.021654,
-      "png_high": 0.579505,
-      "png_medium": 0.162443,
-      "render_svg": 0.003039,
-      "write_svg": 4.4e-05
+      "pdf": 0.020678,
+      "png_high": 0.591745,
+      "png_medium": 0.165244,
+      "render_svg": 0.00313,
+      "write_svg": 4.5e-05
     }
   },
   {
@@ -2236,11 +2236,11 @@
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.01,
-      "png_high": 0.34989,
-      "png_medium": 0.092024,
-      "render_svg": 0.002328,
-      "write_svg": 4.2e-05
+      "pdf": 0.010204,
+      "png_high": 0.341334,
+      "png_medium": 0.093312,
+      "render_svg": 0.002362,
+      "write_svg": 4e-05
     }
   },
   {
@@ -2270,11 +2270,11 @@
       "svg": 37322
     },
     "timings_seconds": {
-      "pdf": 0.041774,
-      "png_high": 0.585264,
-      "png_medium": 0.185399,
-      "render_svg": 0.017012,
-      "write_svg": 6.2e-05
+      "pdf": 0.043569,
+      "png_high": 0.594594,
+      "png_medium": 0.200586,
+      "render_svg": 0.017402,
+      "write_svg": 8.3e-05
     }
   },
   {
@@ -2304,11 +2304,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.029188,
-      "png_high": 0.51375,
-      "png_medium": 0.154946,
-      "render_svg": 0.004659,
-      "write_svg": 5.8e-05
+      "pdf": 0.029073,
+      "png_high": 0.539995,
+      "png_medium": 0.155236,
+      "render_svg": 0.004736,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -2338,11 +2338,11 @@
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.0393,
-      "png_high": 0.413509,
-      "png_medium": 0.137316,
-      "render_svg": 0.005832,
-      "write_svg": 6.9e-05
+      "pdf": 0.039469,
+      "png_high": 0.421929,
+      "png_medium": 0.136902,
+      "render_svg": 0.018291,
+      "write_svg": 9.1e-05
     }
   },
   {
@@ -2372,11 +2372,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.035622,
-      "png_high": 0.577383,
-      "png_medium": 0.184763,
-      "render_svg": 0.02141,
-      "write_svg": 8.9e-05
+      "pdf": 0.035249,
+      "png_high": 0.585759,
+      "png_medium": 0.177437,
+      "render_svg": 0.01464,
+      "write_svg": 9.9e-05
     }
   },
   {
@@ -2406,11 +2406,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.021343,
-      "png_high": 0.574742,
-      "png_medium": 0.163872,
-      "render_svg": 0.002979,
-      "write_svg": 3.4e-05
+      "pdf": 0.021634,
+      "png_high": 0.586414,
+      "png_medium": 0.166999,
+      "render_svg": 0.003026,
+      "write_svg": 3.7e-05
     }
   },
   {
@@ -2440,11 +2440,11 @@
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.010497,
-      "png_high": 0.340956,
-      "png_medium": 0.093027,
-      "render_svg": 0.002333,
-      "write_svg": 3.3e-05
+      "pdf": 0.009937,
+      "png_high": 0.344758,
+      "png_medium": 0.094987,
+      "render_svg": 0.002297,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -2474,11 +2474,11 @@
       "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.042971,
-      "png_high": 0.587154,
-      "png_medium": 0.184863,
-      "render_svg": 0.017374,
-      "write_svg": 6.4e-05
+      "pdf": 0.046682,
+      "png_high": 0.605933,
+      "png_medium": 0.184965,
+      "render_svg": 0.016968,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -2508,11 +2508,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.027712,
-      "png_high": 0.511589,
-      "png_medium": 0.155044,
-      "render_svg": 0.004492,
-      "write_svg": 6.5e-05
+      "pdf": 0.029817,
+      "png_high": 0.542752,
+      "png_medium": 0.166517,
+      "render_svg": 0.00466,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -2536,17 +2536,17 @@
       "svg": "tests/end_to_end/output/tree/terracotta/74_synoptic_boxes_left_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34306,
+      "pdf": 34307,
       "png_high": 725124,
       "png_medium": 321543,
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.039135,
-      "png_high": 0.412701,
-      "png_medium": 0.13691,
-      "render_svg": 0.005906,
-      "write_svg": 8.2e-05
+      "pdf": 0.039943,
+      "png_high": 0.431202,
+      "png_medium": 0.139759,
+      "render_svg": 0.006303,
+      "write_svg": 9.8e-05
     }
   },
   {
@@ -2576,11 +2576,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.033784,
-      "png_high": 0.578967,
-      "png_medium": 0.180579,
-      "render_svg": 0.014803,
-      "write_svg": 0.000111
+      "pdf": 0.036639,
+      "png_high": 0.595913,
+      "png_medium": 0.181973,
+      "render_svg": 0.015357,
+      "write_svg": 0.000109
     }
   },
   {
@@ -2610,11 +2610,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.021534,
-      "png_high": 0.574112,
-      "png_medium": 0.163552,
-      "render_svg": 0.002996,
-      "write_svg": 3.5e-05
+      "pdf": 0.027366,
+      "png_high": 0.587099,
+      "png_medium": 0.166166,
+      "render_svg": 0.003236,
+      "write_svg": 4.1e-05
     }
   },
   {
@@ -2644,11 +2644,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.013726,
-      "png_high": 0.342017,
-      "png_medium": 0.09378,
-      "render_svg": 0.002403,
-      "write_svg": 4.8e-05
+      "pdf": 0.011434,
+      "png_high": 0.349902,
+      "png_medium": 0.095473,
+      "render_svg": 0.00304,
+      "write_svg": 7.1e-05
     }
   },
   {
@@ -2678,11 +2678,11 @@
       "svg": 36782
     },
     "timings_seconds": {
-      "pdf": 0.043406,
-      "png_high": 0.600361,
-      "png_medium": 0.189866,
-      "render_svg": 0.016445,
-      "write_svg": 6.9e-05
+      "pdf": 0.044713,
+      "png_high": 0.616397,
+      "png_medium": 0.193463,
+      "render_svg": 0.016867,
+      "write_svg": 6.7e-05
     }
   },
   {
@@ -2712,11 +2712,11 @@
       "svg": 37392
     },
     "timings_seconds": {
-      "pdf": 0.042903,
-      "png_high": 0.594442,
-      "png_medium": 0.188167,
-      "render_svg": 0.017752,
-      "write_svg": 5.6e-05
+      "pdf": 0.046742,
+      "png_high": 0.609759,
+      "png_medium": 0.18926,
+      "render_svg": 0.0175,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -2746,11 +2746,11 @@
       "svg": 36175
     },
     "timings_seconds": {
-      "pdf": 0.041635,
-      "png_high": 0.600193,
-      "png_medium": 0.187007,
-      "render_svg": 0.01711,
-      "write_svg": 6.2e-05
+      "pdf": 0.045139,
+      "png_high": 0.614209,
+      "png_medium": 0.1911,
+      "render_svg": 0.017347,
+      "write_svg": 8.6e-05
     }
   },
   {
@@ -2780,11 +2780,11 @@
       "svg": 37308
     },
     "timings_seconds": {
-      "pdf": 0.043096,
-      "png_high": 0.609586,
-      "png_medium": 0.189326,
-      "render_svg": 0.01737,
-      "write_svg": 6e-05
+      "pdf": 0.044918,
+      "png_high": 0.617945,
+      "png_medium": 0.193287,
+      "render_svg": 0.018249,
+      "write_svg": 6.3e-05
     }
   },
   {
@@ -2814,11 +2814,11 @@
       "svg": 37288
     },
     "timings_seconds": {
-      "pdf": 0.043649,
-      "png_high": 0.618611,
-      "png_medium": 0.193145,
-      "render_svg": 0.018002,
-      "write_svg": 6.1e-05
+      "pdf": 0.044936,
+      "png_high": 0.612193,
+      "png_medium": 0.195355,
+      "render_svg": 0.018153,
+      "write_svg": 7.2e-05
     }
   },
   {
@@ -2848,11 +2848,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.022553,
-      "png_high": 0.58099,
-      "png_medium": 0.163977,
-      "render_svg": 0.003011,
-      "write_svg": 4e-05
+      "pdf": 0.022888,
+      "png_high": 0.587527,
+      "png_medium": 0.164432,
+      "render_svg": 0.003029,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -2882,11 +2882,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.021899,
-      "png_high": 0.573594,
-      "png_medium": 0.177168,
-      "render_svg": 0.003111,
-      "write_svg": 3.5e-05
+      "pdf": 0.023216,
+      "png_high": 0.590453,
+      "png_medium": 0.167226,
+      "render_svg": 0.003245,
+      "write_svg": 4.3e-05
     }
   },
   {
@@ -2916,10 +2916,10 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.021562,
-      "png_high": 0.570598,
-      "png_medium": 0.162519,
-      "render_svg": 0.00314,
+      "pdf": 0.022331,
+      "png_high": 0.59428,
+      "png_medium": 0.164779,
+      "render_svg": 0.003185,
       "write_svg": 3.8e-05
     }
   },
@@ -2950,11 +2950,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.020568,
-      "png_high": 0.568703,
-      "png_medium": 0.16106,
-      "render_svg": 0.003103,
-      "write_svg": 3.7e-05
+      "pdf": 0.022957,
+      "png_high": 0.589823,
+      "png_medium": 0.163365,
+      "render_svg": 0.00315,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -2984,11 +2984,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.010825,
-      "png_high": 0.458672,
-      "png_medium": 0.122693,
-      "render_svg": 0.002409,
-      "write_svg": 4.2e-05
+      "pdf": 0.01046,
+      "png_high": 0.468188,
+      "png_medium": 0.126969,
+      "render_svg": 0.002494,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -3018,11 +3018,11 @@
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010157,
-      "png_high": 0.455459,
-      "png_medium": 0.122574,
-      "render_svg": 0.002324,
-      "write_svg": 3.4e-05
+      "pdf": 0.010429,
+      "png_high": 0.464436,
+      "png_medium": 0.124585,
+      "render_svg": 0.002338,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -3052,11 +3052,11 @@
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.01045,
-      "png_high": 0.454507,
-      "png_medium": 0.121854,
-      "render_svg": 0.002328,
-      "write_svg": 3.6e-05
+      "pdf": 0.011668,
+      "png_high": 0.466445,
+      "png_medium": 0.125087,
+      "render_svg": 0.002348,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -3086,11 +3086,11 @@
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.010537,
-      "png_high": 0.455841,
-      "png_medium": 0.12123,
-      "render_svg": 0.002925,
-      "write_svg": 3.7e-05
+      "pdf": 0.010777,
+      "png_high": 0.465632,
+      "png_medium": 0.124543,
+      "render_svg": 0.003097,
+      "write_svg": 4.7e-05
     }
   }
 ]

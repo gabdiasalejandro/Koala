@@ -270,6 +270,9 @@ For the current `tree` type, the concrete flow is:
 - `context`: resolved render context
 - `document_type`: currently `"tree"`
 - `title`: generic title used by shared surfaces such as PDF export
+- `advisories`: tuple of `RenderAdvisory(code, message)` items emitted by the
+  API as soft, non-blocking warnings (for example, the layout-quality
+  threshold described in the tutorial)
 
 ## Export flow
 

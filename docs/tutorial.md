@@ -300,10 +300,13 @@ Default limits:
 
 - `max_input_bytes=80000`
 - `max_input_lines=800`
-- `max_nodes=250`
+- `max_nodes=250` — hard limit, raises `InputLimitExceededError` when exceeded
 - `max_warnings=0`
+- `node_warn_threshold=80` — soft threshold, emits a non-blocking advisory
 
-You can override those limits per call.
+You can override those limits per call. Hard limits abort the render with
+`KoalaInputError`. The soft threshold does not abort: it adds a
+`RenderAdvisory` entry to `result.advisories` and lets the render proceed.
 
 ```python
 import koala
@@ -325,6 +328,35 @@ print(export.content)
 ```
 
 `safe_export_text(...)` always returns bytes in memory. It does not accept `output`, so the server owns all storage and response handling.
+
+#### Inspecting advisories
+
+`RenderResult.advisories` is a `tuple[RenderAdvisory, ...]`. Each advisory has
+a `code` and a human `message`. Today the only emitted code is
+`"layout_quality_threshold"`, raised when the parsed document has more nodes
+than `node_warn_threshold`. The output is still valid; the threshold only
+warns that the page-fit may compress the diagram.
+
+```python
+import koala
+
+result = koala.safe_render_text(generated_dsl, type="tree", layout="tree")
+
+for advisory in result.advisories:
+    print(advisory.code, advisory.message)
+
+# Tighten or relax the threshold per call:
+result = koala.safe_render_text(
+    generated_dsl,
+    type="tree",
+    layout="tree",
+    node_warn_threshold=40,
+)
+```
+
+`node_warn_threshold` is also accepted by `render_text(...)`, `compile(...)`,
+`compile_text(...)`, and the export wrappers. When omitted in non-safe APIs,
+no advisory is emitted.
 
 ## 4. User Config
 
