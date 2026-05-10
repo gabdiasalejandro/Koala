@@ -20,17 +20,17 @@
       "svg": "tests/end_to_end/output/tree/academic/00_tree_left_default_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34424,
-      "png_high": 710776,
-      "png_medium": 300563,
-      "svg": 36818
+      "pdf": 34421,
+      "png_high": 667430,
+      "png_medium": 298494,
+      "svg": 36803
     },
     "timings_seconds": {
-      "pdf": 0.045331,
-      "png_high": 0.602613,
-      "png_medium": 0.350672,
-      "render_svg": 0.023239,
-      "write_svg": 0.000107
+      "pdf": 0.044262,
+      "png_high": 0.588073,
+      "png_medium": 0.341365,
+      "render_svg": 0.038643,
+      "write_svg": 9.8e-05
     }
   },
   {
@@ -60,11 +60,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.027071,
-      "png_high": 0.510185,
-      "png_medium": 0.156194,
-      "render_svg": 0.004918,
-      "write_svg": 5.9e-05
+      "pdf": 0.026677,
+      "png_high": 0.506906,
+      "png_medium": 0.153611,
+      "render_svg": 0.004833,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -94,11 +94,11 @@
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.037995,
-      "png_high": 0.419074,
-      "png_medium": 0.135901,
-      "render_svg": 0.00576,
-      "write_svg": 5.1e-05
+      "pdf": 0.037013,
+      "png_high": 0.416855,
+      "png_medium": 0.134011,
+      "render_svg": 0.005785,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -128,11 +128,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.033078,
-      "png_high": 0.583524,
-      "png_medium": 0.178601,
-      "render_svg": 0.014645,
-      "write_svg": 6.5e-05
+      "pdf": 0.033131,
+      "png_high": 0.574039,
+      "png_medium": 0.214046,
+      "render_svg": 0.015235,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -162,11 +162,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.019465,
-      "png_high": 0.581092,
-      "png_medium": 0.16459,
-      "render_svg": 0.003522,
-      "write_svg": 6.5e-05
+      "pdf": 0.020405,
+      "png_high": 0.584095,
+      "png_medium": 0.164247,
+      "render_svg": 0.003176,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -196,11 +196,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.010171,
-      "png_high": 0.343843,
-      "png_medium": 0.096521,
-      "render_svg": 0.002435,
-      "write_svg": 4e-05
+      "pdf": 0.010027,
+      "png_high": 0.340861,
+      "png_medium": 0.096225,
+      "render_svg": 0.002319,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -224,17 +224,17 @@
       "svg": "tests/end_to_end/output/tree/black/06_tree_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 21998,
-      "png_high": 643800,
-      "png_medium": 305952,
-      "svg": 37322
+      "pdf": 22040,
+      "png_high": 630832,
+      "png_medium": 287229,
+      "svg": 37332
     },
     "timings_seconds": {
-      "pdf": 0.039461,
-      "png_high": 0.585656,
-      "png_medium": 0.183857,
-      "render_svg": 0.01649,
-      "write_svg": 5.8e-05
+      "pdf": 0.040017,
+      "png_high": 0.582719,
+      "png_medium": 0.185094,
+      "render_svg": 0.018369,
+      "write_svg": 8.1e-05
     }
   },
   {
@@ -264,11 +264,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.026864,
-      "png_high": 0.517014,
-      "png_medium": 0.154721,
-      "render_svg": 0.004567,
-      "write_svg": 5.9e-05
+      "pdf": 0.026999,
+      "png_high": 0.514459,
+      "png_medium": 0.153445,
+      "render_svg": 0.004808,
+      "write_svg": 6.3e-05
     }
   },
   {
@@ -298,11 +298,11 @@
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.036431,
-      "png_high": 0.423431,
-      "png_medium": 0.134619,
-      "render_svg": 0.005772,
-      "write_svg": 6.3e-05
+      "pdf": 0.037651,
+      "png_high": 0.418313,
+      "png_medium": 0.13557,
+      "render_svg": 0.006355,
+      "write_svg": 8.1e-05
     }
   },
   {
@@ -332,11 +332,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.033478,
-      "png_high": 0.59407,
-      "png_medium": 0.177804,
-      "render_svg": 0.014255,
-      "write_svg": 5.5e-05
+      "pdf": 0.032546,
+      "png_high": 0.576913,
+      "png_medium": 0.181153,
+      "render_svg": 0.014914,
+      "write_svg": 0.000104
     }
   },
   {
@@ -366,11 +366,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.019811,
-      "png_high": 0.578648,
-      "png_medium": 0.163876,
-      "render_svg": 0.002958,
-      "write_svg": 4e-05
+      "pdf": 0.019706,
+      "png_high": 0.573494,
+      "png_medium": 0.162711,
+      "render_svg": 0.002985,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -400,11 +400,11 @@
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010039,
-      "png_high": 0.34282,
-      "png_medium": 0.092377,
-      "render_svg": 0.002255,
-      "write_svg": 3.8e-05
+      "pdf": 0.010181,
+      "png_high": 0.341223,
+      "png_medium": 0.093285,
+      "render_svg": 0.002274,
+      "write_svg": 4.7e-05
     }
   },
   {
@@ -428,17 +428,17 @@
       "svg": "tests/end_to_end/output/tree/colorblind/12_tree_left_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 21997,
-      "png_high": 653859,
-      "png_medium": 296031,
+      "pdf": 21978,
+      "png_high": 654734,
+      "png_medium": 288929,
       "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.039378,
-      "png_high": 0.582398,
-      "png_medium": 0.180882,
-      "render_svg": 0.016463,
-      "write_svg": 4.8e-05
+      "pdf": 0.041955,
+      "png_high": 0.659481,
+      "png_medium": 0.186152,
+      "render_svg": 0.017164,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -468,11 +468,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.042842,
-      "png_high": 0.508852,
-      "png_medium": 0.152534,
-      "render_svg": 0.004523,
-      "write_svg": 5.2e-05
+      "pdf": 0.027826,
+      "png_high": 0.521411,
+      "png_medium": 0.174585,
+      "render_svg": 0.00716,
+      "write_svg": 0.000177
     }
   },
   {
@@ -496,17 +496,17 @@
       "svg": "tests/end_to_end/output/tree/colorblind/14_synoptic_boxes_left_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34214,
+      "pdf": 34213,
       "png_high": 705720,
       "png_medium": 310747,
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.038135,
-      "png_high": 0.413727,
-      "png_medium": 0.133084,
-      "render_svg": 0.005538,
-      "write_svg": 5.3e-05
+      "pdf": 0.037359,
+      "png_high": 0.409844,
+      "png_medium": 0.136142,
+      "render_svg": 0.00606,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -536,11 +536,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.033585,
-      "png_high": 0.585086,
-      "png_medium": 0.175513,
-      "render_svg": 0.01446,
-      "write_svg": 7e-05
+      "pdf": 0.033662,
+      "png_high": 0.578269,
+      "png_medium": 0.175709,
+      "render_svg": 0.014556,
+      "write_svg": 7.1e-05
     }
   },
   {
@@ -570,10 +570,10 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.019969,
-      "png_high": 0.580704,
-      "png_medium": 0.163218,
-      "render_svg": 0.003037,
+      "pdf": 0.029654,
+      "png_high": 0.574242,
+      "png_medium": 0.162154,
+      "render_svg": 0.002958,
       "write_svg": 3.6e-05
     }
   },
@@ -604,11 +604,11 @@
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.010969,
-      "png_high": 0.340193,
-      "png_medium": 0.092107,
-      "render_svg": 0.002254,
-      "write_svg": 3.9e-05
+      "pdf": 0.010724,
+      "png_high": 0.339498,
+      "png_medium": 0.093535,
+      "render_svg": 0.002296,
+      "write_svg": 4.1e-05
     }
   },
   {
@@ -632,17 +632,17 @@
       "svg": "tests/end_to_end/output/tree/default/18_tree_left_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 37136,
-      "png_high": 682376,
-      "png_medium": 302188,
-      "svg": 36212
+      "pdf": 37128,
+      "png_high": 661926,
+      "png_medium": 276202,
+      "svg": 36224
     },
     "timings_seconds": {
-      "pdf": 0.042394,
-      "png_high": 0.605163,
-      "png_medium": 0.186058,
-      "render_svg": 0.01678,
-      "write_svg": 6.6e-05
+      "pdf": 0.041093,
+      "png_high": 0.582542,
+      "png_medium": 0.18316,
+      "render_svg": 0.016813,
+      "write_svg": 4.9e-05
     }
   },
   {
@@ -672,11 +672,11 @@
       "svg": 23218
     },
     "timings_seconds": {
-      "pdf": 0.028933,
-      "png_high": 0.518951,
-      "png_medium": 0.155943,
-      "render_svg": 0.004684,
-      "write_svg": 6.1e-05
+      "pdf": 0.036412,
+      "png_high": 0.515739,
+      "png_medium": 0.155006,
+      "render_svg": 0.004632,
+      "write_svg": 4.9e-05
     }
   },
   {
@@ -700,17 +700,17 @@
       "svg": "tests/end_to_end/output/tree/default/20_synoptic_boxes_left_radial_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 21874,
+      "pdf": 21873,
       "png_high": 685835,
       "png_medium": 319953,
       "svg": 26996
     },
     "timings_seconds": {
-      "pdf": 0.036891,
-      "png_high": 0.423584,
-      "png_medium": 0.137708,
-      "render_svg": 0.005823,
-      "write_svg": 6.5e-05
+      "pdf": 0.037594,
+      "png_high": 0.414807,
+      "png_medium": 0.151283,
+      "render_svg": 0.005641,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -740,11 +740,11 @@
       "svg": 37066
     },
     "timings_seconds": {
-      "pdf": 0.033402,
-      "png_high": 0.588542,
-      "png_medium": 0.179707,
-      "render_svg": 0.014687,
-      "write_svg": 7.1e-05
+      "pdf": 0.033662,
+      "png_high": 0.579309,
+      "png_medium": 0.178529,
+      "render_svg": 0.01459,
+      "write_svg": 7.3e-05
     }
   },
   {
@@ -774,11 +774,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.03679,
-      "png_high": 0.584873,
-      "png_medium": 0.165189,
-      "render_svg": 0.002947,
-      "write_svg": 3.6e-05
+      "pdf": 0.020444,
+      "png_high": 0.584641,
+      "png_medium": 0.164017,
+      "render_svg": 0.002976,
+      "write_svg": 4.5e-05
     }
   },
   {
@@ -808,11 +808,11 @@
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.010708,
-      "png_high": 0.343856,
-      "png_medium": 0.092841,
-      "render_svg": 0.002202,
-      "write_svg": 3.8e-05
+      "pdf": 0.010384,
+      "png_high": 0.339077,
+      "png_medium": 0.093228,
+      "render_svg": 0.002266,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -836,17 +836,17 @@
       "svg": "tests/end_to_end/output/tree/dusk/24_tree_left_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 35634,
-      "png_high": 641003,
-      "png_medium": 286506,
-      "svg": 37424
+      "pdf": 35586,
+      "png_high": 642670,
+      "png_medium": 267801,
+      "svg": 37423
     },
     "timings_seconds": {
-      "pdf": 0.043153,
-      "png_high": 0.591245,
-      "png_medium": 0.18275,
-      "render_svg": 0.01771,
-      "write_svg": 8.2e-05
+      "pdf": 0.040921,
+      "png_high": 0.595133,
+      "png_medium": 0.180298,
+      "render_svg": 0.017812,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -876,11 +876,11 @@
       "svg": 23804
     },
     "timings_seconds": {
-      "pdf": 0.029203,
-      "png_high": 0.51737,
-      "png_medium": 0.154498,
-      "render_svg": 0.004862,
-      "write_svg": 5.9e-05
+      "pdf": 0.028959,
+      "png_high": 0.519863,
+      "png_medium": 0.153896,
+      "render_svg": 0.004786,
+      "write_svg": 5.6e-05
     }
   },
   {
@@ -910,11 +910,11 @@
       "svg": 27322
     },
     "timings_seconds": {
-      "pdf": 0.037798,
-      "png_high": 0.422606,
-      "png_medium": 0.136685,
-      "render_svg": 0.005883,
-      "write_svg": 6.9e-05
+      "pdf": 0.037223,
+      "png_high": 0.422447,
+      "png_medium": 0.136562,
+      "render_svg": 0.00565,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -944,11 +944,11 @@
       "svg": 37150
     },
     "timings_seconds": {
-      "pdf": 0.03376,
-      "png_high": 0.585301,
-      "png_medium": 0.1775,
-      "render_svg": 0.014641,
-      "write_svg": 6.5e-05
+      "pdf": 0.033759,
+      "png_high": 0.579632,
+      "png_medium": 0.178046,
+      "render_svg": 0.014732,
+      "write_svg": 8.9e-05
     }
   },
   {
@@ -978,11 +978,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.030175,
-      "png_high": 0.580822,
-      "png_medium": 0.164843,
-      "render_svg": 0.003005,
-      "write_svg": 3.7e-05
+      "pdf": 0.022237,
+      "png_high": 0.578934,
+      "png_medium": 0.162887,
+      "render_svg": 0.002934,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -1006,17 +1006,17 @@
       "svg": "tests/end_to_end/output/flowchart/dusk/29_flowchart_justify_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24076,
+      "pdf": 24074,
       "png_high": 331404,
       "png_medium": 140267,
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.011294,
-      "png_high": 0.346986,
-      "png_medium": 0.092563,
-      "render_svg": 0.002248,
-      "write_svg": 3.8e-05
+      "pdf": 0.010289,
+      "png_high": 0.342919,
+      "png_medium": 0.093296,
+      "render_svg": 0.002506,
+      "write_svg": 4.6e-05
     }
   },
   {
@@ -1040,17 +1040,17 @@
       "svg": "tests/end_to_end/output/tree/frutal/30_tree_left_default_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34449,
-      "png_high": 709360,
-      "png_medium": 299399,
-      "svg": 36818
+      "pdf": 34458,
+      "png_high": 666966,
+      "png_medium": 297569,
+      "svg": 36803
     },
     "timings_seconds": {
-      "pdf": 0.043679,
-      "png_high": 0.593502,
-      "png_medium": 0.183209,
-      "render_svg": 0.016831,
-      "write_svg": 5.8e-05
+      "pdf": 0.042429,
+      "png_high": 0.589221,
+      "png_medium": 0.183943,
+      "render_svg": 0.01727,
+      "write_svg": 7.5e-05
     }
   },
   {
@@ -1080,11 +1080,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.030141,
-      "png_high": 0.529131,
-      "png_medium": 0.153895,
-      "render_svg": 0.004803,
-      "write_svg": 5.9e-05
+      "pdf": 0.028816,
+      "png_high": 0.51014,
+      "png_medium": 0.159648,
+      "render_svg": 0.004713,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -1114,11 +1114,11 @@
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.051331,
-      "png_high": 0.423503,
-      "png_medium": 0.136059,
-      "render_svg": 0.006017,
-      "write_svg": 6.6e-05
+      "pdf": 0.039201,
+      "png_high": 0.421517,
+      "png_medium": 0.133875,
+      "render_svg": 0.005807,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -1148,11 +1148,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.035879,
-      "png_high": 0.58651,
-      "png_medium": 0.183224,
-      "render_svg": 0.01565,
-      "write_svg": 0.000145
+      "pdf": 0.033573,
+      "png_high": 0.577634,
+      "png_medium": 0.181569,
+      "render_svg": 0.014712,
+      "write_svg": 7e-05
     }
   },
   {
@@ -1182,11 +1182,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.021488,
-      "png_high": 0.583978,
-      "png_medium": 0.165986,
-      "render_svg": 0.003114,
-      "write_svg": 3.8e-05
+      "pdf": 0.026549,
+      "png_high": 0.579058,
+      "png_medium": 0.164607,
+      "render_svg": 0.003131,
+      "write_svg": 5.2e-05
     }
   },
   {
@@ -1210,17 +1210,17 @@
       "svg": "tests/end_to_end/output/flowchart/frutal/35_flowchart_justify_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 26209,
+      "pdf": 26208,
       "png_high": 293173,
       "png_medium": 122216,
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.011308,
-      "png_high": 0.343114,
-      "png_medium": 0.092629,
-      "render_svg": 0.002369,
-      "write_svg": 4e-05
+      "pdf": 0.010824,
+      "png_high": 0.338616,
+      "png_medium": 0.093427,
+      "render_svg": 0.002818,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -1244,17 +1244,17 @@
       "svg": "tests/end_to_end/output/tree/jungle/36_tree_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22029,
-      "png_high": 651545,
-      "png_medium": 310679,
-      "svg": 37322
+      "pdf": 22066,
+      "png_high": 638480,
+      "png_medium": 292443,
+      "svg": 37332
     },
     "timings_seconds": {
-      "pdf": 0.04385,
-      "png_high": 0.592741,
-      "png_medium": 0.184975,
-      "render_svg": 0.02132,
-      "write_svg": 5.9e-05
+      "pdf": 0.046219,
+      "png_high": 0.589979,
+      "png_medium": 0.197885,
+      "render_svg": 0.01748,
+      "write_svg": 7.7e-05
     }
   },
   {
@@ -1284,11 +1284,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.03339,
-      "png_high": 0.523749,
-      "png_medium": 0.155636,
-      "render_svg": 0.004697,
-      "write_svg": 6e-05
+      "pdf": 0.029028,
+      "png_high": 0.515125,
+      "png_medium": 0.157226,
+      "render_svg": 0.00466,
+      "write_svg": 9e-05
     }
   },
   {
@@ -1312,17 +1312,17 @@
       "svg": "tests/end_to_end/output/tree/jungle/38_synoptic_boxes_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35232,
+      "pdf": 35234,
       "png_high": 677702,
       "png_medium": 302925,
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.038371,
-      "png_high": 0.421158,
-      "png_medium": 0.136869,
-      "render_svg": 0.00588,
-      "write_svg": 6.1e-05
+      "pdf": 0.041344,
+      "png_high": 0.421795,
+      "png_medium": 0.145572,
+      "render_svg": 0.006375,
+      "write_svg": 0.000103
     }
   },
   {
@@ -1352,11 +1352,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.037172,
-      "png_high": 0.587628,
-      "png_medium": 0.179313,
-      "render_svg": 0.016103,
-      "write_svg": 6.8e-05
+      "pdf": 0.035153,
+      "png_high": 0.580755,
+      "png_medium": 0.17814,
+      "render_svg": 0.014879,
+      "write_svg": 9.3e-05
     }
   },
   {
@@ -1386,11 +1386,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.02173,
-      "png_high": 0.577273,
-      "png_medium": 0.162391,
-      "render_svg": 0.002995,
-      "write_svg": 3.8e-05
+      "pdf": 0.021788,
+      "png_high": 0.571662,
+      "png_medium": 0.16391,
+      "render_svg": 0.003061,
+      "write_svg": 4.4e-05
     }
   },
   {
@@ -1414,17 +1414,17 @@
       "svg": "tests/end_to_end/output/flowchart/jungle/41_flowchart_justify_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24815,
+      "pdf": 24814,
       "png_high": 325016,
       "png_medium": 138472,
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.011514,
-      "png_high": 0.344894,
-      "png_medium": 0.093619,
-      "render_svg": 0.002336,
-      "write_svg": 3.8e-05
+      "pdf": 0.011034,
+      "png_high": 0.339273,
+      "png_medium": 0.093268,
+      "render_svg": 0.002245,
+      "write_svg": 3.3e-05
     }
   },
   {
@@ -1448,17 +1448,17 @@
       "svg": "tests/end_to_end/output/tree/minimal/42_tree_left_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 21985,
-      "png_high": 658230,
-      "png_medium": 301833,
+      "pdf": 21948,
+      "png_high": 661249,
+      "png_medium": 294050,
       "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.044974,
-      "png_high": 0.595064,
-      "png_medium": 0.185053,
-      "render_svg": 0.018134,
-      "write_svg": 6.3e-05
+      "pdf": 0.042728,
+      "png_high": 0.592413,
+      "png_medium": 0.183372,
+      "render_svg": 0.018338,
+      "write_svg": 8e-05
     }
   },
   {
@@ -1488,11 +1488,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.030401,
-      "png_high": 0.52699,
-      "png_medium": 0.155791,
-      "render_svg": 0.005296,
-      "write_svg": 0.000116
+      "pdf": 0.029875,
+      "png_high": 0.556696,
+      "png_medium": 0.158092,
+      "render_svg": 0.004656,
+      "write_svg": 8e-05
     }
   },
   {
@@ -1516,17 +1516,17 @@
       "svg": "tests/end_to_end/output/tree/minimal/44_synoptic_boxes_left_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34201,
+      "pdf": 34200,
       "png_high": 719762,
       "png_medium": 319001,
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.039921,
-      "png_high": 0.431038,
-      "png_medium": 0.139882,
-      "render_svg": 0.006168,
-      "write_svg": 6.8e-05
+      "pdf": 0.040189,
+      "png_high": 0.424811,
+      "png_medium": 0.13845,
+      "render_svg": 0.006162,
+      "write_svg": 7.4e-05
     }
   },
   {
@@ -1556,11 +1556,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.035383,
-      "png_high": 0.649458,
-      "png_medium": 0.183591,
-      "render_svg": 0.015626,
-      "write_svg": 7.6e-05
+      "pdf": 0.036366,
+      "png_high": 0.580485,
+      "png_medium": 0.180963,
+      "render_svg": 0.015392,
+      "write_svg": 0.000128
     }
   },
   {
@@ -1590,11 +1590,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.020679,
-      "png_high": 0.583519,
-      "png_medium": 0.16615,
-      "render_svg": 0.003133,
-      "write_svg": 4.6e-05
+      "pdf": 0.021949,
+      "png_high": 0.602171,
+      "png_medium": 0.165791,
+      "render_svg": 0.002931,
+      "write_svg": 3.4e-05
     }
   },
   {
@@ -1624,11 +1624,11 @@
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.010947,
-      "png_high": 0.344355,
-      "png_medium": 0.093484,
-      "render_svg": 0.002379,
-      "write_svg": 4e-05
+      "pdf": 0.010925,
+      "png_high": 0.345156,
+      "png_medium": 0.094765,
+      "render_svg": 0.002321,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -1652,17 +1652,17 @@
       "svg": "tests/end_to_end/output/tree/neon/48_tree_left_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 37063,
-      "png_high": 678100,
-      "png_medium": 299811,
-      "svg": 36212
+      "pdf": 37066,
+      "png_high": 656214,
+      "png_medium": 272422,
+      "svg": 36224
     },
     "timings_seconds": {
-      "pdf": 0.043412,
-      "png_high": 0.589235,
-      "png_medium": 0.183987,
-      "render_svg": 0.017055,
-      "write_svg": 6.6e-05
+      "pdf": 0.043758,
+      "png_high": 0.590218,
+      "png_medium": 0.184033,
+      "render_svg": 0.018278,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -1692,11 +1692,11 @@
       "svg": 23218
     },
     "timings_seconds": {
-      "pdf": 0.03111,
-      "png_high": 0.515577,
-      "png_medium": 0.156089,
-      "render_svg": 0.004625,
-      "write_svg": 6.1e-05
+      "pdf": 0.030116,
+      "png_high": 0.516421,
+      "png_medium": 0.155832,
+      "render_svg": 0.004742,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -1726,11 +1726,11 @@
       "svg": 26996
     },
     "timings_seconds": {
-      "pdf": 0.039272,
-      "png_high": 0.424999,
-      "png_medium": 0.138364,
-      "render_svg": 0.005891,
-      "write_svg": 8.8e-05
+      "pdf": 0.037819,
+      "png_high": 0.417471,
+      "png_medium": 0.138078,
+      "render_svg": 0.006754,
+      "write_svg": 7.7e-05
     }
   },
   {
@@ -1760,11 +1760,11 @@
       "svg": 37066
     },
     "timings_seconds": {
-      "pdf": 0.035013,
-      "png_high": 0.594295,
-      "png_medium": 0.181424,
-      "render_svg": 0.014833,
-      "write_svg": 9.6e-05
+      "pdf": 0.041169,
+      "png_high": 0.735476,
+      "png_medium": 0.194392,
+      "render_svg": 0.015578,
+      "write_svg": 8.4e-05
     }
   },
   {
@@ -1794,11 +1794,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.020474,
-      "png_high": 0.587692,
-      "png_medium": 0.164075,
-      "render_svg": 0.002938,
-      "write_svg": 3.9e-05
+      "pdf": 0.022628,
+      "png_high": 0.594265,
+      "png_medium": 0.184773,
+      "render_svg": 0.004564,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -1828,11 +1828,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.011022,
-      "png_high": 0.342612,
-      "png_medium": 0.093563,
-      "render_svg": 0.002263,
-      "write_svg": 3.9e-05
+      "pdf": 0.012201,
+      "png_high": 0.340533,
+      "png_medium": 0.098204,
+      "render_svg": 0.002617,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -1856,17 +1856,17 @@
       "svg": "tests/end_to_end/output/tree/ocean/54_tree_left_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 35426,
-      "png_high": 641026,
-      "png_medium": 286000,
-      "svg": 37424
+      "pdf": 35376,
+      "png_high": 642752,
+      "png_medium": 268016,
+      "svg": 37423
     },
     "timings_seconds": {
-      "pdf": 0.045416,
-      "png_high": 0.590796,
-      "png_medium": 0.183213,
-      "render_svg": 0.017702,
-      "write_svg": 7.1e-05
+      "pdf": 0.043189,
+      "png_high": 0.594567,
+      "png_medium": 0.185317,
+      "render_svg": 0.019114,
+      "write_svg": 8.5e-05
     }
   },
   {
@@ -1896,11 +1896,11 @@
       "svg": 23804
     },
     "timings_seconds": {
-      "pdf": 0.029738,
-      "png_high": 0.522956,
-      "png_medium": 0.156225,
-      "render_svg": 0.004719,
-      "write_svg": 5.6e-05
+      "pdf": 0.028821,
+      "png_high": 0.517734,
+      "png_medium": 0.15611,
+      "render_svg": 0.00506,
+      "write_svg": 0.000113
     }
   },
   {
@@ -1930,11 +1930,11 @@
       "svg": 27322
     },
     "timings_seconds": {
-      "pdf": 0.038884,
-      "png_high": 0.423966,
-      "png_medium": 0.137203,
-      "render_svg": 0.005777,
-      "write_svg": 6.9e-05
+      "pdf": 0.03898,
+      "png_high": 0.418264,
+      "png_medium": 0.137201,
+      "render_svg": 0.005762,
+      "write_svg": 6.7e-05
     }
   },
   {
@@ -1964,11 +1964,11 @@
       "svg": 37150
     },
     "timings_seconds": {
-      "pdf": 0.034985,
-      "png_high": 0.585481,
-      "png_medium": 0.178439,
-      "render_svg": 0.014756,
-      "write_svg": 7.5e-05
+      "pdf": 0.035402,
+      "png_high": 0.580797,
+      "png_medium": 0.179551,
+      "render_svg": 0.015189,
+      "write_svg": 0.000125
     }
   },
   {
@@ -1992,17 +1992,17 @@
       "svg": "tests/end_to_end/output/matrix/ocean/58_matrix_left_default_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 28072,
+      "pdf": 28071,
       "png_high": 614982,
       "png_medium": 282546,
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.021506,
-      "png_high": 0.585465,
-      "png_medium": 0.169512,
-      "render_svg": 0.002938,
-      "write_svg": 4.1e-05
+      "pdf": 0.021352,
+      "png_high": 0.5858,
+      "png_medium": 0.165773,
+      "render_svg": 0.003092,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -2026,17 +2026,17 @@
       "svg": "tests/end_to_end/output/flowchart/ocean/59_flowchart_justify_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 26112,
+      "pdf": 26111,
       "png_high": 294641,
       "png_medium": 123077,
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.011525,
-      "png_high": 0.345687,
-      "png_medium": 0.093906,
-      "render_svg": 0.002283,
-      "write_svg": 4.5e-05
+      "pdf": 0.01095,
+      "png_high": 0.344111,
+      "png_medium": 0.093183,
+      "render_svg": 0.00233,
+      "write_svg": 4.3e-05
     }
   },
   {
@@ -2060,17 +2060,17 @@
       "svg": "tests/end_to_end/output/tree/pastel/60_tree_left_default_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34473,
-      "png_high": 709317,
-      "png_medium": 300242,
-      "svg": 36818
+      "pdf": 34470,
+      "png_high": 667094,
+      "png_medium": 299020,
+      "svg": 36803
     },
     "timings_seconds": {
-      "pdf": 0.044284,
-      "png_high": 0.600722,
-      "png_medium": 0.186189,
-      "render_svg": 0.034393,
-      "write_svg": 9.1e-05
+      "pdf": 0.043271,
+      "png_high": 0.590556,
+      "png_medium": 0.184089,
+      "render_svg": 0.016998,
+      "write_svg": 7.3e-05
     }
   },
   {
@@ -2100,11 +2100,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.030335,
-      "png_high": 0.522533,
-      "png_medium": 0.155618,
-      "render_svg": 0.0049,
-      "write_svg": 6.7e-05
+      "pdf": 0.029846,
+      "png_high": 0.518085,
+      "png_medium": 0.156749,
+      "render_svg": 0.005035,
+      "write_svg": 8e-05
     }
   },
   {
@@ -2128,17 +2128,17 @@
       "svg": "tests/end_to_end/output/tree/pastel/62_synoptic_boxes_left_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 36956,
+      "pdf": 36955,
       "png_high": 699583,
       "png_medium": 293559,
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.040634,
-      "png_high": 0.428813,
-      "png_medium": 0.136985,
-      "render_svg": 0.006034,
-      "write_svg": 7.2e-05
+      "pdf": 0.039713,
+      "png_high": 0.418215,
+      "png_medium": 0.135865,
+      "render_svg": 0.005709,
+      "write_svg": 0.000107
     }
   },
   {
@@ -2168,11 +2168,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.036331,
-      "png_high": 0.593102,
-      "png_medium": 0.181344,
-      "render_svg": 0.015092,
-      "write_svg": 7.4e-05
+      "pdf": 0.035176,
+      "png_high": 0.58313,
+      "png_medium": 0.180482,
+      "render_svg": 0.024192,
+      "write_svg": 0.000133
     }
   },
   {
@@ -2202,11 +2202,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.020678,
-      "png_high": 0.591745,
-      "png_medium": 0.165244,
-      "render_svg": 0.00313,
-      "write_svg": 4.5e-05
+      "pdf": 0.021604,
+      "png_high": 0.580244,
+      "png_medium": 0.164774,
+      "render_svg": 0.003011,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -2236,11 +2236,11 @@
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.010204,
-      "png_high": 0.341334,
-      "png_medium": 0.093312,
-      "render_svg": 0.002362,
-      "write_svg": 4e-05
+      "pdf": 0.010974,
+      "png_high": 0.339535,
+      "png_medium": 0.094166,
+      "render_svg": 0.002296,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -2264,17 +2264,17 @@
       "svg": "tests/end_to_end/output/tree/sepia/66_tree_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 21975,
-      "png_high": 650573,
-      "png_medium": 310303,
-      "svg": 37322
+      "pdf": 22014,
+      "png_high": 637699,
+      "png_medium": 291760,
+      "svg": 37332
     },
     "timings_seconds": {
-      "pdf": 0.043569,
-      "png_high": 0.594594,
-      "png_medium": 0.200586,
-      "render_svg": 0.017402,
-      "write_svg": 8.3e-05
+      "pdf": 0.041459,
+      "png_high": 0.588397,
+      "png_medium": 0.184761,
+      "render_svg": 0.01731,
+      "write_svg": 5.3e-05
     }
   },
   {
@@ -2304,11 +2304,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.029073,
-      "png_high": 0.539995,
-      "png_medium": 0.155236,
-      "render_svg": 0.004736,
-      "write_svg": 5.9e-05
+      "pdf": 0.028254,
+      "png_high": 0.519567,
+      "png_medium": 0.156587,
+      "render_svg": 0.004705,
+      "write_svg": 5.1e-05
     }
   },
   {
@@ -2332,17 +2332,17 @@
       "svg": "tests/end_to_end/output/tree/sepia/68_synoptic_boxes_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35187,
+      "pdf": 35186,
       "png_high": 677173,
       "png_medium": 304234,
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.039469,
-      "png_high": 0.421929,
-      "png_medium": 0.136902,
-      "render_svg": 0.018291,
-      "write_svg": 9.1e-05
+      "pdf": 0.039598,
+      "png_high": 0.417592,
+      "png_medium": 0.138034,
+      "render_svg": 0.005787,
+      "write_svg": 5.3e-05
     }
   },
   {
@@ -2372,11 +2372,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.035249,
-      "png_high": 0.585759,
-      "png_medium": 0.177437,
-      "render_svg": 0.01464,
-      "write_svg": 9.9e-05
+      "pdf": 0.035148,
+      "png_high": 0.581913,
+      "png_medium": 0.179261,
+      "render_svg": 0.022599,
+      "write_svg": 0.000124
     }
   },
   {
@@ -2406,11 +2406,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.021634,
-      "png_high": 0.586414,
-      "png_medium": 0.166999,
-      "render_svg": 0.003026,
-      "write_svg": 3.7e-05
+      "pdf": 0.021034,
+      "png_high": 0.581751,
+      "png_medium": 0.166349,
+      "render_svg": 0.002935,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -2434,16 +2434,16 @@
       "svg": "tests/end_to_end/output/flowchart/sepia/71_flowchart_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 17034,
+      "pdf": 17033,
       "png_high": 301434,
       "png_medium": 125137,
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.009937,
-      "png_high": 0.344758,
-      "png_medium": 0.094987,
-      "render_svg": 0.002297,
+      "pdf": 0.010457,
+      "png_high": 0.345982,
+      "png_medium": 0.094387,
+      "render_svg": 0.002322,
       "write_svg": 3.5e-05
     }
   },
@@ -2468,17 +2468,17 @@
       "svg": "tests/end_to_end/output/tree/terracotta/72_tree_left_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22094,
-      "png_high": 666599,
-      "png_medium": 305403,
+      "pdf": 22073,
+      "png_high": 670770,
+      "png_medium": 298155,
       "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.046682,
-      "png_high": 0.605933,
-      "png_medium": 0.184965,
-      "render_svg": 0.016968,
-      "write_svg": 6.6e-05
+      "pdf": 0.042659,
+      "png_high": 0.597178,
+      "png_medium": 0.185243,
+      "render_svg": 0.017508,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -2508,11 +2508,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.029817,
-      "png_high": 0.542752,
-      "png_medium": 0.166517,
-      "render_svg": 0.00466,
-      "write_svg": 5.7e-05
+      "pdf": 0.028917,
+      "png_high": 0.519021,
+      "png_medium": 0.166261,
+      "render_svg": 0.004563,
+      "write_svg": 8.8e-05
     }
   },
   {
@@ -2542,11 +2542,11 @@
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.039943,
-      "png_high": 0.431202,
-      "png_medium": 0.139759,
-      "render_svg": 0.006303,
-      "write_svg": 9.8e-05
+      "pdf": 0.040653,
+      "png_high": 0.424591,
+      "png_medium": 0.13841,
+      "render_svg": 0.005766,
+      "write_svg": 5.1e-05
     }
   },
   {
@@ -2576,11 +2576,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.036639,
-      "png_high": 0.595913,
-      "png_medium": 0.181973,
-      "render_svg": 0.015357,
-      "write_svg": 0.000109
+      "pdf": 0.035436,
+      "png_high": 0.583371,
+      "png_medium": 0.185042,
+      "render_svg": 0.015066,
+      "write_svg": 0.00011
     }
   },
   {
@@ -2610,11 +2610,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.027366,
-      "png_high": 0.587099,
-      "png_medium": 0.166166,
-      "render_svg": 0.003236,
-      "write_svg": 4.1e-05
+      "pdf": 0.020685,
+      "png_high": 0.595037,
+      "png_medium": 0.166766,
+      "render_svg": 0.00302,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -2644,11 +2644,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.011434,
-      "png_high": 0.349902,
-      "png_medium": 0.095473,
-      "render_svg": 0.00304,
-      "write_svg": 7.1e-05
+      "pdf": 0.01354,
+      "png_high": 0.341211,
+      "png_medium": 0.094729,
+      "render_svg": 0.002349,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -2672,17 +2672,17 @@
       "svg": "tests/end_to_end/output/typography/tree/default/78_tree_tree_default.svg"
     },
     "sizes_bytes": {
-      "pdf": 34508,
-      "png_high": 994887,
-      "png_medium": 467854,
-      "svg": 36782
+      "pdf": 34414,
+      "png_high": 1005799,
+      "png_medium": 444722,
+      "svg": 36770
     },
     "timings_seconds": {
-      "pdf": 0.044713,
-      "png_high": 0.616397,
-      "png_medium": 0.193463,
-      "render_svg": 0.016867,
-      "write_svg": 6.7e-05
+      "pdf": 0.042948,
+      "png_high": 0.599265,
+      "png_medium": 0.192847,
+      "render_svg": 0.016672,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -2706,17 +2706,17 @@
       "svg": "tests/end_to_end/output/typography/tree/academic/79_tree_tree_academic.svg"
     },
     "sizes_bytes": {
-      "pdf": 35385,
-      "png_high": 917871,
-      "png_medium": 413440,
-      "svg": 37392
+      "pdf": 35393,
+      "png_high": 913570,
+      "png_medium": 420189,
+      "svg": 37389
     },
     "timings_seconds": {
-      "pdf": 0.046742,
-      "png_high": 0.609759,
-      "png_medium": 0.18926,
-      "render_svg": 0.0175,
-      "write_svg": 6.5e-05
+      "pdf": 0.044292,
+      "png_high": 0.606648,
+      "png_medium": 0.187813,
+      "render_svg": 0.018026,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -2740,17 +2740,17 @@
       "svg": "tests/end_to_end/output/typography/tree/formal/80_tree_tree_formal.svg"
     },
     "sizes_bytes": {
-      "pdf": 37129,
-      "png_high": 940293,
-      "png_medium": 425096,
-      "svg": 36175
+      "pdf": 37109,
+      "png_high": 945749,
+      "png_medium": 409668,
+      "svg": 36189
     },
     "timings_seconds": {
-      "pdf": 0.045139,
-      "png_high": 0.614209,
-      "png_medium": 0.1911,
-      "render_svg": 0.017347,
-      "write_svg": 8.6e-05
+      "pdf": 0.043168,
+      "png_high": 0.598582,
+      "png_medium": 0.189012,
+      "render_svg": 0.017452,
+      "write_svg": 5.2e-05
     }
   },
   {
@@ -2774,17 +2774,17 @@
       "svg": "tests/end_to_end/output/typography/tree/casual/81_tree_tree_casual.svg"
     },
     "sizes_bytes": {
-      "pdf": 22088,
-      "png_high": 928680,
-      "png_medium": 430672,
+      "pdf": 22035,
+      "png_high": 852111,
+      "png_medium": 392248,
       "svg": 37308
     },
     "timings_seconds": {
-      "pdf": 0.044918,
-      "png_high": 0.617945,
-      "png_medium": 0.193287,
-      "render_svg": 0.018249,
-      "write_svg": 6.3e-05
+      "pdf": 0.041699,
+      "png_high": 0.59378,
+      "png_medium": 0.188853,
+      "render_svg": 0.017807,
+      "write_svg": 7.8e-05
     }
   },
   {
@@ -2808,16 +2808,16 @@
       "svg": "tests/end_to_end/output/typography/tree/radial/82_tree_tree_radial.svg"
     },
     "sizes_bytes": {
-      "pdf": 22105,
-      "png_high": 970408,
-      "png_medium": 458580,
-      "svg": 37288
+      "pdf": 22091,
+      "png_high": 939479,
+      "png_medium": 433696,
+      "svg": 37298
     },
     "timings_seconds": {
-      "pdf": 0.044936,
-      "png_high": 0.612193,
-      "png_medium": 0.195355,
-      "render_svg": 0.018153,
+      "pdf": 0.043937,
+      "png_high": 0.597952,
+      "png_medium": 0.188867,
+      "render_svg": 0.018176,
       "write_svg": 7.2e-05
     }
   },
@@ -2848,11 +2848,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.022888,
-      "png_high": 0.587527,
-      "png_medium": 0.164432,
-      "render_svg": 0.003029,
-      "write_svg": 3.9e-05
+      "pdf": 0.02122,
+      "png_high": 0.578637,
+      "png_medium": 0.163266,
+      "render_svg": 0.003035,
+      "write_svg": 4.1e-05
     }
   },
   {
@@ -2882,11 +2882,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.023216,
-      "png_high": 0.590453,
-      "png_medium": 0.167226,
-      "render_svg": 0.003245,
-      "write_svg": 4.3e-05
+      "pdf": 0.02244,
+      "png_high": 0.578044,
+      "png_medium": 0.165978,
+      "render_svg": 0.003078,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -2916,10 +2916,10 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.022331,
-      "png_high": 0.59428,
-      "png_medium": 0.164779,
-      "render_svg": 0.003185,
+      "pdf": 0.021492,
+      "png_high": 0.606148,
+      "png_medium": 0.163611,
+      "render_svg": 0.003168,
       "write_svg": 3.8e-05
     }
   },
@@ -2950,11 +2950,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.022957,
-      "png_high": 0.589823,
-      "png_medium": 0.163365,
-      "render_svg": 0.00315,
-      "write_svg": 3.5e-05
+      "pdf": 0.0216,
+      "png_high": 0.595759,
+      "png_medium": 0.163942,
+      "render_svg": 0.00311,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -2984,11 +2984,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.01046,
-      "png_high": 0.468188,
-      "png_medium": 0.126969,
-      "render_svg": 0.002494,
-      "write_svg": 5.7e-05
+      "pdf": 0.010175,
+      "png_high": 0.461036,
+      "png_medium": 0.123647,
+      "render_svg": 0.002519,
+      "write_svg": 4.3e-05
     }
   },
   {
@@ -3018,11 +3018,11 @@
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010429,
-      "png_high": 0.464436,
-      "png_medium": 0.124585,
-      "render_svg": 0.002338,
-      "write_svg": 3.8e-05
+      "pdf": 0.011273,
+      "png_high": 0.459842,
+      "png_medium": 0.124043,
+      "render_svg": 0.002428,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -3052,10 +3052,10 @@
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.011668,
-      "png_high": 0.466445,
-      "png_medium": 0.125087,
-      "render_svg": 0.002348,
+      "pdf": 0.010554,
+      "png_high": 0.459589,
+      "png_medium": 0.123199,
+      "render_svg": 0.002356,
       "write_svg": 3.8e-05
     }
   },
@@ -3086,11 +3086,11 @@
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.010777,
-      "png_high": 0.465632,
-      "png_medium": 0.124543,
-      "render_svg": 0.003097,
-      "write_svg": 4.7e-05
+      "pdf": 0.010523,
+      "png_high": 0.462985,
+      "png_medium": 0.123215,
+      "render_svg": 0.003016,
+      "write_svg": 4.2e-05
     }
   }
 ]

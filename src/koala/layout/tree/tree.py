@@ -333,6 +333,10 @@ def _apportion(
         v_outer_left = _next_left(v_outer_left) or v_outer_left
         v_outer_left.ancestor = v
 
+        # Walker resuelve el contorno con sibling_gap. El gap cross-subtree
+        # (entre ramas distintas) lo aplica una pasada posterior porque el
+        # smoothing de Buchheim distribuye el shift entre siblings
+        # intermedios y absorberia parte del cross_gap si lo aplicaramos aca.
         gap = (v_inner_right.box.width + v_inner_left.box.width) / 2 + get_h_gap_for_depth(
             v_inner_right.box.depth, config
         )
@@ -450,6 +454,12 @@ def assign_tree_positions(
     es ancho arriba y angosto abajo, el siguiente puede meterse en su hueco
     inferior sin colisionar. Eso recupera espacio que el packing clasico
     desperdiciaba al reservar bandas independientes por subarbol.
+
+    Despues de Walker se ejecuta una pasada que enforce un gap mayor entre
+    subarboles distintos (cousins o mas lejanos). Walker resuelve overlaps
+    con sibling_gap, pero el smoothing de Buchheim absorbe el factor extra
+    si se intenta aplicar dentro de _apportion. Por eso el ajuste cross-
+    subtree se aplica como post-procesamiento explicito.
     """
 
     cursor_x = config.margin_x
@@ -465,9 +475,86 @@ def assign_tree_positions(
         offset_x = cursor_x - min_left_x
 
         _second_walk(walker_root, offset_x, depth_y)
+        _enforce_cross_subtree_gap(root, boxes, config)
 
-        max_right = max(wn.box.x + wn.box.width for wn in walker_nodes)
+        all_descendants = list(iter_nodes([root]))
+        max_right = max(boxes[n.number].x + boxes[n.number].width for n in all_descendants)
         cursor_x = max_right + config.h_gap_base
+
+
+def _enforce_cross_subtree_gap(
+    root: ConceptNode,
+    boxes: Dict[str, LayoutBox],
+    config: LayoutConfig,
+) -> None:
+    """Pasa post-Walker que separa boxes de ramas distintas.
+
+    Para cada par adyacente al mismo depth con padres distintos, si el gap
+    actual es menor que el cross_gap requerido, desplaza el subarbol del
+    box derecho y todos los siblings posteriores en su cadena de ancestros,
+    hacia la derecha por la diferencia. Eso preserva el spacing relativo
+    dentro de cada rama y solo abre espacio entre ramas distintas.
+
+    Itera hasta que no haya conflictos (o hasta un limite defensivo) porque
+    desplazar puede revelar conflictos en otros depths cuando los subarboles
+    cruzan profundidades distintas.
+    """
+
+    factor = config.cross_subtree_gap_factor
+    if factor <= 1.0 + 1e-6:
+        return
+
+    parent_index_cache: Dict[str, int] = {}
+    for node in iter_nodes([root]):
+        if node.parent is None:
+            continue
+        parent_index_cache[node.number] = node.parent.children.index(node)
+
+    def shift_subtree(node: ConceptNode, dx: float) -> None:
+        boxes[node.number].x += dx
+        for child in node.children:
+            shift_subtree(child, dx)
+
+    def shift_node_and_followers(node: ConceptNode, dx: float) -> None:
+        shift_subtree(node, dx)
+        cur = node
+        while cur.parent is not None:
+            parent = cur.parent
+            idx = parent_index_cache[cur.number]
+            for sibling in parent.children[idx + 1:]:
+                shift_subtree(sibling, dx)
+            cur = parent
+
+    by_depth: Dict[int, List[LayoutBox]] = {}
+    for node in iter_nodes([root]):
+        box = boxes[node.number]
+        by_depth.setdefault(box.depth, []).append(box)
+
+    for _ in range(6):
+        any_shift = False
+        for depth in sorted(by_depth.keys()):
+            level = sorted(by_depth[depth], key=lambda b: b.x)
+            i = 1
+            while i < len(level):
+                a = level[i - 1]
+                b = level[i]
+                same_parent = a.node.parent is b.node.parent
+                if same_parent:
+                    i += 1
+                    continue
+                base_gap = get_h_gap_for_depth(depth, config)
+                required = base_gap * factor
+                actual = b.x - (a.x + a.width)
+                if actual + 0.5 >= required:
+                    i += 1
+                    continue
+                deficit = required - actual
+                shift_node_and_followers(b.node, deficit)
+                level = sorted(by_depth[depth], key=lambda bx: bx.x)
+                any_shift = True
+                i = 1
+        if not any_shift:
+            break
 
 
 def _walker_subtree_left_edge(walker_root: _WalkerNode) -> float:

@@ -48,6 +48,7 @@ class LayoutConfig:
     inner_pad_y: float
     corner_radius: float
     title_body_gap: float
+    cross_subtree_gap_factor: float = 1.4
 @dataclass
 class LayoutBox:
     node: ConceptNode

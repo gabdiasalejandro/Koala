@@ -43,6 +43,11 @@ LAYOUT_CONFIGS: Dict[str, LayoutConfig] = {
         title_body_gap=1.8 * MM,
     ),
 }
+LAYOUT_CONFIGS["tree"] = replace(
+    LAYOUT_CONFIGS["default"],
+    depth_width_reduction=0.0,
+    max_depth_reduction=0.0,
+)
 LAYOUT_CONFIGS["radial"] = replace(
     LAYOUT_CONFIGS["default"],
     node_width_base=58 * MM,
@@ -124,7 +129,7 @@ def _register_tree_profiles() -> None:
         RenderProfileCatalog.register_typography("tree", typography_name, typography)
 
     profiles_by_layout = {
-        "tree": ("default", "default"),
+        "tree": ("tree", "default"),
         "synoptic": ("synoptic", "default"),
         "synoptic_boxes": ("synoptic", "default"),
         "radial": ("radial", "radial"),
