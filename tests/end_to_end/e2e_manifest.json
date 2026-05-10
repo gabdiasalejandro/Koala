@@ -20,17 +20,17 @@
       "svg": "tests/end_to_end/output/tree/academic/00_tree_left_default_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34510,
-      "png_high": 710662,
-      "png_medium": 317322,
-      "svg": 36888
+      "pdf": 34423,
+      "png_high": 710776,
+      "png_medium": 300563,
+      "svg": 36818
     },
     "timings_seconds": {
-      "pdf": 0.042805,
-      "png_high": 0.615636,
-      "png_medium": 0.325024,
-      "render_svg": 0.024655,
-      "write_svg": 0.000109
+      "pdf": 0.043519,
+      "png_high": 0.590183,
+      "png_medium": 0.352687,
+      "render_svg": 0.028022,
+      "write_svg": 9.5e-05
     }
   },
   {
@@ -60,11 +60,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.033437,
-      "png_high": 0.541904,
-      "png_medium": 0.164947,
-      "render_svg": 0.005983,
-      "write_svg": 0.000118
+      "pdf": 0.038608,
+      "png_high": 0.516755,
+      "png_medium": 0.153083,
+      "render_svg": 0.00487,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -88,17 +88,17 @@
       "svg": "tests/end_to_end/output/tree/academic/02_synoptic_boxes_left_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 36903,
+      "pdf": 36904,
       "png_high": 701394,
       "png_medium": 293862,
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.038876,
-      "png_high": 0.433068,
-      "png_medium": 0.140164,
-      "render_svg": 0.006196,
-      "write_svg": 0.000127
+      "pdf": 0.037945,
+      "png_high": 0.415731,
+      "png_medium": 0.152833,
+      "render_svg": 0.006259,
+      "write_svg": 0.000106
     }
   },
   {
@@ -128,11 +128,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.034325,
-      "png_high": 0.590276,
-      "png_medium": 0.183115,
-      "render_svg": 0.015077,
-      "write_svg": 0.000116
+      "pdf": 0.033164,
+      "png_high": 0.571779,
+      "png_medium": 0.183228,
+      "render_svg": 0.015871,
+      "write_svg": 0.000107
     }
   },
   {
@@ -156,17 +156,17 @@
       "svg": "tests/end_to_end/output/matrix/academic/04_matrix_left_formal_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 29259,
+      "pdf": 29257,
       "png_high": 580809,
       "png_medium": 265887,
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.026848,
-      "png_high": 0.583719,
-      "png_medium": 0.167263,
-      "render_svg": 0.003305,
-      "write_svg": 4.8e-05
+      "pdf": 0.020876,
+      "png_high": 0.571383,
+      "png_medium": 0.161912,
+      "render_svg": 0.003058,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -196,11 +196,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.010497,
-      "png_high": 0.413621,
-      "png_medium": 0.128921,
-      "render_svg": 0.003876,
-      "write_svg": 0.000218
+      "pdf": 0.010001,
+      "png_high": 0.35854,
+      "png_medium": 0.098853,
+      "render_svg": 0.002431,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -224,17 +224,17 @@
       "svg": "tests/end_to_end/output/tree/black/06_tree_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22108,
-      "png_high": 668159,
-      "png_medium": 295058,
-      "svg": 37355
+      "pdf": 21998,
+      "png_high": 643800,
+      "png_medium": 305952,
+      "svg": 37322
     },
     "timings_seconds": {
-      "pdf": 0.043182,
-      "png_high": 0.700896,
-      "png_medium": 0.211438,
-      "render_svg": 0.021322,
-      "write_svg": 9.7e-05
+      "pdf": 0.039793,
+      "png_high": 0.578578,
+      "png_medium": 0.190653,
+      "render_svg": 0.017303,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -258,17 +258,17 @@
       "svg": "tests/end_to_end/output/tree/black/07_synoptic_justify_default_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 23160,
+      "pdf": 23161,
       "png_high": 555974,
       "png_medium": 245209,
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.027968,
-      "png_high": 0.541234,
-      "png_medium": 0.162417,
-      "render_svg": 0.008792,
-      "write_svg": 0.000121
+      "pdf": 0.026543,
+      "png_high": 0.511211,
+      "png_medium": 0.151782,
+      "render_svg": 0.004795,
+      "write_svg": 6.4e-05
     }
   },
   {
@@ -298,11 +298,11 @@
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.037776,
-      "png_high": 0.424487,
-      "png_medium": 0.136805,
-      "render_svg": 0.005967,
-      "write_svg": 8.7e-05
+      "pdf": 0.037018,
+      "png_high": 0.408229,
+      "png_medium": 0.134266,
+      "render_svg": 0.006572,
+      "write_svg": 7.6e-05
     }
   },
   {
@@ -332,11 +332,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.033479,
-      "png_high": 0.614355,
-      "png_medium": 0.190723,
-      "render_svg": 0.014181,
-      "write_svg": 0.000103
+      "pdf": 0.041362,
+      "png_high": 0.571921,
+      "png_medium": 0.178598,
+      "render_svg": 0.014732,
+      "write_svg": 8e-05
     }
   },
   {
@@ -366,11 +366,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.020839,
-      "png_high": 0.627811,
-      "png_medium": 0.189674,
-      "render_svg": 0.00299,
-      "write_svg": 4e-05
+      "pdf": 0.019578,
+      "png_high": 0.583658,
+      "png_medium": 0.162672,
+      "render_svg": 0.002927,
+      "write_svg": 3.7e-05
     }
   },
   {
@@ -394,17 +394,17 @@
       "svg": "tests/end_to_end/output/flowchart/black/11_flowchart_justify_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 26222,
+      "pdf": 26223,
       "png_high": 294356,
       "png_medium": 123021,
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.01787,
-      "png_high": 0.363301,
-      "png_medium": 0.106054,
-      "render_svg": 0.002318,
-      "write_svg": 3.7e-05
+      "pdf": 0.010021,
+      "png_high": 0.336879,
+      "png_medium": 0.092035,
+      "render_svg": 0.002278,
+      "write_svg": 3.4e-05
     }
   },
   {
@@ -428,17 +428,17 @@
       "svg": "tests/end_to_end/output/tree/colorblind/12_tree_left_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22059,
-      "png_high": 673706,
-      "png_medium": 293869,
-      "svg": 37337
+      "pdf": 21997,
+      "png_high": 653859,
+      "png_medium": 296031,
+      "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.041586,
-      "png_high": 0.632102,
-      "png_medium": 0.209307,
-      "render_svg": 0.030696,
-      "write_svg": 0.000179
+      "pdf": 0.039811,
+      "png_high": 0.576743,
+      "png_medium": 0.181442,
+      "render_svg": 0.016639,
+      "write_svg": 6.1e-05
     }
   },
   {
@@ -468,11 +468,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.027882,
-      "png_high": 0.543252,
-      "png_medium": 0.160511,
-      "render_svg": 0.005182,
-      "write_svg": 8.4e-05
+      "pdf": 0.026749,
+      "png_high": 0.514905,
+      "png_medium": 0.152606,
+      "render_svg": 0.004581,
+      "write_svg": 5.7e-05
     }
   },
   {
@@ -496,17 +496,17 @@
       "svg": "tests/end_to_end/output/tree/colorblind/14_synoptic_boxes_left_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34213,
+      "pdf": 34214,
       "png_high": 705720,
       "png_medium": 310747,
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.041504,
-      "png_high": 0.43252,
-      "png_medium": 0.152658,
-      "render_svg": 0.005831,
-      "write_svg": 8e-05
+      "pdf": 0.037314,
+      "png_high": 0.408175,
+      "png_medium": 0.133007,
+      "render_svg": 0.005663,
+      "write_svg": 5.3e-05
     }
   },
   {
@@ -536,11 +536,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.033875,
-      "png_high": 0.616754,
-      "png_medium": 0.195002,
-      "render_svg": 0.015167,
-      "write_svg": 0.000122
+      "pdf": 0.033424,
+      "png_high": 0.570795,
+      "png_medium": 0.174998,
+      "render_svg": 0.014433,
+      "write_svg": 0.000102
     }
   },
   {
@@ -570,11 +570,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.020951,
-      "png_high": 0.577445,
-      "png_medium": 0.163909,
-      "render_svg": 0.003044,
-      "write_svg": 4.1e-05
+      "pdf": 0.020074,
+      "png_high": 0.567613,
+      "png_medium": 0.160407,
+      "render_svg": 0.003017,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -598,17 +598,17 @@
       "svg": "tests/end_to_end/output/flowchart/colorblind/17_flowchart_justify_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24544,
+      "pdf": 24545,
       "png_high": 318958,
       "png_medium": 134753,
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.024686,
-      "png_high": 0.344442,
-      "png_medium": 0.094819,
-      "render_svg": 0.002523,
-      "write_svg": 6e-05
+      "pdf": 0.009839,
+      "png_high": 0.335574,
+      "png_medium": 0.091534,
+      "render_svg": 0.002254,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -632,17 +632,17 @@
       "svg": "tests/end_to_end/output/tree/default/18_tree_left_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 37192,
-      "png_high": 685899,
-      "png_medium": 296622,
-      "svg": 36279
+      "pdf": 37136,
+      "png_high": 682376,
+      "png_medium": 302188,
+      "svg": 36212
     },
     "timings_seconds": {
-      "pdf": 0.041775,
-      "png_high": 0.596014,
-      "png_medium": 0.185662,
-      "render_svg": 0.016888,
-      "write_svg": 7.6e-05
+      "pdf": 0.041703,
+      "png_high": 0.5822,
+      "png_medium": 0.182155,
+      "render_svg": 0.016502,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -672,11 +672,11 @@
       "svg": 23218
     },
     "timings_seconds": {
-      "pdf": 0.02817,
-      "png_high": 0.523399,
-      "png_medium": 0.158832,
-      "render_svg": 0.004927,
-      "write_svg": 5.9e-05
+      "pdf": 0.03951,
+      "png_high": 0.511429,
+      "png_medium": 0.155049,
+      "render_svg": 0.004578,
+      "write_svg": 6.2e-05
     }
   },
   {
@@ -700,17 +700,17 @@
       "svg": "tests/end_to_end/output/tree/default/20_synoptic_boxes_left_radial_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 21873,
+      "pdf": 21874,
       "png_high": 685835,
       "png_medium": 319953,
       "svg": 26996
     },
     "timings_seconds": {
-      "pdf": 0.037362,
-      "png_high": 0.417353,
-      "png_medium": 0.139389,
-      "render_svg": 0.006142,
-      "write_svg": 0.000115
+      "pdf": 0.037373,
+      "png_high": 0.412673,
+      "png_medium": 0.13575,
+      "render_svg": 0.005579,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -740,11 +740,11 @@
       "svg": 37066
     },
     "timings_seconds": {
-      "pdf": 0.034127,
-      "png_high": 0.591006,
-      "png_medium": 0.181285,
-      "render_svg": 0.014563,
-      "write_svg": 0.000102
+      "pdf": 0.034195,
+      "png_high": 0.579254,
+      "png_medium": 0.178483,
+      "render_svg": 0.014887,
+      "write_svg": 0.000106
     }
   },
   {
@@ -774,11 +774,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.02036,
-      "png_high": 0.582914,
-      "png_medium": 0.166465,
-      "render_svg": 0.00298,
-      "write_svg": 3.3e-05
+      "pdf": 0.020435,
+      "png_high": 0.57216,
+      "png_medium": 0.202159,
+      "render_svg": 0.002952,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -808,11 +808,11 @@
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.009737,
-      "png_high": 0.341104,
-      "png_medium": 0.092818,
-      "render_svg": 0.002429,
-      "write_svg": 4.1e-05
+      "pdf": 0.009567,
+      "png_high": 0.337668,
+      "png_medium": 0.092212,
+      "render_svg": 0.002332,
+      "write_svg": 3.7e-05
     }
   },
   {
@@ -836,17 +836,17 @@
       "svg": "tests/end_to_end/output/tree/dusk/24_tree_left_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 35662,
-      "png_high": 652504,
-      "png_medium": 281744,
-      "svg": 37445
+      "pdf": 35634,
+      "png_high": 641003,
+      "png_medium": 286506,
+      "svg": 37424
     },
     "timings_seconds": {
-      "pdf": 0.051056,
-      "png_high": 0.589851,
-      "png_medium": 0.18897,
-      "render_svg": 0.02018,
-      "write_svg": 0.000132
+      "pdf": 0.042839,
+      "png_high": 0.580433,
+      "png_medium": 0.180872,
+      "render_svg": 0.017409,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -876,11 +876,11 @@
       "svg": 23804
     },
     "timings_seconds": {
-      "pdf": 0.028911,
-      "png_high": 0.526704,
-      "png_medium": 0.161031,
-      "render_svg": 0.004889,
-      "write_svg": 7.9e-05
+      "pdf": 0.02765,
+      "png_high": 0.512968,
+      "png_medium": 0.15289,
+      "render_svg": 0.004883,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -910,11 +910,11 @@
       "svg": 27322
     },
     "timings_seconds": {
-      "pdf": 0.041069,
-      "png_high": 0.42154,
-      "png_medium": 0.139092,
-      "render_svg": 0.005878,
-      "write_svg": 5.7e-05
+      "pdf": 0.037947,
+      "png_high": 0.43415,
+      "png_medium": 0.13506,
+      "render_svg": 0.00573,
+      "write_svg": 6.6e-05
     }
   },
   {
@@ -944,11 +944,11 @@
       "svg": 37150
     },
     "timings_seconds": {
-      "pdf": 0.033962,
-      "png_high": 0.586228,
-      "png_medium": 0.179304,
-      "render_svg": 0.014558,
-      "write_svg": 0.000106
+      "pdf": 0.032807,
+      "png_high": 0.573232,
+      "png_medium": 0.176784,
+      "render_svg": 0.014709,
+      "write_svg": 8.1e-05
     }
   },
   {
@@ -978,11 +978,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.026852,
-      "png_high": 0.626937,
-      "png_medium": 0.166071,
-      "render_svg": 0.00299,
-      "write_svg": 3.8e-05
+      "pdf": 0.021136,
+      "png_high": 0.573045,
+      "png_medium": 0.161807,
+      "render_svg": 0.003006,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -1006,17 +1006,17 @@
       "svg": "tests/end_to_end/output/flowchart/dusk/29_flowchart_justify_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24074,
+      "pdf": 24076,
       "png_high": 331404,
       "png_medium": 140267,
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.012544,
-      "png_high": 0.382448,
-      "png_medium": 0.11024,
-      "render_svg": 0.003395,
-      "write_svg": 5.8e-05
+      "pdf": 0.010072,
+      "png_high": 0.339131,
+      "png_medium": 0.092665,
+      "render_svg": 0.002585,
+      "write_svg": 3.4e-05
     }
   },
   {
@@ -1040,17 +1040,17 @@
       "svg": "tests/end_to_end/output/tree/frutal/30_tree_left_default_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34538,
-      "png_high": 711196,
-      "png_medium": 317370,
-      "svg": 36888
+      "pdf": 34449,
+      "png_high": 709360,
+      "png_medium": 299399,
+      "svg": 36818
     },
     "timings_seconds": {
-      "pdf": 0.043076,
-      "png_high": 0.60545,
-      "png_medium": 0.224194,
-      "render_svg": 0.022851,
-      "write_svg": 0.000111
+      "pdf": 0.041823,
+      "png_high": 0.60684,
+      "png_medium": 0.183565,
+      "render_svg": 0.01659,
+      "write_svg": 8.3e-05
     }
   },
   {
@@ -1080,11 +1080,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.029746,
-      "png_high": 0.517816,
-      "png_medium": 0.160795,
-      "render_svg": 0.005001,
-      "write_svg": 7e-05
+      "pdf": 0.030084,
+      "png_high": 0.52746,
+      "png_medium": 0.159831,
+      "render_svg": 0.004823,
+      "write_svg": 5.9e-05
     }
   },
   {
@@ -1108,17 +1108,17 @@
       "svg": "tests/end_to_end/output/tree/frutal/32_synoptic_boxes_left_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 36942,
+      "pdf": 36943,
       "png_high": 697011,
       "png_medium": 291623,
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.041539,
-      "png_high": 0.468294,
-      "png_medium": 0.137031,
-      "render_svg": 0.005993,
-      "write_svg": 9e-05
+      "pdf": 0.038841,
+      "png_high": 0.420705,
+      "png_medium": 0.136597,
+      "render_svg": 0.006087,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -1148,11 +1148,11 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.034564,
-      "png_high": 0.590237,
-      "png_medium": 0.189123,
-      "render_svg": 0.015663,
-      "write_svg": 0.000132
+      "pdf": 0.035893,
+      "png_high": 0.583202,
+      "png_medium": 0.180621,
+      "render_svg": 0.015248,
+      "write_svg": 0.000124
     }
   },
   {
@@ -1176,17 +1176,17 @@
       "svg": "tests/end_to_end/output/matrix/frutal/34_matrix_left_default_a4_landscape.svg"
     },
     "sizes_bytes": {
-      "pdf": 28066,
+      "pdf": 28067,
       "png_high": 613070,
       "png_medium": 281591,
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.021998,
-      "png_high": 0.59312,
-      "png_medium": 0.166385,
-      "render_svg": 0.003073,
-      "write_svg": 5.1e-05
+      "pdf": 0.029365,
+      "png_high": 0.579245,
+      "png_medium": 0.164958,
+      "render_svg": 0.003185,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -1210,17 +1210,17 @@
       "svg": "tests/end_to_end/output/flowchart/frutal/35_flowchart_justify_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 26207,
+      "pdf": 26209,
       "png_high": 293173,
       "png_medium": 122216,
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010197,
-      "png_high": 0.346544,
-      "png_medium": 0.094047,
-      "render_svg": 0.002565,
-      "write_svg": 5.3e-05
+      "pdf": 0.011761,
+      "png_high": 0.339085,
+      "png_medium": 0.093573,
+      "render_svg": 0.00233,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -1244,17 +1244,17 @@
       "svg": "tests/end_to_end/output/tree/jungle/36_tree_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22143,
-      "png_high": 676426,
-      "png_medium": 300204,
-      "svg": 37355
+      "pdf": 22029,
+      "png_high": 651545,
+      "png_medium": 310679,
+      "svg": 37322
     },
     "timings_seconds": {
-      "pdf": 0.043439,
-      "png_high": 0.598572,
-      "png_medium": 0.187346,
-      "render_svg": 0.017139,
-      "write_svg": 7.9e-05
+      "pdf": 0.042276,
+      "png_high": 0.590701,
+      "png_medium": 0.183854,
+      "render_svg": 0.017024,
+      "write_svg": 5.4e-05
     }
   },
   {
@@ -1284,11 +1284,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.029578,
-      "png_high": 0.522286,
-      "png_medium": 0.157695,
-      "render_svg": 0.00479,
-      "write_svg": 6e-05
+      "pdf": 0.029118,
+      "png_high": 0.521653,
+      "png_medium": 0.155828,
+      "render_svg": 0.004508,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -1312,17 +1312,17 @@
       "svg": "tests/end_to_end/output/tree/jungle/38_synoptic_boxes_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35232,
+      "pdf": 35234,
       "png_high": 677702,
       "png_medium": 302925,
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.043261,
-      "png_high": 0.425278,
-      "png_medium": 0.138685,
-      "render_svg": 0.006298,
-      "write_svg": 0.000103
+      "pdf": 0.03946,
+      "png_high": 0.414488,
+      "png_medium": 0.135196,
+      "render_svg": 0.005892,
+      "write_svg": 5.4e-05
     }
   },
   {
@@ -1352,11 +1352,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.035111,
-      "png_high": 0.584012,
-      "png_medium": 0.181453,
-      "render_svg": 0.014536,
-      "write_svg": 0.000106
+      "pdf": 0.035469,
+      "png_high": 0.576832,
+      "png_medium": 0.177507,
+      "render_svg": 0.014749,
+      "write_svg": 8.6e-05
     }
   },
   {
@@ -1386,11 +1386,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.023869,
-      "png_high": 0.601864,
-      "png_medium": 0.169541,
-      "render_svg": 0.00319,
-      "write_svg": 5.5e-05
+      "pdf": 0.020294,
+      "png_high": 0.575264,
+      "png_medium": 0.163447,
+      "render_svg": 0.003293,
+      "write_svg": 4.7e-05
     }
   },
   {
@@ -1414,17 +1414,17 @@
       "svg": "tests/end_to_end/output/flowchart/jungle/41_flowchart_justify_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24814,
+      "pdf": 24815,
       "png_high": 325016,
       "png_medium": 138472,
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.010558,
-      "png_high": 0.354835,
-      "png_medium": 0.106613,
-      "render_svg": 0.002438,
-      "write_svg": 5.2e-05
+      "pdf": 0.012196,
+      "png_high": 0.339417,
+      "png_medium": 0.09231,
+      "render_svg": 0.00238,
+      "write_svg": 3.4e-05
     }
   },
   {
@@ -1448,17 +1448,17 @@
       "svg": "tests/end_to_end/output/tree/minimal/42_tree_left_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22043,
-      "png_high": 681779,
-      "png_medium": 298477,
-      "svg": 37337
+      "pdf": 21985,
+      "png_high": 658230,
+      "png_medium": 301833,
+      "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.045405,
-      "png_high": 0.610594,
-      "png_medium": 0.188742,
-      "render_svg": 0.017862,
-      "write_svg": 7.7e-05
+      "pdf": 0.04434,
+      "png_high": 0.614622,
+      "png_medium": 0.183417,
+      "render_svg": 0.017224,
+      "write_svg": 6.8e-05
     }
   },
   {
@@ -1488,11 +1488,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.029252,
-      "png_high": 0.51661,
-      "png_medium": 0.159772,
-      "render_svg": 0.005062,
-      "write_svg": 8.4e-05
+      "pdf": 0.029475,
+      "png_high": 0.513327,
+      "png_medium": 0.158061,
+      "render_svg": 0.004674,
+      "write_svg": 5.1e-05
     }
   },
   {
@@ -1516,17 +1516,17 @@
       "svg": "tests/end_to_end/output/tree/minimal/44_synoptic_boxes_left_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 34200,
+      "pdf": 34201,
       "png_high": 719762,
       "png_medium": 319001,
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.046476,
-      "png_high": 0.421842,
-      "png_medium": 0.142106,
-      "render_svg": 0.006342,
-      "write_svg": 9.3e-05
+      "pdf": 0.0398,
+      "png_high": 0.414133,
+      "png_medium": 0.136682,
+      "render_svg": 0.006331,
+      "write_svg": 9.6e-05
     }
   },
   {
@@ -1556,11 +1556,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.035711,
-      "png_high": 0.581981,
-      "png_medium": 0.181105,
-      "render_svg": 0.014828,
-      "write_svg": 0.000106
+      "pdf": 0.035953,
+      "png_high": 0.572191,
+      "png_medium": 0.177315,
+      "render_svg": 0.014916,
+      "write_svg": 8.4e-05
     }
   },
   {
@@ -1590,11 +1590,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.021979,
-      "png_high": 0.589955,
-      "png_medium": 0.168618,
-      "render_svg": 0.003029,
-      "write_svg": 4.6e-05
+      "pdf": 0.021929,
+      "png_high": 0.56927,
+      "png_medium": 0.162271,
+      "render_svg": 0.003019,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -1618,17 +1618,17 @@
       "svg": "tests/end_to_end/output/flowchart/minimal/47_flowchart_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 17023,
+      "pdf": 17024,
       "png_high": 295447,
       "png_medium": 123464,
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.010598,
-      "png_high": 0.347012,
-      "png_medium": 0.09793,
-      "render_svg": 0.002406,
-      "write_svg": 3.6e-05
+      "pdf": 0.011934,
+      "png_high": 0.338642,
+      "png_medium": 0.092648,
+      "render_svg": 0.002331,
+      "write_svg": 4.3e-05
     }
   },
   {
@@ -1652,17 +1652,17 @@
       "svg": "tests/end_to_end/output/tree/neon/48_tree_left_formal_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 37131,
-      "png_high": 680886,
-      "png_medium": 294129,
-      "svg": 36279
+      "pdf": 37063,
+      "png_high": 678100,
+      "png_medium": 299811,
+      "svg": 36212
     },
     "timings_seconds": {
-      "pdf": 0.04452,
-      "png_high": 0.610368,
-      "png_medium": 0.185871,
-      "render_svg": 0.017119,
-      "write_svg": 7e-05
+      "pdf": 0.043872,
+      "png_high": 0.583942,
+      "png_medium": 0.182864,
+      "render_svg": 0.017128,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -1692,11 +1692,11 @@
       "svg": 23218
     },
     "timings_seconds": {
-      "pdf": 0.029968,
-      "png_high": 0.528405,
-      "png_medium": 0.160766,
-      "render_svg": 0.004972,
-      "write_svg": 7.6e-05
+      "pdf": 0.029104,
+      "png_high": 0.510642,
+      "png_medium": 0.154961,
+      "render_svg": 0.004721,
+      "write_svg": 8e-05
     }
   },
   {
@@ -1726,11 +1726,11 @@
       "svg": 26996
     },
     "timings_seconds": {
-      "pdf": 0.039994,
-      "png_high": 0.424848,
-      "png_medium": 0.14161,
-      "render_svg": 0.006042,
-      "write_svg": 5.4e-05
+      "pdf": 0.038538,
+      "png_high": 0.424223,
+      "png_medium": 0.136924,
+      "render_svg": 0.005948,
+      "write_svg": 6.7e-05
     }
   },
   {
@@ -1760,11 +1760,11 @@
       "svg": 37066
     },
     "timings_seconds": {
-      "pdf": 0.036484,
-      "png_high": 0.600637,
-      "png_medium": 0.184152,
-      "render_svg": 0.015058,
-      "write_svg": 0.000118
+      "pdf": 0.036276,
+      "png_high": 0.583697,
+      "png_medium": 0.196225,
+      "render_svg": 0.015434,
+      "write_svg": 0.000103
     }
   },
   {
@@ -1794,11 +1794,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.022726,
-      "png_high": 0.589794,
-      "png_medium": 0.168129,
-      "render_svg": 0.003209,
-      "write_svg": 4.7e-05
+      "pdf": 0.021352,
+      "png_high": 0.574512,
+      "png_medium": 0.164559,
+      "render_svg": 0.002986,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -1822,17 +1822,17 @@
       "svg": "tests/end_to_end/output/flowchart/neon/53_flowchart_justify_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 23947,
+      "pdf": 23948,
       "png_high": 318431,
       "png_medium": 135240,
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.011019,
-      "png_high": 0.345887,
-      "png_medium": 0.095739,
-      "render_svg": 0.002427,
-      "write_svg": 5.2e-05
+      "pdf": 0.012036,
+      "png_high": 0.347493,
+      "png_medium": 0.093027,
+      "render_svg": 0.002324,
+      "write_svg": 3.7e-05
     }
   },
   {
@@ -1856,17 +1856,17 @@
       "svg": "tests/end_to_end/output/tree/ocean/54_tree_left_academic_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 35455,
-      "png_high": 651169,
-      "png_medium": 281510,
-      "svg": 37445
+      "pdf": 35426,
+      "png_high": 641026,
+      "png_medium": 286000,
+      "svg": 37424
     },
     "timings_seconds": {
-      "pdf": 0.045707,
-      "png_high": 0.605468,
-      "png_medium": 0.193087,
-      "render_svg": 0.01979,
-      "write_svg": 9.4e-05
+      "pdf": 0.041937,
+      "png_high": 0.588649,
+      "png_medium": 0.184309,
+      "render_svg": 0.021005,
+      "write_svg": 8.3e-05
     }
   },
   {
@@ -1896,11 +1896,11 @@
       "svg": 23804
     },
     "timings_seconds": {
-      "pdf": 0.030786,
-      "png_high": 0.565357,
-      "png_medium": 0.160919,
-      "render_svg": 0.005105,
-      "write_svg": 9.6e-05
+      "pdf": 0.029889,
+      "png_high": 0.52112,
+      "png_medium": 0.154819,
+      "render_svg": 0.004913,
+      "write_svg": 7e-05
     }
   },
   {
@@ -1924,17 +1924,17 @@
       "svg": "tests/end_to_end/output/tree/ocean/56_synoptic_boxes_left_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 21893,
+      "pdf": 21894,
       "png_high": 685788,
       "png_medium": 305792,
       "svg": 27322
     },
     "timings_seconds": {
-      "pdf": 0.039507,
-      "png_high": 0.421865,
-      "png_medium": 0.161538,
-      "render_svg": 0.00597,
-      "write_svg": 8.5e-05
+      "pdf": 0.040067,
+      "png_high": 0.423807,
+      "png_medium": 0.138776,
+      "render_svg": 0.005685,
+      "write_svg": 5.2e-05
     }
   },
   {
@@ -1964,11 +1964,11 @@
       "svg": 37150
     },
     "timings_seconds": {
-      "pdf": 0.041274,
-      "png_high": 0.624589,
-      "png_medium": 0.179396,
-      "render_svg": 0.01476,
-      "write_svg": 0.000113
+      "pdf": 0.035602,
+      "png_high": 0.586011,
+      "png_medium": 0.178186,
+      "render_svg": 0.014669,
+      "write_svg": 9.1e-05
     }
   },
   {
@@ -1998,11 +1998,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.022529,
-      "png_high": 0.591896,
-      "png_medium": 0.17665,
-      "render_svg": 0.002948,
-      "write_svg": 4.2e-05
+      "pdf": 0.022487,
+      "png_high": 0.575734,
+      "png_medium": 0.164966,
+      "render_svg": 0.00295,
+      "write_svg": 3.9e-05
     }
   },
   {
@@ -2032,11 +2032,11 @@
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010718,
-      "png_high": 0.350112,
-      "png_medium": 0.097618,
-      "render_svg": 0.002837,
-      "write_svg": 6.6e-05
+      "pdf": 0.010216,
+      "png_high": 0.343122,
+      "png_medium": 0.093611,
+      "render_svg": 0.002289,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -2060,17 +2060,17 @@
       "svg": "tests/end_to_end/output/tree/pastel/60_tree_left_default_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 34550,
-      "png_high": 709793,
-      "png_medium": 318358,
-      "svg": 36888
+      "pdf": 34473,
+      "png_high": 709317,
+      "png_medium": 300242,
+      "svg": 36818
     },
     "timings_seconds": {
-      "pdf": 0.045194,
-      "png_high": 0.622172,
-      "png_medium": 0.192073,
-      "render_svg": 0.017052,
-      "write_svg": 8.4e-05
+      "pdf": 0.042807,
+      "png_high": 0.58766,
+      "png_medium": 0.190667,
+      "render_svg": 0.016682,
+      "write_svg": 7e-05
     }
   },
   {
@@ -2100,11 +2100,11 @@
       "svg": 24344
     },
     "timings_seconds": {
-      "pdf": 0.04108,
-      "png_high": 0.58884,
-      "png_medium": 0.162548,
-      "render_svg": 0.004827,
-      "write_svg": 5.7e-05
+      "pdf": 0.02812,
+      "png_high": 0.509848,
+      "png_medium": 0.153866,
+      "render_svg": 0.00481,
+      "write_svg": 5.5e-05
     }
   },
   {
@@ -2128,17 +2128,17 @@
       "svg": "tests/end_to_end/output/tree/pastel/62_synoptic_boxes_left_formal_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 36955,
+      "pdf": 36956,
       "png_high": 699583,
       "png_medium": 293559,
       "svg": 27082
     },
     "timings_seconds": {
-      "pdf": 0.044104,
-      "png_high": 0.472088,
-      "png_medium": 0.160152,
-      "render_svg": 0.008456,
-      "write_svg": 0.000177
+      "pdf": 0.039332,
+      "png_high": 0.415499,
+      "png_medium": 0.134643,
+      "render_svg": 0.005699,
+      "write_svg": 5.2e-05
     }
   },
   {
@@ -2168,10 +2168,10 @@
       "svg": 37143
     },
     "timings_seconds": {
-      "pdf": 0.037742,
-      "png_high": 0.611075,
-      "png_medium": 0.203248,
-      "render_svg": 0.015176,
+      "pdf": 0.035297,
+      "png_high": 0.578063,
+      "png_medium": 0.1791,
+      "render_svg": 0.023949,
       "write_svg": 0.000112
     }
   },
@@ -2202,11 +2202,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.036591,
-      "png_high": 0.611098,
-      "png_medium": 0.177653,
-      "render_svg": 0.003111,
-      "write_svg": 3.9e-05
+      "pdf": 0.021654,
+      "png_high": 0.579505,
+      "png_medium": 0.162443,
+      "render_svg": 0.003039,
+      "write_svg": 4.4e-05
     }
   },
   {
@@ -2230,17 +2230,17 @@
       "svg": "tests/end_to_end/output/flowchart/pastel/65_flowchart_justify_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24769,
+      "pdf": 24770,
       "png_high": 320932,
       "png_medium": 136941,
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.011768,
-      "png_high": 0.361757,
-      "png_medium": 0.096163,
-      "render_svg": 0.00235,
-      "write_svg": 3.9e-05
+      "pdf": 0.01,
+      "png_high": 0.34989,
+      "png_medium": 0.092024,
+      "render_svg": 0.002328,
+      "write_svg": 4.2e-05
     }
   },
   {
@@ -2264,17 +2264,17 @@
       "svg": "tests/end_to_end/output/tree/sepia/66_tree_left_radial_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22078,
-      "png_high": 675810,
-      "png_medium": 299490,
-      "svg": 37355
+      "pdf": 21975,
+      "png_high": 650573,
+      "png_medium": 310303,
+      "svg": 37322
     },
     "timings_seconds": {
-      "pdf": 0.043672,
-      "png_high": 0.686121,
-      "png_medium": 0.18865,
-      "render_svg": 0.017156,
-      "write_svg": 8.2e-05
+      "pdf": 0.041774,
+      "png_high": 0.585264,
+      "png_medium": 0.185399,
+      "render_svg": 0.017012,
+      "write_svg": 6.2e-05
     }
   },
   {
@@ -2304,11 +2304,11 @@
       "svg": 23446
     },
     "timings_seconds": {
-      "pdf": 0.029551,
-      "png_high": 0.527791,
-      "png_medium": 0.1586,
-      "render_svg": 0.004899,
-      "write_svg": 8.4e-05
+      "pdf": 0.029188,
+      "png_high": 0.51375,
+      "png_medium": 0.154946,
+      "render_svg": 0.004659,
+      "write_svg": 5.8e-05
     }
   },
   {
@@ -2332,17 +2332,17 @@
       "svg": "tests/end_to_end/output/tree/sepia/68_synoptic_boxes_left_academic_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 35186,
+      "pdf": 35187,
       "png_high": 677173,
       "png_medium": 304234,
       "svg": 27895
     },
     "timings_seconds": {
-      "pdf": 0.040342,
-      "png_high": 0.424531,
-      "png_medium": 0.142113,
-      "render_svg": 0.006299,
-      "write_svg": 6.8e-05
+      "pdf": 0.0393,
+      "png_high": 0.413509,
+      "png_medium": 0.137316,
+      "render_svg": 0.005832,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -2372,11 +2372,11 @@
       "svg": 36586
     },
     "timings_seconds": {
-      "pdf": 0.035944,
-      "png_high": 0.59502,
-      "png_medium": 0.181393,
-      "render_svg": 0.014621,
-      "write_svg": 0.000104
+      "pdf": 0.035622,
+      "png_high": 0.577383,
+      "png_medium": 0.184763,
+      "render_svg": 0.02141,
+      "write_svg": 8.9e-05
     }
   },
   {
@@ -2406,11 +2406,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.021637,
-      "png_high": 0.598445,
-      "png_medium": 0.167793,
-      "render_svg": 0.003049,
-      "write_svg": 3.9e-05
+      "pdf": 0.021343,
+      "png_high": 0.574742,
+      "png_medium": 0.163872,
+      "render_svg": 0.002979,
+      "write_svg": 3.4e-05
     }
   },
   {
@@ -2434,17 +2434,17 @@
       "svg": "tests/end_to_end/output/flowchart/sepia/71_flowchart_justify_casual_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 17033,
+      "pdf": 17034,
       "png_high": 301434,
       "png_medium": 125137,
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.013782,
-      "png_high": 0.480763,
-      "png_medium": 0.122111,
-      "render_svg": 0.00236,
-      "write_svg": 3.9e-05
+      "pdf": 0.010497,
+      "png_high": 0.340956,
+      "png_medium": 0.093027,
+      "render_svg": 0.002333,
+      "write_svg": 3.3e-05
     }
   },
   {
@@ -2468,17 +2468,17 @@
       "svg": "tests/end_to_end/output/tree/terracotta/72_tree_left_casual_a4.svg"
     },
     "sizes_bytes": {
-      "pdf": 22162,
-      "png_high": 688333,
-      "png_medium": 301859,
-      "svg": 37337
+      "pdf": 22094,
+      "png_high": 666599,
+      "png_medium": 305403,
+      "svg": 37342
     },
     "timings_seconds": {
-      "pdf": 0.043232,
-      "png_high": 0.633731,
-      "png_medium": 0.218865,
-      "render_svg": 0.018044,
-      "write_svg": 8.9e-05
+      "pdf": 0.042971,
+      "png_high": 0.587154,
+      "png_medium": 0.184863,
+      "render_svg": 0.017374,
+      "write_svg": 6.4e-05
     }
   },
   {
@@ -2508,11 +2508,11 @@
       "svg": 23197
     },
     "timings_seconds": {
-      "pdf": 0.02877,
-      "png_high": 0.526098,
-      "png_medium": 0.159127,
-      "render_svg": 0.004915,
-      "write_svg": 9.8e-05
+      "pdf": 0.027712,
+      "png_high": 0.511589,
+      "png_medium": 0.155044,
+      "render_svg": 0.004492,
+      "write_svg": 6.5e-05
     }
   },
   {
@@ -2542,11 +2542,11 @@
       "svg": 27474
     },
     "timings_seconds": {
-      "pdf": 0.041604,
-      "png_high": 0.454479,
-      "png_medium": 0.164413,
-      "render_svg": 0.009972,
-      "write_svg": 9.9e-05
+      "pdf": 0.039135,
+      "png_high": 0.412701,
+      "png_medium": 0.13691,
+      "render_svg": 0.005906,
+      "write_svg": 8.2e-05
     }
   },
   {
@@ -2576,11 +2576,11 @@
       "svg": 37469
     },
     "timings_seconds": {
-      "pdf": 0.035712,
-      "png_high": 0.591703,
-      "png_medium": 0.185278,
-      "render_svg": 0.014795,
-      "write_svg": 9.5e-05
+      "pdf": 0.033784,
+      "png_high": 0.578967,
+      "png_medium": 0.180579,
+      "render_svg": 0.014803,
+      "write_svg": 0.000111
     }
   },
   {
@@ -2610,11 +2610,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.021874,
-      "png_high": 0.587544,
-      "png_medium": 0.168626,
-      "render_svg": 0.003031,
-      "write_svg": 4.9e-05
+      "pdf": 0.021534,
+      "png_high": 0.574112,
+      "png_medium": 0.163552,
+      "render_svg": 0.002996,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -2638,17 +2638,17 @@
       "svg": "tests/end_to_end/output/flowchart/terracotta/77_flowchart_justify_default_square.svg"
     },
     "sizes_bytes": {
-      "pdf": 24297,
+      "pdf": 24298,
       "png_high": 330677,
       "png_medium": 139911,
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.010903,
-      "png_high": 0.349219,
-      "png_medium": 0.096016,
-      "render_svg": 0.00264,
-      "write_svg": 5.1e-05
+      "pdf": 0.013726,
+      "png_high": 0.342017,
+      "png_medium": 0.09378,
+      "render_svg": 0.002403,
+      "write_svg": 4.8e-05
     }
   },
   {
@@ -2672,17 +2672,17 @@
       "svg": "tests/end_to_end/output/typography/tree/default/78_tree_tree_default.svg"
     },
     "sizes_bytes": {
-      "pdf": 34518,
-      "png_high": 1012425,
-      "png_medium": 470269,
-      "svg": 36854
+      "pdf": 34508,
+      "png_high": 994887,
+      "png_medium": 467854,
+      "svg": 36782
     },
     "timings_seconds": {
-      "pdf": 0.044017,
-      "png_high": 0.620385,
-      "png_medium": 0.197879,
-      "render_svg": 0.017198,
-      "write_svg": 7.8e-05
+      "pdf": 0.043406,
+      "png_high": 0.600361,
+      "png_medium": 0.189866,
+      "render_svg": 0.016445,
+      "write_svg": 6.9e-05
     }
   },
   {
@@ -2706,17 +2706,17 @@
       "svg": "tests/end_to_end/output/typography/tree/academic/79_tree_tree_academic.svg"
     },
     "sizes_bytes": {
-      "pdf": 35474,
-      "png_high": 922501,
-      "png_medium": 424686,
-      "svg": 37411
+      "pdf": 35385,
+      "png_high": 917871,
+      "png_medium": 413440,
+      "svg": 37392
     },
     "timings_seconds": {
-      "pdf": 0.047572,
-      "png_high": 0.617318,
-      "png_medium": 0.206028,
-      "render_svg": 0.01933,
-      "write_svg": 7.6e-05
+      "pdf": 0.042903,
+      "png_high": 0.594442,
+      "png_medium": 0.188167,
+      "render_svg": 0.017752,
+      "write_svg": 5.6e-05
     }
   },
   {
@@ -2740,17 +2740,17 @@
       "svg": "tests/end_to_end/output/typography/tree/formal/80_tree_tree_formal.svg"
     },
     "sizes_bytes": {
-      "pdf": 37157,
-      "png_high": 965618,
-      "png_medium": 444020,
-      "svg": 36245
+      "pdf": 37129,
+      "png_high": 940293,
+      "png_medium": 425096,
+      "svg": 36175
     },
     "timings_seconds": {
-      "pdf": 0.046965,
-      "png_high": 0.63006,
-      "png_medium": 0.206061,
-      "render_svg": 0.021608,
-      "write_svg": 0.003609
+      "pdf": 0.041635,
+      "png_high": 0.600193,
+      "png_medium": 0.187007,
+      "render_svg": 0.01711,
+      "write_svg": 6.2e-05
     }
   },
   {
@@ -2774,17 +2774,17 @@
       "svg": "tests/end_to_end/output/typography/tree/casual/81_tree_tree_casual.svg"
     },
     "sizes_bytes": {
-      "pdf": 22146,
-      "png_high": 962088,
-      "png_medium": 450105,
-      "svg": 37306
+      "pdf": 22088,
+      "png_high": 928680,
+      "png_medium": 430672,
+      "svg": 37308
     },
     "timings_seconds": {
-      "pdf": 0.044485,
-      "png_high": 0.635537,
-      "png_medium": 0.197985,
-      "render_svg": 0.017636,
-      "write_svg": 8e-05
+      "pdf": 0.043096,
+      "png_high": 0.609586,
+      "png_medium": 0.189326,
+      "render_svg": 0.01737,
+      "write_svg": 6e-05
     }
   },
   {
@@ -2808,17 +2808,17 @@
       "svg": "tests/end_to_end/output/typography/tree/radial/82_tree_tree_radial.svg"
     },
     "sizes_bytes": {
-      "pdf": 22135,
-      "png_high": 960569,
-      "png_medium": 430571,
-      "svg": 37322
+      "pdf": 22105,
+      "png_high": 970408,
+      "png_medium": 458580,
+      "svg": 37288
     },
     "timings_seconds": {
-      "pdf": 0.042966,
-      "png_high": 0.617476,
-      "png_medium": 0.196873,
-      "render_svg": 0.018238,
-      "write_svg": 7.9e-05
+      "pdf": 0.043649,
+      "png_high": 0.618611,
+      "png_medium": 0.193145,
+      "render_svg": 0.018002,
+      "write_svg": 6.1e-05
     }
   },
   {
@@ -2848,11 +2848,11 @@
       "svg": 12046
     },
     "timings_seconds": {
-      "pdf": 0.026608,
-      "png_high": 0.679965,
-      "png_medium": 0.171237,
-      "render_svg": 0.003095,
-      "write_svg": 6.8e-05
+      "pdf": 0.022553,
+      "png_high": 0.58099,
+      "png_medium": 0.163977,
+      "render_svg": 0.003011,
+      "write_svg": 4e-05
     }
   },
   {
@@ -2882,11 +2882,11 @@
       "svg": 12039
     },
     "timings_seconds": {
-      "pdf": 0.021765,
-      "png_high": 0.600692,
-      "png_medium": 0.204464,
-      "render_svg": 0.004602,
-      "write_svg": 9.7e-05
+      "pdf": 0.021899,
+      "png_high": 0.573594,
+      "png_medium": 0.177168,
+      "render_svg": 0.003111,
+      "write_svg": 3.5e-05
     }
   },
   {
@@ -2916,11 +2916,11 @@
       "svg": 12307
     },
     "timings_seconds": {
-      "pdf": 0.021144,
-      "png_high": 0.583039,
-      "png_medium": 0.164945,
-      "render_svg": 0.00323,
-      "write_svg": 5.5e-05
+      "pdf": 0.021562,
+      "png_high": 0.570598,
+      "png_medium": 0.162519,
+      "render_svg": 0.00314,
+      "write_svg": 3.8e-05
     }
   },
   {
@@ -2950,11 +2950,11 @@
       "svg": 12038
     },
     "timings_seconds": {
-      "pdf": 0.021224,
-      "png_high": 0.582369,
-      "png_medium": 0.16345,
-      "render_svg": 0.003112,
-      "write_svg": 4.6e-05
+      "pdf": 0.020568,
+      "png_high": 0.568703,
+      "png_medium": 0.16106,
+      "render_svg": 0.003103,
+      "write_svg": 3.7e-05
     }
   },
   {
@@ -2984,11 +2984,11 @@
       "svg": 8516
     },
     "timings_seconds": {
-      "pdf": 0.010303,
-      "png_high": 0.524635,
-      "png_medium": 0.125328,
-      "render_svg": 0.002465,
-      "write_svg": 3.9e-05
+      "pdf": 0.010825,
+      "png_high": 0.458672,
+      "png_medium": 0.122693,
+      "render_svg": 0.002409,
+      "write_svg": 4.2e-05
     }
   },
   {
@@ -3018,11 +3018,11 @@
       "svg": 7415
     },
     "timings_seconds": {
-      "pdf": 0.010468,
-      "png_high": 0.468147,
-      "png_medium": 0.141413,
-      "render_svg": 0.002372,
-      "write_svg": 5.9e-05
+      "pdf": 0.010157,
+      "png_high": 0.455459,
+      "png_medium": 0.122574,
+      "render_svg": 0.002324,
+      "write_svg": 3.4e-05
     }
   },
   {
@@ -3052,11 +3052,11 @@
       "svg": 7748
     },
     "timings_seconds": {
-      "pdf": 0.010838,
-      "png_high": 0.460724,
-      "png_medium": 0.125587,
-      "render_svg": 0.002386,
-      "write_svg": 3.8e-05
+      "pdf": 0.01045,
+      "png_high": 0.454507,
+      "png_medium": 0.121854,
+      "render_svg": 0.002328,
+      "write_svg": 3.6e-05
     }
   },
   {
@@ -3086,11 +3086,11 @@
       "svg": 7402
     },
     "timings_seconds": {
-      "pdf": 0.009991,
-      "png_high": 0.461962,
-      "png_medium": 0.123821,
-      "render_svg": 0.002829,
-      "write_svg": 5.1e-05
+      "pdf": 0.010537,
+      "png_high": 0.455841,
+      "png_medium": 0.12123,
+      "render_svg": 0.002925,
+      "write_svg": 3.7e-05
     }
   }
 ]

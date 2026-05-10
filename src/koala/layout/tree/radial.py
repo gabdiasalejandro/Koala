@@ -28,6 +28,9 @@ from koala.layout.shared.measurement import (
 )
 
 
+_SUBRING_PARENT_THRESHOLD = 4
+
+
 def ordered_children(node: ConceptNode) -> List[ConceptNode]:
     return sorted(node.children, key=lambda item: sort_node_key(item.number))
 
@@ -483,27 +486,162 @@ def assign_node_angles(
     return angles
 
 
-def compute_depth_radii(
+def choose_subrings(
     depth_groups: Dict[int, List[LayoutBox]],
     angles: Dict[str, float],
     config: LayoutConfig,
-) -> Dict[int, float]:
+) -> Tuple[Dict[str, int], Dict[Tuple[int, int], float]]:
+    """Elige entre layout de un solo anillo o multi-anillo por padre.
+
+    Computa ambos: (a) todos los nodos en sub-anillo 0, (b) split por padre
+    con `assign_subrings`. Devuelve la asignacion y radios de la opcion con
+    menor radio maximo. Si ningun padre supera el threshold, el resultado
+    coincide exactamente con el comportamiento clasico.
+    """
+
+    no_split: Dict[str, int] = {}
+    for level_boxes in depth_groups.values():
+        for box in level_boxes:
+            no_split[box.node.number] = 0
+    radii_no = compute_ring_radii(depth_groups, no_split, angles, config)
+
+    candidate = assign_subrings(depth_groups, angles)
+    if candidate == no_split:
+        return no_split, radii_no
+
+    radii_split = compute_ring_radii(depth_groups, candidate, angles, config)
+    if max(radii_split.values()) < max(radii_no.values()):
+        return candidate, radii_split
+    return no_split, radii_no
+
+
+def assign_subrings(
+    depth_groups: Dict[int, List[LayoutBox]],
+    angles: Dict[str, float],
+    threshold: int = _SUBRING_PARENT_THRESHOLD,
+) -> Dict[str, int]:
+    """Asigna a cada nodo un sub-anillo (0 = interno, 1 = externo).
+
+    Cuando un padre tiene `threshold` o mas hijos en un mismo depth,
+    sus hijos se alternan en sub-anillos por orden angular. Eso reduce
+    a la mitad la presion tangencial sin romper la coherencia visual
+    porque los hijos del mismo padre siguen agrupados radialmente.
+
+    Cuando ningun padre supera el umbral, todos los nodos quedan en el
+    sub-anillo 0 y el resultado coincide con el comportamiento clasico
+    de un solo anillo por depth.
+    """
+
+    subring: Dict[str, int] = {}
+    for level_boxes in depth_groups.values():
+        by_parent: Dict[str, List[LayoutBox]] = {}
+        for box in level_boxes:
+            parent_key = box.node.parent.number if box.node.parent else "_root"
+            by_parent.setdefault(parent_key, []).append(box)
+
+        for siblings in by_parent.values():
+            if len(siblings) < threshold:
+                for sibling in siblings:
+                    subring[sibling.node.number] = 0
+                continue
+            siblings.sort(key=lambda item: angles.get(item.node.number, 0.0))
+            for index, sibling in enumerate(siblings):
+                subring[sibling.node.number] = index % 2
+    return subring
+
+
+def _bucket_rings(
+    depth_groups: Dict[int, List[LayoutBox]],
+    subring: Dict[str, int],
+) -> Dict[Tuple[int, int], List[LayoutBox]]:
+    rings: Dict[Tuple[int, int], List[LayoutBox]] = {}
+    for depth, level_boxes in depth_groups.items():
+        for box in level_boxes:
+            key = (depth, subring.get(box.node.number, 0))
+            rings.setdefault(key, []).append(box)
+    return rings
+
+
+def compute_ring_radii(
+    depth_groups: Dict[int, List[LayoutBox]],
+    subring: Dict[str, int],
+    angles: Dict[str, float],
+    config: LayoutConfig,
+) -> Dict[Tuple[int, int], float]:
+    """Calcula radios por (depth, sub-anillo).
+
+    Para cada depth puede haber 1 o 2 sub-anillos. El sub-anillo 0
+    arranca con `min_radial_step` desde el outer mas externo del depth
+    previo. El sub-anillo 1 (si existe) se separa radialmente del 0
+    para evitar solape entre ellos. La separacion tangencial se evalua
+    por sub-anillo de forma independiente, lo cual reduce el radio
+    requerido cuando hay muchos hijos colgando del mismo padre.
+    """
+
+    rings = _bucket_rings(depth_groups, subring)
     max_depth = max(depth_groups.keys(), default=0)
-    radii: Dict[int, float] = {0: 0.0}
+    radii: Dict[Tuple[int, int], float] = {(0, 0): 0.0}
 
     for depth in range(1, max_depth + 1):
-        prev_level = depth_groups.get(depth - 1, [])
-        current_level = depth_groups.get(depth, [])
-        radii[depth] = radii[depth - 1] + min_radial_step(prev_level, current_level, angles, config)
+        prev_keys = [key for key in radii if key[0] == depth - 1]
+        prev_outer_radius = max((radii[key] for key in prev_keys), default=0.0)
+        prev_outer_boxes: List[LayoutBox] = []
+        for key in prev_keys:
+            if abs(radii[key] - prev_outer_radius) < 1e-6:
+                prev_outer_boxes.extend(rings.get(key, []))
+        if not prev_outer_boxes:
+            prev_outer_boxes = depth_groups.get(depth - 1, [])
+
+        for sub in (0, 1):
+            level_boxes = rings.get((depth, sub), [])
+            if not level_boxes:
+                continue
+            radii[(depth, sub)] = prev_outer_radius + min_radial_step(
+                prev_outer_boxes, level_boxes, angles, config
+            )
+
+        if (depth, 0) in radii and (depth, 1) in radii:
+            inner_boxes = rings[(depth, 0)]
+            outer_boxes = rings[(depth, 1)]
+            inner_extent = max(
+                (radial_half_extent(box, angles.get(box.node.number, 0.0)) for box in inner_boxes),
+                default=0.0,
+            )
+            outer_extent = max(
+                (radial_half_extent(box, angles.get(box.node.number, 0.0)) for box in outer_boxes),
+                default=0.0,
+            )
+            radial_gap = max(4.0, min(config.v_gap_base, config.h_gap_base) * 0.30)
+            radii[(depth, 1)] = max(
+                radii[(depth, 1)], radii[(depth, 0)] + inner_extent + outer_extent + radial_gap
+            )
+
+        for sub in (0, 1):
+            level_boxes = rings.get((depth, sub), [])
+            if not level_boxes:
+                continue
+            radii[(depth, sub)] = required_radius_for_tangential_separation(
+                level_boxes, angles, radii[(depth, sub)], config
+            )
 
     for depth in range(1, max_depth + 1):
-        current_level = depth_groups.get(depth, [])
-        radii[depth] = required_radius_for_tangential_separation(current_level, angles, radii[depth], config)
+        prev_keys = [key for key in radii if key[0] == depth - 1]
+        prev_outer_radius = max((radii[key] for key in prev_keys), default=0.0)
+        prev_outer_boxes: List[LayoutBox] = []
+        for key in prev_keys:
+            if abs(radii[key] - prev_outer_radius) < 1e-6:
+                prev_outer_boxes.extend(rings.get(key, []))
+        if not prev_outer_boxes:
+            prev_outer_boxes = depth_groups.get(depth - 1, [])
 
-    for depth in range(1, max_depth + 1):
-        prev_level = depth_groups.get(depth - 1, [])
-        current_level = depth_groups.get(depth, [])
-        radii[depth] = max(radii[depth], radii[depth - 1] + min_radial_step(prev_level, current_level, angles, config))
+        for sub in (0, 1):
+            level_boxes = rings.get((depth, sub), [])
+            if not level_boxes:
+                continue
+            floor_radius = prev_outer_radius + min_radial_step(
+                prev_outer_boxes, level_boxes, angles, config
+            )
+            radii[(depth, sub)] = max(radii[(depth, sub)], floor_radius)
 
     return radii
 
@@ -527,7 +665,8 @@ def build_node_radii(
     root_nodes: List[ConceptNode],
     boxes: Dict[str, LayoutBox],
     depth_groups: Dict[int, List[LayoutBox]],
-    depth_radii: Dict[int, float],
+    ring_radii: Dict[Tuple[int, int], float],
+    subring: Dict[str, int],
     config: LayoutConfig,
 ) -> Dict[str, float]:
     roots = sorted(root_nodes, key=lambda node: sort_node_key(node.number))
@@ -544,7 +683,8 @@ def build_node_radii(
             node_radii[node.number] = root_radius
             continue
 
-        node_radii[node.number] = depth_radii.get(box.depth, 0.0)
+        sub = subring.get(node.number, 0)
+        node_radii[node.number] = ring_radii.get((box.depth, sub), 0.0)
 
     return node_radii
 
@@ -705,8 +845,8 @@ def assign_radial_positions(
     for step in range(rotation_steps):
         rotation_offset = (2 * math.pi * step) / rotation_steps
         angles = assign_node_angles(root_nodes, boxes, config, rotation_offset)
-        depth_radii = compute_depth_radii(depth_groups, angles, config)
-        node_radii = build_node_radii(root_nodes, boxes, depth_groups, depth_radii, config)
+        subring, ring_radii = choose_subrings(depth_groups, angles, config)
+        node_radii = build_node_radii(root_nodes, boxes, depth_groups, ring_radii, subring, config)
         place_radial_boxes(root_nodes, boxes, node_radii, angles, config)
         compact_node_radii(root_nodes, boxes, node_radii, angles, config)
         score = layout_score(build_scene(boxes, []), config)
@@ -716,8 +856,8 @@ def assign_radial_positions(
             best_rotation = rotation_offset
 
     angles = assign_node_angles(root_nodes, boxes, config, best_rotation)
-    depth_radii = compute_depth_radii(depth_groups, angles, config)
-    node_radii = build_node_radii(root_nodes, boxes, depth_groups, depth_radii, config)
+    subring, ring_radii = choose_subrings(depth_groups, angles, config)
+    node_radii = build_node_radii(root_nodes, boxes, depth_groups, ring_radii, subring, config)
     place_radial_boxes(root_nodes, boxes, node_radii, angles, config)
     compact_node_radii(root_nodes, boxes, node_radii, angles, config)
 

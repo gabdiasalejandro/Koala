@@ -125,12 +125,25 @@ class RenderContext:
 
 
 @dataclass(frozen=True)
+class RenderAdvisory:
+    """Aviso no-bloqueante emitido por la API durante el render.
+
+    A diferencia de `InputLimitExceededError`, una advisory NO interrumpe el
+    render. Sirve para que el caller decida si registrar, mostrar o ignorar.
+    """
+
+    code: str
+    message: str
+
+
+@dataclass(frozen=True)
 class RenderResult:
     """Resultado observable de una corrida de render.
 
     `svg` siempre contiene el SVG serializado final.
     `output_svg` solo se completa cuando el caller persistio el archivo.
     `title` es metadata generica para superficies compartidas como export PDF.
+    `advisories` lleva avisos blandos (ej: muchos nodos para el layout actual).
     """
 
     svg: str
@@ -138,6 +151,7 @@ class RenderResult:
     context: RenderContext
     document_type: str = "tree"
     title: str | None = None
+    advisories: tuple[RenderAdvisory, ...] = ()
 
 
 ExportFormat = Literal["svg", "png", "pdf"]

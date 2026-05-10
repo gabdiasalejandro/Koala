@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-from dataclasses import dataclass
+from dataclasses import dataclass, replace as _dc_replace
 from typing import TypedDict
+
 
 from koala.config import KoalaUserConfig, load_user_config
 from koala.core.shared.io import load_input_text
@@ -20,6 +21,7 @@ from koala.render.shared.models import (
     ExportFormat,
     ExportQuality,
     ExportResult,
+    RenderAdvisory,
     RenderContext,
     RenderResult,
 )
@@ -47,6 +49,7 @@ class ContextConfig(TypedDict, total=False):
     max_input_lines: int
     max_nodes: int
     max_warnings: int
+    node_warn_threshold: int
 
 
 class CompileConfig(TypedDict, total=False):
@@ -69,6 +72,7 @@ class CompileConfig(TypedDict, total=False):
     max_input_lines: int
     max_nodes: int
     max_warnings: int
+    node_warn_threshold: int
 
 
 class CompileTextConfig(CompileConfig, total=False):
@@ -116,6 +120,7 @@ class _RenderLimits:
     max_input_lines: int | None = None
     max_nodes: int | None = None
     max_warnings: int | None = None
+    node_warn_threshold: int | None = None
 
 
 SAFE_RENDER_DEFAULT_LIMITS = {
@@ -123,6 +128,7 @@ SAFE_RENDER_DEFAULT_LIMITS = {
     "max_input_lines": 800,
     "max_nodes": 250,
     "max_warnings": 0,
+    "node_warn_threshold": 80,
 }
 SAFE_RENDER_DOCUMENT_TYPES = ("matrix", "tree")
 
@@ -477,7 +483,7 @@ def _render_source_text(
     _enforce_source_text_limits(source_text, limits)
     pipeline = DocumentPipelineRegistry.require(document_type)
     parsed = pipeline.parse(source_text)
-    _enforce_parsed_document_limits(parsed, limits)
+    advisories = _enforce_parsed_document_limits(parsed, limits)
     explicit_output_svg_path = _resolve_explicit_output_path(output, base_dir)
     output_dir_name, default_output_dir_name = (None, None)
     if persist_output:
@@ -500,7 +506,7 @@ def _render_source_text(
             user_config=user_config,
         )
     )
-    return pipeline.render_parsed(
+    result = pipeline.render_parsed(
         parsed,
         base_dir=base_dir,
         persist_output=persist_output,
@@ -517,6 +523,9 @@ def _render_source_text(
         background_color=background,
         user_config=user_config,
     )
+    if advisories:
+        result = _dc_replace(result, advisories=advisories)
+    return result
 
 
 def _build_context_from_text(
@@ -574,6 +583,10 @@ def _limits_from_config(config: dict) -> _RenderLimits:
             config.get("max_warnings"),
             "max_warnings",
             allow_zero=True,
+        ),
+        node_warn_threshold=_optional_positive_int(
+            config.get("node_warn_threshold"),
+            "node_warn_threshold",
         ),
     )
 
@@ -633,16 +646,32 @@ def _enforce_source_text_limits(source_text: object, limits: _RenderLimits) -> s
     return text
 
 
-def _enforce_parsed_document_limits(parsed, limits: _RenderLimits) -> None:
-    if limits.max_nodes is not None:
-        node_count = _count_parsed_nodes(parsed)
-        if node_count > limits.max_nodes:
-            raise InputLimitExceededError("max_nodes", node_count, limits.max_nodes)
+def _enforce_parsed_document_limits(
+    parsed, limits: _RenderLimits
+) -> tuple[RenderAdvisory, ...]:
+    node_count = _count_parsed_nodes(parsed)
+
+    if limits.max_nodes is not None and node_count > limits.max_nodes:
+        raise InputLimitExceededError("max_nodes", node_count, limits.max_nodes)
 
     if limits.max_warnings is not None:
         warning_count = len(getattr(parsed, "warnings", ()))
         if warning_count > limits.max_warnings:
             raise InputLimitExceededError("max_warnings", warning_count, limits.max_warnings)
+
+    advisories: list[RenderAdvisory] = []
+    if limits.node_warn_threshold is not None and node_count > limits.node_warn_threshold:
+        advisories.append(
+            RenderAdvisory(
+                code="layout_quality_threshold",
+                message=(
+                    f"El documento tiene {node_count} nodos, por encima del umbral "
+                    f"de calidad de layout ({limits.node_warn_threshold}). El render "
+                    "puede verse comprimido o con tipografia chica."
+                ),
+            )
+        )
+    return tuple(advisories)
 
 
 def _count_parsed_nodes(parsed) -> int:

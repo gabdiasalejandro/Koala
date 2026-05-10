@@ -210,39 +210,280 @@ def compute_tree_subtree_widths(
     return box.subtree_width
 
 
+class _WalkerNode:
+    """Nodo auxiliar para Walker/Buchheim layout linear."""
+
+    __slots__ = (
+        "node",
+        "box",
+        "children",
+        "parent",
+        "number",
+        "prelim",
+        "mod",
+        "shift",
+        "change",
+        "thread",
+        "ancestor",
+    )
+
+    def __init__(self, node: ConceptNode, box: LayoutBox) -> None:
+        self.node = node
+        self.box = box
+        self.children: List["_WalkerNode"] = []
+        self.parent: "_WalkerNode" | None = None
+        self.number: int = 0
+        self.prelim: float = 0.0
+        self.mod: float = 0.0
+        self.shift: float = 0.0
+        self.change: float = 0.0
+        self.thread: "_WalkerNode" | None = None
+        self.ancestor: "_WalkerNode" = self
+
+
+def _build_walker_tree(root: ConceptNode, boxes: Dict[str, LayoutBox]) -> _WalkerNode:
+    walker_root = _WalkerNode(root, boxes[root.number])
+
+    def build(parent_walker: _WalkerNode, parent_node: ConceptNode) -> None:
+        for index, child in enumerate(parent_node.children):
+            child_walker = _WalkerNode(child, boxes[child.number])
+            child_walker.parent = parent_walker
+            child_walker.number = index
+            child_walker.ancestor = child_walker
+            parent_walker.children.append(child_walker)
+            build(child_walker, child)
+
+    build(walker_root, root)
+    return walker_root
+
+
+def _walker_distance(a: _WalkerNode, b: _WalkerNode, config: LayoutConfig) -> float:
+    h_gap = get_h_gap_for_depth(a.box.depth, config)
+    return (a.box.width + b.box.width) / 2 + h_gap
+
+
+def _next_left(v: _WalkerNode) -> _WalkerNode | None:
+    if v.children:
+        return v.children[0]
+    return v.thread
+
+
+def _next_right(v: _WalkerNode) -> _WalkerNode | None:
+    if v.children:
+        return v.children[-1]
+    return v.thread
+
+
+def _walker_ancestor(
+    v_inner_right: _WalkerNode,
+    v: _WalkerNode,
+    default_ancestor: _WalkerNode,
+) -> _WalkerNode:
+    if v.parent is not None and v_inner_right.ancestor in v.parent.children:
+        return v_inner_right.ancestor
+    return default_ancestor
+
+
+def _move_subtree(w_left: _WalkerNode, w_right: _WalkerNode, shift: float) -> None:
+    subtrees = max(1, w_right.number - w_left.number)
+    w_right.change -= shift / subtrees
+    w_right.shift += shift
+    w_left.change += shift / subtrees
+    w_right.prelim += shift
+    w_right.mod += shift
+
+
+def _execute_shifts(v: _WalkerNode) -> None:
+    shift = 0.0
+    change = 0.0
+    for child in reversed(v.children):
+        child.prelim += shift
+        child.mod += shift
+        change += child.change
+        shift += child.shift + change
+
+
+def _apportion(
+    v: _WalkerNode,
+    default_ancestor: _WalkerNode,
+    config: LayoutConfig,
+) -> _WalkerNode:
+    if v.number == 0 or v.parent is None:
+        return default_ancestor
+
+    left_sibling = v.parent.children[v.number - 1]
+
+    v_inner_right = left_sibling
+    v_inner_left = v
+    v_outer_right = v.parent.children[0]
+    v_outer_left = v
+
+    s_inner_right = v_inner_right.mod
+    s_inner_left = v_inner_left.mod
+    s_outer_right = v_outer_right.mod
+    s_outer_left = v_outer_left.mod
+
+    next_right_inner = _next_right(v_inner_right)
+    next_left_inner = _next_left(v_inner_left)
+
+    while next_right_inner is not None and next_left_inner is not None:
+        v_inner_right = next_right_inner
+        v_inner_left = next_left_inner
+        v_outer_right = _next_right(v_outer_right) or v_outer_right
+        v_outer_left = _next_left(v_outer_left) or v_outer_left
+        v_outer_left.ancestor = v
+
+        gap = (v_inner_right.box.width + v_inner_left.box.width) / 2 + get_h_gap_for_depth(
+            v_inner_right.box.depth, config
+        )
+        shift = (v_inner_right.prelim + s_inner_right) - (
+            v_inner_left.prelim + s_inner_left
+        ) + gap
+        if shift > 0:
+            ancestor = _walker_ancestor(v_inner_right, v, default_ancestor)
+            _move_subtree(ancestor, v, shift)
+            s_inner_left += shift
+            s_outer_left += shift
+
+        s_inner_right += v_inner_right.mod
+        s_inner_left += v_inner_left.mod
+        s_outer_right += v_outer_right.mod
+        s_outer_left += v_outer_left.mod
+
+        next_right_inner = _next_right(v_inner_right)
+        next_left_inner = _next_left(v_inner_left)
+
+    if next_right_inner is not None and _next_right(v_outer_left) is None:
+        v_outer_left.thread = next_right_inner
+        v_outer_left.mod += s_inner_right - s_outer_left
+    if next_left_inner is not None and _next_left(v_outer_right) is None:
+        v_outer_right.thread = next_left_inner
+        v_outer_right.mod += s_inner_left - s_outer_right
+        default_ancestor = v
+
+    return default_ancestor
+
+
+def _first_walk(v: _WalkerNode, config: LayoutConfig) -> None:
+    if not v.children:
+        if v.number > 0 and v.parent is not None:
+            left_sibling = v.parent.children[v.number - 1]
+            v.prelim = left_sibling.prelim + _walker_distance(left_sibling, v, config)
+        else:
+            v.prelim = 0.0
+        return
+
+    default_ancestor = v.children[0]
+    for child in v.children:
+        _first_walk(child, config)
+        default_ancestor = _apportion(child, default_ancestor, config)
+
+    _execute_shifts(v)
+
+    midpoint = (v.children[0].prelim + v.children[-1].prelim) / 2
+    if v.number > 0 and v.parent is not None:
+        left_sibling = v.parent.children[v.number - 1]
+        v.prelim = left_sibling.prelim + _walker_distance(left_sibling, v, config)
+        v.mod = v.prelim - midpoint
+    else:
+        v.prelim = midpoint
+
+
+def _second_walk(
+    v: _WalkerNode,
+    m: float,
+    depth_y: Dict[int, float],
+) -> None:
+    center_x = v.prelim + m
+    v.box.x = center_x - (v.box.width / 2)
+    v.box.y = depth_y[v.box.depth]
+    for child in v.children:
+        _second_walk(child, m + v.mod, depth_y)
+
+
+def _collect_walker_nodes(root: _WalkerNode) -> List[_WalkerNode]:
+    out: List[_WalkerNode] = []
+
+    def visit(node: _WalkerNode) -> None:
+        out.append(node)
+        for child in node.children:
+            visit(child)
+
+    visit(root)
+    return out
+
+
+def _depth_y_offsets(
+    walker_nodes: List[_WalkerNode],
+    config: LayoutConfig,
+    base_y: float,
+) -> Dict[int, float]:
+    """Calcula la y de cada depth: max altura del depth + v_gap acumulado."""
+
+    heights_per_depth: Dict[int, float] = {}
+    for wn in walker_nodes:
+        depth = wn.box.depth
+        heights_per_depth[depth] = max(heights_per_depth.get(depth, 0.0), wn.box.height)
+
+    if not heights_per_depth:
+        return {}
+
+    max_depth = max(heights_per_depth.keys())
+    depth_y: Dict[int, float] = {}
+    cursor = base_y
+    for depth in range(max_depth + 1):
+        depth_y[depth] = cursor
+        v_gap = get_v_gap_for_depth(depth + 1, config)
+        cursor += heights_per_depth.get(depth, 0.0) + v_gap
+    return depth_y
+
+
 def assign_tree_positions(
     root_nodes: List[ConceptNode],
     boxes: Dict[str, LayoutBox],
     config: LayoutConfig,
 ) -> None:
-    current_x = config.margin_x
+    """Coloca nodos usando Walker (Buchheim et al.) en lugar del packing por bandas.
 
-    def place(node: ConceptNode, left: float, top: float) -> None:
-        box = boxes[node.number]
+    El algoritmo de Walker permite que subarboles vecinos interpenetren sus
+    huecos manteniendo separacion entre nodos individuales: cuando un subarbol
+    es ancho arriba y angosto abajo, el siguiente puede meterse en su hueco
+    inferior sin colisionar. Eso recupera espacio que el packing clasico
+    desperdiciaba al reservar bandas independientes por subarbol.
+    """
 
-        box.x = left + ((box.subtree_width - box.width) / 2)
-        box.y = top
-
-        if not node.children:
-            return
-
-        h_gap = get_h_gap_for_depth(box.depth + 1, config)
-        v_gap = get_v_gap_for_depth(box.depth + 1, config)
-
-        total_children_width = sum(boxes[child.number].subtree_width for child in node.children)
-        total_children_width += h_gap * (len(node.children) - 1)
-
-        child_left = left + ((box.subtree_width - total_children_width) / 2)
-        next_top = box.y + box.height + v_gap
-
-        for child in node.children:
-            child_box = boxes[child.number]
-            place(child, child_left, next_top)
-            child_left += child_box.subtree_width + h_gap
+    cursor_x = config.margin_x
 
     for root in root_nodes:
-        place(root, current_x, config.margin_y)
-        current_x += boxes[root.number].subtree_width + config.h_gap_base
+        walker_root = _build_walker_tree(root, boxes)
+        _first_walk(walker_root, config)
+
+        walker_nodes = _collect_walker_nodes(walker_root)
+        depth_y = _depth_y_offsets(walker_nodes, config, base_y=config.margin_y)
+
+        min_left_x = _walker_subtree_left_edge(walker_root)
+        offset_x = cursor_x - min_left_x
+
+        _second_walk(walker_root, offset_x, depth_y)
+
+        max_right = max(wn.box.x + wn.box.width for wn in walker_nodes)
+        cursor_x = max_right + config.h_gap_base
+
+
+def _walker_subtree_left_edge(walker_root: _WalkerNode) -> float:
+    """Recorre el arbol respetando los modifiers para hallar el borde izquierdo."""
+
+    stack: List[Tuple[_WalkerNode, float]] = [(walker_root, 0.0)]
+    min_left = float("inf")
+    while stack:
+        node, accumulated = stack.pop()
+        center_x = node.prelim + accumulated
+        left_x = center_x - node.box.width / 2
+        if left_x < min_left:
+            min_left = left_x
+        for child in node.children:
+            stack.append((child, accumulated + node.mod))
+    return min_left
 
 
 def build_tree_layout(

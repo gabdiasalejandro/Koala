@@ -215,7 +215,7 @@ wheels = [
 
 [[package]]
 name = "koala-diagrams"
-version = "1.3.11"
+version = "1.3.12"
 source = { editable = "." }
 dependencies = [
     { name = "cairosvg" },
